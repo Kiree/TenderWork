@@ -1,11 +1,11 @@
 {
     "logs": {
-        "title": "Logs",
-        "nbloggers": "There are {{ total }} loggers.",
-        "filter": "Filter",
+        "title": "Loggerit",
+        "nbloggers": "Yhteensä {{ total }} loggeria.",
+        "filter": "Suodatin",
         "table": {
-            "name": "Name",
-            "level": "Level"
+            "name": "Nimi",
+            "level": "Taso"
         }
     }
 }

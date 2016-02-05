@@ -1,19 +1,19 @@
 {
     "login": {
-        "title": "Sign in",
+        "title": "Kirjaudu sisään",
         "form": {
-            "password": "Password",
-            "password.placeholder": "Your password",
-            "rememberme": "Remember me",
-            "button": "Sign in"
+            "password": "Salasana",
+            "password.placeholder": "Salasanasi",
+            "rememberme": "Muista minut",
+            "button": "Kirjaudu sisään"
         },
         "messages": {
             "error": {
-                "authentication": "<strong>Failed to sign in!</strong> Please check your credentials and try again."
+                "authentication": "<strong>Kirjautuminen epäonnistui!</strong> Tarkista kirjautumistiedot ja yritä uudelleen."
             }
         },
         "password" : {
-            "forgot": "Did you forget your password?"
+            "forgot": "Unohditko salasanasi?"
         }
     }
 }

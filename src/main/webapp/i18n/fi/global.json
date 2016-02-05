@@ -1,47 +1,47 @@
 {
     "global": {
         "title": "TenderWork",
-        "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
+        "browsehappy": "Käytät <strong>vanhentunutta</strong> selainta. Ole hyvä ja <a href=\"http://browsehappy.com/?locale=en\">päivitä selaimesi</a> parantaaksesi käyttökokemustasi.",
         "menu": {
-            "home": "Home",
+            "home": "Koti",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
-                "main": "Entities",
+                "main": "Entiteetit",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
-                "main": "Account",
-                "settings": "Settings",
-                "password": "Password",
-                "sessions": "Sessions",
-                "login": "Sign in",
-                "logout": "Sign out",
-                "register": "Register"
+                "main": "Tili",
+                "settings": "Asetukset",
+                "password": "Salasana",
+                "sessions": "Istunnot",
+                "login": "Kirjaudu sisään",
+                "logout": "Kirjaudu ulos",
+                "register": "Rekisteröidy"
             },
             "admin": {
-                "main": "Administration",
-                "user-management": "User management",
-                "tracker": "User tracker",
-                "metrics": "Metrics",
-                "health": "Health",
-                "configuration": "Configuration",
-                "logs": "Logs",
-                "audits": "Audits",
+                "main": "Ylläpito",
+                "user-management": "Käyttäjänhallinta",
+                "tracker": "Käyttäjäseuranta",
+                "metrics": "Metriikka",
+                "health": "Terveys",
+                "configuration": "Asetukset",
+                "logs": "Loggerit",
+                "audits": "Tapahtumat",
                 "apidocs": "API",
-                "database": "Database",
+                "database": "Tietokanta",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
-            "language": "Language"
+            "language": "Kieli"
         },
         "form": {
-            "username": "Username",
-            "username.placeholder": "Your username",
-            "newpassword": "New password",
-            "newpassword.placeholder": "New password",
-            "confirmpassword": "New password confirmation",
-            "confirmpassword.placeholder": "Confirm the new password",
-            "email": "E-mail",
-            "email.placeholder": "Your e-mail"
+            "username": "Käyttäjänimi",
+            "username.placeholder": "Käyttäjänimesi",
+            "newpassword": "Uusi salasana",
+            "newpassword.placeholder": "Uusi salasana",
+            "confirmpassword": "Salasana vahvistus",
+            "confirmpassword.placeholder": "Salasana vahvistus",
+            "email": "Sähköposti",
+            "email.placeholder": "Sähköpostisi"
         },
         "messages": {
             "info": {
@@ -53,21 +53,21 @@
             },
             "validate": {
                 "newpassword": {
-                    "required": "Your password is required.",
-                    "minlength": "Your password is required to be at least 5 characters.",
-                    "maxlength": "Your password cannot be longer than 50 characters.",
-                    "strength": "Password strength:"
+                    "required": "Syötä salasana.",
+                    "minlength": "Salasanan oltava vähintään 5 merkkiä.",
+                    "maxlength": "Salasana saa olla korkeintaan 50 merkkiä.",
+                    "strength": "Salasanan vahvuus:"
                 },
                 "confirmpassword": {
-                    "required": "Your confirmation password is required.",
-                    "minlength": "Your confirmation password is required to be at least 5 characters.",
-                    "maxlength": "Your confirmation password cannot be longer than 50 characters."
+                    "required": "Syötä salansanan vahvistus.",
+                    "minlength": "Salasanan vahvistuksen oltava vähintään.",
+                    "maxlength": "Salasanan vahvistus saa olla korkeintaan 50 merkkiä."
                 },
                 "email": {
-                    "required": "Your e-mail is required.",
-                    "invalid": "Your e-mail is invalid.",
-                    "minlength": "Your e-mail is required to be at least 5 characters.",
-                    "maxlength": "Your e-mail cannot be longer than 50 characters."
+                    "required": "Syötä sähköposti.",
+                    "invalid": "Virheellinen sähköposti.",
+                    "minlength": "Sähköpostin oltava vähintään 5 merkkiä.",
+                    "maxlength": "Sähköposti saa olla korkeintaan 50 merkkiä."
                 }
             }
         },
@@ -77,21 +77,21 @@
     },
     "entity": {
         "action": {
-            "addblob": "Add blob",
-            "addimage": "Add image",
-            "back": "Back",
-            "cancel": "Cancel",
-            "delete": "Delete",
-            "edit": "Edit",
-            "save": "Save",
-            "view": "View"
+            "addblob": "Lisää blobi",
+            "addimage": "Lisää kuva",
+            "back": "Takaisin",
+            "cancel": "Peruuta",
+            "delete": "Poista",
+            "edit": "Muokkaa",
+            "save": "Tallenna",
+            "view": "Näytä"
         },
         "detail": {
-            "field": "Field",
-            "value": "Value"
+            "field": "Kenttä",
+            "value": "Arvo"
         },
         "delete": {
-            "title": "Confirm delete operation"
+            "title": "Vahvista poisto"
         },
         "validation": {
             "required": "This field is required.",
@@ -107,12 +107,12 @@
         }
     },
     "error": {
-        "server.not.reachable": "Server not reachable",
-        "NotNull": "Field {{ fieldName }} cannot be empty!",
-        "Size": "Field {{ fieldName }} does not meet min/max size requirements!",
-        "userexists": "Login name already used!",
-        "emailexists": "E-mail is already in use!",
-        "idexists": "A new {{ entityName }} cannot already have an ID"
+        "server.not.reachable": "Palvelin ei saatavilla.",
+        "NotNull": "Kenttä {{ fieldName }} ei voi olla tyhjä!",
+        "Size": "Kenttä {{ fieldName }} ei täytä min/max kokovaatimuksia!",
+        "userexists": "Käyttäjänimi on jo käytössä!",
+        "emailexists": "Sähköposti on jo käytössä!",
+        "idexists": "Uudella {{ entityName }} ei voi olla ID:tä."
     },
-    "footer": "This is your footer"
+    "footer": "TenderWork 2016"
 }

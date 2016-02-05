@@ -1,28 +1,28 @@
 {
     "health": {
-        "title": "Health checks",
-        "refresh.button": "Refresh",
-        "stacktrace": "Stacktrace",
+        "title": "Terveystarkistukset",
+        "refresh.button": "Päivitä",
+        "stacktrace": "Pinojälki",
         "details": {
-            "details": "Details",
-            "properties": "Properties",
-            "name": "Name",
-            "value": "Value",
-            "error": "Error"
+            "details": "Yksityiskohdat",
+            "properties": "Ominaisuudet",
+            "name": "Nimi",
+            "value": "Arvo",
+            "error": "Virhe"
         },
         "indicator": {
-            "diskSpace": "Disk space",
-            "mail": "Email",
+            "diskSpace": "Levytila",
+            "mail": "Sähköposti",
             "elasticsearch": "Elasticsearch",
-            "db": "Database"
+            "db": "Tietokanta"
         },
         "table": {
-            "service": "Service name",
-            "status": "Status"
+            "service": "Palvelun nimi",
+            "status": "Tila"
         },
         "status": {
-            "UP": "UP",
-            "DOWN": "DOWN"
+            "UP": "YLHÄÄLLÄ",
+            "DOWN": "ALHAALLA"
         }
     }
 }

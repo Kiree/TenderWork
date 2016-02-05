@@ -1,10 +1,10 @@
 {
     "configuration": {
-        "title": "Configuration",
-        "filter": "Filter (by prefix)",
+        "title": "Asetukset",
+        "filter": "Suodata (etuliitteellä)",
         "table": {
-            "prefix": "Prefix",
-            "properties": "Properties"
+            "prefix": "Etuliite",
+            "properties": "Ominaisuudet"
         }
     }
 }

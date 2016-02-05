@@ -19,7 +19,7 @@ angular.module('tenderworkApp')
                 "de": "Deutsch",
                 "en": "English",
                 "es": "Español",
-                "fr": "Français",
+                "fi": "Suomi",
                 "gl": "Galego",
                 "hu": "Magyar",
                 "it": "Italiano",
