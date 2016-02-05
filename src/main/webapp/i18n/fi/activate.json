@@ -1,0 +1,9 @@
+{
+    "activate": {
+        "title": "Aktivointi",
+        "messages": {
+            "success": "<strong>Käyttäjä aktivoitu.</strong> Please <a class=\"alert-link\" href=\"#/login\">sign in</a>.",
+            "error": "<strong>Käyttäjän aktivointi epäonnistui.</strong> Ole hyvä ja käytä rekisteröintisivua."
+        }
+    }
+}
