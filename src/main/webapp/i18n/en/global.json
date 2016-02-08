@@ -9,6 +9,7 @@
                 "main": "Entities",
                 "project": "Project",
                 "estimate": "Estimate",
+                "testity": "Testity",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
