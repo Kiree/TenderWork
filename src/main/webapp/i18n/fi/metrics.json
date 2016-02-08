@@ -1,68 +1,68 @@
 {
     "metrics": {
-        "title": "Application Metrics",
-        "refresh.button": "Refresh",
-        "updating": "Updating...",
+        "title": "Sovellusmetriikka",
+        "refresh.button": "Päivitä",
+        "updating": "Päivitetään...",
         "jvm": {
-            "title": "JVM Metrics",
+            "title": "JVM-metriikka",
             "memory": {
-                "title": "Memory",
-                "total": "Total Memory",
-                "heap": "Heap Memory",
-                "nonheap": "Non-Heap Memory"
+                "title": "Muisti",
+                "total": "Kokonaismuisti",
+                "heap": "Kekomuisti",
+                "nonheap": "Muu muisti"
             },
             "threads": {
-                "title": "Threads",
-                "all": "All",
-                "runnable": "Runnable",
-                "timedwaiting": "Timed waiting",
-                "waiting": "Waiting",
-                "blocked": "Blocked",
+                "title": "Säikeet",
+                "all": "Kaikki",
+                "runnable": "Ajossa",
+                "timedwaiting": "Ajastetussa odotuksessa",
+                "waiting": "Odottaa",
+                "blocked": "Estetty",
                 "dump": {
-                    "title": "Threads dump",
+                    "title": "Säiekaatopaikka",
                     "id": "Id: ",
-                    "blockedtime": "Blocked Time",
-                    "blockedcount": "Blocked Count",
-                    "waitedtime": "Waited Time",
-                    "waitedcount": "Waited Count",
-                    "lockname": "Lock name",
-                    "stacktrace": "Stacktrace",
-                    "show": "Show Stacktrace",
-                    "hide": "Hide Stacktrace"
+                    "blockedtime": "Estetty aika",
+                    "blockedcount": "Estetty lukumäärä",
+                    "waitedtime": "Odotusaika",
+                    "waitedcount": "Odotuslukumäärä",
+                    "lockname": "Lukkonimi",
+                    "stacktrace": "Pinojälki",
+                    "show": "Näytä pinojälki",
+                    "hide": "Piilota pinojälki"
                 }
             },
             "gc": {
-                "title": "Garbage collections",
-                "marksweepcount": "Mark Sweep count",
-                "marksweeptime": "Mark Sweep time",
-                "scavengecount": "Scavenge count",
-                "scavengetime": "Scavenge time"
+                "title": "Roskien keruu",
+                "marksweepcount": "Lakaisukerrat",
+                "marksweeptime": "Lakaisuaika",
+                "scavengecount": "Kaivelukerrat",
+                "scavengetime": "Kaiveluaika"
             },
             "http": {
-                "title": "HTTP requests (events per second)",
-                "active": "Active requests:",
-                "total": "Total requests:",
+                "title": "HTTP-pyynnöt (tapahtumia/sekunti)",
+                "active": "Aktiivisia pyyntöjä:",
+                "total": "Pyyntöjä yhteensä:",
                 "table": {
-                    "code": "Code",
-                    "count": "Count",
-                    "mean": "Mean",
-                    "average": "Average"
+                    "code": "Koodi",
+                    "count": "Lukumäärä",
+                    "mean": "Keskimääräinen",
+                    "average": "Keskiarvo"
                 },
                 "code": {
                     "ok": "Ok",
-                    "notfound": "Not found",
-                    "servererror": "Server Error"
+                    "notfound": "Ei löytynyt",
+                    "servererror": "Serverivirhe"
                 }
             }
         },
         "servicesstats": {
-            "title": "Services statistics (time in millisecond)",
+            "title": "Palvelustatistiikat (millisekunteina)",
             "table": {
-                "name": "Service name",
-                "count": "Count",
-                "mean": "Mean",
-                "min": "Min",
-                "max": "Max",
+                "name": "Palvelun nimi",
+                "count": "Lukumäärä",
+                "mean": "Keskiarvo",
+                "min": "Minimi",
+                "max": "Maksimi",
                 "p50": "p50",
                 "p75": "p75",
                 "p95": "p95",
@@ -70,22 +70,22 @@
             }
         },
         "ehcache": {
-            "title": "Ehcache statistics",
-            "cachename": "Cache name",
-            "objects": "Objects",
-            "hits": "Hits",
-            "misses": "Misses",
-            "evictioncount": "Eviction count",
-            "mean": "Mean get time (ms)"
+            "title": "Ehcache-statistiikka",
+            "cachename": "Välimuistin nimi",
+            "objects": "Objektit",
+            "hits": "Osumat",
+            "misses": "Hudit",
+            "evictioncount": "Häätöjen lukumäärä",
+            "mean": "Keskimääräinen hakuaika' (ms)"
         },
         "datasource": {
-        	"usage": "Usage",
-            "title": "DataSource statistics (time in millisecond)",
-            "name": "Pool usage",
-            "count": "Count",
-            "mean": "Mean",
-            "min": "Min",
-            "max": "Max",
+        	"usage": "Käyttö",
+            "title": "DataSource-statistiikka (millisekunteina)",
+            "name": "Varannon käyttö",
+            "count": "Lukumäärä",
+            "mean": "Keskimääräinen",
+            "min": "Keskiarvo",
+            "max": "Maksimi",
             "p50": "p50",
             "p75": "p75",
             "p95": "p95",
