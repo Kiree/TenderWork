@@ -5,7 +5,7 @@ angular.module('tenderworkApp')
         $stateProvider
             .state('home', {
                 parent: 'site',
-                url: '/',
+                url: '/home',
                 data: {
                     authorities: []
                 },

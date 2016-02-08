@@ -18,7 +18,8 @@ angular.module('tenderworkApp')
                 if ($rootScope.previousStateName === 'register') {
                     $state.go('home');
                 } else {
-                    $rootScope.back();
+                    //$rootScope.back();
+                    $state.go('home');
                 }
             }).catch(function () {
                 $scope.authenticationError = true;
