@@ -104,7 +104,7 @@ public class AccountResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("test"));
     }
-
+    // heh
     @Test
     public void testGetExistingAccount() throws Exception {
         Set<Authority> authorities = new HashSet<>();
