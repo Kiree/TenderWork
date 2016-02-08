@@ -1,0 +1,102 @@
+
+<div>
+    <h2><span translate="tenderworkApp.project.detail.title">Project</span> {{project.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.name">Name</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.name}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.description">Description</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.description}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.client">Client</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.client}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.deadline">Deadline</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.deadline | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.lastEditor">LastEditor</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.lastEditor}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.creator">Creator</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.creator}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.createdDate">CreatedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.createdDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.editedDate">EditedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.editedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.docLocation">DocLocation</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.docLocation}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.state">State</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.state}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

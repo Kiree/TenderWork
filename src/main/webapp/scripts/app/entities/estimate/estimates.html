@@ -1,0 +1,94 @@
+<div>
+    <h2 translate="tenderworkApp.estimate.home.title">Estimates</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="estimate.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+class="hidden-xs"                        translate="tenderworkApp.estimate.home.createLabel">Create new Estimate
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="searchQuery" id="searchQuery" placeholder="{{ 'tenderworkApp.estimate.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="search()">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="creator"><span translate="tenderworkApp.estimate.creator">Creator</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="workDays"><span translate="tenderworkApp.estimate.workDays">WorkDays</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="duration"><span translate="tenderworkApp.estimate.duration">Duration</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="cost"><span translate="tenderworkApp.estimate.cost">Cost</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="multiSpec"><span translate="tenderworkApp.estimate.multiSpec">MultiSpec</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="multiImp"><span translate="tenderworkApp.estimate.multiImp">MultiImp</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="multiTest"><span translate="tenderworkApp.estimate.multiTest">MultiTest</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="multiSyn"><span translate="tenderworkApp.estimate.multiSyn">MultiSyn</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="overallCost"><span translate="tenderworkApp.estimate.overallCost">OverallCost</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="overallDuration"><span translate="tenderworkApp.estimate.overallDuration">OverallDuration</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="overallResources"><span translate="tenderworkApp.estimate.overallResources">OverallResources</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="overallGain"><span translate="tenderworkApp.estimate.overallGain">OverallGain</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="project.id"><span translate="tenderworkApp.estimate.project">project</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="estimate in estimates track by estimate.id">
+                    <td><a ui-sref="estimate.detail({id:estimate.id})">{{estimate.id}}</a></td>
+                    <td>{{estimate.creator}}</td>
+                    <td>{{estimate.workDays}}</td>
+                    <td>{{estimate.duration}}</td>
+                    <td>{{estimate.cost}}</td>
+                    <td>{{estimate.multiSpec}}</td>
+                    <td>{{estimate.multiImp}}</td>
+                    <td>{{estimate.multiTest}}</td>
+                    <td>{{estimate.multiSyn}}</td>
+                    <td>{{estimate.overallCost}}</td>
+                    <td>{{estimate.overallDuration}}</td>
+                    <td>{{estimate.overallResources}}</td>
+                    <td>{{estimate.overallGain}}</td>
+                    <td>
+                        <a ui-sref="project.detail({id:estimate.project.id})">{{estimate.project.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="estimate.detail({id:estimate.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="estimate.edit({id:estimate.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="estimate.delete({id:estimate.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

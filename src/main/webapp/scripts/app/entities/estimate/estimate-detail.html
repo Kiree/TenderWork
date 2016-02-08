@@ -1,0 +1,126 @@
+
+<div>
+    <h2><span translate="tenderworkApp.estimate.detail.title">Estimate</span> {{estimate.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.creator">Creator</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.creator}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.workDays">WorkDays</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.workDays}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.duration">Duration</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.duration}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.cost">Cost</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.cost}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.multiSpec">MultiSpec</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.multiSpec}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.multiImp">MultiImp</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.multiImp}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.multiTest">MultiTest</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.multiTest}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.multiSyn">MultiSyn</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.multiSyn}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.overallCost">OverallCost</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.overallCost}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.overallDuration">OverallDuration</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.overallDuration}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.overallResources">OverallResources</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.overallResources}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.overallGain">OverallGain</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.overallGain}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.project">project</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="project.detail({id:estimate.project.id})">{{estimate.project.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

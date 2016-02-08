@@ -1,0 +1,104 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myEstimateLabel" translate="tenderworkApp.estimate.home.createOrEditLabel">Create or edit a Estimate</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="estimate.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.estimate.creator" for="field_creator">Creator</label>
+            <input type="text" class="form-control" name="creator" id="field_creator"
+                    ng-model="estimate.creator"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.estimate.workDays" for="field_workDays">WorkDays</label>
+            <input type="number" class="form-control" name="workDays" id="field_workDays"
+                    ng-model="estimate.workDays"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.estimate.duration" for="field_duration">Duration</label>
+            <input type="number" class="form-control" name="duration" id="field_duration"
+                    ng-model="estimate.duration"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.estimate.cost" for="field_cost">Cost</label>
+            <input type="number" class="form-control" name="cost" id="field_cost"
+                    ng-model="estimate.cost"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.estimate.multiSpec" for="field_multiSpec">MultiSpec</label>
+            <input type="number" class="form-control" name="multiSpec" id="field_multiSpec"
+                    ng-model="estimate.multiSpec"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.estimate.multiImp" for="field_multiImp">MultiImp</label>
+            <input type="number" class="form-control" name="multiImp" id="field_multiImp"
+                    ng-model="estimate.multiImp"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.estimate.multiTest" for="field_multiTest">MultiTest</label>
+            <input type="number" class="form-control" name="multiTest" id="field_multiTest"
+                    ng-model="estimate.multiTest"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.estimate.multiSyn" for="field_multiSyn">MultiSyn</label>
+            <input type="number" class="form-control" name="multiSyn" id="field_multiSyn"
+                    ng-model="estimate.multiSyn"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.estimate.overallCost" for="field_overallCost">OverallCost</label>
+            <input type="number" class="form-control" name="overallCost" id="field_overallCost"
+                    ng-model="estimate.overallCost"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.estimate.overallDuration" for="field_overallDuration">OverallDuration</label>
+            <input type="number" class="form-control" name="overallDuration" id="field_overallDuration"
+                    ng-model="estimate.overallDuration"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.estimate.overallResources" for="field_overallResources">OverallResources</label>
+            <input type="number" class="form-control" name="overallResources" id="field_overallResources"
+                    ng-model="estimate.overallResources"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.estimate.overallGain" for="field_overallGain">OverallGain</label>
+            <input type="number" class="form-control" name="overallGain" id="field_overallGain"
+                    ng-model="estimate.overallGain"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="tenderworkApp.estimate.project" for="field_project">project</label>
+            <select class="form-control" id="field_project" name="project" ng-model="estimate.project" ng-options="project as project.id for project in projects track by project.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

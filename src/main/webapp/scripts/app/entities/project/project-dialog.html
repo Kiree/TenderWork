@@ -1,0 +1,92 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myProjectLabel" translate="tenderworkApp.project.home.createOrEditLabel">Create or edit a Project</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="project.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.project.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="project.name"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.project.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="project.description"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.project.client" for="field_client">Client</label>
+            <input type="text" class="form-control" name="client" id="field_client"
+                    ng-model="project.client"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.project.deadline" for="field_deadline">Deadline</label>
+            <input id="field_deadline" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="project.deadline" is-open="datePickerForDeadline.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForDeadlineOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.project.lastEditor" for="field_lastEditor">LastEditor</label>
+            <input type="text" class="form-control" name="lastEditor" id="field_lastEditor"
+                    ng-model="project.lastEditor"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.project.creator" for="field_creator">Creator</label>
+            <input type="text" class="form-control" name="creator" id="field_creator"
+                    ng-model="project.creator"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.project.createdDate" for="field_createdDate">CreatedDate</label>
+            <input id="field_createdDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="project.createdDate" is-open="datePickerForCreatedDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForCreatedDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.project.editedDate" for="field_editedDate">EditedDate</label>
+            <input id="field_editedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="project.editedDate" is-open="datePickerForEditedDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForEditedDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.project.docLocation" for="field_docLocation">DocLocation</label>
+            <input type="text" class="form-control" name="docLocation" id="field_docLocation"
+                    ng-model="project.docLocation"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.project.state" for="field_state">State</label>
+            <input type="text" class="form-control" name="state" id="field_state"
+                    ng-model="project.state"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,67 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "estimate",
+            "otherEntityName": "estimate",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "project"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "client",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "deadline",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "lastEditor",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "creator",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "createdDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "editedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "docLocation",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "state",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160208121925",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}
