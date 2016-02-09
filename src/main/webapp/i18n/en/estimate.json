@@ -1,0 +1,34 @@
+{
+    "tenderworkApp": {
+        "estimate" : {
+            "home": {
+                "title": "Estimates",
+                "createLabel": "Create a new Estimate",
+                "createOrEditLabel": "Create or edit a Estimate",
+                "search": "Search for Estimate"
+            },
+            "created": "A new Estimate is created with identifier {{ param }}",
+            "updated": "A Estimate is updated with identifier {{ param }}",
+            "deleted": "A Estimate is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Estimate {{ id }}?"
+            },
+            "detail": {
+                "title": "Estimate"
+            },
+            "creator": "Creator",
+            "workDays": "WorkDays",
+            "duration": "Duration",
+            "cost": "Cost",
+            "multiSpec": "MultiSpec",
+            "multiImp": "MultiImp",
+            "multiTest": "MultiTest",
+            "multiSyn": "MultiSyn",
+            "overallCost": "OverallCost",
+            "overallDuration": "OverallDuration",
+            "overallResources": "OverallResources",
+            "overallGain": "OverallGain",
+            "project": "Project"
+        }
+    }
+}
