@@ -44,22 +44,6 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.project.lastEditor">LastEditor</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{project.lastEditor}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.project.creator">Creator</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{project.creator}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <span translate="tenderworkApp.project.createdDate">CreatedDate</span>
                 </td>
                 <td>
@@ -88,6 +72,30 @@
                 </td>
                 <td>
                     <span class="form-control-static">{{project.state}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.stateDescription">StateDescription</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.stateDescription}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.createdBy">createdBy</span>
+                </td>
+                <td>
+                    {{project.createdBy.login}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.editedBy">editedBy</span>
+                </td>
+                <td>
+                    {{project.editedBy.login}}
                 </td>
             </tr>
             </tbody>

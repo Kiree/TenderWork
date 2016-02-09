@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tenderworkApp')
-    .controller('ProjectDetailController', function ($scope, $rootScope, $stateParams, entity, Project, Estimate) {
+    .controller('ProjectDetailController', function ($scope, $rootScope, $stateParams, entity, Project, User) {
         $scope.project = entity;
         $scope.load = function (id) {
             Project.get({id: id}, function(result) {

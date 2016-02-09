@@ -20,13 +20,13 @@
             "description": "Description",
             "client": "Client",
             "deadline": "Deadline",
-            "lastEditor": "LastEditor",
-            "creator": "Creator",
             "createdDate": "CreatedDate",
             "editedDate": "EditedDate",
             "docLocation": "DocLocation",
             "state": "State",
-            "estimate": "Estimate"
+            "stateDescription": "StateDescription",
+            "createdBy": "CreatedBy",
+            "editedBy": "EditedBy"
         }
     }
 }

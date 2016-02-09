@@ -65,12 +65,11 @@ angular.module('tenderworkApp')
                                     description: null,
                                     client: null,
                                     deadline: null,
-                                    lastEditor: null,
-                                    creator: null,
                                     createdDate: null,
                                     editedDate: null,
                                     docLocation: null,
                                     state: null,
+                                    stateDescription: null,
                                     id: null
                                 };
                             }
@@ -129,4 +128,3 @@ angular.module('tenderworkApp')
                 }]
             });
     });
-

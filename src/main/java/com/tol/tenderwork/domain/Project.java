@@ -1,6 +1,5 @@
 package com.tol.tenderwork.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import java.time.LocalDate;
@@ -8,6 +7,7 @@ import java.time.ZonedDateTime;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,40 +26,49 @@ public class Project implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name")
+    @NotNull
+    @Size(max = 60)
+    @Column(name = "name", length = 60, nullable = false)
     private String name;
     
-    @Column(name = "description")
+    @Size(max = 1000)
+    @Column(name = "description", length = 1000)
     private String description;
     
-    @Column(name = "client")
+    @Size(max = 60)
+    @Column(name = "client", length = 60)
     private String client;
     
     @Column(name = "deadline")
     private LocalDate deadline;
     
-    @Column(name = "last_editor")
-    private String lastEditor;
-    
-    @Column(name = "creator")
-    private String creator;
-    
-    @Column(name = "created_date")
+    @NotNull
+    @Column(name = "created_date", nullable = false)
     private ZonedDateTime createdDate;
     
-    @Column(name = "edited_date")
+    @NotNull
+    @Column(name = "edited_date", nullable = false)
     private ZonedDateTime editedDate;
     
-    @Column(name = "doc_location")
+    @Size(max = 250)
+    @Column(name = "doc_location", length = 250)
     private String docLocation;
     
-    @Column(name = "state")
+    @NotNull
+    @Column(name = "state", nullable = false)
     private String state;
     
-    @OneToMany(mappedBy = "project")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Estimate> estimates = new HashSet<>();
+    @Size(max = 1000)
+    @Column(name = "state_description", length = 1000)
+    private String stateDescription;
+    
+    @ManyToOne
+    @JoinColumn(name = "created_by_id")
+    private User createdBy;
+
+    @ManyToOne
+    @JoinColumn(name = "edited_by_id")
+    private User editedBy;
 
     public Long getId() {
         return id;
@@ -101,22 +110,6 @@ public class Project implements Serializable {
         this.deadline = deadline;
     }
 
-    public String getLastEditor() {
-        return lastEditor;
-    }
-    
-    public void setLastEditor(String lastEditor) {
-        this.lastEditor = lastEditor;
-    }
-
-    public String getCreator() {
-        return creator;
-    }
-    
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
-
     public ZonedDateTime getCreatedDate() {
         return createdDate;
     }
@@ -149,12 +142,28 @@ public class Project implements Serializable {
         this.state = state;
     }
 
-    public Set<Estimate> getEstimates() {
-        return estimates;
+    public String getStateDescription() {
+        return stateDescription;
+    }
+    
+    public void setStateDescription(String stateDescription) {
+        this.stateDescription = stateDescription;
     }
 
-    public void setEstimates(Set<Estimate> estimates) {
-        this.estimates = estimates;
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User user) {
+        this.createdBy = user;
+    }
+
+    public User getEditedBy() {
+        return editedBy;
+    }
+
+    public void setEditedBy(User user) {
+        this.editedBy = user;
     }
 
     @Override
@@ -185,12 +194,11 @@ public class Project implements Serializable {
             ", description='" + description + "'" +
             ", client='" + client + "'" +
             ", deadline='" + deadline + "'" +
-            ", lastEditor='" + lastEditor + "'" +
-            ", creator='" + creator + "'" +
             ", createdDate='" + createdDate + "'" +
             ", editedDate='" + editedDate + "'" +
             ", docLocation='" + docLocation + "'" +
             ", state='" + state + "'" +
+            ", stateDescription='" + stateDescription + "'" +
             '}';
     }
 }

@@ -4,8 +4,8 @@ angular.module('tenderworkApp')
     .controller('ProjectController', function ($scope, $state, Project, ProjectSearch, ParseLinks) {
 
         $scope.projects = [];
-        $scope.predicate = 'editedDate';
-        $scope.reverse = false;
+        $scope.predicate = 'id';
+        $scope.reverse = true;
         $scope.page = 0;
         $scope.loadAll = function() {
             Project.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
@@ -23,7 +23,6 @@ angular.module('tenderworkApp')
         $scope.loadPage = function(page) {
             $scope.page = page;
             $scope.loadAll();
-
         };
         $scope.loadAll();
 
@@ -49,12 +48,11 @@ angular.module('tenderworkApp')
                 description: null,
                 client: null,
                 deadline: null,
-                lastEditor: null,
-                creator: null,
                 createdDate: null,
                 editedDate: null,
                 docLocation: null,
                 state: null,
+                stateDescription: null,
                 id: null
             };
         };

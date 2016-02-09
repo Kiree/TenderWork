@@ -11,4 +11,10 @@ import java.util.List;
  */
 public interface ProjectRepository extends JpaRepository<Project,Long> {
 
+    @Query("select project from Project project where project.createdBy.login = ?#{principal.username}")
+    List<Project> findByCreatedByIsCurrentUser();
+
+    @Query("select project from Project project where project.editedBy.login = ?#{principal.username}")
+    List<Project> findByEditedByIsCurrentUser();
+
 }

@@ -58,10 +58,6 @@ public class ProjectResourceIntTest {
 
     private static final LocalDate DEFAULT_DEADLINE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DEADLINE = LocalDate.now(ZoneId.systemDefault());
-    private static final String DEFAULT_LAST_EDITOR = "AAAAA";
-    private static final String UPDATED_LAST_EDITOR = "BBBBB";
-    private static final String DEFAULT_CREATOR = "AAAAA";
-    private static final String UPDATED_CREATOR = "BBBBB";
 
     private static final ZonedDateTime DEFAULT_CREATED_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
     private static final ZonedDateTime UPDATED_CREATED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
@@ -74,6 +70,8 @@ public class ProjectResourceIntTest {
     private static final String UPDATED_DOC_LOCATION = "BBBBB";
     private static final String DEFAULT_STATE = "AAAAA";
     private static final String UPDATED_STATE = "BBBBB";
+    private static final String DEFAULT_STATE_DESCRIPTION = "AAAAA";
+    private static final String UPDATED_STATE_DESCRIPTION = "BBBBB";
 
     @Inject
     private ProjectRepository projectRepository;
@@ -109,12 +107,11 @@ public class ProjectResourceIntTest {
         project.setDescription(DEFAULT_DESCRIPTION);
         project.setClient(DEFAULT_CLIENT);
         project.setDeadline(DEFAULT_DEADLINE);
-        project.setLastEditor(DEFAULT_LAST_EDITOR);
-        project.setCreator(DEFAULT_CREATOR);
         project.setCreatedDate(DEFAULT_CREATED_DATE);
         project.setEditedDate(DEFAULT_EDITED_DATE);
         project.setDocLocation(DEFAULT_DOC_LOCATION);
         project.setState(DEFAULT_STATE);
+        project.setStateDescription(DEFAULT_STATE_DESCRIPTION);
     }
 
     @Test
@@ -137,12 +134,83 @@ public class ProjectResourceIntTest {
         assertThat(testProject.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testProject.getClient()).isEqualTo(DEFAULT_CLIENT);
         assertThat(testProject.getDeadline()).isEqualTo(DEFAULT_DEADLINE);
-        assertThat(testProject.getLastEditor()).isEqualTo(DEFAULT_LAST_EDITOR);
-        assertThat(testProject.getCreator()).isEqualTo(DEFAULT_CREATOR);
         assertThat(testProject.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testProject.getEditedDate()).isEqualTo(DEFAULT_EDITED_DATE);
         assertThat(testProject.getDocLocation()).isEqualTo(DEFAULT_DOC_LOCATION);
         assertThat(testProject.getState()).isEqualTo(DEFAULT_STATE);
+        assertThat(testProject.getStateDescription()).isEqualTo(DEFAULT_STATE_DESCRIPTION);
+    }
+
+    @Test
+    @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = projectRepository.findAll().size();
+        // set the field null
+        project.setName(null);
+
+        // Create the Project, which fails.
+
+        restProjectMockMvc.perform(post("/api/projects")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(project)))
+                .andExpect(status().isBadRequest());
+
+        List<Project> projects = projectRepository.findAll();
+        assertThat(projects).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkCreatedDateIsRequired() throws Exception {
+        int databaseSizeBeforeTest = projectRepository.findAll().size();
+        // set the field null
+        project.setCreatedDate(null);
+
+        // Create the Project, which fails.
+
+        restProjectMockMvc.perform(post("/api/projects")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(project)))
+                .andExpect(status().isBadRequest());
+
+        List<Project> projects = projectRepository.findAll();
+        assertThat(projects).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkEditedDateIsRequired() throws Exception {
+        int databaseSizeBeforeTest = projectRepository.findAll().size();
+        // set the field null
+        project.setEditedDate(null);
+
+        // Create the Project, which fails.
+
+        restProjectMockMvc.perform(post("/api/projects")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(project)))
+                .andExpect(status().isBadRequest());
+
+        List<Project> projects = projectRepository.findAll();
+        assertThat(projects).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkStateIsRequired() throws Exception {
+        int databaseSizeBeforeTest = projectRepository.findAll().size();
+        // set the field null
+        project.setState(null);
+
+        // Create the Project, which fails.
+
+        restProjectMockMvc.perform(post("/api/projects")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(project)))
+                .andExpect(status().isBadRequest());
+
+        List<Project> projects = projectRepository.findAll();
+        assertThat(projects).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -160,12 +228,11 @@ public class ProjectResourceIntTest {
                 .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
                 .andExpect(jsonPath("$.[*].client").value(hasItem(DEFAULT_CLIENT.toString())))
                 .andExpect(jsonPath("$.[*].deadline").value(hasItem(DEFAULT_DEADLINE.toString())))
-                .andExpect(jsonPath("$.[*].lastEditor").value(hasItem(DEFAULT_LAST_EDITOR.toString())))
-                .andExpect(jsonPath("$.[*].creator").value(hasItem(DEFAULT_CREATOR.toString())))
                 .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE_STR)))
                 .andExpect(jsonPath("$.[*].editedDate").value(hasItem(DEFAULT_EDITED_DATE_STR)))
                 .andExpect(jsonPath("$.[*].docLocation").value(hasItem(DEFAULT_DOC_LOCATION.toString())))
-                .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())));
+                .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
+                .andExpect(jsonPath("$.[*].stateDescription").value(hasItem(DEFAULT_STATE_DESCRIPTION.toString())));
     }
 
     @Test
@@ -183,12 +250,11 @@ public class ProjectResourceIntTest {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.client").value(DEFAULT_CLIENT.toString()))
             .andExpect(jsonPath("$.deadline").value(DEFAULT_DEADLINE.toString()))
-            .andExpect(jsonPath("$.lastEditor").value(DEFAULT_LAST_EDITOR.toString()))
-            .andExpect(jsonPath("$.creator").value(DEFAULT_CREATOR.toString()))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE_STR))
             .andExpect(jsonPath("$.editedDate").value(DEFAULT_EDITED_DATE_STR))
             .andExpect(jsonPath("$.docLocation").value(DEFAULT_DOC_LOCATION.toString()))
-            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()));
+            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
+            .andExpect(jsonPath("$.stateDescription").value(DEFAULT_STATE_DESCRIPTION.toString()));
     }
 
     @Test
@@ -212,12 +278,11 @@ public class ProjectResourceIntTest {
         project.setDescription(UPDATED_DESCRIPTION);
         project.setClient(UPDATED_CLIENT);
         project.setDeadline(UPDATED_DEADLINE);
-        project.setLastEditor(UPDATED_LAST_EDITOR);
-        project.setCreator(UPDATED_CREATOR);
         project.setCreatedDate(UPDATED_CREATED_DATE);
         project.setEditedDate(UPDATED_EDITED_DATE);
         project.setDocLocation(UPDATED_DOC_LOCATION);
         project.setState(UPDATED_STATE);
+        project.setStateDescription(UPDATED_STATE_DESCRIPTION);
 
         restProjectMockMvc.perform(put("/api/projects")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -232,12 +297,11 @@ public class ProjectResourceIntTest {
         assertThat(testProject.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testProject.getClient()).isEqualTo(UPDATED_CLIENT);
         assertThat(testProject.getDeadline()).isEqualTo(UPDATED_DEADLINE);
-        assertThat(testProject.getLastEditor()).isEqualTo(UPDATED_LAST_EDITOR);
-        assertThat(testProject.getCreator()).isEqualTo(UPDATED_CREATOR);
         assertThat(testProject.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testProject.getEditedDate()).isEqualTo(UPDATED_EDITED_DATE);
         assertThat(testProject.getDocLocation()).isEqualTo(UPDATED_DOC_LOCATION);
         assertThat(testProject.getState()).isEqualTo(UPDATED_STATE);
+        assertThat(testProject.getStateDescription()).isEqualTo(UPDATED_STATE_DESCRIPTION);
     }
 
     @Test
