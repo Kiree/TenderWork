@@ -15,12 +15,8 @@ angular.module('tenderworkApp')
                 rememberMe: $scope.rememberMe
             }).then(function () {
                 $scope.authenticationError = false;
-                if ($rootScope.previousStateName === 'register') {
-                    $state.go('home');
-                } else {
-                    //$rootScope.back();
-                    $state.go('home');
-                }
+
+                    $state.go('project');
             }).catch(function () {
                 $scope.authenticationError = true;
             });
