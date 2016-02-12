@@ -13,16 +13,6 @@
                 <td>
                     <span class="form-control-static">{{project.name}}</span>
                 </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.project.description" class="projectdetail">Description</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{project.description}}</span>
-                </td>
-            </tr>
-            <tr>
                 <td>
                     <span translate="tenderworkApp.project.client" class="projectdetail">Client</span>
                 </td>
@@ -30,31 +20,16 @@
                     <span class="form-control-static">{{project.client}}</span>
                 </td>
             </tr>
+
+
             <tr>
+
                 <td>
                     <span translate="tenderworkApp.project.deadline" class="projectdetail">Deadline</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{project.deadline | date:'mediumDate'}}</span>
                 </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.project.createdDate" class="projectdetail">CreatedDate</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{project.createdDate | date:'medium'}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.project.editedDate" class="projectdetail">EditedDate</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{project.editedDate | date:'medium'}}</span>
-                </td>
-            </tr>
-            <tr>
                 <td>
                     <span translate="tenderworkApp.project.docLocation" class="projectdetail">DocLocation</span>
                 </td>
@@ -64,21 +39,11 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.project.state" class="projectdetail">State</span>
+                    <span translate="tenderworkApp.project.createdDate" class="projectdetail">CreatedDate</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{project.state}}</span>
+                    <span class="form-control-static">{{project.createdDate | date:'medium'}}</span>
                 </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.project.stateDescription" class="projectdetail">StateDescription</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{project.stateDescription}}</span>
-                </td>
-            </tr>
-            <tr>
                 <td>
                     <span translate="tenderworkApp.project.createdBy" class="projectdetail">createdBy</span>
                 </td>
@@ -88,12 +53,46 @@
             </tr>
             <tr>
                 <td>
+                    <span translate="tenderworkApp.project.editedDate" class="projectdetail">EditedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.editedDate | date:'medium'}}</span>
+                </td>
+                <td>
                     <span translate="tenderworkApp.project.editedBy" class="projectdetail">editedBy</span>
                 </td>
                 <td>
                     {{project.editedBy.login}}
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.state" class="projectdetail">State</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.state}}</span>
+                </td>
+                <td>
+                    <span translate="tenderworkApp.project.stateDescription" class="projectdetail">StateDescription</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.stateDescription}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.description" class="projectdetail">Description</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.description}}</span>
+                </td>
+                <td>
+
+                </td>
+
+            </tr>
+
+
             </tbody>
         </table>
     </div>
