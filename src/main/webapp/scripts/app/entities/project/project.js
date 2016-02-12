@@ -66,7 +66,7 @@ angular.module('tenderworkApp')
                                     client: null,
                                     deadline: null,
                                     createdDate: new Date(),
-                                    editedDate: new Date(),
+                                    editedDate: new Dat,
                                     docLocation: null,
                                     state: null,
                                     stateDescription: null,
@@ -82,7 +82,7 @@ angular.module('tenderworkApp')
                 }]
             })
             .state('project.edit', {
-                parent: 'project',
+                parent: 'project.detail',
                 url: '/{id}/edit',
                 data: {
                     authorities: ['ROLE_USER'],
@@ -98,7 +98,7 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('project', null, { reload: true });
+                        $state.go('project.detail', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
