@@ -1,18 +1,14 @@
 
 <div>
-    <h2><span translate="tenderworkApp.project.detail.title">Project</span> {{project.id}}</h2>
+    <h2>{{project.name}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
-            <thead>
-            <tr>
-                <th translate="entity.detail.field">Field</th>
-                <th translate="entity.detail.value">Value</th>
-            </tr>
-            </thead>
+
             <tbody>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.project.name">Name</span>
+
+                    <span translate="tenderworkApp.project.name" class="projectdetail">Name</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{project.name}}</span>
@@ -20,7 +16,7 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.project.description">Description</span>
+                    <span translate="tenderworkApp.project.description" class="projectdetail">Description</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{project.description}}</span>
@@ -28,7 +24,7 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.project.client">Client</span>
+                    <span translate="tenderworkApp.project.client" class="projectdetail">Client</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{project.client}}</span>
@@ -36,7 +32,7 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.project.deadline">Deadline</span>
+                    <span translate="tenderworkApp.project.deadline" class="projectdetail">Deadline</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{project.deadline | date:'mediumDate'}}</span>
@@ -44,7 +40,7 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.project.createdDate">CreatedDate</span>
+                    <span translate="tenderworkApp.project.createdDate" class="projectdetail">CreatedDate</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{project.createdDate | date:'medium'}}</span>
@@ -52,7 +48,7 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.project.editedDate">EditedDate</span>
+                    <span translate="tenderworkApp.project.editedDate" class="projectdetail">EditedDate</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{project.editedDate | date:'medium'}}</span>
@@ -60,7 +56,7 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.project.docLocation">DocLocation</span>
+                    <span translate="tenderworkApp.project.docLocation" class="projectdetail">DocLocation</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{project.docLocation}}</span>
@@ -68,7 +64,7 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.project.state">State</span>
+                    <span translate="tenderworkApp.project.state" class="projectdetail">State</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{project.state}}</span>
@@ -76,7 +72,7 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.project.stateDescription">StateDescription</span>
+                    <span translate="tenderworkApp.project.stateDescription" class="projectdetail">StateDescription</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{project.stateDescription}}</span>
@@ -84,7 +80,7 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.project.createdBy">createdBy</span>
+                    <span translate="tenderworkApp.project.createdBy" class="projectdetail">createdBy</span>
                 </td>
                 <td>
                     {{project.createdBy.login}}
@@ -92,7 +88,7 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.project.editedBy">editedBy</span>
+                    <span translate="tenderworkApp.project.editedBy" class="projectdetail">editedBy</span>
                 </td>
                 <td>
                     {{project.editedBy.login}}

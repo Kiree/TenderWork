@@ -1,3 +1,7 @@
 tr.rowLink:hover {
     background:darkgrey !important;
 }
+
+span.projectdetail{
+    font-weight: bold !important;
+}
