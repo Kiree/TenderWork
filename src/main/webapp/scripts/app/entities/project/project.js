@@ -68,7 +68,7 @@ angular.module('tenderworkApp')
                                     createdDate: new Date(),
                                     editedDate: new Date(),
                                     docLocation: null,
-                                    state: null,
+                                    state: 'Uusi',
                                     stateDescription: null,
                                     id: null
                                 };
@@ -89,7 +89,7 @@ angular.module('tenderworkApp')
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/project/project-dialog.html',
+                        templateUrl: 'scripts/app/entities/project/project-edit-dialog.html',
                         controller: 'ProjectDialogController',
                         size: 'lg',
                         resolve: {

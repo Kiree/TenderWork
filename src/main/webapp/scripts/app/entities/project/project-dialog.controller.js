@@ -6,7 +6,8 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
 
         $scope.project = entity;
         $scope.users = User.query();
-
+        $scope.states = ['Uusi', 'Tarjous jätetty', 'Voitettu', 'Hävitty', 'Suljettu'];
+        $scope.defaultState = 'Uusi';
         $scope.load = function(id) {
             Project.get({id : id}, function(result) {
                 $scope.project = result;

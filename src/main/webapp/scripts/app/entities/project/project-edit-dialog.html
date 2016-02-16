@@ -11,20 +11,20 @@
         <div class="form-group">
             <label for="id" translate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
-                    ng-model="project.id" readonly />
+                   ng-model="project.id" readonly />
         </div>
         <div class="form-group">
             <label class="control-label" translate="tenderworkApp.project.name" for="field_name">Name</label>
             <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="project.name"
-                    required ng-maxlength="60" />
+                   ng-model="project.name"
+                   required ng-maxlength="60" />
             <div ng-show="editForm.name.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.name.$error.required" translate="entity.validation.required">
+                   ng-show="editForm.name.$error.required" translate="entity.validation.required">
                     This field is required.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.name.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="60">
+                   ng-show="editForm.name.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="60">
                     This field cannot be longer than 60 characters.
                 </p>
             </div>
@@ -32,11 +32,11 @@
         <div class="form-group">
             <label class="control-label" translate="tenderworkApp.project.description" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
-                    ng-model="project.description"
-                    ng-maxlength="1000" />
+                   ng-model="project.description"
+                   ng-maxlength="1000" />
             <div ng-show="editForm.description.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.description.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="1000">
+                   ng-show="editForm.description.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="1000">
                     This field cannot be longer than 1000 characters.
                 </p>
             </div>
@@ -44,11 +44,11 @@
         <div class="form-group">
             <label class="control-label" translate="tenderworkApp.project.client" for="field_client">Client</label>
             <input type="text" class="form-control" name="client" id="field_client"
-                    ng-model="project.client"
-                    ng-maxlength="60" />
+                   ng-model="project.client"
+                   ng-maxlength="60" />
             <div ng-show="editForm.client.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.client.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="60">
+                   ng-show="editForm.client.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="60">
                     This field cannot be longer than 60 characters.
                 </p>
             </div>
@@ -64,17 +64,17 @@
         <div class="form-group" ng-hide="true">
             <label class="control-label" translate="tenderworkApp.project.createdDate" for="field_createdDate">CreatedDate</label>
             <input id="field_createdDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="project.createdDate" is-open="datePickerForCreatedDate.status.opened"
-            required readonly/>
+                   required readonly/>
             <!--<span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="datePickerForCreatedDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>-->
             <div ng-show="editForm.createdDate.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.createdDate.$error.required" translate="entity.validation.required">
+                   ng-show="editForm.createdDate.$error.required" translate="entity.validation.required">
                     This field is required.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.createdDate.$error.ZonedDateTimelocal" translate="entity.validation.ZonedDateTimelocal">
+                   ng-show="editForm.createdDate.$error.ZonedDateTimelocal" translate="entity.validation.ZonedDateTimelocal">
                     This field should be a date and time.
                 </p>
             </div>
@@ -82,17 +82,17 @@
         <div class="form-group" ng-hide="true">
             <label class="control-label" translate="tenderworkApp.project.editedDate" for="field_editedDate">EditedDate</label>
             <input id="field_editedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="project.editedDate" is-open="datePickerForEditedDate.status.opened"
-            required readonly/>
-           <!-- <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForEditedDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>-->
+                   required readonly/>
+            <!-- <span class="input-group-btn">
+                 <button type="button" class="btn btn-default" ng-click="datePickerForEditedDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+             </span>-->
             <div ng-show="editForm.editedDate.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.editedDate.$error.required" translate="entity.validation.required">
+                   ng-show="editForm.editedDate.$error.required" translate="entity.validation.required">
                     This field is required.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.editedDate.$error.ZonedDateTimelocal" translate="entity.validation.ZonedDateTimelocal">
+                   ng-show="editForm.editedDate.$error.ZonedDateTimelocal" translate="entity.validation.ZonedDateTimelocal">
                     This field should be a date and time.
                 </p>
             </div>
@@ -100,27 +100,24 @@
         <div class="form-group">
             <label class="control-label" translate="tenderworkApp.project.docLocation" for="field_docLocation">DocLocation</label>
             <input type="text" class="form-control" name="docLocation" id="field_docLocation"
-                    ng-model="project.docLocation"
-                    ng-maxlength="250" />
+                   ng-model="project.docLocation"
+                   ng-maxlength="250" />
             <div ng-show="editForm.docLocation.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.docLocation.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="250">
+                   ng-show="editForm.docLocation.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="250">
                     This field cannot be longer than 250 characters.
                 </p>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label" translate="tenderworkApp.project.state" for="field_state">State</label>
-            <input type="text" class="form-control" name="state" id="field_state"
-                   ng-model="project.state"
-                   readonly/>
-           <!-- <select class="form-control" id="field_state" name="state" ng-model="project.state" ng-options="state for state in states">
+            <select class="form-control" id="field_state" name="state" ng-model="project.state" ng-options="state for state in states">
 
-            </select>-->
+            </select>
 
             <div ng-show="editForm.state.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.state.$error.required" translate="entity.validation.required">
+                   ng-show="editForm.state.$error.required" translate="entity.validation.required">
                     This field is required.
                 </p>
             </div>
@@ -128,11 +125,11 @@
         <div class="form-group">
             <label class="control-label" translate="tenderworkApp.project.stateDescription" for="field_stateDescription">StateDescription</label>
             <input type="text" class="form-control" name="stateDescription" id="field_stateDescription"
-                    ng-model="project.stateDescription"
-                    ng-maxlength="1000" />
+                   ng-model="project.stateDescription"
+                   ng-maxlength="1000" />
             <div ng-show="editForm.stateDescription.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.stateDescription.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="1000">
+                   ng-show="editForm.stateDescription.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="1000">
                     This field cannot be longer than 1000 characters.
                 </p>
             </div>
