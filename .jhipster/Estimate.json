@@ -1,0 +1,124 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "createdBy",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "ownerProject",
+            "otherEntityName": "project",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "workdaysInMonth",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": "1",
+            "fieldValidateRulesMax": "31"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "desiredProjectDuration",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": "1"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "dailyPrice",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": "1"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "specificationFactor",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required",
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": "0",
+            "fieldValidateRulesMax": "1"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "testingFactor",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required",
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": "0",
+            "fieldValidateRulesMax": "1"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "implementationFactor",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required",
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": "0",
+            "fieldValidateRulesMax": "1"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "synergyBenefit",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required",
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": "0",
+            "fieldValidateRulesMax": "1"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "totalPrice",
+            "fieldType": "Long"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "totalDuration",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "resourcing",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 11,
+            "fieldName": "totalSynergyBenefit",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20160216083746",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

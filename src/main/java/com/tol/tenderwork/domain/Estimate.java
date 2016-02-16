@@ -28,54 +28,56 @@ public class Estimate implements Serializable {
     @Min(value = 1)
     @Max(value = 31)
     @Column(name = "workdays_in_month", nullable = false)
+    //Työpäiviä kuukaudessa (0 - 31)
     private Integer workdaysInMonth;
-    
+
     @NotNull
     @Min(value = 1)
     @Column(name = "desired_project_duration", nullable = false)
+    //Toivottu
     private Integer desiredProjectDuration;
-    
+
     @NotNull
     @Min(value = 1)
     @Column(name = "daily_price", nullable = false)
     private Long dailyPrice;
-    
+
     @NotNull
     @Min(value = 0)
     @Max(value = 1)
     @Column(name = "specification_factor", nullable = false)
     private Float specificationFactor;
-    
+
     @NotNull
     @Min(value = 0)
     @Max(value = 1)
     @Column(name = "testing_factor", nullable = false)
     private Float testingFactor;
-    
+
     @NotNull
     @Min(value = 0)
     @Max(value = 1)
     @Column(name = "implementation_factor", nullable = false)
     private Float implementationFactor;
-    
+
     @NotNull
     @Min(value = 0)
     @Max(value = 1)
     @Column(name = "synergy_benefit", nullable = false)
     private Float synergyBenefit;
-    
+
     @Column(name = "total_price")
     private Long totalPrice;
-    
+
     @Column(name = "total_duration")
     private Integer totalDuration;
-    
+
     @Column(name = "resourcing")
     private Integer resourcing;
-    
+
     @Column(name = "total_synergy_benefit")
     private Integer totalSynergyBenefit;
-    
+
     @ManyToOne
     @JoinColumn(name = "created_by_id")
     private User createdBy;
@@ -95,7 +97,7 @@ public class Estimate implements Serializable {
     public Integer getWorkdaysInMonth() {
         return workdaysInMonth;
     }
-    
+
     public void setWorkdaysInMonth(Integer workdaysInMonth) {
         this.workdaysInMonth = workdaysInMonth;
     }
@@ -103,7 +105,7 @@ public class Estimate implements Serializable {
     public Integer getDesiredProjectDuration() {
         return desiredProjectDuration;
     }
-    
+
     public void setDesiredProjectDuration(Integer desiredProjectDuration) {
         this.desiredProjectDuration = desiredProjectDuration;
     }
@@ -111,7 +113,7 @@ public class Estimate implements Serializable {
     public Long getDailyPrice() {
         return dailyPrice;
     }
-    
+
     public void setDailyPrice(Long dailyPrice) {
         this.dailyPrice = dailyPrice;
     }
@@ -119,7 +121,7 @@ public class Estimate implements Serializable {
     public Float getSpecificationFactor() {
         return specificationFactor;
     }
-    
+
     public void setSpecificationFactor(Float specificationFactor) {
         this.specificationFactor = specificationFactor;
     }
@@ -127,7 +129,7 @@ public class Estimate implements Serializable {
     public Float getTestingFactor() {
         return testingFactor;
     }
-    
+
     public void setTestingFactor(Float testingFactor) {
         this.testingFactor = testingFactor;
     }
@@ -135,7 +137,7 @@ public class Estimate implements Serializable {
     public Float getImplementationFactor() {
         return implementationFactor;
     }
-    
+
     public void setImplementationFactor(Float implementationFactor) {
         this.implementationFactor = implementationFactor;
     }
@@ -143,7 +145,7 @@ public class Estimate implements Serializable {
     public Float getSynergyBenefit() {
         return synergyBenefit;
     }
-    
+
     public void setSynergyBenefit(Float synergyBenefit) {
         this.synergyBenefit = synergyBenefit;
     }
@@ -151,7 +153,7 @@ public class Estimate implements Serializable {
     public Long getTotalPrice() {
         return totalPrice;
     }
-    
+
     public void setTotalPrice(Long totalPrice) {
         this.totalPrice = totalPrice;
     }
@@ -159,7 +161,7 @@ public class Estimate implements Serializable {
     public Integer getTotalDuration() {
         return totalDuration;
     }
-    
+
     public void setTotalDuration(Integer totalDuration) {
         this.totalDuration = totalDuration;
     }
@@ -167,7 +169,7 @@ public class Estimate implements Serializable {
     public Integer getResourcing() {
         return resourcing;
     }
-    
+
     public void setResourcing(Integer resourcing) {
         this.resourcing = resourcing;
     }
@@ -175,7 +177,7 @@ public class Estimate implements Serializable {
     public Integer getTotalSynergyBenefit() {
         return totalSynergyBenefit;
     }
-    
+
     public void setTotalSynergyBenefit(Integer totalSynergyBenefit) {
         this.totalSynergyBenefit = totalSynergyBenefit;
     }
