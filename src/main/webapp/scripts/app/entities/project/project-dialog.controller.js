@@ -1,17 +1,20 @@
 'use strict';
 
 angular.module('tenderworkApp').controller('ProjectDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Project', 'User', 'Principal',
-        function($scope, $stateParams, $uibModalInstance, entity, Project, User, Principal) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Project', 'User', 'Principal', 'Estimate',
+        function($scope, $stateParams, $uibModalInstance, entity, Project, User, Principal, Estimate) {
 
         $scope.project = entity;
         $scope.users = User.query();
         $scope.states = ['Uusi', 'Tarjous jätetty', 'Voitettu', 'Hävitty', 'Suljettu'];
         $scope.defaultState = 'Uusi';
+
         $scope.load = function(id) {
             Project.get({id : id}, function(result) {
                 $scope.project = result;
+
             });
+
         };
 
         Principal.identity().then(function(account) {
@@ -20,6 +23,7 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
                 $scope.currentUserAccount = result;
             });
         });
+
 
         var copyAccount = function(account) {
             return {
