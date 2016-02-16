@@ -1,0 +1,142 @@
+
+<div>
+    <h2><span translate="tenderworkApp.task.detail.title">Task</span> {{task.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.task.name">Name</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{task.name}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.task.description">Description</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{task.description}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.task.estimateSpecification">EstimateSpecification</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{task.estimateSpecification}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.task.estimateImplementation">EstimateImplementation</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{task.estimateImplementation}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.task.estimateTesting">EstimateTesting</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{task.estimateTesting}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.task.estimateSynergy">EstimateSynergy</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{task.estimateSynergy}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.task.synergyCheck">SynergyCheck</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{task.synergyCheck}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.task.synergyTotal">SynergyTotal</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{task.synergyTotal}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.task.estimateTotal">EstimateTotal</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{task.estimateTotal}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.task.ownedBy">ownedBy</span>
+                </td>
+                <td>
+                    {{task.ownedBy.login}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.task.specificationFactor">specificationFactor</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="estimate.detail({id:task.specificationFactor.id})">{{task.specificationFactor.specificationFactor}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.task.implementationFactor">implementationFactor</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="estimate.detail({id:task.implementationFactor.id})">{{task.implementationFactor.implementationFactor}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.task.testingFactor">testingFactor</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="estimate.detail({id:task.testingFactor.id})">{{task.testingFactor.testingFactor}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.task.synergyBenefit">synergyBenefit</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="estimate.detail({id:task.synergyBenefit.id})">{{task.synergyBenefit.synergyBenefit}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.task.ownerRequirement">ownerRequirement</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="requirement.detail({id:task.ownerRequirement.id})">{{task.ownerRequirement.name}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

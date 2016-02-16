@@ -1,0 +1,94 @@
+
+<div>
+    <h2><span translate="tenderworkApp.requirement.detail.title">Requirement</span> {{requirement.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.requirement.name">Name</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requirement.name}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.requirement.description">Description</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requirement.description}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.requirement.totalDuration">TotalDuration</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requirement.totalDuration}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.requirement.durationSpecification">DurationSpecification</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requirement.durationSpecification}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.requirement.durationImplementation">DurationImplementation</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requirement.durationImplementation}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.requirement.durationTesting">DurationTesting</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requirement.durationTesting}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.requirement.synergyBenefit">SynergyBenefit</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requirement.synergyBenefit}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.requirement.owner">owner</span>
+                </td>
+                <td>
+                    {{requirement.owner.login}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.requirement.ownerEstimate">ownerEstimate</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="estimate.detail({id:requirement.ownerEstimate.id})">{{requirement.ownerEstimate.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

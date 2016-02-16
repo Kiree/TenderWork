@@ -1,0 +1,138 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "ownedBy",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "specificationFactor",
+            "otherEntityName": "estimate",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "specificationFactor"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "implementationFactor",
+            "otherEntityName": "estimate",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "implementationFactor"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "testingFactor",
+            "otherEntityName": "estimate",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "testingFactor"
+        },
+        {
+            "relationshipId": 5,
+            "relationshipName": "synergyBenefit",
+            "otherEntityName": "estimate",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "synergyBenefit"
+        },
+        {
+            "relationshipId": 6,
+            "relationshipName": "ownerRequirement",
+            "otherEntityName": "requirement",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "1",
+            "fieldValidateRulesMaxlength": "60"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "1000"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "estimateSpecification",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "estimateImplementation",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "estimateTesting",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "estimateSynergy",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "synergyCheck",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "synergyTotal",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": "0"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "estimateTotal",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": "0"
+        }
+    ],
+    "changelogDate": "20160216114107",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

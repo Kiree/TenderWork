@@ -1,0 +1,88 @@
+<div>
+    <h2 translate="tenderworkApp.requirement.home.title">Requirements</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="requirement.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+class="hidden-xs"                        translate="tenderworkApp.requirement.home.createLabel">Create new Requirement
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="searchQuery" id="searchQuery" placeholder="{{ 'tenderworkApp.requirement.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="search()">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span translate="tenderworkApp.requirement.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="description"><span translate="tenderworkApp.requirement.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalDuration"><span translate="tenderworkApp.requirement.totalDuration">TotalDuration</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="durationSpecification"><span translate="tenderworkApp.requirement.durationSpecification">DurationSpecification</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="durationImplementation"><span translate="tenderworkApp.requirement.durationImplementation">DurationImplementation</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="durationTesting"><span translate="tenderworkApp.requirement.durationTesting">DurationTesting</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="synergyBenefit"><span translate="tenderworkApp.requirement.synergyBenefit">SynergyBenefit</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="owner.login"><span translate="tenderworkApp.requirement.owner">owner</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ownerEstimate.id"><span translate="tenderworkApp.requirement.ownerEstimate">ownerEstimate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="requirement in requirements track by requirement.id">
+                    <td><a ui-sref="requirement.detail({id:requirement.id})">{{requirement.id}}</a></td>
+                    <td>{{requirement.name}}</td>
+                    <td>{{requirement.description}}</td>
+                    <td>{{requirement.totalDuration}}</td>
+                    <td>{{requirement.durationSpecification}}</td>
+                    <td>{{requirement.durationImplementation}}</td>
+                    <td>{{requirement.durationTesting}}</td>
+                    <td>{{requirement.synergyBenefit}}</td>
+                    <td>
+                        {{requirement.owner.login}}
+                    </td>
+                    <td>
+                        <a ui-sref="estimate.detail({id:requirement.ownerEstimate.id})">{{requirement.ownerEstimate.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="requirement.detail({id:requirement.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="requirement.edit({id:requirement.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="requirement.delete({id:requirement.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
