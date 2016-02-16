@@ -2,33 +2,33 @@
     "tenderworkApp": {
         "estimate" : {
             "home": {
-                "title": "Estimates",
-                "createLabel": "Create a new Estimate",
-                "createOrEditLabel": "Create or edit a Estimate",
-                "search": "Search for Estimate"
+                "title": "Arviot",
+                "createLabel": "Luo uusi arvio",
+                "createOrEditLabel": "Luo tai muokkaa arviota",
+                "search": "Etsi arviota"
             },
-            "created": "A new Estimate is created with identifier {{ param }}",
-            "updated": "A Estimate is updated with identifier {{ param }}",
-            "deleted": "A Estimate is deleted with identifier {{ param }}",
+            "created": "Uusi arvio on luotu tunnisteella {{ param }}",
+            "updated": "Arvio on päivitetty tunnisteella {{ param }}",
+            "deleted": "Arvio on poistettu tunnisteella {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Estimate {{ id }}?"
+                "question": "Haluatko varmasti poistaa arvion {{ id }}?"
             },
             "detail": {
-                "title": "Estimate"
+                "title": "Arvio"
             },
-            "creator": "Creator",
-            "workDays": "WorkDays",
-            "duration": "Duration",
-            "cost": "Cost",
-            "multiSpec": "MultiSpec",
-            "multiImp": "MultiImp",
-            "multiTest": "MultiTest",
-            "multiSyn": "MultiSyn",
-            "overallCost": "OverallCost",
-            "overallDuration": "OverallDuration",
-            "overallResources": "OverallResources",
-            "overallGain": "OverallGain",
-            "project": "Project"
+            "workdaysInMonth": "Työpäivät/kk",
+            "desiredProjectDuration": "Toivekesto",
+            "dailyPrice": "Päivähinta",
+            "specificationFactor": "KerroinMäärittely",
+            "testingFactor": "KerroinTestaus",
+            "implementationFactor": "KerroinToteutus",
+            "synergyBenefit": "KerroinSynergia",
+            "totalPrice": "KokonaisHinta",
+            "totalDuration": "KokonaisKesto",
+            "resourcing": "Resursointi",
+            "totalSynergyBenefit": "KokonaisSynergiaHyöty",
+            "createdBy": "Luoja",
+            "ownerProject": "OmistajaProjekti"
         }
     }
 }

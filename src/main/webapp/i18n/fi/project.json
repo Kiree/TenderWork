@@ -11,7 +11,7 @@
             "updated": "Projekti on päivitetty tunnisteella {{ param }}",
             "deleted": "Projekti on poistettu tunnisteella {{ param }}",
             "delete": {
-                "question": "Oletko varma että haluat poistaa projektin {{ id }}?"
+                "question": "Haluatko varmasti poistaa projektin {{ id }}?"
             },
             "detail": {
                 "title": "Projekti"
