@@ -49,7 +49,7 @@ angular.module('tenderworkApp')
             })
             .state('estimate.new', {
                 parent: 'estimate',
-                url: '/new',
+                url: '/new/:project',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -77,7 +77,7 @@ angular.module('tenderworkApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('estimate', null, { reload: true });
+                        $state.go('project.detail', { id:result.ownerProject.id }, { reload: true });
                     }, function() {
                         $state.go('estimate');
                     })
