@@ -40,7 +40,6 @@ angular.module('tenderworkApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('project');
-                        $translatePartialLoader.addPart('estimate');
                         return $translate.refresh();
                     }],
                     entity: ['$stateParams', 'Project', function($stateParams, Project) {
@@ -66,10 +65,10 @@ angular.module('tenderworkApp')
                                     description: null,
                                     client: null,
                                     deadline: null,
-                                    createdDate: new Date(),
-                                    editedDate: new Date(),
+                                    createdDate: null,
+                                    editedDate: null,
                                     docLocation: null,
-                                    state: 'Uusi',
+                                    state: null,
                                     stateDescription: null,
                                     id: null
                                 };
@@ -83,14 +82,14 @@ angular.module('tenderworkApp')
                 }]
             })
             .state('project.edit', {
-                parent: 'project.detail',
+                parent: 'project',
                 url: '/{id}/edit',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/project/project-edit-dialog.html',
+                        templateUrl: 'scripts/app/entities/project/project-dialog.html',
                         controller: 'ProjectDialogController',
                         size: 'lg',
                         resolve: {
@@ -99,7 +98,7 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('project.detail', null, { reload: true });
+                        $state.go('project', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })

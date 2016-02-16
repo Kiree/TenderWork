@@ -29,31 +29,31 @@ public class Requirement implements Serializable {
     @Size(min = 1, max = 60)
     @Column(name = "name", length = 60, nullable = false)
     private String name;
-
+    
     @Size(max = 1000)
     @Column(name = "description", length = 1000)
     private String description;
-
+    
     @Min(value = 0)
     @Column(name = "total_duration")
     private Integer totalDuration;
-
+    
     @Min(value = 0)
     @Column(name = "duration_specification")
     private Integer durationSpecification;
-
+    
     @Min(value = 0)
     @Column(name = "duration_implementation")
     private Integer durationImplementation;
-
+    
     @Min(value = 0)
     @Column(name = "duration_testing")
     private Integer durationTesting;
-
+    
     @Min(value = 0)
     @Column(name = "synergy_benefit")
     private Integer synergyBenefit;
-
+    
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private User owner;
@@ -65,7 +65,7 @@ public class Requirement implements Serializable {
     @OneToMany(mappedBy = "ownerRequirement")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Task> hasTasks = new HashSet<>();
+    private Set<Task> hasTaskss = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -78,7 +78,7 @@ public class Requirement implements Serializable {
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
@@ -86,7 +86,7 @@ public class Requirement implements Serializable {
     public String getDescription() {
         return description;
     }
-
+    
     public void setDescription(String description) {
         this.description = description;
     }
@@ -94,7 +94,7 @@ public class Requirement implements Serializable {
     public Integer getTotalDuration() {
         return totalDuration;
     }
-
+    
     public void setTotalDuration(Integer totalDuration) {
         this.totalDuration = totalDuration;
     }
@@ -102,7 +102,7 @@ public class Requirement implements Serializable {
     public Integer getDurationSpecification() {
         return durationSpecification;
     }
-
+    
     public void setDurationSpecification(Integer durationSpecification) {
         this.durationSpecification = durationSpecification;
     }
@@ -110,7 +110,7 @@ public class Requirement implements Serializable {
     public Integer getDurationImplementation() {
         return durationImplementation;
     }
-
+    
     public void setDurationImplementation(Integer durationImplementation) {
         this.durationImplementation = durationImplementation;
     }
@@ -118,7 +118,7 @@ public class Requirement implements Serializable {
     public Integer getDurationTesting() {
         return durationTesting;
     }
-
+    
     public void setDurationTesting(Integer durationTesting) {
         this.durationTesting = durationTesting;
     }
@@ -126,7 +126,7 @@ public class Requirement implements Serializable {
     public Integer getSynergyBenefit() {
         return synergyBenefit;
     }
-
+    
     public void setSynergyBenefit(Integer synergyBenefit) {
         this.synergyBenefit = synergyBenefit;
     }
@@ -147,12 +147,12 @@ public class Requirement implements Serializable {
         this.ownerEstimate = estimate;
     }
 
-    public Set<Task> getHasTasks() {
-        return hasTasks;
+    public Set<Task> getHasTaskss() {
+        return hasTaskss;
     }
 
-    public void setHasTasks(Set<Task> tasks) {
-        this.hasTasks = tasks;
+    public void setHasTaskss(Set<Task> tasks) {
+        this.hasTaskss = tasks;
     }
 
     @Override

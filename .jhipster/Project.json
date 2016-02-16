@@ -13,6 +13,13 @@
             "otherEntityName": "user",
             "relationshipType": "many-to-one",
             "otherEntityField": "login"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "hasEstimates",
+            "otherEntityName": "estimate",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "ownerProject"
         }
     ],
     "fields": [

@@ -61,13 +61,13 @@
                 <button type="button" class="btn btn-default" ng-click="datePickerForDeadlineOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
         </div>
-        <div class="form-group" ng-hide="true">
+        <div class="form-group">
             <label class="control-label" translate="tenderworkApp.project.createdDate" for="field_createdDate">CreatedDate</label>
             <input id="field_createdDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="project.createdDate" is-open="datePickerForCreatedDate.status.opened"
-            required readonly/>
-            <!--<span class="input-group-btn">
+            required/>
+            <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="datePickerForCreatedDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>-->
+            </span>
             <div ng-show="editForm.createdDate.$invalid">
                 <p class="help-block"
                     ng-show="editForm.createdDate.$error.required" translate="entity.validation.required">
@@ -79,13 +79,13 @@
                 </p>
             </div>
         </div>
-        <div class="form-group" ng-hide="true">
+        <div class="form-group">
             <label class="control-label" translate="tenderworkApp.project.editedDate" for="field_editedDate">EditedDate</label>
             <input id="field_editedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="project.editedDate" is-open="datePickerForEditedDate.status.opened"
-            required readonly/>
-           <!-- <span class="input-group-btn">
+            required/>
+            <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="datePickerForEditedDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>-->
+            </span>
             <div ng-show="editForm.editedDate.$invalid">
                 <p class="help-block"
                     ng-show="editForm.editedDate.$error.required" translate="entity.validation.required">
@@ -112,12 +112,8 @@
         <div class="form-group">
             <label class="control-label" translate="tenderworkApp.project.state" for="field_state">State</label>
             <input type="text" class="form-control" name="state" id="field_state"
-                   ng-model="project.state"
-                   readonly/>
-           <!-- <select class="form-control" id="field_state" name="state" ng-model="project.state" ng-options="state for state in states">
-
-            </select>-->
-
+                    ng-model="project.state"
+                    required />
             <div ng-show="editForm.state.$invalid">
                 <p class="help-block"
                     ng-show="editForm.state.$error.required" translate="entity.validation.required">
@@ -138,21 +134,18 @@
             </div>
         </div>
 
-        <!--<div class="form-group">
+        <div class="form-group">
             <label translate="tenderworkApp.project.createdBy" for="field_createdBy">createdBy</label>
-            <input type="text" class="form-control" name="createdBy" id="field_createdBy"
-                   ng-model="project.createdBy"
-                   required />
             <select class="form-control" id="field_createdBy" name="createdBy" ng-model="project.createdBy" ng-options="user as user.login for user in users track by user.id">
-
+                <option value=""></option>
             </select>
-        </div>-->
-        <!--<div class="form-group">
+        </div>
+        <div class="form-group">
             <label translate="tenderworkApp.project.editedBy" for="field_editedBy">editedBy</label>
-            <input type="text" class="form-control" name="editedBy" id="field_editedBy"
-                   ng-model="project.editedBy"
-                   required />
-        </div>-->
+            <select class="form-control" id="field_editedBy" name="editedBy" ng-model="project.editedBy" ng-options="user as user.login for user in users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">

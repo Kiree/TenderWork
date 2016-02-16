@@ -1,37 +1,66 @@
 
 <div>
-    <h2>{{project.name}}</h2>
+    <h2><span translate="tenderworkApp.project.detail.title">Project</span> {{project.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
-
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
             <tbody>
             <tr>
                 <td>
-
-                    <span translate="tenderworkApp.project.name" class="projectdetail">Name</span>
+                    <span translate="tenderworkApp.project.name">Name</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{project.name}}</span>
                 </td>
+            </tr>
+            <tr>
                 <td>
-                    <span translate="tenderworkApp.project.client" class="projectdetail">Client</span>
+                    <span translate="tenderworkApp.project.description">Description</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.description}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.client">Client</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{project.client}}</span>
                 </td>
             </tr>
-
-
             <tr>
-
                 <td>
-                    <span translate="tenderworkApp.project.deadline" class="projectdetail">Deadline</span>
+                    <span translate="tenderworkApp.project.deadline">Deadline</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{project.deadline | date:'mediumDate'}}</span>
                 </td>
+            </tr>
+            <tr>
                 <td>
-                    <span translate="tenderworkApp.project.docLocation" class="projectdetail">DocLocation</span>
+                    <span translate="tenderworkApp.project.createdDate">CreatedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.createdDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.editedDate">EditedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{project.editedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.docLocation">DocLocation</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{project.docLocation}}</span>
@@ -39,13 +68,23 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.project.createdDate" class="projectdetail">CreatedDate</span>
+                    <span translate="tenderworkApp.project.state">State</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{project.createdDate | date:'medium'}}</span>
+                    <span class="form-control-static">{{project.state}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.stateDescription">StateDescription</span>
                 </td>
                 <td>
-                    <span translate="tenderworkApp.project.createdBy" class="projectdetail">createdBy</span>
+                    <span class="form-control-static">{{project.stateDescription}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.project.createdBy">createdBy</span>
                 </td>
                 <td>
                     {{project.createdBy.login}}
@@ -53,129 +92,19 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.project.editedDate" class="projectdetail">EditedDate</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{project.editedDate | date:'medium'}}</span>
-                </td>
-                <td>
-                    <span translate="tenderworkApp.project.editedBy" class="projectdetail">editedBy</span>
+                    <span translate="tenderworkApp.project.editedBy">editedBy</span>
                 </td>
                 <td>
                     {{project.editedBy.login}}
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.project.state" class="projectdetail">State</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{project.state}}</span>
-                </td>
-                <td>
-                    <span translate="tenderworkApp.project.stateDescription" class="projectdetail">StateDescription</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{project.stateDescription}}</span>
-                </td>
-            </tr>
             </tbody>
         </table>
-        <div>
-            <div class="col-sm-12 bg-info"><span translate="tenderworkApp.project.description" class="projectdetail">Description</span></div>
-            <div class="col-sm-12"><span class="form-control-static projectDetail">{{project.description}}</span></div>
-        </div>
     </div>
-    <div class="btn-group flex-btn-group-container">
-        <button type="submit"
-                ui-sref="project"
-                class="btn btn-info">
-            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
-        </button>
 
-        <button type="submit"
-                ui-sref="project.edit({id:project.id})" class="btn btn-primary btn-sm">
-            <span class="glyphicon glyphicon-pencil"></span>
-            <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
-        </button>
-    </div>
-</div>
-<div>
-    <h2 translate="tenderworkApp.estimate.home.title">Estimates</h2>
-    <jh-alert></jh-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="estimate.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span
-                        class="hidden-xs"                        translate="tenderworkApp.estimate.home.createLabel">Create new Estimate
-                    </span>
-                </button>
-            </div>
-            <div class="col-xs-8 no-padding-right">
-                <form name="searchForm" class="form-inline">
-                    <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="searchQuery" id="searchQuery" placeholder="{{ 'tenderworkApp.estimate.home.search' | translate }}">
-                        <span  class="input-group-btn width-min" >
-                            <button class="btn btn-info" ng-click="search()">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
-            <tr jh-sort="predicate" ascending="reverse" callback="reset()">
-                <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="totalPrice"><span translate="tenderworkApp.estimate.totalPrice">TotalPrice</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="totalDuration"><span translate="tenderworkApp.estimate.totalDuration">TotalDuration</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="resourcing"><span translate="tenderworkApp.estimate.resourcing">Resourcing</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="createdBy.login"><span translate="tenderworkApp.estimate.createdBy">createdBy</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
-            <tr ng-repeat="estimate in estimates track by estimate.id">
-                <td><a ui-sref="estimate.detail({id:estimate.id})">{{estimate.id}}</a></td>
-                <td>{{estimate.totalPrice}}</td>
-                <td>{{estimate.totalDuration}}</td>
-                <td>{{estimate.resourcing}}</td>
-                <td>
-                    {{estimate.createdBy.login}}
-                </td>
-                <td>
-                    <a ui-sref="project.detail({id:estimate.ownerProject.id})">{{estimate.ownerProject.name}}</a>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                ui-sref="estimate.detail({id:estimate.id})"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>
-                            <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="estimate.edit({id:estimate.id})"
-                                class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="estimate.delete({id:estimate.id})"
-                                class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-remove-circle"></span>
-                            <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
 </div>

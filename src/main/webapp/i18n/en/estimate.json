@@ -28,7 +28,8 @@
             "resourcing": "Resourcing",
             "totalSynergyBenefit": "TotalSynergyBenefit",
             "createdBy": "CreatedBy",
-            "ownerProject": "OwnerProject"
+            "ownerProject": "OwnerProject",
+            "hasRequirements": "HasRequirements"
         }
     }
 }

@@ -13,6 +13,13 @@
             "otherEntityName": "project",
             "relationshipType": "many-to-one",
             "otherEntityField": "name"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "hasRequirements",
+            "otherEntityName": "task",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "ownerEstimate"
         }
     ],
     "fields": [
