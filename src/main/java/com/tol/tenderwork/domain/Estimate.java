@@ -88,7 +88,7 @@ public class Estimate implements Serializable {
     @OneToMany(mappedBy = "ownerEstimate")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Task> hasRequirementss = new HashSet<>();
+    private Set<Requirement> hasRequirementss = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -202,12 +202,12 @@ public class Estimate implements Serializable {
         this.ownerProject = project;
     }
 
-    public Set<Task> getHasRequirementss() {
+    public Set<Requirement> getHasRequirementss() {
         return hasRequirementss;
     }
 
-    public void setHasRequirementss(Set<Task> tasks) {
-        this.hasRequirementss = tasks;
+    public void setHasRequirementss(Set<Requirement> requirements) {
+        this.hasRequirementss = requirements;
     }
 
     @Override

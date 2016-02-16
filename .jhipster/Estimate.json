@@ -17,7 +17,7 @@
         {
             "relationshipId": 3,
             "relationshipName": "hasRequirements",
-            "otherEntityName": "task",
+            "otherEntityName": "requirement",
             "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "ownerEstimate"
         }

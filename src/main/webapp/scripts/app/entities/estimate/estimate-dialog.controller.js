@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('tenderworkApp').controller('EstimateDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Estimate', 'User', 'Project', 'Task',
-        function($scope, $stateParams, $uibModalInstance, entity, Estimate, User, Project, Task) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Estimate', 'User', 'Project', 'Requirement',
+        function($scope, $stateParams, $uibModalInstance, entity, Estimate, User, Project, Requirement) {
 
         $scope.estimate = entity;
         $scope.users = User.query();
         $scope.projects = Project.query();
-        $scope.tasks = Task.query();
+        $scope.requirements = Requirement.query();
         $scope.load = function(id) {
             Estimate.get({id : id}, function(result) {
                 $scope.estimate = result;
