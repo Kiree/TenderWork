@@ -29,39 +29,48 @@ public class Project implements Serializable {
     @NotNull
     @Size(max = 60)
     @Column(name = "name", length = 60, nullable = false)
+    //Projektin nimi
     private String name;
-    
+
     @Size(max = 1000)
     @Column(name = "description", length = 1000)
+    //Projektin kuvaus
     private String description;
-    
+
     @Size(max = 60)
     @Column(name = "client", length = 60)
+    //Projektin asiakas
     private String client;
-    
+
     @Column(name = "deadline")
+    //Projektin deadline
     private LocalDate deadline;
-    
+
     @NotNull
     @Column(name = "created_date", nullable = false)
+    //Luontipäivämäärä
     private ZonedDateTime createdDate;
-    
+
     @NotNull
     @Column(name = "edited_date", nullable = false)
+    //Muokkauspäivämäärä
     private ZonedDateTime editedDate;
-    
+
     @Size(max = 250)
     @Column(name = "doc_location", length = 250)
+    //Dokumenttien sijainti
     private String docLocation;
-    
+
     @NotNull
     @Column(name = "state", nullable = false)
+    //Projektin tila
     private String state;
-    
+
     @Size(max = 1000)
     @Column(name = "state_description", length = 1000)
+    //Tilakuvaus
     private String stateDescription;
-    
+
     @ManyToOne
     @JoinColumn(name = "created_by_id")
     private User createdBy;
@@ -81,7 +90,7 @@ public class Project implements Serializable {
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
@@ -89,7 +98,7 @@ public class Project implements Serializable {
     public String getDescription() {
         return description;
     }
-    
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -97,7 +106,7 @@ public class Project implements Serializable {
     public String getClient() {
         return client;
     }
-    
+
     public void setClient(String client) {
         this.client = client;
     }
@@ -105,7 +114,7 @@ public class Project implements Serializable {
     public LocalDate getDeadline() {
         return deadline;
     }
-    
+
     public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
@@ -113,7 +122,7 @@ public class Project implements Serializable {
     public ZonedDateTime getCreatedDate() {
         return createdDate;
     }
-    
+
     public void setCreatedDate(ZonedDateTime createdDate) {
         this.createdDate = createdDate;
     }
@@ -121,7 +130,7 @@ public class Project implements Serializable {
     public ZonedDateTime getEditedDate() {
         return editedDate;
     }
-    
+
     public void setEditedDate(ZonedDateTime editedDate) {
         this.editedDate = editedDate;
     }
@@ -129,7 +138,7 @@ public class Project implements Serializable {
     public String getDocLocation() {
         return docLocation;
     }
-    
+
     public void setDocLocation(String docLocation) {
         this.docLocation = docLocation;
     }
@@ -137,7 +146,7 @@ public class Project implements Serializable {
     public String getState() {
         return state;
     }
-    
+
     public void setState(String state) {
         this.state = state;
     }
@@ -145,7 +154,7 @@ public class Project implements Serializable {
     public String getStateDescription() {
         return stateDescription;
     }
-    
+
     public void setStateDescription(String stateDescription) {
         this.stateDescription = stateDescription;
     }

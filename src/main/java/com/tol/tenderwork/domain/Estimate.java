@@ -28,54 +28,66 @@ public class Estimate implements Serializable {
     @Min(value = 1)
     @Max(value = 31)
     @Column(name = "workdays_in_month", nullable = false)
-    //Työpäiviä kuukaudessa (0 - 31)
+    //Työpäiviä kuukaudessa (1 - 31) keskimäärin
     private Integer workdaysInMonth;
 
     @NotNull
     @Min(value = 1)
     @Column(name = "desired_project_duration", nullable = false)
-    //Toivottu
+    //Projektin toivekesto KUUKAUSIA
     private Integer desiredProjectDuration;
 
     @NotNull
     @Min(value = 1)
     @Column(name = "daily_price", nullable = false)
+    //Päivähinta
     private Long dailyPrice;
 
     @NotNull
     @Min(value = 0)
     @Max(value = 1)
     @Column(name = "specification_factor", nullable = false)
+    //Määrityskerroin 0-1
     private Float specificationFactor;
 
     @NotNull
     @Min(value = 0)
     @Max(value = 1)
     @Column(name = "testing_factor", nullable = false)
+    //Testauskerroin 0-1
     private Float testingFactor;
 
     @NotNull
     @Min(value = 0)
     @Max(value = 1)
     @Column(name = "implementation_factor", nullable = false)
+    //Toteutuskerroin 0-1
     private Float implementationFactor;
 
     @NotNull
     @Min(value = 0)
     @Max(value = 1)
     @Column(name = "synergy_benefit", nullable = false)
+    //Synergiaetukerroin 0-1
     private Float synergyBenefit;
 
     @Column(name = "total_price")
+    //Itsenäinen tuote: kesto(htp) x päivähinta
+    //Synergialla: (kesto - hyöty) x päivähinta [jos synergyBenefit > 0]
     private Long totalPrice;
 
     @Column(name = "total_duration")
+    //Itsenäinen tuote: (htp), vaatimuksien työmääräarvio yhteensä
+    //Synergialla: Työmääräarvio - hyöty [jos synergyBenefit > 0]
     private Integer totalDuration;
 
     @Column(name = "resourcing")
+    //Itsenäinen tuote: Kesto / (työpäiviä kuukaudessa * toivekesto kuukausissa)
+    //Synergialla: Sama [jos synergyBenefit > 0]
     private Integer resourcing;
 
     @Column(name = "total_synergy_benefit")
+    //Synergiahyöty: Hyöty yhteensä (htp) vaatimuksista [jos synergyBenefit > 0]
     private Integer totalSynergyBenefit;
 
     @ManyToOne
