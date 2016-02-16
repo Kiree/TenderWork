@@ -66,7 +66,7 @@ angular.module('tenderworkApp')
                                     client: null,
                                     deadline: null,
                                     createdDate: new Date(),
-                                    editedDate: new Dat,
+                                    editedDate: new Date(),
                                     docLocation: null,
                                     state: null,
                                     stateDescription: null,
