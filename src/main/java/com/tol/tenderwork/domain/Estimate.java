@@ -5,8 +5,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -24,45 +24,65 @@ public class Estimate implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "creator")
-    private String creator;
+    @NotNull
+    @Min(value = 1)
+    @Max(value = 31)
+    @Column(name = "workdays_in_month", nullable = false)
+    private Integer workdaysInMonth;
     
-    @Column(name = "work_days")
-    private Integer workDays;
+    @NotNull
+    @Min(value = 1)
+    @Column(name = "desired_project_duration", nullable = false)
+    private Integer desiredProjectDuration;
     
-    @Column(name = "duration")
-    private Integer duration;
+    @NotNull
+    @Min(value = 1)
+    @Column(name = "daily_price", nullable = false)
+    private Long dailyPrice;
     
-    @Column(name = "cost", precision=10, scale=2)
-    private BigDecimal cost;
+    @NotNull
+    @Min(value = 0)
+    @Max(value = 1)
+    @Column(name = "specification_factor", nullable = false)
+    private Float specificationFactor;
     
-    @Column(name = "multi_spec", precision=10, scale=2)
-    private BigDecimal multiSpec;
+    @NotNull
+    @Min(value = 0)
+    @Max(value = 1)
+    @Column(name = "testing_factor", nullable = false)
+    private Float testingFactor;
     
-    @Column(name = "multi_imp", precision=10, scale=2)
-    private BigDecimal multiImp;
+    @NotNull
+    @Min(value = 0)
+    @Max(value = 1)
+    @Column(name = "implementation_factor", nullable = false)
+    private Float implementationFactor;
     
-    @Column(name = "multi_test", precision=10, scale=2)
-    private BigDecimal multiTest;
+    @NotNull
+    @Min(value = 0)
+    @Max(value = 1)
+    @Column(name = "synergy_benefit", nullable = false)
+    private Float synergyBenefit;
     
-    @Column(name = "multi_syn", precision=10, scale=2)
-    private BigDecimal multiSyn;
+    @Column(name = "total_price")
+    private Long totalPrice;
     
-    @Column(name = "overall_cost", precision=10, scale=2)
-    private BigDecimal overallCost;
+    @Column(name = "total_duration")
+    private Integer totalDuration;
     
-    @Column(name = "overall_duration", precision=10, scale=2)
-    private BigDecimal overallDuration;
+    @Column(name = "resourcing")
+    private Integer resourcing;
     
-    @Column(name = "overall_resources", precision=10, scale=2)
-    private BigDecimal overallResources;
-    
-    @Column(name = "overall_gain", precision=10, scale=2)
-    private BigDecimal overallGain;
+    @Column(name = "total_synergy_benefit")
+    private Integer totalSynergyBenefit;
     
     @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
+    @JoinColumn(name = "created_by_id")
+    private User createdBy;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_project_id")
+    private Project ownerProject;
 
     public Long getId() {
         return id;
@@ -72,108 +92,108 @@ public class Estimate implements Serializable {
         this.id = id;
     }
 
-    public String getCreator() {
-        return creator;
+    public Integer getWorkdaysInMonth() {
+        return workdaysInMonth;
     }
     
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setWorkdaysInMonth(Integer workdaysInMonth) {
+        this.workdaysInMonth = workdaysInMonth;
     }
 
-    public Integer getWorkDays() {
-        return workDays;
+    public Integer getDesiredProjectDuration() {
+        return desiredProjectDuration;
     }
     
-    public void setWorkDays(Integer workDays) {
-        this.workDays = workDays;
+    public void setDesiredProjectDuration(Integer desiredProjectDuration) {
+        this.desiredProjectDuration = desiredProjectDuration;
     }
 
-    public Integer getDuration() {
-        return duration;
+    public Long getDailyPrice() {
+        return dailyPrice;
     }
     
-    public void setDuration(Integer duration) {
-        this.duration = duration;
+    public void setDailyPrice(Long dailyPrice) {
+        this.dailyPrice = dailyPrice;
     }
 
-    public BigDecimal getCost() {
-        return cost;
+    public Float getSpecificationFactor() {
+        return specificationFactor;
     }
     
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
+    public void setSpecificationFactor(Float specificationFactor) {
+        this.specificationFactor = specificationFactor;
     }
 
-    public BigDecimal getMultiSpec() {
-        return multiSpec;
+    public Float getTestingFactor() {
+        return testingFactor;
     }
     
-    public void setMultiSpec(BigDecimal multiSpec) {
-        this.multiSpec = multiSpec;
+    public void setTestingFactor(Float testingFactor) {
+        this.testingFactor = testingFactor;
     }
 
-    public BigDecimal getMultiImp() {
-        return multiImp;
+    public Float getImplementationFactor() {
+        return implementationFactor;
     }
     
-    public void setMultiImp(BigDecimal multiImp) {
-        this.multiImp = multiImp;
+    public void setImplementationFactor(Float implementationFactor) {
+        this.implementationFactor = implementationFactor;
     }
 
-    public BigDecimal getMultiTest() {
-        return multiTest;
+    public Float getSynergyBenefit() {
+        return synergyBenefit;
     }
     
-    public void setMultiTest(BigDecimal multiTest) {
-        this.multiTest = multiTest;
+    public void setSynergyBenefit(Float synergyBenefit) {
+        this.synergyBenefit = synergyBenefit;
     }
 
-    public BigDecimal getMultiSyn() {
-        return multiSyn;
+    public Long getTotalPrice() {
+        return totalPrice;
     }
     
-    public void setMultiSyn(BigDecimal multiSyn) {
-        this.multiSyn = multiSyn;
+    public void setTotalPrice(Long totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
-    public BigDecimal getOverallCost() {
-        return overallCost;
+    public Integer getTotalDuration() {
+        return totalDuration;
     }
     
-    public void setOverallCost(BigDecimal overallCost) {
-        this.overallCost = overallCost;
+    public void setTotalDuration(Integer totalDuration) {
+        this.totalDuration = totalDuration;
     }
 
-    public BigDecimal getOverallDuration() {
-        return overallDuration;
+    public Integer getResourcing() {
+        return resourcing;
     }
     
-    public void setOverallDuration(BigDecimal overallDuration) {
-        this.overallDuration = overallDuration;
+    public void setResourcing(Integer resourcing) {
+        this.resourcing = resourcing;
     }
 
-    public BigDecimal getOverallResources() {
-        return overallResources;
+    public Integer getTotalSynergyBenefit() {
+        return totalSynergyBenefit;
     }
     
-    public void setOverallResources(BigDecimal overallResources) {
-        this.overallResources = overallResources;
+    public void setTotalSynergyBenefit(Integer totalSynergyBenefit) {
+        this.totalSynergyBenefit = totalSynergyBenefit;
     }
 
-    public BigDecimal getOverallGain() {
-        return overallGain;
-    }
-    
-    public void setOverallGain(BigDecimal overallGain) {
-        this.overallGain = overallGain;
+    public User getCreatedBy() {
+        return createdBy;
     }
 
-    public Project getProject() {
-        return project;
+    public void setCreatedBy(User user) {
+        this.createdBy = user;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public Project getOwnerProject() {
+        return ownerProject;
+    }
+
+    public void setOwnerProject(Project project) {
+        this.ownerProject = project;
     }
 
     @Override
@@ -200,18 +220,17 @@ public class Estimate implements Serializable {
     public String toString() {
         return "Estimate{" +
             "id=" + id +
-            ", creator='" + creator + "'" +
-            ", workDays='" + workDays + "'" +
-            ", duration='" + duration + "'" +
-            ", cost='" + cost + "'" +
-            ", multiSpec='" + multiSpec + "'" +
-            ", multiImp='" + multiImp + "'" +
-            ", multiTest='" + multiTest + "'" +
-            ", multiSyn='" + multiSyn + "'" +
-            ", overallCost='" + overallCost + "'" +
-            ", overallDuration='" + overallDuration + "'" +
-            ", overallResources='" + overallResources + "'" +
-            ", overallGain='" + overallGain + "'" +
+            ", workdaysInMonth='" + workdaysInMonth + "'" +
+            ", desiredProjectDuration='" + desiredProjectDuration + "'" +
+            ", dailyPrice='" + dailyPrice + "'" +
+            ", specificationFactor='" + specificationFactor + "'" +
+            ", testingFactor='" + testingFactor + "'" +
+            ", implementationFactor='" + implementationFactor + "'" +
+            ", synergyBenefit='" + synergyBenefit + "'" +
+            ", totalPrice='" + totalPrice + "'" +
+            ", totalDuration='" + totalDuration + "'" +
+            ", resourcing='" + resourcing + "'" +
+            ", totalSynergyBenefit='" + totalSynergyBenefit + "'" +
             '}';
     }
 }

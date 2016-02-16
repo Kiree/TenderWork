@@ -31,39 +31,41 @@ class="hidden-xs"                        translate="tenderworkApp.estimate.home.
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="creator"><span translate="tenderworkApp.estimate.creator">Creator</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="workDays"><span translate="tenderworkApp.estimate.workDays">WorkDays</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="duration"><span translate="tenderworkApp.estimate.duration">Duration</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="cost"><span translate="tenderworkApp.estimate.cost">Cost</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="multiSpec"><span translate="tenderworkApp.estimate.multiSpec">MultiSpec</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="multiImp"><span translate="tenderworkApp.estimate.multiImp">MultiImp</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="multiTest"><span translate="tenderworkApp.estimate.multiTest">MultiTest</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="multiSyn"><span translate="tenderworkApp.estimate.multiSyn">MultiSyn</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="overallCost"><span translate="tenderworkApp.estimate.overallCost">OverallCost</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="overallDuration"><span translate="tenderworkApp.estimate.overallDuration">OverallDuration</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="overallResources"><span translate="tenderworkApp.estimate.overallResources">OverallResources</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="overallGain"><span translate="tenderworkApp.estimate.overallGain">OverallGain</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="project.id"><span translate="tenderworkApp.estimate.project">project</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="workdaysInMonth"><span translate="tenderworkApp.estimate.workdaysInMonth">WorkdaysInMonth</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="desiredProjectDuration"><span translate="tenderworkApp.estimate.desiredProjectDuration">DesiredProjectDuration</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dailyPrice"><span translate="tenderworkApp.estimate.dailyPrice">DailyPrice</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="specificationFactor"><span translate="tenderworkApp.estimate.specificationFactor">SpecificationFactor</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="testingFactor"><span translate="tenderworkApp.estimate.testingFactor">TestingFactor</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="implementationFactor"><span translate="tenderworkApp.estimate.implementationFactor">ImplementationFactor</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="synergyBenefit"><span translate="tenderworkApp.estimate.synergyBenefit">SynergyBenefit</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalPrice"><span translate="tenderworkApp.estimate.totalPrice">TotalPrice</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalDuration"><span translate="tenderworkApp.estimate.totalDuration">TotalDuration</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="resourcing"><span translate="tenderworkApp.estimate.resourcing">Resourcing</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalSynergyBenefit"><span translate="tenderworkApp.estimate.totalSynergyBenefit">TotalSynergyBenefit</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy.login"><span translate="tenderworkApp.estimate.createdBy">createdBy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ownerProject.name"><span translate="tenderworkApp.estimate.ownerProject">ownerProject</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
                 <tr ng-repeat="estimate in estimates track by estimate.id">
                     <td><a ui-sref="estimate.detail({id:estimate.id})">{{estimate.id}}</a></td>
-                    <td>{{estimate.creator}}</td>
-                    <td>{{estimate.workDays}}</td>
-                    <td>{{estimate.duration}}</td>
-                    <td>{{estimate.cost}}</td>
-                    <td>{{estimate.multiSpec}}</td>
-                    <td>{{estimate.multiImp}}</td>
-                    <td>{{estimate.multiTest}}</td>
-                    <td>{{estimate.multiSyn}}</td>
-                    <td>{{estimate.overallCost}}</td>
-                    <td>{{estimate.overallDuration}}</td>
-                    <td>{{estimate.overallResources}}</td>
-                    <td>{{estimate.overallGain}}</td>
+                    <td>{{estimate.workdaysInMonth}}</td>
+                    <td>{{estimate.desiredProjectDuration}}</td>
+                    <td>{{estimate.dailyPrice}}</td>
+                    <td>{{estimate.specificationFactor}}</td>
+                    <td>{{estimate.testingFactor}}</td>
+                    <td>{{estimate.implementationFactor}}</td>
+                    <td>{{estimate.synergyBenefit}}</td>
+                    <td>{{estimate.totalPrice}}</td>
+                    <td>{{estimate.totalDuration}}</td>
+                    <td>{{estimate.resourcing}}</td>
+                    <td>{{estimate.totalSynergyBenefit}}</td>
                     <td>
-                        <a ui-sref="project.detail({id:estimate.project.id})">{{estimate.project.id}}</a>
+                        {{estimate.createdBy.login}}
+                    </td>
+                    <td>
+                        <a ui-sref="project.detail({id:estimate.ownerProject.id})">{{estimate.ownerProject.name}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

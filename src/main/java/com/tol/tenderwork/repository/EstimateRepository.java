@@ -11,4 +11,7 @@ import java.util.List;
  */
 public interface EstimateRepository extends JpaRepository<Estimate,Long> {
 
+    @Query("select estimate from Estimate estimate where estimate.createdBy.login = ?#{principal.username}")
+    List<Estimate> findByCreatedByIsCurrentUser();
+
 }

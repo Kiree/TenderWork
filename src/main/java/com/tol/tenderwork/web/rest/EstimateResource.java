@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -48,7 +49,7 @@ public class EstimateResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Estimate> createEstimate(@RequestBody Estimate estimate) throws URISyntaxException {
+    public ResponseEntity<Estimate> createEstimate(@Valid @RequestBody Estimate estimate) throws URISyntaxException {
         log.debug("REST request to save Estimate : {}", estimate);
         if (estimate.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("estimate", "idexists", "A new estimate cannot already have an ID")).body(null);
@@ -67,7 +68,7 @@ public class EstimateResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Estimate> updateEstimate(@RequestBody Estimate estimate) throws URISyntaxException {
+    public ResponseEntity<Estimate> updateEstimate(@Valid @RequestBody Estimate estimate) throws URISyntaxException {
         log.debug("REST request to update Estimate : {}", estimate);
         if (estimate.getId() == null) {
             return createEstimate(estimate);

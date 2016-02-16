@@ -44,18 +44,17 @@ angular.module('tenderworkApp')
 
         $scope.clear = function () {
             $scope.estimate = {
-                creator: null,
-                workDays: null,
-                duration: null,
-                cost: null,
-                multiSpec: null,
-                multiImp: null,
-                multiTest: null,
-                multiSyn: null,
-                overallCost: null,
-                overallDuration: null,
-                overallResources: null,
-                overallGain: null,
+                workdaysInMonth: null,
+                desiredProjectDuration: null,
+                dailyPrice: null,
+                specificationFactor: null,
+                testingFactor: null,
+                implementationFactor: null,
+                synergyBenefit: null,
+                totalPrice: null,
+                totalDuration: null,
+                resourcing: null,
+                totalSynergyBenefit: null,
                 id: null
             };
         };

@@ -12,106 +12,106 @@
             <tbody>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.estimate.creator">Creator</span>
+                    <span translate="tenderworkApp.estimate.workdaysInMonth">WorkdaysInMonth</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{estimate.creator}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.estimate.workDays">WorkDays</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.workDays}}</span>
+                    <span class="form-control-static">{{estimate.workdaysInMonth}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.estimate.duration">Duration</span>
+                    <span translate="tenderworkApp.estimate.desiredProjectDuration">DesiredProjectDuration</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{estimate.duration}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.estimate.cost">Cost</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.cost}}</span>
+                    <span class="form-control-static">{{estimate.desiredProjectDuration}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.estimate.multiSpec">MultiSpec</span>
+                    <span translate="tenderworkApp.estimate.dailyPrice">DailyPrice</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{estimate.multiSpec}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.estimate.multiImp">MultiImp</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.multiImp}}</span>
+                    <span class="form-control-static">{{estimate.dailyPrice}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.estimate.multiTest">MultiTest</span>
+                    <span translate="tenderworkApp.estimate.specificationFactor">SpecificationFactor</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{estimate.multiTest}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.estimate.multiSyn">MultiSyn</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.multiSyn}}</span>
+                    <span class="form-control-static">{{estimate.specificationFactor}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.estimate.overallCost">OverallCost</span>
+                    <span translate="tenderworkApp.estimate.testingFactor">TestingFactor</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{estimate.overallCost}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.estimate.overallDuration">OverallDuration</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.overallDuration}}</span>
+                    <span class="form-control-static">{{estimate.testingFactor}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.estimate.overallResources">OverallResources</span>
+                    <span translate="tenderworkApp.estimate.implementationFactor">ImplementationFactor</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{estimate.overallResources}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.estimate.overallGain">OverallGain</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.overallGain}}</span>
+                    <span class="form-control-static">{{estimate.implementationFactor}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.estimate.project">project</span>
+                    <span translate="tenderworkApp.estimate.synergyBenefit">SynergyBenefit</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="project.detail({id:estimate.project.id})">{{estimate.project.id}}</a>
+                    <span class="form-control-static">{{estimate.synergyBenefit}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.totalPrice">TotalPrice</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.totalPrice}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.totalDuration">TotalDuration</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.totalDuration}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.resourcing">Resourcing</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.resourcing}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.totalSynergyBenefit">TotalSynergyBenefit</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.totalSynergyBenefit}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.createdBy">createdBy</span>
+                </td>
+                <td>
+                    {{estimate.createdBy.login}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.ownerProject">ownerProject</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="project.detail({id:estimate.ownerProject.id})">{{estimate.ownerProject.name}}</a>
                 </td>
             </tr>
             </tbody>

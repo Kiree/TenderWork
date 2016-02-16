@@ -16,19 +16,19 @@
             "detail": {
                 "title": "Estimate"
             },
-            "creator": "Creator",
-            "workDays": "WorkDays",
-            "duration": "Duration",
-            "cost": "Cost",
-            "multiSpec": "MultiSpec",
-            "multiImp": "MultiImp",
-            "multiTest": "MultiTest",
-            "multiSyn": "MultiSyn",
-            "overallCost": "OverallCost",
-            "overallDuration": "OverallDuration",
-            "overallResources": "OverallResources",
-            "overallGain": "OverallGain",
-            "project": "Project"
+            "workdaysInMonth": "WorkdaysInMonth",
+            "desiredProjectDuration": "DesiredProjectDuration",
+            "dailyPrice": "DailyPrice",
+            "specificationFactor": "SpecificationFactor",
+            "testingFactor": "TestingFactor",
+            "implementationFactor": "ImplementationFactor",
+            "synergyBenefit": "SynergyBenefit",
+            "totalPrice": "TotalPrice",
+            "totalDuration": "TotalDuration",
+            "resourcing": "Resourcing",
+            "totalSynergyBenefit": "TotalSynergyBenefit",
+            "createdBy": "CreatedBy",
+            "ownerProject": "OwnerProject"
         }
     }
 }

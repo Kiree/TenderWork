@@ -24,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,41 +42,39 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class EstimateResourceIntTest {
 
-    private static final String DEFAULT_CREATOR = "AAAAA";
-    private static final String UPDATED_CREATOR = "BBBBB";
 
-    private static final Integer DEFAULT_WORK_DAYS = 1;
-    private static final Integer UPDATED_WORK_DAYS = 2;
+    private static final Integer DEFAULT_WORKDAYS_IN_MONTH = 1;
+    private static final Integer UPDATED_WORKDAYS_IN_MONTH = 2;
 
-    private static final Integer DEFAULT_DURATION = 1;
-    private static final Integer UPDATED_DURATION = 2;
+    private static final Integer DEFAULT_DESIRED_PROJECT_DURATION = 1;
+    private static final Integer UPDATED_DESIRED_PROJECT_DURATION = 2;
 
-    private static final BigDecimal DEFAULT_COST = new BigDecimal(1);
-    private static final BigDecimal UPDATED_COST = new BigDecimal(2);
+    private static final Long DEFAULT_DAILY_PRICE = 1L;
+    private static final Long UPDATED_DAILY_PRICE = 2L;
 
-    private static final BigDecimal DEFAULT_MULTI_SPEC = new BigDecimal(1);
-    private static final BigDecimal UPDATED_MULTI_SPEC = new BigDecimal(2);
+    private static final Float DEFAULT_SPECIFICATION_FACTOR = 0F;
+    private static final Float UPDATED_SPECIFICATION_FACTOR = 1F;
 
-    private static final BigDecimal DEFAULT_MULTI_IMP = new BigDecimal(1);
-    private static final BigDecimal UPDATED_MULTI_IMP = new BigDecimal(2);
+    private static final Float DEFAULT_TESTING_FACTOR = 0F;
+    private static final Float UPDATED_TESTING_FACTOR = 1F;
 
-    private static final BigDecimal DEFAULT_MULTI_TEST = new BigDecimal(1);
-    private static final BigDecimal UPDATED_MULTI_TEST = new BigDecimal(2);
+    private static final Float DEFAULT_IMPLEMENTATION_FACTOR = 0F;
+    private static final Float UPDATED_IMPLEMENTATION_FACTOR = 1F;
 
-    private static final BigDecimal DEFAULT_MULTI_SYN = new BigDecimal(1);
-    private static final BigDecimal UPDATED_MULTI_SYN = new BigDecimal(2);
+    private static final Float DEFAULT_SYNERGY_BENEFIT = 0F;
+    private static final Float UPDATED_SYNERGY_BENEFIT = 1F;
 
-    private static final BigDecimal DEFAULT_OVERALL_COST = new BigDecimal(1);
-    private static final BigDecimal UPDATED_OVERALL_COST = new BigDecimal(2);
+    private static final Long DEFAULT_TOTAL_PRICE = 1L;
+    private static final Long UPDATED_TOTAL_PRICE = 2L;
 
-    private static final BigDecimal DEFAULT_OVERALL_DURATION = new BigDecimal(1);
-    private static final BigDecimal UPDATED_OVERALL_DURATION = new BigDecimal(2);
+    private static final Integer DEFAULT_TOTAL_DURATION = 1;
+    private static final Integer UPDATED_TOTAL_DURATION = 2;
 
-    private static final BigDecimal DEFAULT_OVERALL_RESOURCES = new BigDecimal(1);
-    private static final BigDecimal UPDATED_OVERALL_RESOURCES = new BigDecimal(2);
+    private static final Integer DEFAULT_RESOURCING = 1;
+    private static final Integer UPDATED_RESOURCING = 2;
 
-    private static final BigDecimal DEFAULT_OVERALL_GAIN = new BigDecimal(1);
-    private static final BigDecimal UPDATED_OVERALL_GAIN = new BigDecimal(2);
+    private static final Integer DEFAULT_TOTAL_SYNERGY_BENEFIT = 1;
+    private static final Integer UPDATED_TOTAL_SYNERGY_BENEFIT = 2;
 
     @Inject
     private EstimateRepository estimateRepository;
@@ -109,18 +106,17 @@ public class EstimateResourceIntTest {
     @Before
     public void initTest() {
         estimate = new Estimate();
-        estimate.setCreator(DEFAULT_CREATOR);
-        estimate.setWorkDays(DEFAULT_WORK_DAYS);
-        estimate.setDuration(DEFAULT_DURATION);
-        estimate.setCost(DEFAULT_COST);
-        estimate.setMultiSpec(DEFAULT_MULTI_SPEC);
-        estimate.setMultiImp(DEFAULT_MULTI_IMP);
-        estimate.setMultiTest(DEFAULT_MULTI_TEST);
-        estimate.setMultiSyn(DEFAULT_MULTI_SYN);
-        estimate.setOverallCost(DEFAULT_OVERALL_COST);
-        estimate.setOverallDuration(DEFAULT_OVERALL_DURATION);
-        estimate.setOverallResources(DEFAULT_OVERALL_RESOURCES);
-        estimate.setOverallGain(DEFAULT_OVERALL_GAIN);
+        estimate.setWorkdaysInMonth(DEFAULT_WORKDAYS_IN_MONTH);
+        estimate.setDesiredProjectDuration(DEFAULT_DESIRED_PROJECT_DURATION);
+        estimate.setDailyPrice(DEFAULT_DAILY_PRICE);
+        estimate.setSpecificationFactor(DEFAULT_SPECIFICATION_FACTOR);
+        estimate.setTestingFactor(DEFAULT_TESTING_FACTOR);
+        estimate.setImplementationFactor(DEFAULT_IMPLEMENTATION_FACTOR);
+        estimate.setSynergyBenefit(DEFAULT_SYNERGY_BENEFIT);
+        estimate.setTotalPrice(DEFAULT_TOTAL_PRICE);
+        estimate.setTotalDuration(DEFAULT_TOTAL_DURATION);
+        estimate.setResourcing(DEFAULT_RESOURCING);
+        estimate.setTotalSynergyBenefit(DEFAULT_TOTAL_SYNERGY_BENEFIT);
     }
 
     @Test
@@ -139,18 +135,143 @@ public class EstimateResourceIntTest {
         List<Estimate> estimates = estimateRepository.findAll();
         assertThat(estimates).hasSize(databaseSizeBeforeCreate + 1);
         Estimate testEstimate = estimates.get(estimates.size() - 1);
-        assertThat(testEstimate.getCreator()).isEqualTo(DEFAULT_CREATOR);
-        assertThat(testEstimate.getWorkDays()).isEqualTo(DEFAULT_WORK_DAYS);
-        assertThat(testEstimate.getDuration()).isEqualTo(DEFAULT_DURATION);
-        assertThat(testEstimate.getCost()).isEqualTo(DEFAULT_COST);
-        assertThat(testEstimate.getMultiSpec()).isEqualTo(DEFAULT_MULTI_SPEC);
-        assertThat(testEstimate.getMultiImp()).isEqualTo(DEFAULT_MULTI_IMP);
-        assertThat(testEstimate.getMultiTest()).isEqualTo(DEFAULT_MULTI_TEST);
-        assertThat(testEstimate.getMultiSyn()).isEqualTo(DEFAULT_MULTI_SYN);
-        assertThat(testEstimate.getOverallCost()).isEqualTo(DEFAULT_OVERALL_COST);
-        assertThat(testEstimate.getOverallDuration()).isEqualTo(DEFAULT_OVERALL_DURATION);
-        assertThat(testEstimate.getOverallResources()).isEqualTo(DEFAULT_OVERALL_RESOURCES);
-        assertThat(testEstimate.getOverallGain()).isEqualTo(DEFAULT_OVERALL_GAIN);
+        assertThat(testEstimate.getWorkdaysInMonth()).isEqualTo(DEFAULT_WORKDAYS_IN_MONTH);
+        assertThat(testEstimate.getDesiredProjectDuration()).isEqualTo(DEFAULT_DESIRED_PROJECT_DURATION);
+        assertThat(testEstimate.getDailyPrice()).isEqualTo(DEFAULT_DAILY_PRICE);
+        assertThat(testEstimate.getSpecificationFactor()).isEqualTo(DEFAULT_SPECIFICATION_FACTOR);
+        assertThat(testEstimate.getTestingFactor()).isEqualTo(DEFAULT_TESTING_FACTOR);
+        assertThat(testEstimate.getImplementationFactor()).isEqualTo(DEFAULT_IMPLEMENTATION_FACTOR);
+        assertThat(testEstimate.getSynergyBenefit()).isEqualTo(DEFAULT_SYNERGY_BENEFIT);
+        assertThat(testEstimate.getTotalPrice()).isEqualTo(DEFAULT_TOTAL_PRICE);
+        assertThat(testEstimate.getTotalDuration()).isEqualTo(DEFAULT_TOTAL_DURATION);
+        assertThat(testEstimate.getResourcing()).isEqualTo(DEFAULT_RESOURCING);
+        assertThat(testEstimate.getTotalSynergyBenefit()).isEqualTo(DEFAULT_TOTAL_SYNERGY_BENEFIT);
+    }
+
+    @Test
+    @Transactional
+    public void checkWorkdaysInMonthIsRequired() throws Exception {
+        int databaseSizeBeforeTest = estimateRepository.findAll().size();
+        // set the field null
+        estimate.setWorkdaysInMonth(null);
+
+        // Create the Estimate, which fails.
+
+        restEstimateMockMvc.perform(post("/api/estimates")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(estimate)))
+                .andExpect(status().isBadRequest());
+
+        List<Estimate> estimates = estimateRepository.findAll();
+        assertThat(estimates).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkDesiredProjectDurationIsRequired() throws Exception {
+        int databaseSizeBeforeTest = estimateRepository.findAll().size();
+        // set the field null
+        estimate.setDesiredProjectDuration(null);
+
+        // Create the Estimate, which fails.
+
+        restEstimateMockMvc.perform(post("/api/estimates")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(estimate)))
+                .andExpect(status().isBadRequest());
+
+        List<Estimate> estimates = estimateRepository.findAll();
+        assertThat(estimates).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkDailyPriceIsRequired() throws Exception {
+        int databaseSizeBeforeTest = estimateRepository.findAll().size();
+        // set the field null
+        estimate.setDailyPrice(null);
+
+        // Create the Estimate, which fails.
+
+        restEstimateMockMvc.perform(post("/api/estimates")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(estimate)))
+                .andExpect(status().isBadRequest());
+
+        List<Estimate> estimates = estimateRepository.findAll();
+        assertThat(estimates).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkSpecificationFactorIsRequired() throws Exception {
+        int databaseSizeBeforeTest = estimateRepository.findAll().size();
+        // set the field null
+        estimate.setSpecificationFactor(null);
+
+        // Create the Estimate, which fails.
+
+        restEstimateMockMvc.perform(post("/api/estimates")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(estimate)))
+                .andExpect(status().isBadRequest());
+
+        List<Estimate> estimates = estimateRepository.findAll();
+        assertThat(estimates).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkTestingFactorIsRequired() throws Exception {
+        int databaseSizeBeforeTest = estimateRepository.findAll().size();
+        // set the field null
+        estimate.setTestingFactor(null);
+
+        // Create the Estimate, which fails.
+
+        restEstimateMockMvc.perform(post("/api/estimates")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(estimate)))
+                .andExpect(status().isBadRequest());
+
+        List<Estimate> estimates = estimateRepository.findAll();
+        assertThat(estimates).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkImplementationFactorIsRequired() throws Exception {
+        int databaseSizeBeforeTest = estimateRepository.findAll().size();
+        // set the field null
+        estimate.setImplementationFactor(null);
+
+        // Create the Estimate, which fails.
+
+        restEstimateMockMvc.perform(post("/api/estimates")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(estimate)))
+                .andExpect(status().isBadRequest());
+
+        List<Estimate> estimates = estimateRepository.findAll();
+        assertThat(estimates).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkSynergyBenefitIsRequired() throws Exception {
+        int databaseSizeBeforeTest = estimateRepository.findAll().size();
+        // set the field null
+        estimate.setSynergyBenefit(null);
+
+        // Create the Estimate, which fails.
+
+        restEstimateMockMvc.perform(post("/api/estimates")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(estimate)))
+                .andExpect(status().isBadRequest());
+
+        List<Estimate> estimates = estimateRepository.findAll();
+        assertThat(estimates).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -164,18 +285,17 @@ public class EstimateResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(estimate.getId().intValue())))
-                .andExpect(jsonPath("$.[*].creator").value(hasItem(DEFAULT_CREATOR.toString())))
-                .andExpect(jsonPath("$.[*].workDays").value(hasItem(DEFAULT_WORK_DAYS)))
-                .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION)))
-                .andExpect(jsonPath("$.[*].cost").value(hasItem(DEFAULT_COST.intValue())))
-                .andExpect(jsonPath("$.[*].multiSpec").value(hasItem(DEFAULT_MULTI_SPEC.intValue())))
-                .andExpect(jsonPath("$.[*].multiImp").value(hasItem(DEFAULT_MULTI_IMP.intValue())))
-                .andExpect(jsonPath("$.[*].multiTest").value(hasItem(DEFAULT_MULTI_TEST.intValue())))
-                .andExpect(jsonPath("$.[*].multiSyn").value(hasItem(DEFAULT_MULTI_SYN.intValue())))
-                .andExpect(jsonPath("$.[*].overallCost").value(hasItem(DEFAULT_OVERALL_COST.intValue())))
-                .andExpect(jsonPath("$.[*].overallDuration").value(hasItem(DEFAULT_OVERALL_DURATION.intValue())))
-                .andExpect(jsonPath("$.[*].overallResources").value(hasItem(DEFAULT_OVERALL_RESOURCES.intValue())))
-                .andExpect(jsonPath("$.[*].overallGain").value(hasItem(DEFAULT_OVERALL_GAIN.intValue())));
+                .andExpect(jsonPath("$.[*].workdaysInMonth").value(hasItem(DEFAULT_WORKDAYS_IN_MONTH)))
+                .andExpect(jsonPath("$.[*].desiredProjectDuration").value(hasItem(DEFAULT_DESIRED_PROJECT_DURATION)))
+                .andExpect(jsonPath("$.[*].dailyPrice").value(hasItem(DEFAULT_DAILY_PRICE.intValue())))
+                .andExpect(jsonPath("$.[*].specificationFactor").value(hasItem(DEFAULT_SPECIFICATION_FACTOR.doubleValue())))
+                .andExpect(jsonPath("$.[*].testingFactor").value(hasItem(DEFAULT_TESTING_FACTOR.doubleValue())))
+                .andExpect(jsonPath("$.[*].implementationFactor").value(hasItem(DEFAULT_IMPLEMENTATION_FACTOR.doubleValue())))
+                .andExpect(jsonPath("$.[*].synergyBenefit").value(hasItem(DEFAULT_SYNERGY_BENEFIT.doubleValue())))
+                .andExpect(jsonPath("$.[*].totalPrice").value(hasItem(DEFAULT_TOTAL_PRICE.intValue())))
+                .andExpect(jsonPath("$.[*].totalDuration").value(hasItem(DEFAULT_TOTAL_DURATION)))
+                .andExpect(jsonPath("$.[*].resourcing").value(hasItem(DEFAULT_RESOURCING)))
+                .andExpect(jsonPath("$.[*].totalSynergyBenefit").value(hasItem(DEFAULT_TOTAL_SYNERGY_BENEFIT)));
     }
 
     @Test
@@ -189,18 +309,17 @@ public class EstimateResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(estimate.getId().intValue()))
-            .andExpect(jsonPath("$.creator").value(DEFAULT_CREATOR.toString()))
-            .andExpect(jsonPath("$.workDays").value(DEFAULT_WORK_DAYS))
-            .andExpect(jsonPath("$.duration").value(DEFAULT_DURATION))
-            .andExpect(jsonPath("$.cost").value(DEFAULT_COST.intValue()))
-            .andExpect(jsonPath("$.multiSpec").value(DEFAULT_MULTI_SPEC.intValue()))
-            .andExpect(jsonPath("$.multiImp").value(DEFAULT_MULTI_IMP.intValue()))
-            .andExpect(jsonPath("$.multiTest").value(DEFAULT_MULTI_TEST.intValue()))
-            .andExpect(jsonPath("$.multiSyn").value(DEFAULT_MULTI_SYN.intValue()))
-            .andExpect(jsonPath("$.overallCost").value(DEFAULT_OVERALL_COST.intValue()))
-            .andExpect(jsonPath("$.overallDuration").value(DEFAULT_OVERALL_DURATION.intValue()))
-            .andExpect(jsonPath("$.overallResources").value(DEFAULT_OVERALL_RESOURCES.intValue()))
-            .andExpect(jsonPath("$.overallGain").value(DEFAULT_OVERALL_GAIN.intValue()));
+            .andExpect(jsonPath("$.workdaysInMonth").value(DEFAULT_WORKDAYS_IN_MONTH))
+            .andExpect(jsonPath("$.desiredProjectDuration").value(DEFAULT_DESIRED_PROJECT_DURATION))
+            .andExpect(jsonPath("$.dailyPrice").value(DEFAULT_DAILY_PRICE.intValue()))
+            .andExpect(jsonPath("$.specificationFactor").value(DEFAULT_SPECIFICATION_FACTOR.doubleValue()))
+            .andExpect(jsonPath("$.testingFactor").value(DEFAULT_TESTING_FACTOR.doubleValue()))
+            .andExpect(jsonPath("$.implementationFactor").value(DEFAULT_IMPLEMENTATION_FACTOR.doubleValue()))
+            .andExpect(jsonPath("$.synergyBenefit").value(DEFAULT_SYNERGY_BENEFIT.doubleValue()))
+            .andExpect(jsonPath("$.totalPrice").value(DEFAULT_TOTAL_PRICE.intValue()))
+            .andExpect(jsonPath("$.totalDuration").value(DEFAULT_TOTAL_DURATION))
+            .andExpect(jsonPath("$.resourcing").value(DEFAULT_RESOURCING))
+            .andExpect(jsonPath("$.totalSynergyBenefit").value(DEFAULT_TOTAL_SYNERGY_BENEFIT));
     }
 
     @Test
@@ -220,18 +339,17 @@ public class EstimateResourceIntTest {
 		int databaseSizeBeforeUpdate = estimateRepository.findAll().size();
 
         // Update the estimate
-        estimate.setCreator(UPDATED_CREATOR);
-        estimate.setWorkDays(UPDATED_WORK_DAYS);
-        estimate.setDuration(UPDATED_DURATION);
-        estimate.setCost(UPDATED_COST);
-        estimate.setMultiSpec(UPDATED_MULTI_SPEC);
-        estimate.setMultiImp(UPDATED_MULTI_IMP);
-        estimate.setMultiTest(UPDATED_MULTI_TEST);
-        estimate.setMultiSyn(UPDATED_MULTI_SYN);
-        estimate.setOverallCost(UPDATED_OVERALL_COST);
-        estimate.setOverallDuration(UPDATED_OVERALL_DURATION);
-        estimate.setOverallResources(UPDATED_OVERALL_RESOURCES);
-        estimate.setOverallGain(UPDATED_OVERALL_GAIN);
+        estimate.setWorkdaysInMonth(UPDATED_WORKDAYS_IN_MONTH);
+        estimate.setDesiredProjectDuration(UPDATED_DESIRED_PROJECT_DURATION);
+        estimate.setDailyPrice(UPDATED_DAILY_PRICE);
+        estimate.setSpecificationFactor(UPDATED_SPECIFICATION_FACTOR);
+        estimate.setTestingFactor(UPDATED_TESTING_FACTOR);
+        estimate.setImplementationFactor(UPDATED_IMPLEMENTATION_FACTOR);
+        estimate.setSynergyBenefit(UPDATED_SYNERGY_BENEFIT);
+        estimate.setTotalPrice(UPDATED_TOTAL_PRICE);
+        estimate.setTotalDuration(UPDATED_TOTAL_DURATION);
+        estimate.setResourcing(UPDATED_RESOURCING);
+        estimate.setTotalSynergyBenefit(UPDATED_TOTAL_SYNERGY_BENEFIT);
 
         restEstimateMockMvc.perform(put("/api/estimates")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -242,18 +360,17 @@ public class EstimateResourceIntTest {
         List<Estimate> estimates = estimateRepository.findAll();
         assertThat(estimates).hasSize(databaseSizeBeforeUpdate);
         Estimate testEstimate = estimates.get(estimates.size() - 1);
-        assertThat(testEstimate.getCreator()).isEqualTo(UPDATED_CREATOR);
-        assertThat(testEstimate.getWorkDays()).isEqualTo(UPDATED_WORK_DAYS);
-        assertThat(testEstimate.getDuration()).isEqualTo(UPDATED_DURATION);
-        assertThat(testEstimate.getCost()).isEqualTo(UPDATED_COST);
-        assertThat(testEstimate.getMultiSpec()).isEqualTo(UPDATED_MULTI_SPEC);
-        assertThat(testEstimate.getMultiImp()).isEqualTo(UPDATED_MULTI_IMP);
-        assertThat(testEstimate.getMultiTest()).isEqualTo(UPDATED_MULTI_TEST);
-        assertThat(testEstimate.getMultiSyn()).isEqualTo(UPDATED_MULTI_SYN);
-        assertThat(testEstimate.getOverallCost()).isEqualTo(UPDATED_OVERALL_COST);
-        assertThat(testEstimate.getOverallDuration()).isEqualTo(UPDATED_OVERALL_DURATION);
-        assertThat(testEstimate.getOverallResources()).isEqualTo(UPDATED_OVERALL_RESOURCES);
-        assertThat(testEstimate.getOverallGain()).isEqualTo(UPDATED_OVERALL_GAIN);
+        assertThat(testEstimate.getWorkdaysInMonth()).isEqualTo(UPDATED_WORKDAYS_IN_MONTH);
+        assertThat(testEstimate.getDesiredProjectDuration()).isEqualTo(UPDATED_DESIRED_PROJECT_DURATION);
+        assertThat(testEstimate.getDailyPrice()).isEqualTo(UPDATED_DAILY_PRICE);
+        assertThat(testEstimate.getSpecificationFactor()).isEqualTo(UPDATED_SPECIFICATION_FACTOR);
+        assertThat(testEstimate.getTestingFactor()).isEqualTo(UPDATED_TESTING_FACTOR);
+        assertThat(testEstimate.getImplementationFactor()).isEqualTo(UPDATED_IMPLEMENTATION_FACTOR);
+        assertThat(testEstimate.getSynergyBenefit()).isEqualTo(UPDATED_SYNERGY_BENEFIT);
+        assertThat(testEstimate.getTotalPrice()).isEqualTo(UPDATED_TOTAL_PRICE);
+        assertThat(testEstimate.getTotalDuration()).isEqualTo(UPDATED_TOTAL_DURATION);
+        assertThat(testEstimate.getResourcing()).isEqualTo(UPDATED_RESOURCING);
+        assertThat(testEstimate.getTotalSynergyBenefit()).isEqualTo(UPDATED_TOTAL_SYNERGY_BENEFIT);
     }
 
     @Test
