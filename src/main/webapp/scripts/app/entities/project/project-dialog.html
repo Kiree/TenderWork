@@ -61,6 +61,7 @@
                 <button type="button" class="btn btn-default" ng-click="datePickerForDeadlineOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
         </div>
+        <!--
         <div class="form-group">
             <label class="control-label" translate="tenderworkApp.project.createdDate" for="field_createdDate">CreatedDate</label>
             <input id="field_createdDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="project.createdDate" is-open="datePickerForCreatedDate.status.opened"
@@ -97,6 +98,7 @@
                 </p>
             </div>
         </div>
+        -->
         <div class="form-group">
             <label class="control-label" translate="tenderworkApp.project.docLocation" for="field_docLocation">DocLocation</label>
             <input type="text" class="form-control" name="docLocation" id="field_docLocation"
@@ -113,7 +115,7 @@
             <label class="control-label" translate="tenderworkApp.project.state" for="field_state">State</label>
             <input type="text" class="form-control" name="state" id="field_state"
                     ng-model="project.state"
-                    required />
+                    required readonly />
             <div ng-show="editForm.state.$invalid">
                 <p class="help-block"
                     ng-show="editForm.state.$error.required" translate="entity.validation.required">
@@ -133,7 +135,7 @@
                 </p>
             </div>
         </div>
-
+        <!--
         <div class="form-group">
             <label translate="tenderworkApp.project.createdBy" for="field_createdBy">createdBy</label>
             <select class="form-control" id="field_createdBy" name="createdBy" ng-model="project.createdBy" ng-options="user as user.login for user in users track by user.id">
@@ -146,6 +148,7 @@
                 <option value=""></option>
             </select>
         </div>
+        -->
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
