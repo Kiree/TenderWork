@@ -48,8 +48,8 @@ angular.module('tenderworkApp')
                 }
             })
             .state('estimate.new', {
-                parent: 'estimate',
-                url: '/new/:project',
+                parent: 'project.detail',
+                url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -72,14 +72,15 @@ angular.module('tenderworkApp')
                                     totalDuration: null,
                                     resourcing: null,
                                     totalSynergyBenefit: null,
-                                    id: null
+                                    id: null,
+                                    projectId:$stateParams.id
                                 };
                             }
                         }
                     }).result.then(function(result) {
                         $state.go('project.detail', { id:result.ownerProject.id }, { reload: true });
-                    }, function() {
-                        $state.go('estimate');
+                    }, function(reason) {
+                        $state.go('project.detail', { id:reason.id});
                     })
                 }]
             })
@@ -100,9 +101,9 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('estimate', null, { reload: true });
+                        $state.go('project.detail', { id:result.ownerProject.id }, { reload: true });
                     }, function() {
-                        $state.go('^');
+                        $state.go('project.detail');
                     })
                 }]
             })
