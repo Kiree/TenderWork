@@ -5,6 +5,9 @@ import com.tol.tenderwork.domain.Task;
 /**
  * Created by Sebastian Körkkö on 18.2.2016.
  */
+/**
+* Slack Integration Test
+*/
 public class UpdateController {
 
     public Task updateTask(Task task) {
