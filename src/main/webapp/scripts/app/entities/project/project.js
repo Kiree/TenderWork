@@ -66,10 +66,10 @@ angular.module('tenderworkApp')
                                     description: null,
                                     client: null,
                                     deadline: null,
-                                    createdDate: new Date(),
-                                    editedDate: new Date(),
+                                    createdDate: null,
+                                    editedDate: null,
                                     docLocation: null,
-                                    state: 'Uusi',
+                                    state: null,
                                     stateDescription: null,
                                     id: null
                                 };

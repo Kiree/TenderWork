@@ -1,14 +1,22 @@
 'use strict';
 
 angular.module('tenderworkApp').controller('EstimateDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Estimate', 'User', 'Principal', 'Project', 'Requirement',
-        function($scope, $stateParams, $uibModalInstance, entity, Estimate, User, Principal, Project, Requirement) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Estimate', 'User', 'Project', 'Requirement', 'Principal',
+        function($scope, $stateParams, $uibModalInstance, entity, Estimate, User, Project, Requirement, Principal) {
 
         $scope.estimate = entity;
         $scope.users = User.query();
-        $scope.projects = Project.query();
+        $scope.projects = Project.query().$promise.then(function(results) {
+            results.some(function(item) {
+                if (item.id == $stateParams.id) {
+                    $scope.attachToProject = copyProject(item);
+                    return true;
+                }
+            });
+        });
         $scope.requirements = Requirement.query();
-            console.log($scope.estimate);
+        $scope.currentUserAccount = null;
+
         $scope.load = function(id) {
             Estimate.get({id : id}, function(result) {
                 $scope.estimate = result;
@@ -22,6 +30,23 @@ angular.module('tenderworkApp').controller('EstimateDialogController',
             });
         });
 
+        var copyProject = function(project) {
+            console.log("Got: ", project);
+            return {
+                id:project.id,
+                client:project.client,
+                createdBy:project.createdBy,
+                createdDate:project.createdDate,
+                deadline:project.deadline,
+                description:project.description,
+                editedBy:project.editedBy,
+                editedDate:project.editedDate,
+                name:project.name,
+                state:project.state,
+                stateDescription:project.stateDescription
+            }
+        };
+
         var copyAccount = function(account) {
             return {
                 activated:account.activated,
@@ -31,7 +56,7 @@ angular.module('tenderworkApp').controller('EstimateDialogController',
                 lastName: account.lastName,
                 login: account.login
             }
-            };
+        };
         var onSaveSuccess = function (result) {
             $scope.$emit('tenderworkApp:estimateUpdate', result);
             $uibModalInstance.close(result);
@@ -48,6 +73,7 @@ angular.module('tenderworkApp').controller('EstimateDialogController',
                 Estimate.update($scope.estimate, onSaveSuccess, onSaveError);
             } else {
                 $scope.estimate.createdBy = $scope.currentUserAccount;
+                $scope.estimate.ownerProject = $scope.attachToProject;
                 Estimate.save($scope.estimate, onSaveSuccess, onSaveError);
             }
         };

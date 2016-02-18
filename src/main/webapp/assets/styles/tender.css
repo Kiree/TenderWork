@@ -1,7 +1,14 @@
 tr.rowLink:hover {
-    background:darkgrey !important;
+    background:#cfcfcf !important;
 }
 
 span.projectdetail{
     font-weight: bold !important;
 }
+
+.border-top-bottom-padding-1 {
+    padding-bottom:5px;
+    padding-top:5px;
+    border-bottom: 1px solid #cfcfcf;
+}
+

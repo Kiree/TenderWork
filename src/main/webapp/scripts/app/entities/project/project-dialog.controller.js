@@ -3,12 +3,16 @@
 angular.module('tenderworkApp').controller('ProjectDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Project', 'User', 'Estimate', 'Principal',
         function($scope, $stateParams, $uibModalInstance, entity, Project, User, Estimate, Principal) {
-
+        $scope.states = ['Uusi', 'Tarjous jätetty', 'Voitettu', 'Hävitty', 'Suljettu'];
+        $scope.defaultState = 'Uusi';
+        if(entity.id == null) {
+            entity.state = $scope.defaultState;
+        }
         $scope.project = entity;
         $scope.users = User.query();
         $scope.estimates = Estimate.query();
-        $scope.states = ['Uusi', 'Tarjous jätetty', 'Voitettu', 'Hävitty', 'Suljettu'];
-        $scope.defaultState = 'Uusi';
+
+        $scope.currentUserAccount = null;
 
         $scope.load = function(id) {
             Project.get({id : id}, function(result) {
@@ -17,12 +21,11 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
         };
 
         Principal.identity().then(function(account) {
-            $scope.myAccount = copyAccount(account);
-            User.get({login: $scope.myAccount.login}, function(result) {
+            var myAccount = copyAccount(account);
+            User.get({login:myAccount.login}, function(result) {
                 $scope.currentUserAccount = result;
             });
         });
-
 
         var copyAccount = function(account) {
             return {
