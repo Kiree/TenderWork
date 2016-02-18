@@ -18,7 +18,6 @@ public class UpdateController {
         float testFactorHelper = (float)task.getEstimateTesting() * task.getTestingFactor().getTestingFactor();
         float specFactorHelper = (float)task.getEstimateSpecification() * task.getSpecificationFactor().getSpecificationFactor();
         task.setEstimateTotal((int) impFactorHelper + (int) testFactorHelper + (int) specFactorHelper);
-        task.setEstimateTotal(500);
         return task;
     }
 
