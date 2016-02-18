@@ -3,12 +3,6 @@
     <h2><span translate="tenderworkApp.estimate.detail.title">Estimate</span> {{estimate.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
-            <thead>
-            <tr>
-                <th translate="entity.detail.field">Field</th>
-                <th translate="entity.detail.value">Value</th>
-            </tr>
-            </thead>
             <tbody>
             <tr>
                 <td>
@@ -17,8 +11,7 @@
                 <td>
                     <span class="form-control-static">{{estimate.workdaysInMonth}}</span>
                 </td>
-            </tr>
-            <tr>
+
                 <td>
                     <span translate="tenderworkApp.estimate.desiredProjectDuration">DesiredProjectDuration</span>
                 </td>
@@ -33,8 +26,6 @@
                 <td>
                     <span class="form-control-static">{{estimate.dailyPrice}}</span>
                 </td>
-            </tr>
-            <tr>
                 <td>
                     <span translate="tenderworkApp.estimate.specificationFactor">SpecificationFactor</span>
                 </td>
@@ -49,8 +40,7 @@
                 <td>
                     <span class="form-control-static">{{estimate.testingFactor}}</span>
                 </td>
-            </tr>
-            <tr>
+
                 <td>
                     <span translate="tenderworkApp.estimate.implementationFactor">ImplementationFactor</span>
                 </td>
@@ -65,8 +55,7 @@
                 <td>
                     <span class="form-control-static">{{estimate.synergyBenefit}}</span>
                 </td>
-            </tr>
-            <tr>
+
                 <td>
                     <span translate="tenderworkApp.estimate.totalPrice">TotalPrice</span>
                 </td>
@@ -81,8 +70,6 @@
                 <td>
                     <span class="form-control-static">{{estimate.totalDuration}}</span>
                 </td>
-            </tr>
-            <tr>
                 <td>
                     <span translate="tenderworkApp.estimate.resourcing">Resourcing</span>
                 </td>
@@ -97,8 +84,6 @@
                 <td>
                     <span class="form-control-static">{{estimate.totalSynergyBenefit}}</span>
                 </td>
-            </tr>
-            <tr>
                 <td>
                     <span translate="tenderworkApp.estimate.createdBy">createdBy</span>
                 </td>
@@ -117,6 +102,76 @@
             </tbody>
         </table>
     </div>
+
+<!--
+    <div class="well">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-4 no-padding-left"><h3 translate="tenderworkApp.requirement.home.title">Requirements</h3></div>
+                <div class="col-xs-8 no-padding-right">
+                    <br />
+                    <button class="btn btn-primary pull-right" ui-sref="requirement.new" >
+                        <span class="glyphicon glyphicon-plus"></span>
+                    <span
+                        class="hidden-xs"                        translate="tenderworkApp.requirement.home.createLabel">Create new Estimate
+                    </span>
+                    </button>
+                </div>
+
+                <!--
+                <div class="col-xs-8 no-padding-right">
+                    <form name="searchForm" class="form-inline">
+                        <div class="input-group pull-right" >
+                            <input type="text" class="form-control" ng-model="searchQuery" id="searchQuery" placeholder="{{ 'tenderworkApp.estimate.home.search' | translate }}">
+                            <span  class="input-group-btn width-min" >
+                                <button class="btn btn-info" ng-click="search()">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <jh-alert></jh-alert>
+
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span translate="tenderworkApp.requirement.name">TotalPrice</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="description"><span translate="tenderworkApp.requirement.description">TotalDuration</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalDuration"><span translate="tenderworkApp.requirement.totalDuration">Resourcing</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="durationSpecification"><span translate="tenderworkApp.requirement.durationSpecification">createdBy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="durationImplementation"><span translate="tenderworkApp.requirement.durationImplementation">createdBy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="durationTesting"><span translate="tenderworkApp.requirement.durationTesting">createdBy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="synergyBenefit"><span translate="tenderworkApp.requirement.synergyBenefit">createdBy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="requirement.owner"><span translate="tenderworkApp.requirement.owner">createdBy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody data-link="row" class="rowlink" infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr class="rowLink" ng-repeat="requirement in requirements track by requirement.id" ui-sref="estimate.detail({id:estimate.id})">
+                    <td>{{requirement.id}}</td>
+                    <td>{{requirement.name}}</td>
+                    <td>{{requirement.description}}</td>
+                    <td>{{requirement.totalDuration}}</td>
+                    <td>{{requirement.durationSpecification}}</td>
+                    <td>{{requirement.durationImplementation}}</td>
+                    <td>{{durationTesting}}</td>
+                    <td>{{estimate.synergyBenefit}}</td>
+                    <td>{{estimate.resourcing}}</td>
+                    <td>
+                        {{requirement.owner}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>-->
+
+
 
     <button type="submit"
             onclick="window.history.back()"
