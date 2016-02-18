@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.tol.tenderwork.domain.Task;
 import com.tol.tenderwork.repository.TaskRepository;
 import com.tol.tenderwork.repository.search.TaskSearchRepository;
+import com.tol.tenderwork.web.UpdateController;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -35,13 +36,13 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class TaskResource {
 
     private final Logger log = LoggerFactory.getLogger(TaskResource.class);
-        
+
     @Inject
     private TaskRepository taskRepository;
-    
+
     @Inject
     private TaskSearchRepository taskSearchRepository;
-    
+
     /**
      * POST  /tasks -> Create a new task.
      */
@@ -54,6 +55,10 @@ public class TaskResource {
         if (task.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("task", "idexists", "A new task cannot already have an ID")).body(null);
         }
+
+        UpdateController updateController = new UpdateController();
+        task = updateController.updateTask(task);
+
         Task result = taskRepository.save(task);
         taskSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/tasks/" + result.getId()))
@@ -73,6 +78,9 @@ public class TaskResource {
         if (task.getId() == null) {
             return createTask(task);
         }
+        UpdateController updateController = new UpdateController();
+        task = updateController.updateTask(task);
+
         Task result = taskRepository.save(task);
         taskSearchRepository.save(result);
         return ResponseEntity.ok()
@@ -90,7 +98,7 @@ public class TaskResource {
     public ResponseEntity<List<Task>> getAllTasks(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Tasks");
-        Page<Task> page = taskRepository.findAll(pageable); 
+        Page<Task> page = taskRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tasks");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
