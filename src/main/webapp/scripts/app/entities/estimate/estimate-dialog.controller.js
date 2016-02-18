@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tenderworkApp').controller('EstimateDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Estimate', 'User', 'Project', 'Requirement',
-        function($scope, $stateParams, $uibModalInstance, entity, Estimate, User, Project, Requirement) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Estimate', 'User', 'Principal', 'Project', 'Requirement',
+        function($scope, $stateParams, $uibModalInstance, entity, Estimate, User, Principal, Project, Requirement) {
 
         $scope.estimate = entity;
         $scope.users = User.query();
@@ -15,6 +15,23 @@ angular.module('tenderworkApp').controller('EstimateDialogController',
             });
         };
 
+        Principal.identity().then(function(account) {
+            $scope.myAccount = copyAccount(account);
+            User.get({login: $scope.myAccount.login}, function(result) {
+                $scope.currentUserAccount = result;
+            });
+        });
+
+        var copyAccount = function(account) {
+            return {
+                activated:account.activated,
+                email:account.email,
+                firstName:account.firstName,
+                langKey: account.langKey,
+                lastName: account.lastName,
+                login: account.login
+            }
+            };
         var onSaveSuccess = function (result) {
             $scope.$emit('tenderworkApp:estimateUpdate', result);
             $uibModalInstance.close(result);
@@ -30,6 +47,7 @@ angular.module('tenderworkApp').controller('EstimateDialogController',
             if ($scope.estimate.id != null) {
                 Estimate.update($scope.estimate, onSaveSuccess, onSaveError);
             } else {
+                $scope.estimate.createdBy = $scope.currentUserAccount;
                 Estimate.save($scope.estimate, onSaveSuccess, onSaveError);
             }
         };
