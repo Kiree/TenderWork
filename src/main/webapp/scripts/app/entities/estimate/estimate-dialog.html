@@ -102,6 +102,30 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.estimate.testingFactor" for="field_testingFactor">TestingFactor</label>
+            <input type="number" class="form-control" name="testingFactor" id="field_testingFactor"
+                    ng-model="estimate.testingFactor"
+                    required min="0" max="1" />
+            <div ng-show="editForm.testingFactor.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.testingFactor.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.testingFactor.$error.min" translate="entity.validation.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.testingFactor.$error.max" translate="entity.validation.max" translate-value-max="1">
+                    This field cannot be more than 1.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.testingFactor.$error.number" translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="control-label" translate="tenderworkApp.estimate.implementationFactor" for="field_implementationFactor">ImplementationFactor</label>
             <input type="number" class="form-control" name="implementationFactor" id="field_implementationFactor"
                     ng-model="estimate.implementationFactor"
@@ -121,30 +145,6 @@
                 </p>
                 <p class="help-block"
                     ng-show="editForm.implementationFactor.$error.number" translate="entity.validation.number">
-                    This field should be a number.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" translate="tenderworkApp.estimate.testingFactor" for="field_testingFactor">TestingFactor</label>
-            <input type="number" class="form-control" name="testingFactor" id="field_testingFactor"
-                   ng-model="estimate.testingFactor"
-                   required min="0" max="1" />
-            <div ng-show="editForm.testingFactor.$invalid">
-                <p class="help-block"
-                   ng-show="editForm.testingFactor.$error.required" translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                   ng-show="editForm.testingFactor.$error.min" translate="entity.validation.min" translate-value-min="0">
-                    This field should be more than 0.
-                </p>
-                <p class="help-block"
-                   ng-show="editForm.testingFactor.$error.max" translate="entity.validation.max" translate-value-max="1">
-                    This field cannot be more than 1.
-                </p>
-                <p class="help-block"
-                   ng-show="editForm.testingFactor.$error.number" translate="entity.validation.number">
                     This field should be a number.
                 </p>
             </div>
