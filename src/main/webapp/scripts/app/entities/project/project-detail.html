@@ -113,7 +113,6 @@
                     </span>
                 </button>
             </div>
-
             <!--
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
@@ -130,54 +129,49 @@
         </div>
     </div>
     <jh-alert></jh-alert>
-
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
-            <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="totalPrice"><span translate="tenderworkApp.estimate.totalPrice">TotalPrice</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalDuration"><span translate="tenderworkApp.estimate.totalDuration">TotalDuration</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="resourcing"><span translate="tenderworkApp.estimate.resourcing">Resourcing</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy.login"><span translate="tenderworkApp.estimate.createdBy">createdBy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                </tr>
+            </thead>
+            <tbody data-link="row" class="rowlink" infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr class="rowLink" ng-repeat="estimate in estimates track by estimate.id">
+                    <td><a href="#" ui-sref="estimate.detail({id:estimate.id})">{{estimate.totalPrice}}</a></td>
+                    <td>{{estimate.totalDuration}}</td>
+                    <td>{{estimate.resourcing}}</td>
+                    <td>{{estimate.createdBy.login}}</td>
 
-                <th jh-sort-by="totalPrice"><span translate="tenderworkApp.estimate.totalPrice">TotalPrice</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="totalDuration"><span translate="tenderworkApp.estimate.totalDuration">TotalDuration</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="resourcing"><span translate="tenderworkApp.estimate.resourcing">Resourcing</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="createdBy.login"><span translate="tenderworkApp.estimate.createdBy">createdBy</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th></th>
-                    </tr>
-                    </thead>
-                    <tbody data-link="row" class="rowlink" infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
-                    <tr class="rowLink" ng-repeat="estimate in estimates track by estimate.id" ui-sref="estimate.detail({id:estimate.id})">
-                        <td>{{estimate.totalPrice}}</td>
-                        <td>{{estimate.totalDuration}}</td>
-                        <td>{{estimate.resourcing}}</td>
-                        <td>
-                            {{estimate.createdBy.login}}
-                        </td>
+                    <!--
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="estimate.detail({id:estimate.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="estimate.edit({id:estimate.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="estimate.delete({id:estimate.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
 
-                <!--
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                ui-sref="estimate.detail({id:estimate.id})"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>
-                            <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="estimate.edit({id:estimate.id})"
-                                class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="estimate.delete({id:estimate.id})"
-                                class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-remove-circle"></span>
-                            <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
-                        </button>
-                    </div>
-                </td>
-
-                -->
-            </tr>
+                    -->
+                </tr>
             </tbody>
         </table>
     </div>
