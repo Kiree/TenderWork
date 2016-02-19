@@ -103,7 +103,6 @@
         </table>
     </div>
 
-<!--
     <div class="well">
         <div class="container-fluid">
             <div class="row">
@@ -113,7 +112,7 @@
                     <button class="btn btn-primary pull-right" ui-sref="requirement.new" >
                         <span class="glyphicon glyphicon-plus"></span>
                     <span
-                        class="hidden-xs"                        translate="tenderworkApp.requirement.home.createLabel">Create new Estimate
+                        class="hidden-xs"                        translate="tenderworkApp.requirement.home.createLabel">Create new Requirement
                     </span>
                     </button>
                 </div>
@@ -130,46 +129,41 @@
                             </span>
                         </div>
                     </form>
-                </div>
+                </div>-->
             </div>
         </div>
         <jh-alert></jh-alert>
 
-        <div class="table-responsive">
+        <div class="table-responsive" ng-controller="RequirementController">
             <table class="jh-table table table-striped">
                 <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span translate="tenderworkApp.requirement.name">TotalPrice</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="description"><span translate="tenderworkApp.requirement.description">TotalDuration</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="totalDuration"><span translate="tenderworkApp.requirement.totalDuration">Resourcing</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="durationSpecification"><span translate="tenderworkApp.requirement.durationSpecification">createdBy</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="durationImplementation"><span translate="tenderworkApp.requirement.durationImplementation">createdBy</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="durationTesting"><span translate="tenderworkApp.requirement.durationTesting">createdBy</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="synergyBenefit"><span translate="tenderworkApp.requirement.synergyBenefit">createdBy</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="requirement.owner"><span translate="tenderworkApp.requirement.owner">createdBy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span translate="tenderworkApp.requirement.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="description"><span translate="tenderworkApp.requirement.description">Desc</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalDuration"><span translate="tenderworkApp.requirement.totalDuration">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="durationSpecification"><span translate="tenderworkApp.requirement.durationSpecification">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="durationImplementation"><span translate="tenderworkApp.requirement.durationImplementation">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="durationTesting"><span translate="tenderworkApp.requirement.durationTesting">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="synergyBenefit"><span translate="tenderworkApp.requirement.synergyBenefit">Desc</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody data-link="row" class="rowlink" infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
-                <tr class="rowLink" ng-repeat="requirement in requirements track by requirement.id" ui-sref="estimate.detail({id:estimate.id})">
+                <tr class="rowLink" ng-repeat="requirement in requirements track by requirement.id">
                     <td>{{requirement.id}}</td>
                     <td>{{requirement.name}}</td>
                     <td>{{requirement.description}}</td>
                     <td>{{requirement.totalDuration}}</td>
                     <td>{{requirement.durationSpecification}}</td>
                     <td>{{requirement.durationImplementation}}</td>
-                    <td>{{durationTesting}}</td>
-                    <td>{{estimate.synergyBenefit}}</td>
-                    <td>{{estimate.resourcing}}</td>
-                    <td>
-                        {{requirement.owner}}
-                    </td>
-                </tr>
+                    <td>{{requirement.durationTesting}}</td>
+                    <td>{{requirement.synergyBenefit}}</td>
+                   </tr>
                 </tbody>
             </table>
         </div>
-        </div>-->
+        </div>
 
 
 
