@@ -16,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -54,6 +55,7 @@ public class TaskResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
     public ResponseEntity<Task> createTask(@Valid @RequestBody Task task) throws URISyntaxException {
         log.debug("REST request to save Task : {}", task);
         if (task.getId() != null) {
@@ -65,7 +67,7 @@ public class TaskResource {
         Task result = taskRepository.save(task);
         taskSearchRepository.save(result);
 
-        updateController.updateRequirement(task.getOwnerRequirement());
+        updateController.updateRequirement(task);
 
         return ResponseEntity.created(new URI("/api/tasks/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("task", result.getId().toString()))
@@ -79,6 +81,7 @@ public class TaskResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
     public ResponseEntity<Task> updateTask(@Valid @RequestBody Task task) throws URISyntaxException {
         log.debug("REST request to update Task : {}", task);
         if (task.getId() == null) {
@@ -89,7 +92,7 @@ public class TaskResource {
         Task result = taskRepository.save(task);
         taskSearchRepository.save(result);
 
-        updateController.updateRequirement(task.getOwnerRequirement());
+        updateController.updateRequirement(task);
 
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("task", task.getId().toString()))

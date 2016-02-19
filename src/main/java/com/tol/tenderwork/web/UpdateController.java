@@ -8,19 +8,22 @@ import com.tol.tenderwork.repository.RequirementRepository;
 import com.tol.tenderwork.repository.search.RequirementSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import javax.inject.Inject;
+import java.util.Set;
 
 
 /**
  * Created by Sebastian Körkkö on 18.2.2016.
  * Edited by Petteri Salonurmi on 19.2.2016 11:26 GMT+2.
+ * Jukka was here
  */
 
-@Repository
+@Service
+@Transactional
 public class UpdateController {
 
     private final Logger log = LoggerFactory.getLogger(UpdateController.class);
@@ -41,15 +44,17 @@ public class UpdateController {
         return estimate;
     }
 
-    public void updateRequirement(Requirement requirement){
-
-        float specHelper = 0;
+    @Transactional
+    public void updateRequirement(Task task){
+        Requirement requirement = requirementRepository.findOne(task.getOwnerRequirement().getId());
+        Set<Task> tasks = requirement.getHasTaskss();
+        float specHelper = 0;/*
         log.debug("Spechelper", specHelper);
-        log.debug("Task", requirement);
-        for (Task task : requirement.getHasTaskss()) {
-            specHelper = specHelper + task.getEstimateTotal();
-            log.debug("IMP", task.getEstimateImplementation());
-            log.debug("TOTAL", task.getEstimateTotal());
+        log.debug("Task", requirement);*/
+        for (Task t : tasks) {
+            specHelper = specHelper + t.getEstimateTotal();
+            //log.debug("IMP", task.getEstimateImplementation());
+            //log.debug("TOTAL", task.getEstimateTotal());
         }
         requirement.setTotalDuration(specHelper);
 
@@ -57,8 +62,8 @@ public class UpdateController {
         requirementSearchRepository.save(result);
     }
 
+    @Transactional
     public Task updateTask(Task task) {
-
         if(task.getSynergyCheck() == true) {
             float synergyHelper = task.getEstimateSynergy() * task.getSynergyBenefit().getSynergyBenefit();
             task.setSynergyTotal(synergyHelper);

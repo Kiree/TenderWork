@@ -29,6 +29,10 @@ span.projectdetail{
     }
 }
 
+.preformatted {
+    white-space:pre-wrap;
+}
+
 
 
 
