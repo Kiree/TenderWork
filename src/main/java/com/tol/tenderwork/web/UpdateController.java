@@ -1,6 +1,10 @@
 package com.tol.tenderwork.web;
 
+import com.tol.tenderwork.domain.Project;
+import com.tol.tenderwork.domain.Estimate;
+import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.domain.Task;
+
 
 /**
  * Created by Sebastian Körkkö on 18.2.2016.
@@ -9,6 +13,21 @@ import com.tol.tenderwork.domain.Task;
 * Slack Integration Test
 */
 public class UpdateController {
+
+    public Project updateProject(Project project){
+
+        return project;
+    }
+
+    public Estimate updateEstimate(Estimate estimate){
+
+        return estimate;
+    }
+
+    public Requirement updateRequirement(Requirement requirement){
+
+        return requirement;
+    }
 
     public Task updateTask(Task task) {
 
