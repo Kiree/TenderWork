@@ -63,6 +63,19 @@
                 </p>
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.project.docLocation" for="field_docLocation">Doclocation</label>
+            <input type="text" class="form-control" name="docLocation" id="field_docLocation"
+                   ng-model="project.docLocation"
+                   />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="tenderworkApp.project.description" for="field_description">Description</label>
+            <textarea class="form-control" name="description" id="field_description"
+                   ng-model="project.description"
+                   ng-maxlength="1000" />
+        </div>
+
 
         <!--<div class="form-group">
             <label translate="tenderworkApp.project.createdBy" for="field_createdBy">createdBy</label>

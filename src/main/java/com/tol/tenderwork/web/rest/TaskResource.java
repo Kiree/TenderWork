@@ -9,6 +9,7 @@ import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -43,6 +44,9 @@ public class TaskResource {
     @Inject
     private TaskSearchRepository taskSearchRepository;
 
+    @Autowired
+    private UpdateController updateController;
+
     /**
      * POST  /tasks -> Create a new task.
      */
@@ -56,11 +60,13 @@ public class TaskResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("task", "idexists", "A new task cannot already have an ID")).body(null);
         }
 
-        UpdateController updateController = new UpdateController();
         task = updateController.updateTask(task);
 
         Task result = taskRepository.save(task);
         taskSearchRepository.save(result);
+
+        updateController.updateRequirement(task.getOwnerRequirement());
+
         return ResponseEntity.created(new URI("/api/tasks/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("task", result.getId().toString()))
             .body(result);
@@ -78,11 +84,13 @@ public class TaskResource {
         if (task.getId() == null) {
             return createTask(task);
         }
-        UpdateController updateController = new UpdateController();
         task = updateController.updateTask(task);
 
         Task result = taskRepository.save(task);
         taskSearchRepository.save(result);
+
+        updateController.updateRequirement(task.getOwnerRequirement());
+
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("task", task.getId().toString()))
             .body(result);
