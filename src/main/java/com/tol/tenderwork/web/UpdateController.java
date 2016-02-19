@@ -73,6 +73,8 @@ public class UpdateController {
         task.setImplementationTotal(Math.round(impFactorHelper));
         task.setTestingTotal(Math.round(testFactorHelper));
         task.setEstimateTotal(Math.round((specFactorHelper + impFactorHelper + testFactorHelper)));
+
+        task.getOwnerRequirement().addTask(task);
         return task;
     }
 
