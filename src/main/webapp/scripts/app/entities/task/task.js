@@ -68,6 +68,9 @@ angular.module('tenderworkApp')
                                     estimateTesting: null,
                                     estimateSynergy: null,
                                     synergyCheck: false,
+                                    specificationTotal: null,
+                                    implementationTotal: null,
+                                    testingTotal: null,
                                     synergyTotal: null,
                                     estimateTotal: null,
                                     id: null

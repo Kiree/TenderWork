@@ -35,11 +35,15 @@ public class UpdateController {
             task.setSynergyTotal(Math.round(synergyHelper));
         }
 
+        float specFactorHelper = (float)task.getEstimateSpecification() * task.getSpecificationFactor().getSpecificationFactor();
         float impFactorHelper = (float)task.getEstimateImplementation() * task.getImplementationFactor().getImplementationFactor();
         float testFactorHelper = (float)task.getEstimateTesting() * task.getTestingFactor().getTestingFactor();
-        float specFactorHelper = (float)task.getEstimateSpecification() * task.getSpecificationFactor().getSpecificationFactor();
         //task.setEstimateTotal((int) impFactorHelper + (int) testFactorHelper + (int) specFactorHelper);
-        task.setEstimateTotal(Math.round((impFactorHelper + testFactorHelper + specFactorHelper)));
+
+        task.setSpecificationTotal(Math.round(specFactorHelper));
+        task.setImplementationTotal(Math.round(impFactorHelper));
+        task.setTestingTotal(Math.round(testFactorHelper));
+        task.setEstimateTotal(Math.round((specFactorHelper + impFactorHelper + testFactorHelper)));
         return task;
     }
 

@@ -62,6 +62,15 @@ public class TaskResourceIntTest {
     private static final Boolean DEFAULT_SYNERGY_CHECK = false;
     private static final Boolean UPDATED_SYNERGY_CHECK = true;
 
+    private static final Integer DEFAULT_SPECIFICATION_TOTAL = 0;
+    private static final Integer UPDATED_SPECIFICATION_TOTAL = 1;
+
+    private static final Integer DEFAULT_IMPLEMENTATION_TOTAL = 0;
+    private static final Integer UPDATED_IMPLEMENTATION_TOTAL = 1;
+
+    private static final Integer DEFAULT_TESTING_TOTAL = 0;
+    private static final Integer UPDATED_TESTING_TOTAL = 1;
+
     private static final Integer DEFAULT_SYNERGY_TOTAL = 0;
     private static final Integer UPDATED_SYNERGY_TOTAL = 1;
 
@@ -105,6 +114,9 @@ public class TaskResourceIntTest {
         task.setEstimateTesting(DEFAULT_ESTIMATE_TESTING);
         task.setEstimateSynergy(DEFAULT_ESTIMATE_SYNERGY);
         task.setSynergyCheck(DEFAULT_SYNERGY_CHECK);
+        task.setSpecificationTotal(DEFAULT_SPECIFICATION_TOTAL);
+        task.setImplementationTotal(DEFAULT_IMPLEMENTATION_TOTAL);
+        task.setTestingTotal(DEFAULT_TESTING_TOTAL);
         task.setSynergyTotal(DEFAULT_SYNERGY_TOTAL);
         task.setEstimateTotal(DEFAULT_ESTIMATE_TOTAL);
     }
@@ -132,6 +144,9 @@ public class TaskResourceIntTest {
         assertThat(testTask.getEstimateTesting()).isEqualTo(DEFAULT_ESTIMATE_TESTING);
         assertThat(testTask.getEstimateSynergy()).isEqualTo(DEFAULT_ESTIMATE_SYNERGY);
         assertThat(testTask.getSynergyCheck()).isEqualTo(DEFAULT_SYNERGY_CHECK);
+        assertThat(testTask.getSpecificationTotal()).isEqualTo(DEFAULT_SPECIFICATION_TOTAL);
+        assertThat(testTask.getImplementationTotal()).isEqualTo(DEFAULT_IMPLEMENTATION_TOTAL);
+        assertThat(testTask.getTestingTotal()).isEqualTo(DEFAULT_TESTING_TOTAL);
         assertThat(testTask.getSynergyTotal()).isEqualTo(DEFAULT_SYNERGY_TOTAL);
         assertThat(testTask.getEstimateTotal()).isEqualTo(DEFAULT_ESTIMATE_TOTAL);
     }
@@ -244,6 +259,9 @@ public class TaskResourceIntTest {
                 .andExpect(jsonPath("$.[*].estimateTesting").value(hasItem(DEFAULT_ESTIMATE_TESTING)))
                 .andExpect(jsonPath("$.[*].estimateSynergy").value(hasItem(DEFAULT_ESTIMATE_SYNERGY)))
                 .andExpect(jsonPath("$.[*].synergyCheck").value(hasItem(DEFAULT_SYNERGY_CHECK.booleanValue())))
+                .andExpect(jsonPath("$.[*].specificationTotal").value(hasItem(DEFAULT_SPECIFICATION_TOTAL)))
+                .andExpect(jsonPath("$.[*].implementationTotal").value(hasItem(DEFAULT_IMPLEMENTATION_TOTAL)))
+                .andExpect(jsonPath("$.[*].testingTotal").value(hasItem(DEFAULT_TESTING_TOTAL)))
                 .andExpect(jsonPath("$.[*].synergyTotal").value(hasItem(DEFAULT_SYNERGY_TOTAL)))
                 .andExpect(jsonPath("$.[*].estimateTotal").value(hasItem(DEFAULT_ESTIMATE_TOTAL)));
     }
@@ -266,6 +284,9 @@ public class TaskResourceIntTest {
             .andExpect(jsonPath("$.estimateTesting").value(DEFAULT_ESTIMATE_TESTING))
             .andExpect(jsonPath("$.estimateSynergy").value(DEFAULT_ESTIMATE_SYNERGY))
             .andExpect(jsonPath("$.synergyCheck").value(DEFAULT_SYNERGY_CHECK.booleanValue()))
+            .andExpect(jsonPath("$.specificationTotal").value(DEFAULT_SPECIFICATION_TOTAL))
+            .andExpect(jsonPath("$.implementationTotal").value(DEFAULT_IMPLEMENTATION_TOTAL))
+            .andExpect(jsonPath("$.testingTotal").value(DEFAULT_TESTING_TOTAL))
             .andExpect(jsonPath("$.synergyTotal").value(DEFAULT_SYNERGY_TOTAL))
             .andExpect(jsonPath("$.estimateTotal").value(DEFAULT_ESTIMATE_TOTAL));
     }
@@ -294,6 +315,9 @@ public class TaskResourceIntTest {
         task.setEstimateTesting(UPDATED_ESTIMATE_TESTING);
         task.setEstimateSynergy(UPDATED_ESTIMATE_SYNERGY);
         task.setSynergyCheck(UPDATED_SYNERGY_CHECK);
+        task.setSpecificationTotal(UPDATED_SPECIFICATION_TOTAL);
+        task.setImplementationTotal(UPDATED_IMPLEMENTATION_TOTAL);
+        task.setTestingTotal(UPDATED_TESTING_TOTAL);
         task.setSynergyTotal(UPDATED_SYNERGY_TOTAL);
         task.setEstimateTotal(UPDATED_ESTIMATE_TOTAL);
 
@@ -313,6 +337,9 @@ public class TaskResourceIntTest {
         assertThat(testTask.getEstimateTesting()).isEqualTo(UPDATED_ESTIMATE_TESTING);
         assertThat(testTask.getEstimateSynergy()).isEqualTo(UPDATED_ESTIMATE_SYNERGY);
         assertThat(testTask.getSynergyCheck()).isEqualTo(UPDATED_SYNERGY_CHECK);
+        assertThat(testTask.getSpecificationTotal()).isEqualTo(UPDATED_SPECIFICATION_TOTAL);
+        assertThat(testTask.getImplementationTotal()).isEqualTo(UPDATED_IMPLEMENTATION_TOTAL);
+        assertThat(testTask.getTestingTotal()).isEqualTo(UPDATED_TESTING_TOTAL);
         assertThat(testTask.getSynergyTotal()).isEqualTo(UPDATED_SYNERGY_TOTAL);
         assertThat(testTask.getEstimateTotal()).isEqualTo(UPDATED_ESTIMATE_TOTAL);
     }

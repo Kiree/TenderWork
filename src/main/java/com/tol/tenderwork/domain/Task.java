@@ -28,42 +28,54 @@ public class Task implements Serializable {
     @Size(min = 1, max = 60)
     @Column(name = "name", length = 60, nullable = false)
     private String name;
-    
+
     @Size(max = 1000)
     @Column(name = "description", length = 1000)
     private String description;
-    
+
     @NotNull
     @Min(value = 0)
     @Column(name = "estimate_specification", nullable = false)
     private Integer estimateSpecification;
-    
+
     @NotNull
     @Min(value = 0)
     @Column(name = "estimate_implementation", nullable = false)
     private Integer estimateImplementation;
-    
+
     @NotNull
     @Min(value = 0)
     @Column(name = "estimate_testing", nullable = false)
     private Integer estimateTesting;
-    
+
     @Min(value = 0)
     @Column(name = "estimate_synergy")
     private Integer estimateSynergy;
-    
+
     @NotNull
     @Column(name = "synergy_check", nullable = false)
     private Boolean synergyCheck;
-    
+
+    @Min(value = 0)
+    @Column(name = "specification_total")
+    private Integer specificationTotal;
+
+    @Min(value = 0)
+    @Column(name = "implementation_total")
+    private Integer implementationTotal;
+
+    @Min(value = 0)
+    @Column(name = "testing_total")
+    private Integer testingTotal;
+
     @Min(value = 0)
     @Column(name = "synergy_total")
     private Integer synergyTotal;
-    
+
     @Min(value = 0)
     @Column(name = "estimate_total")
     private Integer estimateTotal;
-    
+
     @ManyToOne
     @JoinColumn(name = "owned_by_id")
     private User ownedBy;
@@ -99,7 +111,7 @@ public class Task implements Serializable {
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
@@ -107,7 +119,7 @@ public class Task implements Serializable {
     public String getDescription() {
         return description;
     }
-    
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -115,7 +127,7 @@ public class Task implements Serializable {
     public Integer getEstimateSpecification() {
         return estimateSpecification;
     }
-    
+
     public void setEstimateSpecification(Integer estimateSpecification) {
         this.estimateSpecification = estimateSpecification;
     }
@@ -123,7 +135,7 @@ public class Task implements Serializable {
     public Integer getEstimateImplementation() {
         return estimateImplementation;
     }
-    
+
     public void setEstimateImplementation(Integer estimateImplementation) {
         this.estimateImplementation = estimateImplementation;
     }
@@ -131,7 +143,7 @@ public class Task implements Serializable {
     public Integer getEstimateTesting() {
         return estimateTesting;
     }
-    
+
     public void setEstimateTesting(Integer estimateTesting) {
         this.estimateTesting = estimateTesting;
     }
@@ -139,7 +151,7 @@ public class Task implements Serializable {
     public Integer getEstimateSynergy() {
         return estimateSynergy;
     }
-    
+
     public void setEstimateSynergy(Integer estimateSynergy) {
         this.estimateSynergy = estimateSynergy;
     }
@@ -147,15 +159,39 @@ public class Task implements Serializable {
     public Boolean getSynergyCheck() {
         return synergyCheck;
     }
-    
+
     public void setSynergyCheck(Boolean synergyCheck) {
         this.synergyCheck = synergyCheck;
+    }
+
+    public Integer getSpecificationTotal() {
+        return specificationTotal;
+    }
+
+    public void setSpecificationTotal(Integer specificationTotal){
+        this.specificationTotal = specificationTotal;
+    }
+
+    public Integer getImplementationTotal() {
+        return implementationTotal;
+    }
+
+    public void setImplementationTotal(Integer implementationTotal){
+        this.implementationTotal = implementationTotal;
+    }
+
+    public Integer getTestingTotal() {
+        return testingTotal;
+    }
+
+    public void setTestingTotal(Integer testingTotal){
+        this.testingTotal = testingTotal;
     }
 
     public Integer getSynergyTotal() {
         return synergyTotal;
     }
-    
+
     public void setSynergyTotal(Integer synergyTotal) {
         this.synergyTotal = synergyTotal;
     }
@@ -163,7 +199,7 @@ public class Task implements Serializable {
     public Integer getEstimateTotal() {
         return estimateTotal;
     }
-    
+
     public void setEstimateTotal(Integer estimateTotal) {
         this.estimateTotal = estimateTotal;
     }
