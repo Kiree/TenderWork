@@ -58,23 +58,23 @@ public class Task implements Serializable {
 
     @Min(value = 0)
     @Column(name = "specification_total")
-    private Integer specificationTotal;
+    private Float specificationTotal;
 
     @Min(value = 0)
     @Column(name = "implementation_total")
-    private Integer implementationTotal;
+    private Float implementationTotal;
 
     @Min(value = 0)
     @Column(name = "testing_total")
-    private Integer testingTotal;
+    private Float testingTotal;
 
     @Min(value = 0)
     @Column(name = "synergy_total")
-    private Integer synergyTotal;
+    private Float synergyTotal;
 
     @Min(value = 0)
     @Column(name = "estimate_total")
-    private Integer estimateTotal;
+    private Float estimateTotal;
 
     @ManyToOne
     @JoinColumn(name = "owned_by_id")
@@ -164,43 +164,43 @@ public class Task implements Serializable {
         this.synergyCheck = synergyCheck;
     }
 
-    public Integer getSpecificationTotal() {
+    public Float getSpecificationTotal() {
         return specificationTotal;
     }
 
-    public void setSpecificationTotal(Integer specificationTotal){
+    public void setSpecificationTotal(Float specificationTotal){
         this.specificationTotal = specificationTotal;
     }
 
-    public Integer getImplementationTotal() {
+    public Float getImplementationTotal() {
         return implementationTotal;
     }
 
-    public void setImplementationTotal(Integer implementationTotal){
+    public void setImplementationTotal(Float implementationTotal){
         this.implementationTotal = implementationTotal;
     }
 
-    public Integer getTestingTotal() {
+    public Float getTestingTotal() {
         return testingTotal;
     }
 
-    public void setTestingTotal(Integer testingTotal){
+    public void setTestingTotal(Float testingTotal){
         this.testingTotal = testingTotal;
     }
 
-    public Integer getSynergyTotal() {
+    public Float getSynergyTotal() {
         return synergyTotal;
     }
 
-    public void setSynergyTotal(Integer synergyTotal) {
+    public void setSynergyTotal(Float synergyTotal) {
         this.synergyTotal = synergyTotal;
     }
 
-    public Integer getEstimateTotal() {
+    public Float getEstimateTotal() {
         return estimateTotal;
     }
 
-    public void setEstimateTotal(Integer estimateTotal) {
+    public void setEstimateTotal(Float estimateTotal) {
         this.estimateTotal = estimateTotal;
     }
 

@@ -45,15 +45,15 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="specification_total" type="integer"/>
+            <column name="specification_total" type="${floatType}"/>
 
-            <column name="implementation_total" type="integer"/>
+            <column name="implementation_total" type="${floatType}"/>
 
-            <column name="testing_total" type="integer"/>
+            <column name="testing_total" type="${floatType}"/>
 
-            <column name="synergy_total" type="integer"/>
+            <column name="synergy_total" type="${floatType}"/>
 
-            <column name="estimate_total" type="integer"/>
+            <column name="estimate_total" type="${floatType}"/>
 
             <column name="owned_by_id" type="bigint"/>
             <column name="specification_factor_id" type="bigint"/>

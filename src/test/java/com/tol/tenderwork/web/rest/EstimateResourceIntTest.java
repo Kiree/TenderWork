@@ -67,14 +67,14 @@ public class EstimateResourceIntTest {
     private static final Long DEFAULT_TOTAL_PRICE = 1L;
     private static final Long UPDATED_TOTAL_PRICE = 2L;
 
-    private static final Integer DEFAULT_TOTAL_DURATION = 1;
-    private static final Integer UPDATED_TOTAL_DURATION = 2;
+    private static final Float DEFAULT_TOTAL_DURATION = 0F;
+    private static final Float UPDATED_TOTAL_DURATION = 1F;
 
-    private static final Integer DEFAULT_RESOURCING = 1;
-    private static final Integer UPDATED_RESOURCING = 2;
+    private static final Float DEFAULT_RESOURCING = 0F;
+    private static final Float UPDATED_RESOURCING = 1F;
 
-    private static final Integer DEFAULT_TOTAL_SYNERGY_BENEFIT = 1;
-    private static final Integer UPDATED_TOTAL_SYNERGY_BENEFIT = 2;
+    private static final Float DEFAULT_TOTAL_SYNERGY_BENEFIT = 0F;
+    private static final Float UPDATED_TOTAL_SYNERGY_BENEFIT = 1F;
 
     @Inject
     private EstimateRepository estimateRepository;

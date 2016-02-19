@@ -24,44 +24,44 @@
             <column name="workdays_in_month" type="integer">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="desired_project_duration" type="integer">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="daily_price" type="bigint">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="specification_factor" type="${floatType}">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="testing_factor" type="${floatType}">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="implementation_factor" type="${floatType}">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="synergy_benefit" type="${floatType}">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="total_price" type="bigint"/>
-            
-            <column name="total_duration" type="integer"/>
-            
-            <column name="resourcing" type="integer"/>
-            
-            <column name="total_synergy_benefit" type="integer"/>
-            
+
+            <column name="total_duration" type="${floatType}"/>
+
+            <column name="resourcing" type="${floatType}"/>
+
+            <column name="total_synergy_benefit" type="${floatType}"/>
+
             <column name="created_by_id" type="bigint"/>
             <column name="owner_project_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
         <addForeignKeyConstraint baseColumnNames="created_by_id"
                                  baseTableName="estimate"
                                  constraintName="fk_estimate_createdby_id"

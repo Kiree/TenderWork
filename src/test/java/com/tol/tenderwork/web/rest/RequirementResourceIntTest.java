@@ -47,20 +47,20 @@ public class RequirementResourceIntTest {
     private static final String DEFAULT_DESCRIPTION = "AAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBB";
 
-    private static final Integer DEFAULT_TOTAL_DURATION = 0;
-    private static final Integer UPDATED_TOTAL_DURATION = 1;
+    private static final Float DEFAULT_TOTAL_DURATION = 0F;
+    private static final Float UPDATED_TOTAL_DURATION = 1F;
 
-    private static final Integer DEFAULT_DURATION_SPECIFICATION = 0;
-    private static final Integer UPDATED_DURATION_SPECIFICATION = 1;
+    private static final Float DEFAULT_DURATION_SPECIFICATION = 0F;
+    private static final Float UPDATED_DURATION_SPECIFICATION = 1F;
 
-    private static final Integer DEFAULT_DURATION_IMPLEMENTATION = 0;
-    private static final Integer UPDATED_DURATION_IMPLEMENTATION = 1;
+    private static final Float DEFAULT_DURATION_IMPLEMENTATION = 0F;
+    private static final Float UPDATED_DURATION_IMPLEMENTATION = 1F;
 
-    private static final Integer DEFAULT_DURATION_TESTING = 0;
-    private static final Integer UPDATED_DURATION_TESTING = 1;
+    private static final Float DEFAULT_DURATION_TESTING = 0F;
+    private static final Float UPDATED_DURATION_TESTING = 1F;
 
-    private static final Integer DEFAULT_SYNERGY_BENEFIT = 0;
-    private static final Integer UPDATED_SYNERGY_BENEFIT = 1;
+    private static final Float DEFAULT_SYNERGY_BENEFIT = 0F;
+    private static final Float UPDATED_SYNERGY_BENEFIT = 1F;
 
     @Inject
     private RequirementRepository requirementRepository;

@@ -24,24 +24,24 @@
             <column name="name" type="varchar(60)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="description" type="varchar(1000)"/>
-            
-            <column name="total_duration" type="integer"/>
-            
-            <column name="duration_specification" type="integer"/>
-            
-            <column name="duration_implementation" type="integer"/>
-            
-            <column name="duration_testing" type="integer"/>
-            
-            <column name="synergy_benefit" type="integer"/>
-            
+
+            <column name="total_duration" type="${floatType}"/>
+
+            <column name="duration_specification" type="${floatType}"/>
+
+            <column name="duration_implementation" type="${floatType}"/>
+
+            <column name="duration_testing" type="${floatType}"/>
+
+            <column name="synergy_benefit" type="${floatType}"/>
+
             <column name="owner_id" type="bigint"/>
             <column name="owner_estimate_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
         <addForeignKeyConstraint baseColumnNames="owner_id"
                                  baseTableName="requirement"
                                  constraintName="fk_requirement_owner_id"

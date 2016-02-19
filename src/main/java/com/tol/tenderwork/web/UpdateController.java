@@ -43,7 +43,7 @@ public class UpdateController {
 
     public void updateRequirement(Requirement requirement){
 
-        int specHelper = 0;
+        float specHelper = 0;
         log.debug("Spechelper", specHelper);
         log.debug("Task", requirement);
         for (Task task : requirement.getHasTaskss()) {
@@ -61,18 +61,18 @@ public class UpdateController {
 
         if(task.getSynergyCheck() == true) {
             float synergyHelper = task.getEstimateSynergy() * task.getSynergyBenefit().getSynergyBenefit();
-            task.setSynergyTotal(Math.round(synergyHelper));
+            task.setSynergyTotal(synergyHelper);
         }
 
-        float specFactorHelper = (float)task.getEstimateSpecification() * task.getSpecificationFactor().getSpecificationFactor();
-        float impFactorHelper = (float)task.getEstimateImplementation() * task.getImplementationFactor().getImplementationFactor();
-        float testFactorHelper = (float)task.getEstimateTesting() * task.getTestingFactor().getTestingFactor();
+        float specFactorHelper = task.getEstimateSpecification() * task.getSpecificationFactor().getSpecificationFactor();
+        float impFactorHelper = task.getEstimateImplementation() * task.getImplementationFactor().getImplementationFactor();
+        float testFactorHelper = task.getEstimateTesting() * task.getTestingFactor().getTestingFactor();
         //task.setEstimateTotal((int) impFactorHelper + (int) testFactorHelper + (int) specFactorHelper);
 
-        task.setSpecificationTotal(Math.round(specFactorHelper));
-        task.setImplementationTotal(Math.round(impFactorHelper));
-        task.setTestingTotal(Math.round(testFactorHelper));
-        task.setEstimateTotal(Math.round((specFactorHelper + impFactorHelper + testFactorHelper)));
+        task.setSpecificationTotal(specFactorHelper);
+        task.setImplementationTotal(impFactorHelper);
+        task.setTestingTotal(testFactorHelper);
+        task.setEstimateTotal(specFactorHelper + impFactorHelper + testFactorHelper);
 
         task.getOwnerRequirement().addTask(task);
         return task;

@@ -62,20 +62,20 @@ public class TaskResourceIntTest {
     private static final Boolean DEFAULT_SYNERGY_CHECK = false;
     private static final Boolean UPDATED_SYNERGY_CHECK = true;
 
-    private static final Integer DEFAULT_SPECIFICATION_TOTAL = 0;
-    private static final Integer UPDATED_SPECIFICATION_TOTAL = 1;
+    private static final Float DEFAULT_SPECIFICATION_TOTAL = 0F;
+    private static final Float UPDATED_SPECIFICATION_TOTAL = 1F;
 
-    private static final Integer DEFAULT_IMPLEMENTATION_TOTAL = 0;
-    private static final Integer UPDATED_IMPLEMENTATION_TOTAL = 1;
+    private static final Float DEFAULT_IMPLEMENTATION_TOTAL = 0F;
+    private static final Float UPDATED_IMPLEMENTATION_TOTAL = 1F;
 
-    private static final Integer DEFAULT_TESTING_TOTAL = 0;
-    private static final Integer UPDATED_TESTING_TOTAL = 1;
+    private static final Float DEFAULT_TESTING_TOTAL = 0F;
+    private static final Float UPDATED_TESTING_TOTAL = 1F;
 
-    private static final Integer DEFAULT_SYNERGY_TOTAL = 0;
-    private static final Integer UPDATED_SYNERGY_TOTAL = 1;
+    private static final Float DEFAULT_SYNERGY_TOTAL = 0F;
+    private static final Float UPDATED_SYNERGY_TOTAL = 1F;
 
-    private static final Integer DEFAULT_ESTIMATE_TOTAL = 0;
-    private static final Integer UPDATED_ESTIMATE_TOTAL = 1;
+    private static final Float DEFAULT_ESTIMATE_TOTAL = 0F;
+    private static final Float UPDATED_ESTIMATE_TOTAL = 1F;
 
     @Inject
     private TaskRepository taskRepository;

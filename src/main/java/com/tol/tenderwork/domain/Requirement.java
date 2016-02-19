@@ -36,23 +36,23 @@ public class Requirement implements Serializable {
 
     @Min(value = 0)
     @Column(name = "total_duration")
-    private Integer totalDuration;
+    private Float totalDuration;
 
     @Min(value = 0)
     @Column(name = "duration_specification")
-    private Integer durationSpecification;
+    private Float durationSpecification;
 
     @Min(value = 0)
     @Column(name = "duration_implementation")
-    private Integer durationImplementation;
+    private Float durationImplementation;
 
     @Min(value = 0)
     @Column(name = "duration_testing")
-    private Integer durationTesting;
+    private Float durationTesting;
 
     @Min(value = 0)
     @Column(name = "synergy_benefit")
-    private Integer synergyBenefit;
+    private Float synergyBenefit;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
@@ -91,43 +91,43 @@ public class Requirement implements Serializable {
         this.description = description;
     }
 
-    public Integer getTotalDuration() {
+    public Float getTotalDuration() {
         return totalDuration;
     }
 
-    public void setTotalDuration(Integer totalDuration) {
+    public void setTotalDuration(Float totalDuration) {
         this.totalDuration = totalDuration;
     }
 
-    public Integer getDurationSpecification() {
+    public Float getDurationSpecification() {
         return durationSpecification;
     }
 
-    public void setDurationSpecification(Integer durationSpecification) {
+    public void setDurationSpecification(Float durationSpecification) {
         this.durationSpecification = durationSpecification;
     }
 
-    public Integer getDurationImplementation() {
+    public Float getDurationImplementation() {
         return durationImplementation;
     }
 
-    public void setDurationImplementation(Integer durationImplementation) {
+    public void setDurationImplementation(Float durationImplementation) {
         this.durationImplementation = durationImplementation;
     }
 
-    public Integer getDurationTesting() {
+    public Float getDurationTesting() {
         return durationTesting;
     }
 
-    public void setDurationTesting(Integer durationTesting) {
+    public void setDurationTesting(Float durationTesting) {
         this.durationTesting = durationTesting;
     }
 
-    public Integer getSynergyBenefit() {
+    public Float getSynergyBenefit() {
         return synergyBenefit;
     }
 
-    public void setSynergyBenefit(Integer synergyBenefit) {
+    public void setSynergyBenefit(Float synergyBenefit) {
         this.synergyBenefit = synergyBenefit;
     }
 
