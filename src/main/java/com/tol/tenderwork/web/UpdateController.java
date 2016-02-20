@@ -41,6 +41,7 @@ public class UpdateController {
 
     public Estimate updateEstimate(Estimate estimate){
 
+
         return estimate;
     }
 
@@ -48,15 +49,30 @@ public class UpdateController {
     public void updateRequirement(Task task){
         Requirement requirement = requirementRepository.findOne(task.getOwnerRequirement().getId());
         Set<Task> tasks = requirement.getHasTaskss();
-        float specHelper = 0;/*
-        log.debug("Spechelper", specHelper);
-        log.debug("Task", requirement);*/
+        float totalDurationHelper = 0;
+        float totalSpecificationHelper = 0;
+        float totalImplementationHelper = 0;
+        float totalTestingHelper = 0;
+        float totalSynergyHelper = 0;
+        /*
+        *log.debug("Spechelper", specHelper);
+        *log.debug("Task", requirement);
+        */
         for (Task t : tasks) {
-            specHelper = specHelper + t.getEstimateTotal();
+            totalDurationHelper = totalDurationHelper + t.getEstimateTotal();
+            totalSpecificationHelper = totalSpecificationHelper + t.getEstimateSpecification();
+            totalImplementationHelper = totalImplementationHelper + t.getEstimateImplementation();
+            totalTestingHelper = totalTestingHelper + t.getEstimateTesting();
+            totalSynergyHelper = totalSynergyHelper + t.getSynergyTotal();
             //log.debug("IMP", task.getEstimateImplementation());
             //log.debug("TOTAL", task.getEstimateTotal());
         }
-        requirement.setTotalDuration(specHelper);
+
+        requirement.setTotalDuration(totalDurationHelper);
+        requirement.setDurationSpecification(totalSpecificationHelper);
+        requirement.setDurationImplementation(totalImplementationHelper);
+        requirement.setDurationTesting(totalTestingHelper);
+        requirement.setSynergyBenefit(totalSynergyHelper);
 
         Requirement result = requirementRepository.save(requirement);
         requirementSearchRepository.save(result);
@@ -72,7 +88,6 @@ public class UpdateController {
         float specFactorHelper = task.getEstimateSpecification() * task.getSpecificationFactor().getSpecificationFactor();
         float impFactorHelper = task.getEstimateImplementation() * task.getImplementationFactor().getImplementationFactor();
         float testFactorHelper = task.getEstimateTesting() * task.getTestingFactor().getTestingFactor();
-        //task.setEstimateTotal((int) impFactorHelper + (int) testFactorHelper + (int) specFactorHelper);
 
         task.setSpecificationTotal(specFactorHelper);
         task.setImplementationTotal(impFactorHelper);
@@ -82,5 +97,4 @@ public class UpdateController {
         task.getOwnerRequirement().addTask(task);
         return task;
     }
-
 }
