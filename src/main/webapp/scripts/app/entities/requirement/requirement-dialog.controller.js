@@ -8,6 +8,7 @@ angular.module('tenderworkApp').controller('RequirementDialogController',
         $scope.users = User.query();
         $scope.estimates = Estimate.query();
         $scope.tasks = Task.query();
+        $scope.estimateId = $stateParams.id;
         $scope.load = function(id) {
             Requirement.get({id : id}, function(result) {
                 $scope.requirement = result;
@@ -53,6 +54,6 @@ angular.module('tenderworkApp').controller('RequirementDialogController',
         };
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss({id:$scope.estimateId, message:'cancel'});
         };
 }]);

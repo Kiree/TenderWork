@@ -61,6 +61,7 @@ angular.module('tenderworkApp')
                         size: 'lg',
                         resolve: {
                             entity: function () {
+                                console.log("entity");
                                 return {
                                     workdaysInMonth: null,
                                     desiredProjectDuration: null,
@@ -73,20 +74,19 @@ angular.module('tenderworkApp')
                                     totalDuration: null,
                                     resourcing: null,
                                     totalSynergyBenefit: null,
-                                    id: null,
-                                    projectId:$stateParams.id
+                                    id: null
                                 };
                             }
                         }
                     }).result.then(function(result) {
                         $state.go('project.detail', { id:result.ownerProject.id }, { reload: true });
-                    }, function(reason) {
-                        $state.go('project.detail', { id:reason.id});
+                    }, function() {
+                        $state.go('project.detail', { id:$stateParams.id});
                     })
                 }]
             })
             .state('estimate.edit', {
-                parent: 'estimate',
+                parent: 'project.detail',
                 url: '/{id}/edit',
                 data: {
                     authorities: ['ROLE_USER'],
@@ -104,7 +104,7 @@ angular.module('tenderworkApp')
                     }).result.then(function(result) {
                         $state.go('project.detail', { id:result.ownerProject.id }, { reload: true });
                     }, function() {
-                        $state.go('project.detail');
+                        $state.go('project.detail', { id:$stateParams.id} );
                     })
                 }]
             })

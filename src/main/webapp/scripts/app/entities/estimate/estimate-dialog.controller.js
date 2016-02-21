@@ -3,7 +3,7 @@
 angular.module('tenderworkApp').controller('EstimateDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Estimate', 'User', 'Project', 'Requirement', 'Principal',
         function($scope, $stateParams, $uibModalInstance, entity, Estimate, User, Project, Requirement, Principal) {
-
+        $scope.estimateId = $stateParams.id;
         $scope.estimate = entity;
         $scope.users = User.query();
         $scope.projects = Project.query().$promise.then(function(results) {
@@ -79,9 +79,7 @@ angular.module('tenderworkApp').controller('EstimateDialogController',
         };
 
         $scope.clear = function() {
-            console.log($scope.estimate);
-            if($scope.estimate.projectId != null) {
-                $uibModalInstance.dismiss({message:'cancel', id:$scope.estimate.projectId});
-            }
+            $uibModalInstance.dismiss('cancel');
+
         };
 }]);
