@@ -4,8 +4,12 @@ import com.tol.tenderwork.domain.Project;
 import com.tol.tenderwork.domain.Estimate;
 import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.domain.Task;
+
+import com.tol.tenderwork.repository.EstimateRepository;
+import com.tol.tenderwork.repository.search.EstimateSearchRepository;
 import com.tol.tenderwork.repository.RequirementRepository;
 import com.tol.tenderwork.repository.search.RequirementSearchRepository;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -28,21 +32,51 @@ public class UpdateController {
 
     private final Logger log = LoggerFactory.getLogger(UpdateController.class);
 
-    @Inject
-    private RequirementRepository requirementRepository;
 
     @Inject
+    private EstimateRepository estimateRepository;
+    @Inject
+    private EstimateSearchRepository estimateSearchRepository;
+    @Inject
+    private RequirementRepository requirementRepository;
+    @Inject
     private RequirementSearchRepository requirementSearchRepository;
+
 
     public Project updateProject(Project project){
 
         return project;
     }
 
-    public Estimate updateEstimate(Estimate estimate){
+    @Transactional
+    public void updateEstimate(Requirement requirement){
+        Estimate estimate = estimateRepository.findOne(requirement.getOwnerEstimate().getId());
+        Set<Requirement> requirements = estimate.getHasRequirementss();
+        float totalDurationHelper = 0;
+        float totalPriceHelper = 0;
+        float resourcingHelper = 0;
+        float totalSynergyHelper = 0;
 
+        for(Requirement r : requirements){
+            totalDurationHelper = totalDurationHelper + r.getTotalDuration();
+            totalSynergyHelper = totalSynergyHelper + r.getSynergyBenefit();
+        }
 
-        return estimate;
+        if(estimate.getSynergyBenefit() == 0) {
+            totalPriceHelper = totalDurationHelper * estimate.getDailyPrice();
+            resourcingHelper = totalDurationHelper / (estimate.getWorkdaysInMonth() * estimate.getDesiredProjectDuration());
+        } else {
+            totalDurationHelper = totalDurationHelper - totalSynergyHelper;
+            totalPriceHelper = totalDurationHelper * estimate.getDailyPrice();
+            resourcingHelper = totalDurationHelper / (estimate.getWorkdaysInMonth() * estimate.getDesiredProjectDuration());
+        }
+
+        estimate.setTotalDuration(totalDurationHelper);
+        estimate.setTotalPrice((long) totalPriceHelper);
+        estimate.setResourcing(resourcingHelper);
+
+        Estimate result = estimateRepository.save(estimate);
+        estimateSearchRepository.save(result);
     }
 
     @Transactional
@@ -76,6 +110,7 @@ public class UpdateController {
 
         Requirement result = requirementRepository.save(requirement);
         requirementSearchRepository.save(result);
+        requirement.getOwnerEstimate().addRequirement(requirement);
     }
 
     @Transactional

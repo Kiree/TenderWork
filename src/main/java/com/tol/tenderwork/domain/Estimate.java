@@ -210,6 +210,10 @@ public class Estimate implements Serializable {
         this.hasRequirementss = requirements;
     }
 
+    public void addRequirement(Requirement requirement){
+        this.hasRequirementss.add(requirement);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

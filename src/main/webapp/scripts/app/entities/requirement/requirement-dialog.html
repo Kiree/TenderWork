@@ -142,13 +142,13 @@
                 <option value=""></option>
             </select>
         </div>
+        -->
         <div class="form-group">
             <label translate="tenderworkApp.requirement.ownerEstimate" for="field_ownerEstimate">ownerEstimate</label>
             <select class="form-control" id="field_ownerEstimate" name="ownerEstimate" ng-model="requirement.ownerEstimate" ng-options="estimate as estimate.id for estimate in estimates track by estimate.id">
                 <option value=""></option>
             </select>
         </div>
-        -->
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">

@@ -6,7 +6,14 @@ angular.module('tenderworkApp').controller('RequirementDialogController',
 
         $scope.requirement = entity;
         $scope.users = User.query();
-        $scope.estimates = Estimate.query();
+        $scope.estimates = Estimate.query().$promise.then(function(results) {
+            results.some(function(item) {
+                if (item.id == $stateParams.id) {
+                    $scope.attachToEstimate = copyEstimate(item);
+                    return true;
+                }
+            });
+        });
         $scope.tasks = Task.query();
         $scope.load = function(id) {
             Requirement.get({id : id}, function(result) {
@@ -20,6 +27,24 @@ angular.module('tenderworkApp').controller('RequirementDialogController',
                 $scope.currentUserAccount = result;
             });
         });
+
+        var copyEstimate = function(estimate) {
+            console.log("Got: ", estimate);
+            return {
+                id:estimate.id,
+                workdaysInMonth:estimate.workdaysInMonth,
+                desiredProjectDuration:estimate.desiredProjectDuration,
+                dailyPrice:estimate.dailyPrice,
+                specificationFactor:estimate.specificationFactor,
+                testingFactor:estimate.testingFactor,
+                implementationFactor:estimate.implementationFactor,
+                synergyBenefit:estimate.synergyBenefit,
+                totalPrice:estimate.totalPrice,
+                totalDuration:estimate.totalDuration,
+                resourcing:estimate.resourcing,
+                totalSynergyBenefit:estimate.totalSynergyBenefit
+            }
+        };
 
         var copyAccount = function(account) {
             return {
@@ -48,6 +73,7 @@ angular.module('tenderworkApp').controller('RequirementDialogController',
                 Requirement.update($scope.requirement, onSaveSuccess, onSaveError);
             } else {
                 $scope.requirement.owner = $scope.currentUserAccount;
+                $scope.requirement.ownerEstimate = $scope.attachToEstimate;
                 Requirement.save($scope.requirement, onSaveSuccess, onSaveError);
             }
         };

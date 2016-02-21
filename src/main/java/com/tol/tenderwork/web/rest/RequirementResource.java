@@ -4,16 +4,19 @@ import com.codahale.metrics.annotation.Timed;
 import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.repository.RequirementRepository;
 import com.tol.tenderwork.repository.search.RequirementSearchRepository;
+import com.tol.tenderwork.web.UpdateController;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -35,13 +38,16 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class RequirementResource {
 
     private final Logger log = LoggerFactory.getLogger(RequirementResource.class);
-        
+
     @Inject
     private RequirementRepository requirementRepository;
-    
+
     @Inject
     private RequirementSearchRepository requirementSearchRepository;
-    
+
+    @Autowired
+    private UpdateController updateController;
+
     /**
      * POST  /requirements -> Create a new requirement.
      */
@@ -49,6 +55,7 @@ public class RequirementResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
     public ResponseEntity<Requirement> createRequirement(@Valid @RequestBody Requirement requirement) throws URISyntaxException {
         log.debug("REST request to save Requirement : {}", requirement);
         if (requirement.getId() != null) {
@@ -56,6 +63,9 @@ public class RequirementResource {
         }
         Requirement result = requirementRepository.save(requirement);
         requirementSearchRepository.save(result);
+
+        //updateController.updateEstimate(requirement);
+
         return ResponseEntity.created(new URI("/api/requirements/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("requirement", result.getId().toString()))
             .body(result);
@@ -75,6 +85,9 @@ public class RequirementResource {
         }
         Requirement result = requirementRepository.save(requirement);
         requirementSearchRepository.save(result);
+
+        updateController.updateEstimate(requirement);
+
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("requirement", requirement.getId().toString()))
             .body(result);
@@ -90,7 +103,7 @@ public class RequirementResource {
     public ResponseEntity<List<Requirement>> getAllRequirements(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Requirements");
-        Page<Requirement> page = requirementRepository.findAll(pageable); 
+        Page<Requirement> page = requirementRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/requirements");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
