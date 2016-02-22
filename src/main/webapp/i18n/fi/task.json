@@ -1,0 +1,39 @@
+{
+    "tenderworkApp": {
+        "task" : {
+            "home": {
+                "title": "Taskit",
+                "createLabel": "Luo uusi taski",
+                "createOrEditLabel": "Luo tai muuta taskia",
+                "search": "Etsi taskia"
+            },
+            "created": "Uusi taski on luotu tunnisteella {{ param }}",
+            "updated": "Taski on päivitetty tunnisteella {{ param }}",
+            "deleted": "Taski on poistettu tunnisteella {{ param }}",
+            "delete": {
+                "question": "Haluatko varmasti poistaa taskin {{ id }}?"
+            },
+            "detail": {
+                "title": "Taski"
+            },
+            "name": "Nimi",
+            "description": "Kuvaus",
+            "estimateSpecification": "ArvioMäärittely",
+            "estimateImplementation": "ArvioToteutus",
+            "estimateTesting": "ArvioTestaus",
+            "estimateSynergy": "ArvioSynergia",
+            "synergyCheck": "SynergiaCheck",
+            "specificationTotal": "KokoMäärittely",
+            "implementationTotal": "KokoToteutus",
+            "testingTotal": "KokoTestaus",
+            "synergyTotal": "KokoSynergia",
+            "estimateTotal": "KokoArvio",
+            "ownedBy": "Omistaja",
+            "specificationFactor": "FaktoriMäärittely",
+            "implementationFactor": "FaktoriToteutus",
+            "testingFactor": "FaktoriTestaus",
+            "synergyBenefit": "SynergiaHyöty",
+            "ownerRequirement": "OmistajaVaatimus"
+        }
+    }
+}

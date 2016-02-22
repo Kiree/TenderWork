@@ -1,0 +1,31 @@
+{
+    "tenderworkApp": {
+        "requirement" : {
+            "home": {
+                "title": "Vaatimukset",
+                "createLabel": "Luo uusi vaatimus",
+                "createOrEditLabel": "Luo tai muokkaa vaatimusta",
+                "search": "Etsi vaatimusta"
+            },
+            "created": "Uusi vaatimus on luotu tunnisteella {{ param }}",
+            "updated": "Vaatimus on päivitetty tunnisteella {{ param }}",
+            "deleted": "Vaatimus on poistettu tunnisteella {{ param }}",
+            "delete": {
+                "question": "Haluatko varmasti poistaa vaatimuksen {{ id }}?"
+            },
+            "detail": {
+                "title": "Vaatimus"
+            },
+            "name": "Nimi",
+            "description": "Kuvaus",
+            "totalDuration": "KokonaisKesto",
+            "durationSpecification": "KestoMäärittely",
+            "durationImplementation": "KestoToteutus",
+            "durationTesting": "KestoTestaus",
+            "synergyBenefit": "SynergiaHyöty",
+            "owner": "Omistaja",
+            "ownerEstimate": "OmistajaArvio",
+            "hasTasks": "OmistaaTaskit"
+        }
+    }
+}
