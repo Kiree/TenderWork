@@ -30,7 +30,7 @@
             <div class="well" ui-view="content"></div>
 
             <div class="footer">
-                <p translate="footer">This is your footer</p>
+                <span translate="footer">This is your footer</span> <span ng-show="{{ENV==='dev'}}" ng-cloak="" ng-controller="EasterController"> - It just might {{ randomQuote() }}</span>
             </div>
         </div>
 
@@ -107,6 +107,7 @@
     <script src="scripts/components/util/data-util.service.js"></script>
     <script src="scripts/components/util/sort.directive.js"></script>
     <script src="scripts/components/rowlink/rowlink.js"></script>
+    <script src="scripts/components/easter/easter.js"></script>
     <script src="scripts/app/account/account.js"></script>
     <script src="scripts/app/account/activate/activate.js"></script>
     <script src="scripts/app/account/activate/activate.controller.js"></script>
@@ -189,6 +190,7 @@
     <script src="scripts/app/entities/task/task-detail.controller.js"></script>
     <script src="scripts/components/entities/task/task.service.js"></script>
     <script src="scripts/components/entities/task/task.search.service.js"></script>
+
     <!-- endbuild -->
 </body>
 </html>
