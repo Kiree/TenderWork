@@ -4,10 +4,12 @@ import com.codahale.metrics.annotation.Timed;
 import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.repository.RequirementRepository;
 import com.tol.tenderwork.repository.search.RequirementSearchRepository;
+import com.tol.tenderwork.web.UpdateController;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -42,6 +44,9 @@ public class RequirementResource {
     @Inject
     private RequirementSearchRepository requirementSearchRepository;
 
+    @Autowired
+    private UpdateController updateController;
+
     /**
      * POST  /requirements -> Create a new requirement.
      */
@@ -58,6 +63,7 @@ public class RequirementResource {
         requirementSearchRepository.save(result);
 
         requirement.getOwnerEstimate().addRequirement(requirement);
+        updateController.updateProject(requirement.getOwnerEstimate().getOwnerProject(), requirement.getOwner());
 
         return ResponseEntity.created(new URI("/api/requirements/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("requirement", result.getId().toString()))
@@ -78,6 +84,9 @@ public class RequirementResource {
         }
         Requirement result = requirementRepository.save(requirement);
         requirementSearchRepository.save(result);
+
+        updateController.updateProject(requirement.getOwnerEstimate().getOwnerProject(), requirement.getOwner());
+
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("requirement", requirement.getId().toString()))
             .body(result);

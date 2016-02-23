@@ -4,10 +4,12 @@ import com.codahale.metrics.annotation.Timed;
 import com.tol.tenderwork.domain.Estimate;
 import com.tol.tenderwork.repository.EstimateRepository;
 import com.tol.tenderwork.repository.search.EstimateSearchRepository;
+import com.tol.tenderwork.web.UpdateController;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -35,13 +37,16 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class EstimateResource {
 
     private final Logger log = LoggerFactory.getLogger(EstimateResource.class);
-        
+
     @Inject
     private EstimateRepository estimateRepository;
-    
+
     @Inject
     private EstimateSearchRepository estimateSearchRepository;
-    
+
+    @Autowired
+    private UpdateController updateController;
+
     /**
      * POST  /estimates -> Create a new estimate.
      */
@@ -56,6 +61,9 @@ public class EstimateResource {
         }
         Estimate result = estimateRepository.save(estimate);
         estimateSearchRepository.save(result);
+
+        updateController.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
+
         return ResponseEntity.created(new URI("/api/estimates/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("estimate", result.getId().toString()))
             .body(result);
@@ -75,6 +83,9 @@ public class EstimateResource {
         }
         Estimate result = estimateRepository.save(estimate);
         estimateSearchRepository.save(result);
+
+        updateController.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
+
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("estimate", estimate.getId().toString()))
             .body(result);
@@ -90,7 +101,7 @@ public class EstimateResource {
     public ResponseEntity<List<Estimate>> getAllEstimates(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Estimates");
-        Page<Estimate> page = estimateRepository.findAll(pageable); 
+        Page<Estimate> page = estimateRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/estimates");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

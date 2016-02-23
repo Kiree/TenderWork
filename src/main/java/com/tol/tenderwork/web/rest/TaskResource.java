@@ -70,6 +70,7 @@ public class TaskResource {
         updateController.updateRequirement(task);
 
         updateController.updateEstimate(task.getOwnerRequirement());
+        updateController.updateProject(task.getOwnerRequirement().getOwnerEstimate().getOwnerProject(), task.getOwnedBy());
 
         return ResponseEntity.created(new URI("/api/tasks/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("task", result.getId().toString()))
@@ -96,6 +97,7 @@ public class TaskResource {
 
         updateController.updateRequirement(task);
         updateController.updateEstimate(task.getOwnerRequirement());
+        updateController.updateProject(task.getOwnerRequirement().getOwnerEstimate().getOwnerProject(), task.getOwnedBy());
 
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("task", task.getId().toString()))

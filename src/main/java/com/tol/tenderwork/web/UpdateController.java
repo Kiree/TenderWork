@@ -1,12 +1,11 @@
 package com.tol.tenderwork.web;
 
-import com.tol.tenderwork.domain.Project;
-import com.tol.tenderwork.domain.Estimate;
-import com.tol.tenderwork.domain.Requirement;
-import com.tol.tenderwork.domain.Task;
+import com.tol.tenderwork.domain.*;
 import com.tol.tenderwork.repository.EstimateRepository;
+import com.tol.tenderwork.repository.ProjectRepository;
 import com.tol.tenderwork.repository.RequirementRepository;
 import com.tol.tenderwork.repository.search.EstimateSearchRepository;
+import com.tol.tenderwork.repository.search.ProjectSearchRepository;
 import com.tol.tenderwork.repository.search.RequirementSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import javax.inject.Inject;
+import java.time.ZonedDateTime;
 import java.util.Set;
 
 
@@ -42,15 +42,20 @@ public class UpdateController {
     @Inject
     private EstimateSearchRepository estimateSearchRepository;
 
-    public Project updateProject(Project project){
+    @Inject
+    private ProjectRepository projectRepository;
 
-        return project;
-    }
-
-    public Estimate updateEstimate(Estimate estimate){
+    @Inject
+    private ProjectSearchRepository projectSearchRepository;
 
 
-        return estimate;
+    @Transactional
+    public void updateProject(Project project, User user){
+        project.setEditedBy(user);
+        project.setEditedDate(ZonedDateTime.now());
+
+        Project result = projectRepository.save(project);
+        projectSearchRepository.save(result);
     }
 
     @Transactional
