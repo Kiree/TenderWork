@@ -58,18 +58,32 @@ public class UpdateController {
         Estimate estimate = estimateRepository.findOne(requirement.getOwnerEstimate().getId());
         Set<Requirement> requirements = estimate.getHasRequirementss();
         float totalDurationHelper = 0;
+        float totalSynergyHelper = 0;
 
         log.debug("REQS: ", requirements);
 
         for(Requirement r : requirements) {
-            if(r.getTotalDuration() != null ) {
+            if(r.getTotalDuration() != null) {
                 totalDurationHelper = totalDurationHelper + r.getTotalDuration();
+            }
+            if(r.getSynergyBenefit() != null) {
+                totalSynergyHelper = totalSynergyHelper + r.getSynergyBenefit();
             }
         }
         totalDurationHelper  = Math.round(totalDurationHelper);
-        estimate.setTotalDuration(totalDurationHelper);
-        estimate.setTotalPrice((int)totalDurationHelper * estimate.getDailyPrice());
-        estimate.setResourcing(totalDurationHelper / (estimate.getWorkdaysInMonth() * estimate.getDesiredProjectDuration()));
+
+        if(totalSynergyHelper != 0 || estimate.getSynergyBenefit() != 0) {
+            totalSynergyHelper = Math.round(totalSynergyHelper);
+            estimate.setTotalPrice(((long) totalDurationHelper - (long)totalSynergyHelper) * estimate.getDailyPrice());
+            estimate.setTotalDuration(totalDurationHelper - totalSynergyHelper);
+            estimate.setResourcing(estimate.getTotalDuration() / (estimate.getWorkdaysInMonth() * estimate.getWorkdaysInMonth()));
+            estimate.setTotalSynergyBenefit(totalSynergyHelper);
+        } else {
+            estimate.setTotalPrice((long) totalDurationHelper * estimate.getDailyPrice());
+            estimate.setResourcing(totalDurationHelper / (estimate.getWorkdaysInMonth() * estimate.getDesiredProjectDuration()));
+            estimate.setTotalDuration(totalDurationHelper);
+            estimate.setTotalSynergyBenefit((float)0);
+        }
 
         Estimate result = estimateRepository.save(estimate);
         estimateSearchRepository.save(result);
@@ -94,6 +108,7 @@ public class UpdateController {
             totalImplementationHelper = totalImplementationHelper + t.getEstimateImplementation();
             totalTestingHelper = totalTestingHelper + t.getEstimateTesting();
             totalSynergyHelper = totalSynergyHelper + t.getSynergyTotal();
+
             //log.debug("IMP", task.getEstimateImplementation());
             //log.debug("TOTAL", task.getEstimateTotal());
         }
@@ -111,19 +126,32 @@ public class UpdateController {
 
     @Transactional
     public Task updateTask(Task task) {
-        if(task.getSynergyCheck() == true) {
+
+        task.setSynergyTotal((float)0);
+        if (task.getSynergyCheck() == true && task.getEstimateSynergy() != null && task.getEstimateSynergy() != 0) {
             float synergyHelper = task.getEstimateSynergy() * task.getSynergyBenefit().getSynergyBenefit();
             task.setSynergyTotal(synergyHelper);
         }
 
-        float specFactorHelper = task.getEstimateSpecification() * task.getSpecificationFactor().getSpecificationFactor();
-        float impFactorHelper = task.getEstimateImplementation() * task.getImplementationFactor().getImplementationFactor();
-        float testFactorHelper = task.getEstimateTesting() * task.getTestingFactor().getTestingFactor();
+        task.setSpecificationTotal((float)task.getEstimateSpecification());
+        if (task.getSpecificationFactor().getSpecificationFactor() != 0) {
+            float specFactorHelper = task.getEstimateSpecification() * task.getSpecificationFactor().getSpecificationFactor();
+            task.setSpecificationTotal(specFactorHelper);
+        }
 
-        task.setSpecificationTotal(specFactorHelper);
-        task.setImplementationTotal(impFactorHelper);
-        task.setTestingTotal(testFactorHelper);
-        task.setEstimateTotal(specFactorHelper + impFactorHelper + testFactorHelper);
+        task.setImplementationTotal((float)task.getEstimateImplementation());
+        if (task.getImplementationFactor().getImplementationFactor() != 0) {
+            float impFactorHelper = task.getEstimateImplementation() * task.getImplementationFactor().getImplementationFactor();
+            task.setImplementationTotal(impFactorHelper);
+        }
+
+        task.setTestingTotal((float)task.getEstimateTesting());
+        if(task.getTestingFactor().getTestingFactor() != 0){
+            float testFactorHelper = task.getEstimateTesting() * task.getTestingFactor().getTestingFactor();
+            task.setTestingTotal(testFactorHelper);
+        }
+
+        task.setEstimateTotal(task.getSpecificationTotal() + task.getImplementationTotal() + task.getTestingTotal());
 
         task.getOwnerRequirement().addTask(task);
         return task;
