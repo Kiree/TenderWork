@@ -139,19 +139,19 @@ public class UpdateController {
         }
 
         task.setSpecificationTotal((float)task.getEstimateSpecification());
-        if (task.getSpecificationFactor().getSpecificationFactor() != 0) {
+        if (task.getSpecificationFactor().getSpecificationFactor() != 0 && task.getEstimateSpecification() != 0) {
             float specFactorHelper = task.getEstimateSpecification() * task.getSpecificationFactor().getSpecificationFactor();
             task.setSpecificationTotal(specFactorHelper);
         }
 
         task.setImplementationTotal((float)task.getEstimateImplementation());
-        if (task.getImplementationFactor().getImplementationFactor() != 0) {
+        if (task.getImplementationFactor().getImplementationFactor() != 0 && task.getEstimateImplementation() != 0) {
             float impFactorHelper = task.getEstimateImplementation() * task.getImplementationFactor().getImplementationFactor();
             task.setImplementationTotal(impFactorHelper);
         }
 
         task.setTestingTotal((float)task.getEstimateTesting());
-        if(task.getTestingFactor().getTestingFactor() != 0){
+        if(task.getTestingFactor().getTestingFactor() != 0 && task.getEstimateImplementation() != 0){
             float testFactorHelper = task.getEstimateTesting() * task.getTestingFactor().getTestingFactor();
             task.setTestingTotal(testFactorHelper);
         }
