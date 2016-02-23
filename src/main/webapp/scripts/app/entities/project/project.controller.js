@@ -2,7 +2,6 @@
 
 angular.module('tenderworkApp')
     .controller('ProjectController', function ($scope, $state, Project, ProjectSearch, ParseLinks) {
-
         $scope.projects = [];
         $scope.predicate = 'editedDate';
         $scope.reverse = false;

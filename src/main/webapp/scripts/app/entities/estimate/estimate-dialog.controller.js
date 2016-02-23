@@ -3,8 +3,16 @@
 angular.module('tenderworkApp').controller('EstimateDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Estimate', 'User', 'Project', 'Requirement', 'Principal',
         function($scope, $stateParams, $uibModalInstance, entity, Estimate, User, Project, Requirement, Principal) {
+        var defaultValues = function(entity) {
+            if (entity.id == null) {
+                entity.workdaysInMonth = 21;
+                entity.dailyPrice = 500;
+                entity.desiredProjectDuration = 3;
+            }
+            return entity;
+        };
         $scope.estimateId = $stateParams.id;
-        $scope.estimate = entity;
+        $scope.estimate = defaultValues(entity);
         $scope.users = User.query();
         $scope.projects = Project.query().$promise.then(function(results) {
             results.some(function(item) {
@@ -31,7 +39,6 @@ angular.module('tenderworkApp').controller('EstimateDialogController',
         });
 
         var copyProject = function(project) {
-            console.log("Got: ", project);
             return {
                 id:project.id,
                 client:project.client,

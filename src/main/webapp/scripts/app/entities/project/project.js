@@ -106,7 +106,7 @@ angular.module('tenderworkApp')
                 }]
             })
             .state('project.delete', {
-                parent: 'project',
+                parent: 'project.detail',
                 url: '/{id}/delete',
                 data: {
                     authorities: ['ROLE_USER'],
@@ -124,7 +124,7 @@ angular.module('tenderworkApp')
                     }).result.then(function(result) {
                         $state.go('project', null, { reload: true });
                     }, function() {
-                        $state.go('^');
+                        $state.go('project.detail', { id:$stateParams.id } );
                     })
                 }]
             });

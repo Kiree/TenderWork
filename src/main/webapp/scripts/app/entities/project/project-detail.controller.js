@@ -8,7 +8,6 @@ angular.module('tenderworkApp')
         $scope.reverse = true;
         $scope.page = 0;
         $scope.load = function (id) {
-            console.log("loadding");
             Project.get({id: id}, function(result) {
                 $scope.project = result;
             });
