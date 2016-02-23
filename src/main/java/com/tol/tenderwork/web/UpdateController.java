@@ -4,7 +4,9 @@ import com.tol.tenderwork.domain.Project;
 import com.tol.tenderwork.domain.Estimate;
 import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.domain.Task;
+import com.tol.tenderwork.repository.EstimateRepository;
 import com.tol.tenderwork.repository.RequirementRepository;
+import com.tol.tenderwork.repository.search.EstimateSearchRepository;
 import com.tol.tenderwork.repository.search.RequirementSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +36,12 @@ public class UpdateController {
     @Inject
     private RequirementSearchRepository requirementSearchRepository;
 
+    @Inject
+    private EstimateRepository estimateRepository;
+
+    @Inject
+    private EstimateSearchRepository estimateSearchRepository;
+
     public Project updateProject(Project project){
 
         return project;
@@ -43,6 +51,26 @@ public class UpdateController {
 
 
         return estimate;
+    }
+
+    @Transactional
+    public void updateEstimate(Requirement requirement){
+        Estimate estimate = estimateRepository.findOne(requirement.getOwnerEstimate().getId());
+        Set<Requirement> requirements = estimate.getHasRequirementss();
+        float totalDurationHelper = 0;
+
+        log.debug("REQS: ", requirements);
+
+        for(Requirement r : requirements) {
+            totalDurationHelper = totalDurationHelper + r.getTotalDuration();
+        }
+        totalDurationHelper  = Math.round(totalDurationHelper);
+        estimate.setTotalDuration(totalDurationHelper);
+        estimate.setTotalPrice((int)totalDurationHelper * estimate.getDailyPrice());
+        estimate.setResourcing(totalDurationHelper / (estimate.getWorkdaysInMonth() * estimate.getDesiredProjectDuration()));
+
+        Estimate result = estimateRepository.save(estimate);
+        estimateSearchRepository.save(result);
     }
 
     @Transactional
@@ -76,6 +104,8 @@ public class UpdateController {
 
         Requirement result = requirementRepository.save(requirement);
         requirementSearchRepository.save(result);
+
+        requirement.getOwnerEstimate().addRequirement(requirement);
     }
 
     @Transactional
