@@ -62,7 +62,9 @@ public class UpdateController {
         log.debug("REQS: ", requirements);
 
         for(Requirement r : requirements) {
-            totalDurationHelper = totalDurationHelper + r.getTotalDuration();
+            if(r.getTotalDuration() != null ) {
+                totalDurationHelper = totalDurationHelper + r.getTotalDuration();
+            }
         }
         totalDurationHelper  = Math.round(totalDurationHelper);
         estimate.setTotalDuration(totalDurationHelper);
@@ -105,7 +107,6 @@ public class UpdateController {
         Requirement result = requirementRepository.save(requirement);
         requirementSearchRepository.save(result);
 
-        requirement.getOwnerEstimate().addRequirement(requirement);
     }
 
     @Transactional

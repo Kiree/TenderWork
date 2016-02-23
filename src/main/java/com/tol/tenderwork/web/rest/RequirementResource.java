@@ -35,13 +35,13 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class RequirementResource {
 
     private final Logger log = LoggerFactory.getLogger(RequirementResource.class);
-        
+
     @Inject
     private RequirementRepository requirementRepository;
-    
+
     @Inject
     private RequirementSearchRepository requirementSearchRepository;
-    
+
     /**
      * POST  /requirements -> Create a new requirement.
      */
@@ -56,6 +56,9 @@ public class RequirementResource {
         }
         Requirement result = requirementRepository.save(requirement);
         requirementSearchRepository.save(result);
+
+        requirement.getOwnerEstimate().addRequirement(requirement);
+
         return ResponseEntity.created(new URI("/api/requirements/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("requirement", result.getId().toString()))
             .body(result);
@@ -90,7 +93,7 @@ public class RequirementResource {
     public ResponseEntity<List<Requirement>> getAllRequirements(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Requirements");
-        Page<Requirement> page = requirementRepository.findAll(pageable); 
+        Page<Requirement> page = requirementRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/requirements");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
