@@ -86,8 +86,8 @@ angular.module('tenderworkApp')
                 }]
             })
             .state('estimate.edit', {
-                parent: 'project.detail',
-                url: '/{id}/edit',
+                parent: 'estimate.detail',
+                url: '/{id}/edit/edit2',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -102,9 +102,9 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('project.detail', { id:result.ownerProject.id }, { reload: true });
+                        $state.go('estimate.detail', { id:result.estimate.id }, { reload: true });
                     }, function() {
-                        $state.go('project.detail', { id:$stateParams.id} );
+                        $state.go('estimate.detail', { id:$stateParams.id} );
                     })
                 }]
             })
@@ -125,9 +125,9 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('estimate', null, { reload: true });
+                        $state.go('project.detail', { id:result.ownerProject.id }, { reload: true });
                     }, function() {
-                        $state.go('^');
+                        $state.go('project.detail');
                     })
                 }]
             });
