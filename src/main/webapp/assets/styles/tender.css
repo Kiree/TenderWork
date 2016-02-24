@@ -38,8 +38,8 @@ textarea {
 }
 
 div.description {
+    background-color:#fbfbfb !important;
     margin-bottom:50px;
-
 }
 
 div.description-header {

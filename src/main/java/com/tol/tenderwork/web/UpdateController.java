@@ -65,11 +65,9 @@ public class UpdateController {
         float totalDurationHelper = 0;
         float totalSynergyHelper = 0;
 
-<<<<<<< HEAD
+
         //log.debug("REQS: ", requirements);
 
-=======
->>>>>>> origin/master
         for(Requirement r : requirements) {
             if(r.getTotalDuration() != null) {
                 totalDurationHelper = totalDurationHelper + r.getTotalDuration();

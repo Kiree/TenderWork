@@ -3,6 +3,14 @@
 angular.module('tenderworkApp').controller('EstimateDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Estimate', 'User', 'Project', 'Requirement', 'Principal',
         function($scope, $stateParams, $uibModalInstance, entity, Estimate, User, Project, Requirement, Principal) {
+        $scope.slider= {
+            options: {
+                step:.01,
+                floor:0,
+                ceil:1,
+                precision:2
+            }
+        };
         var defaultValues = function(entity) {
             if (entity.id == null) {
                 entity.workdaysInMonth = 21;

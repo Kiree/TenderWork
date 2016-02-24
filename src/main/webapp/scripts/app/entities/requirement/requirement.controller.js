@@ -8,18 +8,24 @@ angular.module('tenderworkApp')
         $scope.reverse = true;
         $scope.page = 0;
         $scope.loadAll = function() {
-            RequirementSearch.query({query:"ownerEstimate.id:" + $scope.estimate.id}, function(result) {
-                for (var i = 0; i < result.length; i++) {
-                    $scope.requirements.push(result[i]);
-                }
-            });
-            /*
-            Requirement.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
-                for (var i = 0; i < result.length; i++) {
-                    $scope.requirements.push(result[i]);
-                }
-            });*/
+            if($scope.estimate) {
+                RequirementSearch.query({query: "ownerEstimate.id:" + $scope.estimate.id}, function (result) {
+                    for (var i = 0; i < result.length; i++) {
+                        $scope.requirements.push(result[i]);
+                    }
+                });
+            } else {
+                Requirement.query({
+                    page: $scope.page,
+                    size: 20,
+                    sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']
+                }, function (result, headers) {
+                    $scope.links = ParseLinks.parse(headers('link'));
+                    for (var i = 0; i < result.length; i++) {
+                        $scope.requirements.push(result[i]);
+                    }
+                });
+            }
         };
         $scope.reset = function() {
             $scope.page = 0;
