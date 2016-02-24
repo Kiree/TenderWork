@@ -33,6 +33,10 @@ span.projectdetail{
     white-space:pre-wrap;
 }
 
+textarea {
+    resize:vertical;
+}
+
 
 
 

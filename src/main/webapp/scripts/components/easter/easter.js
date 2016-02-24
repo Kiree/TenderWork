@@ -3,7 +3,7 @@
  */
 
 angular.module('tenderworkApp').controller('EasterController', ['$scope', '$rootScope', function($scope, $rootScope) {
-    var quotes = ['Think different!', 'Work!', 'Null Pointer!', 'Revert!', 'Project Manage!'];
+    var quotes = ['Think different!', 'Work!', 'Null Pointer!', 'Revert!', 'Project Manage!', 'Super Fusion!'];
     var current_index = 0;
     $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
       $scope.newIndex();
