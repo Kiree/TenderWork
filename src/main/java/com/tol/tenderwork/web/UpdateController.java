@@ -122,7 +122,7 @@ public class UpdateController {
     }
 
     @Transactional
-    public void updateTask(Task task) {
+    public Task updateTask(Task task) {
 
         task.setSynergyTotal((float)0);
         if (task.getSynergyCheck() == true && task.getEstimateSynergy() != null && task.getEstimateSynergy() > 0) {
@@ -151,5 +151,7 @@ public class UpdateController {
         task.setEstimateTotal(task.getSpecificationTotal() + task.getImplementationTotal() + task.getTestingTotal());
 
         task.getOwnerRequirement().addTask(task);
+
+        return task;
     }
 }

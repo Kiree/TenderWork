@@ -85,16 +85,6 @@ public class EstimateResource {
             return createEstimate(estimate);
         }
 
-        Set<Requirement> requirements = estimate.getHasRequirementss();
-        for(Requirement r : requirements) {
-            Set<Task> tasks = r.getHasTaskss();
-            for(Task t : tasks) {
-                updateController.updateTask(t);
-            }
-            updateController.updateRequirement(tasks.iterator().next());
-        }
-        updateController.updateEstimate(estimate.getHasRequirementss().iterator().next());
-
         Estimate result = estimateRepository.save(estimate);
         estimateSearchRepository.save(result);
 
