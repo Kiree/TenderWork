@@ -73,11 +73,9 @@ public class UpdateController {
                 totalSynergyHelper = totalSynergyHelper + r.getSynergyBenefit();
             }
         }
-        totalDurationHelper  = Math.round(totalDurationHelper);
 
         if(totalSynergyHelper > 0 || estimate.getSynergyBenefit() > 0) {
-            totalSynergyHelper = Math.round(totalSynergyHelper);
-            estimate.setTotalPrice(((long) totalDurationHelper - (long)totalSynergyHelper) * estimate.getDailyPrice());
+            estimate.setTotalPrice((long)Math.round(totalDurationHelper - totalSynergyHelper * estimate.getDailyPrice()));
             estimate.setTotalDuration(totalDurationHelper - totalSynergyHelper);
             estimate.setResourcing(estimate.getTotalDuration() / (estimate.getWorkdaysInMonth() * estimate.getWorkdaysInMonth()));
             estimate.setTotalSynergyBenefit(totalSynergyHelper);
