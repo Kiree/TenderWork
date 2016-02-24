@@ -2,6 +2,8 @@ package com.tol.tenderwork.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.tol.tenderwork.domain.Estimate;
+import com.tol.tenderwork.domain.Requirement;
+import com.tol.tenderwork.domain.Task;
 import com.tol.tenderwork.repository.EstimateRepository;
 import com.tol.tenderwork.repository.search.EstimateSearchRepository;
 import com.tol.tenderwork.web.UpdateController;
@@ -24,6 +26,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -81,6 +84,17 @@ public class EstimateResource {
         if (estimate.getId() == null) {
             return createEstimate(estimate);
         }
+
+        Set<Requirement> requirements = estimate.getHasRequirementss();
+        for(Requirement r : requirements) {
+            Set<Task> tasks = r.getHasTaskss();
+            for(Task t : tasks) {
+                updateController.updateTask(t);
+            }
+            updateController.updateRequirement(tasks.iterator().next());
+        }
+        updateController.updateEstimate(estimate.getHasRequirementss().iterator().next());
+
         Estimate result = estimateRepository.save(estimate);
         estimateSearchRepository.save(result);
 

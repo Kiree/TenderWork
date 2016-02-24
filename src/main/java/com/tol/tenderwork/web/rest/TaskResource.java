@@ -62,7 +62,7 @@ public class TaskResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("task", "idexists", "A new task cannot already have an ID")).body(null);
         }
 
-        task = updateController.updateTask(task);
+        updateController.updateTask(task);
 
         Task result = taskRepository.save(task);
         taskSearchRepository.save(result);
@@ -90,7 +90,7 @@ public class TaskResource {
         if (task.getId() == null) {
             return createTask(task);
         }
-        task = updateController.updateTask(task);
+        updateController.updateTask(task);
 
         Task result = taskRepository.save(task);
         taskSearchRepository.save(result);

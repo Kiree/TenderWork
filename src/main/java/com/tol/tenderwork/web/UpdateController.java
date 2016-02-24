@@ -65,7 +65,7 @@ public class UpdateController {
         float totalDurationHelper = 0;
         float totalSynergyHelper = 0;
 
-        log.debug("REQS: ", requirements);
+        //log.debug("REQS: ", requirements);
 
         for(Requirement r : requirements) {
             if(r.getTotalDuration() != null) {
@@ -130,7 +130,7 @@ public class UpdateController {
     }
 
     @Transactional
-    public Task updateTask(Task task) {
+    public void updateTask(Task task) {
 
         task.setSynergyTotal((float)0);
         if (task.getSynergyCheck() == true && task.getEstimateSynergy() != null && task.getEstimateSynergy() != 0) {
@@ -159,6 +159,5 @@ public class UpdateController {
         task.setEstimateTotal(task.getSpecificationTotal() + task.getImplementationTotal() + task.getTestingTotal());
 
         task.getOwnerRequirement().addTask(task);
-        return task;
     }
 }
