@@ -87,7 +87,7 @@ angular.module('tenderworkApp')
             })
             .state('estimate.edit', {
                 parent: 'estimate.detail',
-                url: '/{id}/edit/edit2',
+                url: '/edit',
                 data: {
                     authorities: ['ROLE_USER'],
                 },

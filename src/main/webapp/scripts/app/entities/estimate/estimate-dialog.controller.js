@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tenderworkApp').controller('EstimateDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Estimate', 'User', 'Project', 'Requirement', 'Principal',
-        function($scope, $stateParams, $uibModalInstance, entity, Estimate, User, Project, Requirement, Principal) {
+    ['$scope', '$rootScope','$stateParams', '$uibModalInstance', 'entity', 'Estimate', 'User', 'Project', 'Requirement', 'Principal',
+        function($scope, $rootScope, $stateParams, $uibModalInstance, entity, Estimate, User, Project, Requirement, Principal) {
         $scope.slider= {
             options: {
                 step:.01,
@@ -29,6 +29,7 @@ angular.module('tenderworkApp').controller('EstimateDialogController',
                     return true;
                 }
             });
+            $rootScope.$broadcast('rzSliderForceRender');
         });
         $scope.requirements = Requirement.query();
         $scope.currentUserAccount = null;
