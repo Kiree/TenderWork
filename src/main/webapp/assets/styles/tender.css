@@ -37,6 +37,22 @@ textarea {
     resize:vertical;
 }
 
+div.description {
+    margin-bottom:50px;
+
+}
+
+div.description-header {
+    background-color:#fbfbfb !important;
+}
+
+div.description-text-field {
+    background-color:#fafafa !important;
+    border-bottom: 1px solid #cfcfcf;
+    margin-bottom:50px;
+}
+
+
 
 
 
