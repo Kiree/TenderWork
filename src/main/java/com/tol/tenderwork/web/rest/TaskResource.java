@@ -90,7 +90,7 @@ public class TaskResource {
         if (task.getId() == null) {
             return createTask(task);
         }
-        updateController.updateTask(task);
+        task = updateController.updateTask(task);
 
         Task result = taskRepository.save(task);
         taskSearchRepository.save(result);
