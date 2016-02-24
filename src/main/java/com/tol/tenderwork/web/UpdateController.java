@@ -65,9 +65,6 @@ public class UpdateController {
         float totalDurationHelper = 0;
         float totalSynergyHelper = 0;
 
-
-        //log.debug("REQS: ", requirements);
-
         for(Requirement r : requirements) {
             if(r.getTotalDuration() != null) {
                 totalDurationHelper = totalDurationHelper + r.getTotalDuration();
@@ -78,7 +75,7 @@ public class UpdateController {
         }
 
         if(totalSynergyHelper > 0 || estimate.getSynergyBenefit() > 0) {
-            estimate.setTotalPrice((long)Math.round(totalDurationHelper - totalSynergyHelper * estimate.getDailyPrice()));
+            estimate.setTotalPrice((long)Math.round((totalDurationHelper - totalSynergyHelper) * estimate.getDailyPrice()));
             estimate.setTotalDuration(totalDurationHelper - totalSynergyHelper);
             estimate.setResourcing(estimate.getTotalDuration() / (estimate.getWorkdaysInMonth() * estimate.getWorkdaysInMonth()));
             estimate.setTotalSynergyBenefit(totalSynergyHelper);
