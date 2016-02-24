@@ -1,6 +1,32 @@
 
 <div>
-    <h2><span translate="tenderworkApp.estimate.detail.title">Estimate</span> {{estimate.id}}</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left"><h2><span translate="tenderworkApp.estimate.detail.title">Estimate</span> {{estimate.id}}</h2></div>
+
+    <div class="col-xs-8 no-padding-right">
+        <div class="btn-group pull-right">
+            <button type="submit"
+                    ui-sref="estimate"
+                    class="btn btn-info btn-sm">
+                <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+            </button>
+            <button type="submit" class="btn btn-primary btn-sm"
+                    ui-sref="estimate.edit({id:estimate.id})" class="btn btn-primary btn-sm">
+                <span class="glyphicon glyphicon-pencil"></span>
+                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+            </button>
+            <button type="submit"
+                    ui-sref="estimate.delete({id:estimate.id})"
+                    class="btn btn-danger btn-sm">
+                <span class="glyphicon glyphicon-remove-circle"></span>
+                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+            </button>
+        </div>
+    </div>
+    </div>
+</div>
+
     <div class="table-responsive">
         <table class="table table-striped">
             <tbody>
@@ -169,7 +195,7 @@
 
     <button type="submit"
             ui-sref="project.detail({id:estimate.ownerProject.id})"
-            class="btn btn-info">
+  nk" n     class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
     </button>
 </div>

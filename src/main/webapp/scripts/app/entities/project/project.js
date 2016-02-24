@@ -76,9 +76,9 @@ angular.module('tenderworkApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('project', null, { reload: true });
+                        $state.go('project.detail', { id:result.id }, { reload: true });
                     }, function() {
-                        $state.go('project');
+                        $state.go('project',  { id:$stateParams.id } );
                     })
                 }]
             })

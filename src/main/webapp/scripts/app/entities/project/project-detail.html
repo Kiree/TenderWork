@@ -6,10 +6,9 @@
 
             <div class="col-xs-8 no-padding-right">
                 <div class="btn-group pull-right">
-                    <br />
-                    <button type="submit" class="btn btn-info btn-sm"
+                    <button type="submit"
                             ui-sref="project"
-                            class="btn btn-info">
+                            class="btn btn-info btn-sm">
                         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
                     </button>
                     <button type="submit" class="btn btn-primary btn-sm"
@@ -118,9 +117,9 @@
                 </div>
             </div>
         </div>
-        <div>
-            <div class="col-sm-12 bg-info"><span translate="tenderworkApp.project.description" class="projectdetail">Description</span></div>
-            <div class="col-sm-12 preformatted"><span class="form-control-static projectDetail">{{project.description}}</span></div>
+        <div class="description">
+            <div class="col-sm-12 description-header"><span translate="tenderworkApp.project.description" class="projectdetail">Description</span></div>
+            <div class="col-sm-12 preformatted description-text-field"><span class="form-control-static projectDetail">{{project.description}}</span></div>
         </div>
     </div>
 
