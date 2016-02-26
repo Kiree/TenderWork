@@ -156,6 +156,9 @@ public class Requirement implements Serializable {
     }
 
     public void addTask(Task task) {
+        if(this.hasTaskss.contains(task)){
+            this.hasTaskss.remove(task);
+        }
         this.hasTaskss.add(task);
     }
 

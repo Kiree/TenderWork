@@ -18,12 +18,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -57,6 +59,7 @@ public class EstimateResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
     public ResponseEntity<Estimate> createEstimate(@Valid @RequestBody Estimate estimate) throws URISyntaxException {
         log.debug("REST request to save Estimate : {}", estimate);
         if (estimate.getId() != null) {
@@ -79,15 +82,14 @@ public class EstimateResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
     public ResponseEntity<Estimate> updateEstimate(@Valid @RequestBody Estimate estimate) throws URISyntaxException {
         log.debug("REST request to update Estimate : {}", estimate);
         if (estimate.getId() == null) {
             return createEstimate(estimate);
         }
 
-        Estimate result = estimateRepository.save(estimate);
-        estimateSearchRepository.save(result);
-
+        Estimate result = updateController.updateAllTasks(estimate);
         updateController.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
 
         return ResponseEntity.ok()

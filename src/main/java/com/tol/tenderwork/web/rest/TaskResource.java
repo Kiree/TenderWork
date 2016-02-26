@@ -1,6 +1,8 @@
 package com.tol.tenderwork.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.tol.tenderwork.domain.Estimate;
+import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.domain.Task;
 import com.tol.tenderwork.repository.TaskRepository;
 import com.tol.tenderwork.repository.search.TaskSearchRepository;
@@ -62,15 +64,7 @@ public class TaskResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("task", "idexists", "A new task cannot already have an ID")).body(null);
         }
 
-        updateController.updateTask(task);
-
-        Task result = taskRepository.save(task);
-        taskSearchRepository.save(result);
-
-        updateController.updateRequirement(task);
-
-        updateController.updateEstimate(task.getOwnerRequirement());
-        updateController.updateProject(task.getOwnerRequirement().getOwnerEstimate().getOwnerProject(), task.getOwnedBy());
+        Task result = updateController.modifyTask(task);
 
         return ResponseEntity.created(new URI("/api/tasks/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("task", result.getId().toString()))
@@ -90,14 +84,8 @@ public class TaskResource {
         if (task.getId() == null) {
             return createTask(task);
         }
-        task = updateController.updateTask(task);
 
-        Task result = taskRepository.save(task);
-        taskSearchRepository.save(result);
-
-        updateController.updateRequirement(task);
-        updateController.updateEstimate(task.getOwnerRequirement());
-        updateController.updateProject(task.getOwnerRequirement().getOwnerEstimate().getOwnerProject(), task.getOwnedBy());
+        Task result = updateController.modifyTask(task);
 
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("task", task.getId().toString()))

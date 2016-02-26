@@ -1,6 +1,7 @@
 package com.tol.tenderwork.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.tol.tenderwork.domain.Estimate;
 import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.repository.RequirementRepository;
 import com.tol.tenderwork.repository.search.RequirementSearchRepository;
@@ -59,11 +60,8 @@ public class RequirementResource {
         if (requirement.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("requirement", "idexists", "A new requirement cannot already have an ID")).body(null);
         }
-        Requirement result = requirementRepository.save(requirement);
-        requirementSearchRepository.save(result);
 
-        requirement.getOwnerEstimate().addRequirement(requirement);
-        updateController.updateProject(requirement.getOwnerEstimate().getOwnerProject(), requirement.getOwner());
+        Requirement result = updateController.modifyRequirement(requirement);
 
         return ResponseEntity.created(new URI("/api/requirements/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("requirement", result.getId().toString()))
@@ -82,10 +80,8 @@ public class RequirementResource {
         if (requirement.getId() == null) {
             return createRequirement(requirement);
         }
-        Requirement result = requirementRepository.save(requirement);
-        requirementSearchRepository.save(result);
 
-        updateController.updateProject(requirement.getOwnerEstimate().getOwnerProject(), requirement.getOwner());
+        Requirement result = updateController.modifyRequirement(requirement);
 
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("requirement", requirement.getId().toString()))
