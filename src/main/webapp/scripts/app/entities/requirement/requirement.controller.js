@@ -1,18 +1,54 @@
 'use strict';
 
 angular.module('tenderworkApp')
-    .controller('RequirementController', function ($scope, $state, Requirement, RequirementSearch, ParseLinks) {
+    .controller('RequirementController', function ($scope, $state, Requirement, RequirementSearch, ParseLinks, Task, TaskSearch) {
 
         $scope.requirements = [];
+        $scope.tasks = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
+        var populated = false;
+        /*
+        // searches for requirements and their tasks and builds an array out of the results
+        // the array is an associative array - key being the parent requirement id
+        // and the contents being an array with all tasks associated with that particular
+        // requirement
+        // ie:
+            req-id = 1:
+                [
+                    task-1,
+                    task 3
+                ]
+            req-id = 2:
+                [
+                    task 4
+                ]
+            req-id = 3:
+                [
+                    task-2,
+                    task-5
+                ]
+         */
         $scope.loadAll = function() {
             if($scope.estimate) {
                 RequirementSearch.query({query: "ownerEstimate.id:" + $scope.estimate.id}, function (result) {
+                    if (populated) {
+                        return;
+                    }
                     for (var i = 0; i < result.length; i++) {
                         $scope.requirements.push(result[i]);
+                        TaskSearch.query({query: "ownerRequirement.id:" + result[i].id}, function(results_tasks) {
+                            for (var j = 0; j < results_tasks.length; j++) {
+                                if ($scope.tasks[results_tasks[j].ownerRequirement.id] === undefined) {
+                                    $scope.tasks[results_tasks[j].ownerRequirement.id] = new Array(results_tasks[j]);
+                                } else {
+                                    $scope.tasks[results_tasks[j].ownerRequirement.id].push(results_tasks[j]);
+                                }
+                            }
+                        });
                     }
+                    populated = true;
                 });
             } else {
                 Requirement.query({
