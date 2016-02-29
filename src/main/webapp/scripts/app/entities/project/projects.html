@@ -45,7 +45,11 @@ class="hidden-xs"                        translate="tenderworkApp.project.home.c
                     <td>{{project.client}}</td>
                     <td>{{project.deadline | date:'mediumDate'}}</td>
                     <td>{{project.editedDate | date:'medium'}}</td>
-                    <td>{{project.state}}</td>
+                    <td><span ng-show="project.state=='states.new'" class="" translate="states.new">NW: {{ translated.state.new }}</span>
+                        <span ng-show="project.state=='states.closed'" class="" translate="states.closed">NW: {{ project.state }}</span>
+                        <span ng-show="project.state=='states.pending'" class="" translate="states.pending">NW: {{ project.state }}</span>
+                        <span ng-show="project.state=='states.won'" class="" translate="states.won">NW: {{ project.state }}</span>
+                        <span ng-show="project.state=='states.lost'" class="" translate="states.lost">NW: {{ project.state }}</span>
                     <td>{{project.editedBy.login}}</td>
                     <!--<td class="text-right">
                         <div class="btn-group flex-btn-group-container">

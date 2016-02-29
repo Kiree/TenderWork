@@ -1,18 +1,34 @@
 'use strict';
 
 angular.module('tenderworkApp').controller('ProjectDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Project', 'User', 'Estimate', 'Principal',
-        function($scope, $stateParams, $uibModalInstance, entity, Project, User, Estimate, Principal) {
-        $scope.states = ['Uusi', 'Tarjous jätetty', 'Voitettu', 'Hävitty', 'Suljettu'];
-        $scope.defaultState = 'Uusi';
-        if(entity.id == null) {
-            entity.state = $scope.defaultState;
-        }
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Project', 'User', 'Estimate', 'Principal','$translate',
+        function($scope, $stateParams, $uibModalInstance, entity, Project, User, Estimate, Principal, $translate) {
+        $scope.stateTranslations = ['states.new', 'states.pending', 'states.won', 'states.lost', 'states.closed'];
+        $scope.states = {
+            'New':'states.new',
+            'Tender pending':'states.pending',
+            'Won':'states.won',
+            'Lost':'states.lost',
+            'Closed':'states.closed',
+            'Uusi':'states.new',
+            'Tarjous jätetty':'states.pending',
+            'Voitettu':'states.won',
+            'Hävitty':'states.lost',
+            'Suljettu':'states.closed'
+        };
+
         $scope.project = entity;
         $scope.users = User.query();
         $scope.estimates = Estimate.query();
 
         $scope.currentUserAccount = null;
+
+        $scope.defaultState = $translate.instant('states.new');
+        if($scope.project.id === null) {
+            $scope.project.state = $scope.defaultState;
+        }
+
+        $scope.stateTracker = $scope.project.state;
 
         $scope.load = function(id) {
             Project.get({id : id}, function(result) {
@@ -50,6 +66,7 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
 
         $scope.save = function () {
             var today = new Date();
+            $scope.project.state = $scope.states[$scope.stateTracker];
             $scope.project.editedBy = $scope.currentUserAccount;
             $scope.project.editedDate = today;
             $scope.isSaving = true;

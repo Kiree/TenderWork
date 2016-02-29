@@ -106,7 +106,11 @@
                     <span translate="tenderworkApp.project.state" class="projectdetail">State</span>
                 </div>
                 <div class="col-xs-8 col-sm-8">
-                    <span class="">{{project.state}}</span>
+                    <span ng-show="project.state=='states.new'" class="" translate="states.new">NW: {{ translated.state.new }}</span>
+                    <span ng-show="project.state=='states.closed'" class="" translate="states.closed">NW: {{ project.state }}</span>
+                    <span ng-show="project.state=='states.pending'" class="" translate="states.pending">NW: {{ project.state }}</span>
+                    <span ng-show="project.state=='states.won'" class="" translate="states.won">NW: {{ project.state }}</span>
+                    <span ng-show="project.state=='states.lost'" class="" translate="states.lost">NW: {{ project.state }}</span>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 border-top-bottom-padding-1 bg-mobile-gray">

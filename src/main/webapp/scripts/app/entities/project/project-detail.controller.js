@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tenderworkApp')
-    .controller('ProjectDetailController', function ($scope, $rootScope, $stateParams, entity, Project, User, Estimate, ParseLinks, EstimateSearch) {
+    .controller('ProjectDetailController', function ($scope, $rootScope, $stateParams, entity, Project, User, Estimate, ParseLinks, EstimateSearch, $translate) {
         $scope.project = entity;
         $scope.estimates = [];
         $scope.predicate = 'id';
@@ -11,10 +11,6 @@ angular.module('tenderworkApp')
             Project.get({id: id}, function(result) {
                 $scope.project = result;
             });
-        };
-
-        var filterByProjectId = function(estimate) {
-            return (estimate.ownerProject.id == $scope.project.id);
         };
 
         $scope.loadAll = function() {

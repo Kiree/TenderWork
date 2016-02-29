@@ -1,0 +1,9 @@
+{
+    "states": {
+        "new": "New",
+        "pending": "Tender pending",
+        "won": "Won",
+        "lost": "Lost",
+        "closed": "Closed"
+    }
+}

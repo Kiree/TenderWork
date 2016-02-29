@@ -1,0 +1,9 @@
+{
+    "states": {
+        "new": "Uusi",
+        "pending": "Tarjous jätetty",
+        "won": "Voitettu",
+        "lost": "Hävitty",
+        "closed": "Suljettu"
+    }
+}

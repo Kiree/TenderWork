@@ -20,6 +20,7 @@ angular.module('tenderworkApp')
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('project');
                         $translatePartialLoader.addPart('global');
+                        $translatePartialLoader.addPart('states');
                         return $translate.refresh();
                     }]
                 }
@@ -39,6 +40,7 @@ angular.module('tenderworkApp')
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('states');
                         $translatePartialLoader.addPart('project');
                         $translatePartialLoader.addPart('estimate');
                         return $translate.refresh();
@@ -94,8 +96,13 @@ angular.module('tenderworkApp')
                         controller: 'ProjectDialogController',
                         size: 'lg',
                         resolve: {
-                            entity: ['Project', function(Project) {
-                                return Project.get({id : $stateParams.id});
+                            entity: ['$translate', 'Project', function($translate, Project) {
+                                return Project.get({id : $stateParams.id}).$promise.then(function(result) {
+                                    result.state = $translate.instant(result.state);
+                                    return result;
+                                }, function(result) { return result; },
+                                    function(result) { return result; });
+                                //return Project.get({id : $stateParams.id});
                             }]
                         }
                     }).result.then(function(result) {

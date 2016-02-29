@@ -40,7 +40,7 @@
 
         <div class="form-group">
             <label class="control-label" translate="tenderworkApp.project.state" for="field_state">State</label>
-            <select class="form-control" id="field_state" name="state" ng-model="project.state" ng-options="state for state in states">
+            <select class="form-control" id="field_state" name="state" ng-model="stateTracker" ng-options="state for state in stateTranslations | translate">
 
             </select>
 
