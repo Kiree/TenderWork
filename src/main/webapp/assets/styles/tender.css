@@ -70,18 +70,23 @@ textarea {
 }
 
 div.description {
-    background-color:#fbfbfb !important;
+
     margin-bottom:50px;
 }
 
 div.description-header {
-    background-color:#fbfbfb !important;
+
+    padding-bottom:8px;
+    padding-top:8px;
 }
 
 div.description-text-field {
-    background-color:#fafafa !important;
+    padding-bottom:8px;
+    padding-top:8px;
+}
+
+div.bottom-border-1 {
     border-bottom: 1px solid #cfcfcf;
-    margin-bottom:50px;
 }
 
 
