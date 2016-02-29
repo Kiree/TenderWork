@@ -33,7 +33,7 @@ public class UpdateController {
 
     // Logger for debugging the class //
 
-    private final Logger log = LoggerFactory.getLogger(UpdateController.class);
+    //private final Logger log = LoggerFactory.getLogger(UpdateController.class);
 
     // Entity repositories //
 
@@ -119,7 +119,7 @@ public class UpdateController {
 
         for (Task t : tasks) {
             totalDurationHelper = totalDurationHelper + t.getEstimateTotal();
-            totalSpecificationHelper = totalSpecificationHelper + t.getEstimateTotal();
+            totalSpecificationHelper = totalSpecificationHelper + t.getSpecificationTotal();
             totalImplementationHelper = totalImplementationHelper + t.getImplementationTotal();
             totalTestingHelper = totalTestingHelper + t.getTestingTotal();
             totalSynergyHelper = totalSynergyHelper + t.getSynergyTotal();
@@ -199,7 +199,7 @@ public class UpdateController {
     public Estimate saveEstimateToRepo(Estimate estimate) {
         Estimate result = estimateRepository.save(estimate);
         estimateSearchRepository.save(result);
-        log.debug("ESTIMATE SAVED: {}", result.getId());
+        //log.debug("ESTIMATE SAVED: {}", result.getId());
 
         return result;
     }
@@ -215,13 +215,13 @@ public class UpdateController {
         Task taskHelper = new Task();
         Requirement requirementHelper = new Requirement();
 
-        log.debug("REQS: {}", requirements);
+        //log.debug("REQS: {}", requirements);
 
         for(Requirement requirement : requirements){
             Set<Task> tasks = requirement.getHasTaskss();
             Set<Task> tasksHelper = new HashSet<>();
 
-            log.debug("TASKS: {}", tasks);
+            //log.debug("TASKS: {}", tasks);
 
             for(Task task : tasks){
                 Task taskResult = calculateTask(task, estimate);
@@ -229,7 +229,7 @@ public class UpdateController {
                 tasksHelper.add(task);
                 taskHelper = task;
 
-                log.debug("TASK:{}", taskHelper);
+                //log.debug("TASK:{}", taskHelper);
 
             }
             requirementHelper.setHasTaskss(tasksHelper);
@@ -238,7 +238,7 @@ public class UpdateController {
             saveRequirementToRepo(requirementHelper);
         }
         estimate.setHasRequirementss(requirementsHelper);
-        log.debug("REQHELPER: {}", requirementHelper);
+        //log.debug("REQHELPER: {}", requirementHelper);
         estimate = calculateEstimate(requirementHelper, estimate);
         Estimate result = saveEstimateToRepo(estimate);
 
