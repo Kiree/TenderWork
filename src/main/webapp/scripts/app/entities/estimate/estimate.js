@@ -104,7 +104,7 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('estimate.detail', { id:result.estimate.id }, { reload: true });
+                        $state.go('estimate.detail', { id:result.id }, { reload: true });
                     }, function() {
                         $state.go('estimate.detail', { id:$stateParams.id} );
                     })
