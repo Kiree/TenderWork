@@ -8,14 +8,17 @@ angular.module('tenderworkApp').controller('EstimateDialogController',
                 step:.01,
                 floor:0,
                 ceil:1,
-                precision:2
+                precision:1
             }
         };
         var defaultValues = function(entity) {
-            if (entity.id == null) {
+            if (entity.id === null) {
                 entity.workdaysInMonth = 21;
                 entity.dailyPrice = 500;
                 entity.desiredProjectDuration = 3;
+                entity.testingFactor = 1;
+                entity.implementationFactor = 1;
+                entity.specificationFactor = 1;
             }
             return entity;
         };
