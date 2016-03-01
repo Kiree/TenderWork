@@ -32,91 +32,93 @@
             <tbody>
             <tr>
                 <td>
-                    <span translate="tenderworkApp.estimate.workdaysInMonth">WorkdaysInMonth</span>
+                    <span translate="tenderworkApp.estimate.totalPrice" class="projectdetail">TotalPrice</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.totalPrice}}</span>
+                </td>
+
+                <td>
+                    <span translate="tenderworkApp.estimate.totalSynergyBenefit" class="projectdetail">TotalSynergyBenefit</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.totalSynergyBenefit}}</span>
+                </td>
+
+                <td>
+                    <span translate="tenderworkApp.estimate.totalDuration" class="projectdetail">TotalDuration</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{estimate.totalDuration}}</span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.estimate.workdaysInMonth" class="projectdetail">WorkdaysInMonth</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{estimate.workdaysInMonth}}</span>
                 </td>
 
                 <td>
-                    <span translate="tenderworkApp.estimate.desiredProjectDuration">DesiredProjectDuration</span>
+                    <span translate="tenderworkApp.estimate.desiredProjectDuration" class="projectdetail">DesiredProjectDuration</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{estimate.desiredProjectDuration}}</span>
                 </td>
-            </tr>
-            <tr>
                 <td>
-                    <span translate="tenderworkApp.estimate.dailyPrice">DailyPrice</span>
+                    <span translate="tenderworkApp.estimate.dailyPrice" class="projectdetail">DailyPrice</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{estimate.dailyPrice}}</span>
                 </td>
+                </tr>
+                <tr>
                 <td>
-                    <span translate="tenderworkApp.estimate.specificationFactor">SpecificationFactor</span>
+                    <span translate="tenderworkApp.estimate.specificationFactor" class="projectdetail">SpecificationFactor</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{estimate.specificationFactor}}</span>
                 </td>
-            </tr>
-            <tr>
                 <td>
-                    <span translate="tenderworkApp.estimate.implementationFactor">ImplementationFactor</span>
+                    <span translate="tenderworkApp.estimate.implementationFactor" class="projectdetail">ImplementationFactor</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{estimate.implementationFactor}}</span>
                 </td>
 
                 <td>
-                    <span translate="tenderworkApp.estimate.testingFactor">TestingFactor</span>
+                    <span translate="tenderworkApp.estimate.testingFactor" class="projectdetail">TestingFactor</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{estimate.testingFactor}}</span>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.estimate.synergyBenefit">SynergyBenefit</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.synergyBenefit}}</span>
-                </td>
+           <tr>
+               <td>
+                   <span translate="tenderworkApp.estimate.synergyBenefit" class="projectdetail">SynergyBenefit</span>
+               </td>
+               <td>
+                   <span class="form-control-static">{{estimate.synergyBenefit}}</span>
+               </td>
 
-                <td>
-                    <span translate="tenderworkApp.estimate.totalPrice">TotalPrice</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.totalPrice}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.estimate.totalDuration">TotalDuration</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.totalDuration}}</span>
-                </td>
-                <td>
-                    <span translate="tenderworkApp.estimate.resourcing">Resourcing</span>
+               <td>
+                    <span translate="tenderworkApp.estimate.resourcing" class="projectdetail">Resourcing</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{estimate.resourcing}}</span>
                 </td>
-            </tr>
-            <tr>
+
                 <td>
-                    <span translate="tenderworkApp.estimate.totalSynergyBenefit">TotalSynergyBenefit</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.totalSynergyBenefit}}</span>
-                </td>
-                <td>
-                    <span translate="tenderworkApp.estimate.createdBy">createdBy</span>
+                    <span translate="tenderworkApp.estimate.createdBy" class="projectdetail">createdBy</span>
                 </td>
                 <td>
                     {{estimate.createdBy.login}}
                 </td>
             </tr>
+
+            <!--
             <tr>
                 <td>
                     <span translate="tenderworkApp.estimate.ownerProject">ownerProject</span>
@@ -125,6 +127,7 @@
                     <a class="form-control-static" ui-sref="project.detail({id:estimate.ownerProject.id})">{{estimate.ownerProject.name}}</a>
                 </td>
             </tr>
+            -->
             </tbody>
         </table>
     </div>

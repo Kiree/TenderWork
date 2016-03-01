@@ -20,13 +20,13 @@
             "description": "Description",
             "client": "Client",
             "deadline": "Deadline",
-            "createdDate": "CreatedDate",
-            "editedDate": "EditedDate",
-            "docLocation": "DocLocation",
+            "createdDate": "Created date",
+            "editedDate": "Edited date",
+            "docLocation": "Documentation location",
             "state": "State",
-            "stateDescription": "StateDescription",
-            "createdBy": "CreatedBy",
-            "editedBy": "EditedBy",
+            "stateDescription": "State description",
+            "createdBy": "Created by",
+            "editedBy": "Edited by",
             "hasEstimates": "HasEstimates"
         }
     }

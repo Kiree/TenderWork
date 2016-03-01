@@ -16,19 +16,19 @@
             "detail": {
                 "title": "Estimate"
             },
-            "workdaysInMonth": "WorkdaysInMonth",
-            "desiredProjectDuration": "DesiredProjectDuration",
-            "dailyPrice": "DailyPrice",
-            "specificationFactor": "SpecificationFactor",
-            "testingFactor": "TestingFactor",
-            "implementationFactor": "ImplementationFactor",
-            "synergyBenefit": "SynergyBenefit",
-            "totalPrice": "TotalPrice",
-            "totalDuration": "TotalDuration",
+            "workdaysInMonth": "Workdays in month",
+            "desiredProjectDuration": "Desired duration",
+            "dailyPrice": "Daily price",
+            "specificationFactor": "Specification factor",
+            "testingFactor": "Testing factor",
+            "implementationFactor": "Implementation factor",
+            "synergyBenefit": "Synergy benefit",
+            "totalPrice": "Price",
+            "totalDuration": "Duration",
             "resourcing": "Resourcing",
-            "totalSynergyBenefit": "TotalSynergyBenefit",
-            "createdBy": "CreatedBy",
-            "ownerProject": "OwnerProject",
+            "totalSynergyBenefit": "Total synergy benefit",
+            "createdBy": "Created by",
+            "ownerProject": "Owner project",
             "hasRequirements": "HasRequirements"
         }
     }

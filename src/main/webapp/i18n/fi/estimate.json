@@ -19,16 +19,16 @@
             "workdaysInMonth": "Työpäivät/kk",
             "desiredProjectDuration": "Toivekesto",
             "dailyPrice": "Päivähinta",
-            "specificationFactor": "KerroinMäärittely",
-            "testingFactor": "KerroinTestaus",
-            "implementationFactor": "KerroinToteutus",
-            "synergyBenefit": "KerroinSynergia",
-            "totalPrice": "KokonaisHinta",
-            "totalDuration": "KokonaisKesto",
+            "specificationFactor": "Määrittelykerroin",
+            "testingFactor": "Testauskerroin",
+            "implementationFactor": "Toteutuskerroin",
+            "synergyBenefit": "Synergiakerroin",
+            "totalPrice": "Hinta",
+            "totalDuration": "Kesto",
             "resourcing": "Resursointi",
-            "totalSynergyBenefit": "KokonaisSynergiaHyöty",
+            "totalSynergyBenefit": "Synergiahyöty",
             "createdBy": "Luoja",
-            "ownerProject": "OmistajaProjekti"
+            "ownerProject": "Omistava projekti"
         }
     }
 }
