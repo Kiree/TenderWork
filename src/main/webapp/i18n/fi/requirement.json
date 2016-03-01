@@ -21,7 +21,7 @@
             "totalDuration": "Kokonaiskesto",
             "durationSpecification": "Määrittelyn kesto",
             "durationImplementation": "Toteutuksen kesto",
-            "durationTesting": "Tstauksen kesto",
+            "durationTesting": "Testauksen kesto",
             "synergyBenefit": "Synergiahyöty",
             "owner": "Omistaja",
             "ownerEstimate": "OmistajaArvio",
