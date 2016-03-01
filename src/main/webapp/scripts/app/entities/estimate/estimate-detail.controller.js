@@ -11,9 +11,10 @@ angular.module('tenderworkApp')
         };
         // takes float and rounds it to nearest whole or half
         var roundResourcing = function(resourcing) {
+            console.log(resourcing);
             return resourcing - Math.floor(resourcing) > .5 ? Math.ceil(resourcing) : Math.floor(resourcing) + .5;
         };
-        if(entity.resourcing !== null) {
+        if(entity.resourcing !== null && entity.resourcing !== undefined) {
             $scope.roundedResourcing = roundResourcing(entity.resourcing);
         }
 
