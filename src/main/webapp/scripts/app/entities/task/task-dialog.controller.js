@@ -9,7 +9,7 @@ angular.module('tenderworkApp').controller('TaskDialogController',
         $scope.estimates = Estimate.query();
             // this does nothing as of yet, need to finish html views
 
-        $scope.requirements = Requirement.query().$promise.then(function(results) {
+        $scope.requirements = Requirement.query();/*.$promise.then(function(results) {
             results.some(function(item) {
                 console.log(item.id);
                 if(item.id == $stateParams.id) {
@@ -20,7 +20,8 @@ angular.module('tenderworkApp').controller('TaskDialogController',
                     return true;
                 }
             });
-        });
+            return results;
+        });*/
         $scope.load = function(id) {
             Task.get({id : id}, function(result) {
                 $scope.task = result;
