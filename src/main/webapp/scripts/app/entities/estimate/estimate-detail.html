@@ -162,40 +162,92 @@
         </div>
         <jh-alert></jh-alert>
 
-        <div class="col-lg-12">
+        <div>
             <div class="panel panel-default">
-                <div class="panel-body col-lg-12" ng-controller="RequirementController">
+                <div class="panel-body" ng-controller="RequirementController">
                     <table class="table table-condensed" style="border-collapse:collapse;">
 
                         <tbody>
                         <tr>
-
-                            <td><div data-toggle="collapse" data-target="#demo{{requirement.id}}" class="accordion-toggle col-lg-12" ng-repeat="requirement in requirements track by requirement.id">
+                            <td><div data-toggle="collapse" data-target="#demo{{requirement.id}}" class="accordion-toggle" ng-repeat="requirement in requirements track by requirement.id">
                                 <div>
                                     <div class="col-lg-1">
-                                    <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
+                                        <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
                                     </div>
 
                                     <div class="col-lg-2">
                                         <span translate="global.field.id" class="projectdetail">ID</span>
+                                        <span class="requirementlisting">{{requirement.id}}</span>
+                                    </div>
 
-                                        <span class="requirementlisting">{{requirement.id}}</span></div>
-
-                                    <div class="col-lg-2">
+                                    <div class="col-lg-9">
                                         <span translate="tenderworkApp.requirement.name" class="projectdetail">Name</span>
                                         <span class="requirementlisting">{{requirement.name}}</span>
                                     </div>
                                 </div>
 
-                            <div>
-                                <table class="table table-striped col-lg-12">
+                                <div>
+                                    <table class="table table-striped">
 
-
-                                    <!--VAATIMUKSEN TIEDOT JA TASKIEN LISTAUS SEURAAVAAN-->
                                     <tbody>
                                     <tr>
-                                        <td class="hiddenRow col-lg-12">
-                                            <div class="accordion-body collapse" id="demo{{requirement.id}}">Demo1</div>
+                                        <td class="hiddenRow row">
+                                            <div class="accordion-body collapse" id="demo{{requirement.id}}">
+
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <span translate="tenderworkApp.requirement.description" class="projectdetail">Desc</span>
+                                                            </td>
+                                                            <td>
+                                                                <span class="form-control-static">{{requirement.description}}</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <span translate="tenderworkApp.requirement.totalDuration" class="projectdetail">TotalDuration</span>
+                                                            </td>
+                                                            <td>
+                                                                <span class="form-control-static">{{requirement.totalDuration}}</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <span translate="tenderworkApp.requirement.durationSpecification" class="projectdetail">DurationSpecification</span>
+                                                            </td>
+                                                            <td>
+                                                                <span class="form-control-static">{{requirement.durationSpecification}}</span>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>
+                                                                <span translate="tenderworkApp.requirement.durationImplementation" class="projectdetail">DurationImplementation</span>
+                                                            </td>
+                                                            <td>
+                                                                <span class="form-control-static">{{requirement.durationImplementation}}</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <span translate="tenderworkApp.requirement.durationTesting" class="projectdetail">DurationTesting</span>
+                                                            </td>
+                                                            <td>
+                                                                <span class="form-control-static">{{requirement.durationTesting}}</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <span translate="tenderworkApp.requirement.synergyBenefit" class="projectdetail">SynergyBenefit</span>
+                                                            </td>
+                                                            <td>
+                                                                <span class="form-control-static">{{requirement.synergyBenefit}}</span>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -203,7 +255,7 @@
 
                                     </div>
                                 </div>
-            </td>
+                            </td>
 
                         </tr>
 
@@ -214,44 +266,11 @@
             </div>
 
         </div>
-
-        <!--
-
-        <div class="table-responsive" ng-controller="RequirementController">
-            <table class="jh-table table table-striped">
-                <thead>
-                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
-                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span translate="tenderworkApp.requirement.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="description"><span translate="tenderworkApp.requirement.description">Desc</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="totalDuration"><span translate="tenderworkApp.requirement.totalDuration">TotalDuration</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="durationSpecification"><span translate="tenderworkApp.requirement.durationSpecification">DurationSpecification</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="durationImplementation"><span translate="tenderworkApp.requirement.durationImplementation">DurationImplementation</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="durationTesting"><span translate="tenderworkApp.requirement.durationTesting">DurationTesting</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="synergyBenefit"><span translate="tenderworkApp.requirement.synergyBenefit">SynergyBenefit</span> <span class="glyphicon glyphicon-sort"></span></th>
-                </tr>
-                </thead>
-                <tbody data-link="row"
-                 class="rowlink" infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
-                <tr class="rowLink" ng-repeat="requirement in requirements track by requirement.id">
-                    <td><a href="#" ui-sref="requirement.detail({id:requirement.id})">{{requirement.id}}</a></td>
-                    <td>{{requirement.name}}</td>
-                    <td>{{requirement.description}}</td>
-                    <td>{{requirement.totalDuration}}</td>
-                    <td>{{requirement.durationSpecification}}</td>
-                    <td>{{requirement.durationImplementation}}</td>
-                    <td>{{requirement.durationTesting}}</td>
-                    <td>{{requirement.synergyBenefit}}</td>
-                   </tr>
-                </tbody>
-            </table>
-        </div>-->
-        </div>
-
-
+    </div>
 
     <button type="submit"
             ui-sref="project.detail({id:estimate.ownerProject.id})" class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
     </button>
+    
 </div>
