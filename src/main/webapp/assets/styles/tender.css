@@ -61,6 +61,15 @@ span.projectdetail{
     }
 }
 
+div.wrap-field {
+    text-overflow:ellipsis;
+    overflow:hidden;
+}
+
+div.wrap-field:hover {
+    word-wrap: break-word;
+}
+
 .preformatted {
     white-space:pre-wrap;
 }
