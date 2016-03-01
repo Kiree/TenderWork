@@ -21,7 +21,9 @@ angular.module('tenderworkApp')
         $scope.loadAll = function() {
             EstimateSearch.query({query:"ownerProject.id:" + $scope.project.id}, function(result) {
                 for (var i = 0; i < result.length; i++) {
-                    result[i].rounded = roundResourcing(result[i].resourcing);
+                    if(result[i].resourcing !== null) {
+                        result[i].rounded = roundResourcing(result[i].resourcing);
+                    }
                     $scope.estimates.push(result[i]);
                 }
             });

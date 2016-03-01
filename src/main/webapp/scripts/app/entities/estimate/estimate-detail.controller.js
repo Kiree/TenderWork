@@ -13,7 +13,9 @@ angular.module('tenderworkApp')
         var roundResourcing = function(resourcing) {
             return resourcing - Math.floor(resourcing) > .5 ? Math.ceil(resourcing) : Math.floor(resourcing) + .5;
         };
-        $scope.roundedResourcing = roundResourcing(entity.resourcing);
+        if(entity.resourcing !== null) {
+            $scope.roundedResourcing = roundResourcing(entity.resourcing);
+        }
 
         var unsubscribe = $rootScope.$on('tenderworkApp:estimateUpdate', function(event, result) {
             $scope.estimate = result;
