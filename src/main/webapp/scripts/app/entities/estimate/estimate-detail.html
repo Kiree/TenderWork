@@ -37,19 +37,19 @@
                 <td>
                     <span class="form-control-static">{{estimate.totalPrice}}</span>
                 </td>
-
-                <td>
-                    <span translate="tenderworkApp.estimate.totalSynergyBenefit" class="projectdetail">TotalSynergyBenefit</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.totalSynergyBenefit}}</span>
-                </td>
-
+                
                 <td>
                     <span translate="tenderworkApp.estimate.totalDuration" class="projectdetail">TotalDuration</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{estimate.totalDuration}}</span>
+                </td>
+
+                <td>
+                    <span translate="tenderworkApp.estimate.totalSynergyBenefit" class="projectdetail" ng-show="task.synergyCheck=='true'">TotalSynergyBenefit</span>
+                </td>
+                <td>
+                    <span class="form-control-static" ng-show="task.synergyCheck=='true'">{{estimate.totalSynergyBenefit}}</span>
                 </td>
             </tr>
 
@@ -136,8 +136,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-4 no-padding-left"><h3 translate="tenderworkApp.requirement.home.title">Requirements</h3></div>
-                <div class="col-xs-8 no-padding-right">
-                    <br />
+                <div class="col-xs-8 no-padding-right btn-newestimate">
                     <button class="btn btn-primary pull-right" ui-sref="requirement.new({estimateId:estimate.id})" >
                         <span class="glyphicon glyphicon-plus"></span>
                     <span
@@ -170,11 +169,11 @@
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span translate="tenderworkApp.requirement.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="description"><span translate="tenderworkApp.requirement.description">Desc</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="totalDuration"><span translate="tenderworkApp.requirement.totalDuration">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="durationSpecification"><span translate="tenderworkApp.requirement.durationSpecification">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="durationImplementation"><span translate="tenderworkApp.requirement.durationImplementation">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="durationTesting"><span translate="tenderworkApp.requirement.durationTesting">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="synergyBenefit"><span translate="tenderworkApp.requirement.synergyBenefit">Desc</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalDuration"><span translate="tenderworkApp.requirement.totalDuration">TotalDuration</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="durationSpecification"><span translate="tenderworkApp.requirement.durationSpecification">DurationSpecification</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="durationImplementation"><span translate="tenderworkApp.requirement.durationImplementation">DurationImplementation</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="durationTesting"><span translate="tenderworkApp.requirement.durationTesting">DurationTesting</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="synergyBenefit"><span translate="tenderworkApp.requirement.synergyBenefit">SynergyBenefit</span> <span class="glyphicon glyphicon-sort"></span></th>
                 </tr>
                 </thead>
                 <tbody data-link="row" class="rowlink" infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
