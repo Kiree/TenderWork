@@ -6,6 +6,8 @@ import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.domain.Task;
 import com.tol.tenderwork.repository.TaskRepository;
 import com.tol.tenderwork.repository.search.TaskSearchRepository;
+import com.tol.tenderwork.repository.RequirementRepository;
+import com.tol.tenderwork.repository.search.RequirementSearchRepository;
 import com.tol.tenderwork.web.UpdateController;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
@@ -46,6 +48,9 @@ public class TaskResource {
 
     @Inject
     private TaskSearchRepository taskSearchRepository;
+
+    @Inject
+    private RequirementRepository requirementRepository;
 
     @Autowired
     private UpdateController updateController;
@@ -131,10 +136,23 @@ public class TaskResource {
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         log.debug("REST request to delete Task : {}", id);
+
+        //Remove the task from the owner Requirement
+        Task task = taskRepository.findOne(id);
+        Requirement requirement = requirementRepository.findOne(task.getOwnerRequirement().getId());
+        requirement.getHasTaskss().remove(task);
+
+        //Delete the task
         taskRepository.delete(id);
         taskSearchRepository.delete(id);
+
+        //Force the Owner Requirement to update its values
+        log.error("Forcing update");
+        updateController.updateAllTasks(task.getOwnerRequirement().getOwnerEstimate());
+
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("task", id.toString())).build();
     }
 

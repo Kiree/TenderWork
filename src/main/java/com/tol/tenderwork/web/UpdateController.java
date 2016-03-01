@@ -33,7 +33,7 @@ public class UpdateController {
 
     // Logger for debugging the class //
 
-    //private final Logger log = LoggerFactory.getLogger(UpdateController.class);
+    private final Logger log = LoggerFactory.getLogger(UpdateController.class);
 
     // Entity repositories //
 
@@ -113,12 +113,14 @@ public class UpdateController {
     public Requirement calculateRequirement(Task task){
         Requirement requirement = requirementRepository.findOne(task.getOwnerRequirement().getId());
         Set<Task> tasks = requirement.getHasTaskss();
+        log.debug("Laskussa setti tehty");
         float totalDurationHelper = 0;
         float totalSpecificationHelper = 0;
         float totalImplementationHelper = 0;
         float totalTestingHelper = 0;
         float totalSynergyHelper = 0;
 
+        log.debug("Laskussa taski loop alkaa");
         for (Task t : tasks) {
             totalDurationHelper = totalDurationHelper + t.getEstimateTotal();
             totalSpecificationHelper = totalSpecificationHelper + t.getSpecificationTotal();
@@ -127,6 +129,7 @@ public class UpdateController {
             totalSynergyHelper = totalSynergyHelper + t.getSynergyTotal();
         }
 
+        log.debug("Laskussa setteri kutsut");
         requirement.setTotalDuration(totalDurationHelper);
         requirement.setDurationSpecification(totalSpecificationHelper);
         requirement.setDurationImplementation(totalImplementationHelper);
@@ -211,6 +214,7 @@ public class UpdateController {
     @Transactional
     public void updateAllTasks(Estimate estimate) {
 
+        log.debug("updateAllTasks aloitus");
         Estimate estimateHelper = estimateRepository.findOne(estimate.getId());
         Set<Requirement> requirements = estimateHelper.getHasRequirementss();
         Set<Requirement> requirementsHelper = new HashSet<>();
@@ -220,21 +224,25 @@ public class UpdateController {
         //log.debug("REQS: {}", requirements);
 
         for(Requirement requirement : requirements){
+            log.error("Requ looppi");
             Set<Task> tasks = requirement.getHasTaskss();
             Set<Task> tasksHelper = new HashSet<>();
 
             //log.debug("TASKS: {}", tasks);
 
             for(Task task : tasks){
+                log.error("Taski looppi");
                 Task taskResult = calculateTask(task, estimate);
                 saveTaskToRepo(taskResult);
                 tasksHelper.add(task);
                 taskHelper = task;
 
-                //log.debug("TASK:{}", taskHelper);
+                log.debug("TASK:{}", taskHelper);
 
             }
+            log.debug("Taski looppi läpi");
             requirementHelper.setHasTaskss(tasksHelper);
+            // Tässä null-pointer, ei edes mene funktioon. taskHelper = null....?
             requirementHelper = calculateRequirement(taskHelper);
             requirementsHelper.add(requirementHelper);
             saveRequirementToRepo(requirementHelper);
