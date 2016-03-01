@@ -80,29 +80,31 @@ public class UpdateController {
         estimate.setTestingFactor(estimateHelper.getTestingFactor());
         estimate.setSynergyBenefit(estimateHelper.getSynergyBenefit());
 
-        Set<Requirement> requirements = estimate.getHasRequirementss();
-        float totalDurationHelper = 0;
-        float totalSynergyHelper = 0;
+        if (estimate.getHasRequirementss().isEmpty() != true) {
+            Set<Requirement> requirements = estimate.getHasRequirementss();
+            float totalDurationHelper = 0;
+            float totalSynergyHelper = 0;
 
-        for(Requirement r : requirements) {
-            if(r.getTotalDuration() != null) {
-                totalDurationHelper = totalDurationHelper + r.getTotalDuration();
+            for (Requirement r : requirements) {
+                if (r.getTotalDuration() != null) {
+                    totalDurationHelper = totalDurationHelper + r.getTotalDuration();
+                }
+                if (r.getSynergyBenefit() != null) {
+                    totalSynergyHelper = totalSynergyHelper + r.getSynergyBenefit();
+                }
             }
-            if(r.getSynergyBenefit() != null) {
-                totalSynergyHelper = totalSynergyHelper + r.getSynergyBenefit();
-            }
-        }
 
-        if(totalSynergyHelper > 0 || estimate.getSynergyBenefit() > 0) {
-            estimate.setTotalPrice((long)Math.round((totalDurationHelper - totalSynergyHelper) * estimate.getDailyPrice()));
-            estimate.setTotalDuration(totalDurationHelper - totalSynergyHelper);
-            estimate.setResourcing(estimate.getTotalDuration() / (estimate.getWorkdaysInMonth() * estimate.getWorkdaysInMonth()));
-            estimate.setTotalSynergyBenefit(totalSynergyHelper);
-        } else {
-            estimate.setTotalPrice((long) totalDurationHelper * estimate.getDailyPrice());
-            estimate.setResourcing(totalDurationHelper / (estimate.getWorkdaysInMonth() * estimate.getDesiredProjectDuration()));
-            estimate.setTotalDuration(totalDurationHelper);
-            estimate.setTotalSynergyBenefit((float)0);
+            if (totalSynergyHelper > 0 || estimate.getSynergyBenefit() > 0) {
+                estimate.setTotalPrice((long) Math.round((totalDurationHelper - totalSynergyHelper) * estimate.getDailyPrice()));
+                estimate.setTotalDuration(totalDurationHelper - totalSynergyHelper);
+                estimate.setResourcing(estimate.getTotalDuration() / (estimate.getWorkdaysInMonth() * estimate.getWorkdaysInMonth()));
+                estimate.setTotalSynergyBenefit(totalSynergyHelper);
+            } else {
+                estimate.setTotalPrice((long) totalDurationHelper * estimate.getDailyPrice());
+                estimate.setResourcing(totalDurationHelper / (estimate.getWorkdaysInMonth() * estimate.getDesiredProjectDuration()));
+                estimate.setTotalDuration(totalDurationHelper);
+                estimate.setTotalSynergyBenefit((float) 0);
+            }
         }
         return estimate;
     }
@@ -207,7 +209,7 @@ public class UpdateController {
     // Method for updating everything, when Estimate is updated //
 
     @Transactional
-    public Estimate updateAllTasks(Estimate estimate) {
+    public void updateAllTasks(Estimate estimate) {
 
         Estimate estimateHelper = estimateRepository.findOne(estimate.getId());
         Set<Requirement> requirements = estimateHelper.getHasRequirementss();
@@ -240,9 +242,6 @@ public class UpdateController {
         estimate.setHasRequirementss(requirementsHelper);
         //log.debug("REQHELPER: {}", requirementHelper);
         estimate = calculateEstimate(requirementHelper, estimate);
-        Estimate result = saveEstimateToRepo(estimate);
-
-        return result;
     }
 
     // PUT/POST-methods for adding/updating entities //
