@@ -25,7 +25,7 @@
         </div>
     </div>
     </div>
-</div>
+    </div>
 
     <div class="table-responsive">
         <table class="table table-striped">
@@ -189,7 +189,7 @@
                                 <div>
                                     <table class="table table-striped">
 
-                                    <tbody>
+                                    <thead>
                                     <tr>
                                         <td class="hiddenRow row">
                                             <div class="accordion-body collapse" id="demo{{requirement.id}}">
@@ -250,10 +250,77 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    </tbody>
-                                </table>
+                                    </thead>
+                                    <tbody>
 
-                                    </div>
+
+
+
+                                            <div class="panel-body" ng-controller="TaskController">
+                                                <table class="table table-condensed" style="border-collapse:collapse;">
+
+                                                    <tbody>
+                                                    <tr>
+                                                        <td><div data-toggle="collapse" data-target="#demo{{task.id}}" class="accordion-toggle" ng-repeat="task in tasks track by task.id">
+                                                            <div>
+                                                                <div class="col-lg-1">
+                                                                    <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
+                                                                </div>
+
+                                                                <div class="col-lg-2">
+                                                                    <span translate="global.field.id" class="projectdetail">ID</span>
+                                                                    <span class="requirementlisting">{{task.id}}</span>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div>
+                                                                <table class="table table-striped">
+
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td class="hiddenRow row">
+                                                                            <div class="accordion-body collapse" id="demo{{task.id}}">
+
+
+                                                                                <div class="table-responsive">
+                                                                                    <table class="table">
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <span translate="tenderworkApp.task.id" class="projectdetail">ID</span>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <span class="form-control-static">{{task.id}}</span>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+
+                                                                </table>
+
+                                                            </div>
+                                                            </div>
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                     </tbody>
+                                    </table>
+
+                                </div>
                                 </div>
                             </td>
 
@@ -272,5 +339,5 @@
             ui-sref="project.detail({id:estimate.ownerProject.id})" class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
     </button>
-    
+
 </div>
