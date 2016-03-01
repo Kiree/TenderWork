@@ -6,8 +6,15 @@ angular.module('tenderworkApp')
         $scope.load = function (id) {
             Estimate.get({id: id}, function(result) {
                 $scope.estimate = result;
+
             });
         };
+        // takes float and rounds it to nearest whole or half
+        var roundResourcing = function(resourcing) {
+            return resourcing - Math.floor(resourcing) > .5 ? Math.ceil(resourcing) : Math.floor(resourcing) + .5;
+        };
+        $scope.roundedResourcing = roundResourcing(entity.resourcing);
+
         var unsubscribe = $rootScope.$on('tenderworkApp:estimateUpdate', function(event, result) {
             $scope.estimate = result;
         });
