@@ -89,8 +89,15 @@ public class EstimateResource {
             return createEstimate(estimate);
         }
 
-        Estimate result = updateController.updateAllTasks(estimate);
-        updateController.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
+        if (estimate.getHasRequirementss().isEmpty() != true) {
+            updateController.updateAllTasks(estimate);
+            updateController.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
+        } else {
+            log.error("REST Tasolla estimate päivitys, requ oli tyhjä");
+        }
+
+        Estimate result = estimateRepository.save(estimate);
+        estimateSearchRepository.save(result);
 
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("estimate", estimate.getId().toString()))
