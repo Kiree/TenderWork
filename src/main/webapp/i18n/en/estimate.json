@@ -4,12 +4,12 @@
             "home": {
                 "title": "Estimates",
                 "createLabel": "Create a new Estimate",
-                "createOrEditLabel": "Create or edit a Estimate",
+                "createOrEditLabel": "Create or edit an Estimate",
                 "search": "Search for Estimate"
             },
             "created": "A new Estimate is created with identifier {{ param }}",
-            "updated": "A Estimate is updated with identifier {{ param }}",
-            "deleted": "A Estimate is deleted with identifier {{ param }}",
+            "updated": "An Estimate is updated with identifier {{ param }}",
+            "deleted": "An Estimate is deleted with identifier {{ param }}",
             "delete": {
                 "question": "Are you sure you want to delete Estimate {{ id }}?"
             },
