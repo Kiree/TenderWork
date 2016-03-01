@@ -178,7 +178,7 @@
                 <tr class="rowLink" ng-repeat="estimate in estimates track by estimate.id">
                     <td><a href="#" ui-sref="estimate.detail({id:estimate.id})">{{estimate.totalPrice}}</a></td>
                     <td>{{estimate.totalDuration}}</td>
-                    <td>{{estimate.resourcing}}</td>
+                    <td>{{estimate.rounded}}</td>
                     <td>{{estimate.createdBy.login}}</td>
 
                     <!--

@@ -13,9 +13,17 @@ angular.module('tenderworkApp')
             });
         };
 
+        // takes float and rounds it to nearest whole or half
+        var roundResourcing = function(resourcing) {
+            return resourcing - Math.floor(resourcing) > .5 ? Math.ceil(resourcing) : Math.floor(resourcing) + .5;
+        };
+
         $scope.loadAll = function() {
             EstimateSearch.query({query:"ownerProject.id:" + $scope.project.id}, function(result) {
                 for (var i = 0; i < result.length; i++) {
+                    if(result[i].resourcing !== null && entity.resourcing !== undefined) {
+                        result[i].rounded = roundResourcing(result[i].resourcing);
+                    }
                     $scope.estimates.push(result[i]);
                 }
             });

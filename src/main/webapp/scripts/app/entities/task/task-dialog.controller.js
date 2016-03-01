@@ -7,7 +7,20 @@ angular.module('tenderworkApp').controller('TaskDialogController',
         $scope.task = entity;
         $scope.users = User.query();
         $scope.estimates = Estimate.query();
-        $scope.requirements = Requirement.query();
+            // this does nothing as of yet, need to finish html views
+
+        $scope.requirements = Requirement.query().$promise.then(function(results) {
+            results.some(function(item) {
+                console.log(item.id);
+                if(item.id == $stateParams.id) {
+                    Estimate.get({id:item.ownerEstimate.id}, function(estimate) {
+                       console.log(estimate.id);
+                    });
+                    $scope.attachToRequirement = item;
+                    return true;
+                }
+            });
+        });
         $scope.load = function(id) {
             Task.get({id : id}, function(result) {
                 $scope.task = result;
