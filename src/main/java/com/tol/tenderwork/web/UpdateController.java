@@ -80,7 +80,7 @@ public class UpdateController {
     // Method for updating everything, when Estimate is updated //
 
     @Transactional
-    public void updateAllTasks(Estimate estimate) {
+    public Estimate updateAllTasks(Estimate estimate) {
 
         //log.debug("updateAllTasks aloitus");
         Estimate estimateHelper = estimateRepository.findOne(estimate.getId());
@@ -118,6 +118,8 @@ public class UpdateController {
         estimate.setHasRequirementss(requirementsHelper);
         //log.debug("REQHELPER: {}", requirementHelper);
         estimate = mathController.calculateEstimate(requirementHelper, estimate);
+
+        return estimate;
     }
 
     // PUT/POST-methods for adding/updating entities //
