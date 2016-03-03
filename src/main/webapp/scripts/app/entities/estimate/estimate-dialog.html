@@ -13,74 +13,72 @@
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="estimate.id" readonly />
         </div>
-
-        <div class="form-group col-xs-4">
-            <label class="control-label" translate="tenderworkApp.estimate.workdaysInMonth" for="field_workdaysInMonth">WorkdaysInMonth</label>
-            <input type="number" class="form-control" name="workdaysInMonth" id="field_workdaysInMonth"
-                    ng-model="estimate.workdaysInMonth"
-                    required min="1" max="31" />
-            <div ng-show="editForm.workdaysInMonth.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.workdaysInMonth.$error.required" translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.workdaysInMonth.$error.min" translate="entity.validation.min" translate-value-min="1">
-                    This field should be more than 1.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.workdaysInMonth.$error.max" translate="entity.validation.max" translate-value-max="31">
-                    This field cannot be more than 31.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.workdaysInMonth.$error.number" translate="entity.validation.number">
-                    This field should be a number.
-                </p>
+        <div class="row">
+            <div class="form-group col-xs-12 col-sm-4">
+                <label class="control-label" translate="tenderworkApp.estimate.workdaysInMonth" for="field_workdaysInMonth">WorkdaysInMonth</label>
+                <input type="number" class="form-control" name="workdaysInMonth" id="field_workdaysInMonth"
+                        ng-model="estimate.workdaysInMonth"
+                        required min="1" max="31" />
+                <div ng-show="editForm.workdaysInMonth.$invalid">
+                    <p class="help-block"
+                        ng-show="editForm.workdaysInMonth.$error.required" translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                    <p class="help-block"
+                        ng-show="editForm.workdaysInMonth.$error.min" translate="entity.validation.min" translate-value-min="1">
+                        This field should be more than 1.
+                    </p>
+                    <p class="help-block"
+                        ng-show="editForm.workdaysInMonth.$error.max" translate="entity.validation.max" translate-value-max="31">
+                        This field cannot be more than 31.
+                    </p>
+                    <p class="help-block"
+                        ng-show="editForm.workdaysInMonth.$error.number" translate="entity.validation.number">
+                        This field should be a number.
+                    </p>
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-sm-4">
+                <label class="control-label" translate="tenderworkApp.estimate.desiredProjectDuration" for="field_desiredProjectDuration">DesiredProjectDuration</label>
+                <input type="number" class="form-control" name="desiredProjectDuration" id="field_desiredProjectDuration"
+                        ng-model="estimate.desiredProjectDuration"
+                        required min="1" />
+                <div ng-show="editForm.desiredProjectDuration.$invalid">
+                    <p class="help-block"
+                        ng-show="editForm.desiredProjectDuration.$error.required" translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                    <p class="help-block"
+                        ng-show="editForm.desiredProjectDuration.$error.min" translate="entity.validation.min" translate-value-min="1">
+                        This field should be more than 1.
+                    </p>
+                    <p class="help-block"
+                        ng-show="editForm.desiredProjectDuration.$error.number" translate="entity.validation.number">
+                        This field should be a number.
+                    </p>
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-sm-4 description">
+                <label class="control-label" translate="tenderworkApp.estimate.dailyPrice" for="field_dailyPrice">DailyPrice</label>
+                <input type="number" class="form-control" name="dailyPrice" id="field_dailyPrice"
+                        ng-model="estimate.dailyPrice"
+                        required min="1" />
+                <div ng-show="editForm.dailyPrice.$invalid">
+                    <p class="help-block"
+                        ng-show="editForm.dailyPrice.$error.required" translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                    <p class="help-block"
+                        ng-show="editForm.dailyPrice.$error.min" translate="entity.validation.min" translate-value-min="1">
+                        This field should be more than 1.
+                    </p>
+                    <p class="help-block"
+                        ng-show="editForm.dailyPrice.$error.number" translate="entity.validation.number">
+                        This field should be a number.
+                    </p>
+                </div>
             </div>
         </div>
-
-        <div class="form-group col-xs-4">
-            <label class="control-label" translate="tenderworkApp.estimate.desiredProjectDuration" for="field_desiredProjectDuration">DesiredProjectDuration</label>
-            <input type="number" class="form-control" name="desiredProjectDuration" id="field_desiredProjectDuration"
-                    ng-model="estimate.desiredProjectDuration"
-                    required min="1" />
-            <div ng-show="editForm.desiredProjectDuration.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.desiredProjectDuration.$error.required" translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.desiredProjectDuration.$error.min" translate="entity.validation.min" translate-value-min="1">
-                    This field should be more than 1.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.desiredProjectDuration.$error.number" translate="entity.validation.number">
-                    This field should be a number.
-                </p>
-            </div>
-        </div>
-
-        <div class="form-group col-xs-4 description">
-            <label class="control-label" translate="tenderworkApp.estimate.dailyPrice" for="field_dailyPrice">DailyPrice</label>
-            <input type="number" class="form-control" name="dailyPrice" id="field_dailyPrice"
-                    ng-model="estimate.dailyPrice"
-                    required min="1" />
-            <div ng-show="editForm.dailyPrice.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.dailyPrice.$error.required" translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.dailyPrice.$error.min" translate="entity.validation.min" translate-value-min="1">
-                    This field should be more than 1.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.dailyPrice.$error.number" translate="entity.validation.number">
-                    This field should be a number.
-                </p>
-            </div>
-        </div>
-
 
 
 
