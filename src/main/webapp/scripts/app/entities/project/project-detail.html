@@ -4,7 +4,6 @@
         <div class="row">
             <jh-alert></jh-alert>
             <div class="col-xs-8 no-padding-left wrap-field"><h2>{{project.name}}</h2></div>
-
             <div class="col-xs-4 no-padding-right">
                 <div class="btn-group pull-right">
                     <button type="submit"
@@ -28,109 +27,86 @@
         </div>
     </div>
     <div class="container-fluid">
-        <div class="row desktop-border bg-desktop-white">
-            <div class="col-xs-12 col-sm-6 border-top-bottom-padding-1 bg-mobile-white">
-                <div class="col-xs-4 col-sm-4">
-                    <span translate="tenderworkApp.project.name" class="projectdetail">Name</span>
-                </div>
-                <div class="col-xs-8 col-sm-8 wrap-field">
-                    <span class="">{{project.name}}</span>
-                </div>
+        <div class="col-xs-12 col-sm-8 desktop-border bg-desktop-white bg-mobile-white box-padding-margin">
+            <div class="col-xs-12 padding-detail-header-field">
+                <span translate="tenderworkApp.project.client" class="projectdetail">Client</span>
             </div>
-            <div class="col-xs-12 col-sm-6 border-top-bottom-padding-1 bg-mobile-gray">
-                <div class="col-xs-4 col-sm-4">
-                    <span translate="tenderworkApp.project.client" class="projectdetail">Client</span>
-                </div>
-                <div class="col-xs-8 col-sm-8 wrap-field">
-                    <span class="">{{project.client}}</span>
-                </div>
+            <div class="col-xs-12 padding-detail-text-field wrap-field">
+                <span class="">{{project.client}}</span>
             </div>
-        </div>
-        <div class="row desktop-border bg-desktop-gray">
-            <div class="col-xs-12 col-sm-6 border-top-bottom-padding-1 bg-mobile-white">
-                <div class="col-xs-4 col-sm-4">
-                    <span translate="tenderworkApp.project.deadline" class="projectdetail">Deadline</span>
-                </div>
-                <div class="col-xs-8 col-sm-8">
-                    <span class="">{{project.deadline | date:'mediumDate'}}</span>
-                </div>
+            <div class="col-xs-12 padding-detail-header-field">
+                <span translate="tenderworkApp.project.deadline" class="projectdetail">Deadline</span>
             </div>
-            <div class="col-xs-12 col-sm-6 border-top-bottom-padding-1 bg-mobile-gray">
-                <div class="col-xs-4 col-sm-4">
-                    <span translate="tenderworkApp.project.docLocation" class="projectdetail">DocLocation</span>
-                </div>
-                <div class="col-xs-8 col-sm-8 wrap-field">
-                    <span ng-bind-html="project.docLocation | linky"class=""></span>
-                </div>
+            <div class="col-xs-12 padding-detail-text-field">
+                <span class="">{{project.deadline | date:'mediumDate'}}</span>
+            </div>
+            <div class="col-xs-12 padding-detail-header-field">
+                <span translate="tenderworkApp.project.docLocation" class="projectdetail">DocLocation</span>
+            </div>
+            <div class="col-xs-12 padding-detail-text-field wrap-field">
+                <span ng-bind-html="project.docLocation | linky"class=""></span>
             </div>
         </div>
-        <div class="row desktop-border  bg-desktop-white">
-            <div class="col-xs-12 col-sm-6 border-top-bottom-padding-1 bg-mobile-white">
-                <div class="col-xs-4 col-sm-4">
-                    <span translate="tenderworkApp.project.createdDate" class="projectdetail">CreatedDate</span>
-                </div>
-                <div class="col-xs-8 col-sm-8">
-                    <span class="">{{project.createdDate | date:'medium'}}</span>
-                </div>
+        <div class="col-xs-12 col-sm-4 desktop-border bg-desktop-white bg-mobile-white box-padding-margin ">
+            <div class="col-xs-12 padding-detail-header-field">
+                <span translate="tenderworkApp.project.createdDate" class="projectdetail">CreatedDate</span>
             </div>
-            <div class="col-xs-12 col-sm-6 border-top-bottom-padding-1 bg-mobile-gray">
-                <div class="col-xs-4 col-sm-4">
-                    <span translate="tenderworkApp.project.createdBy" class="projectdetail">createdBy</span>
-                </div>
-                <div class="col-xs-8 col-sm-8">
-                    {{project.createdBy.login}}
-                </div>
+            <div class="col-xs-12 padding-detail-text-field">
+                <span class="">{{project.createdDate | date:'medium'}}</span>
             </div>
-        </div>
-        <div class="row desktop-border  bg-desktop-gray">
-            <div class="col-xs-12 col-sm-6 border-top-bottom-padding-1 bg-mobile-white">
-                <div class="col-xs-4 col-sm-4">
-                    <span translate="tenderworkApp.project.editedDate" class="projectdetail">EditedDate</span>
-                </div>
-                <div class="col-xs-8 col-sm-8">
-                    <span class="">{{project.editedDate | date:'medium'}}</span>
-                </div>
+
+
+            <div class="col-xs-12 padding-detail-header-field">
+                <span translate="tenderworkApp.project.createdBy" class="projectdetail">createdBy</span>
             </div>
-            <div class="col-xs-12 col-sm-6 border-top-bottom-padding-1 bg-mobile-gray">
-                <div class="col-xs-4 col-sm-4">
-                    <span translate="tenderworkApp.project.editedBy" class="projectdetail">editedBy</span>
-                </div>
-                <div class="col-xs-8 col-sm-8">
-                    {{project.editedBy.login}}
-                </div>
+            <div class="col-xs-12 padding-detail-text-field">
+                {{project.createdBy.login}}
+            </div>
+
+            <div class="col-xs-12 padding-detail-header-field">
+                <span translate="tenderworkApp.project.editedDate" class="projectdetail">EditedDate</span>
+            </div>
+            <div class="col-xs-12 padding-detail-text-field">
+                <span class="">{{project.editedDate | date:'medium'}}</span>
+            </div>
+
+            <div class="col-xs-12 padding-detail-header-field">
+                <span translate="tenderworkApp.project.editedBy" class="projectdetail">editedBy</span>
+            </div>
+            <div class="col-xs-12 padding-detail-text-field">
+                {{project.editedBy.login}}
             </div>
         </div>
-        <div class="row desktop-border  bg-desktop-white">
-            <div class="col-xs-12 col-sm-6 border-top-bottom-padding-1 bg-mobile-white">
-                <div class="col-xs-4 col-sm-4">
-                    <span translate="tenderworkApp.project.state" class="projectdetail">State</span>
-                </div>
-                <div class="col-xs-8 col-sm-8">
-                    <span ng-show="project.state=='states.new'" class="" translate="states.new">NW: {{ translated.state.new }}</span>
-                    <span ng-show="project.state=='states.closed'" class="" translate="states.closed">NW: {{ project.state }}</span>
-                    <span ng-show="project.state=='states.pending'" class="" translate="states.pending">NW: {{ project.state }}</span>
-                    <span ng-show="project.state=='states.won'" class="" translate="states.won">NW: {{ project.state }}</span>
-                    <span ng-show="project.state=='states.lost'" class="" translate="states.lost">NW: {{ project.state }}</span>
-                </div>
+        <div class="col-xs-12 desktop-border box-padding-margin bg-desktop-white bg-mobile-white">
+            <div class="col-xs-12 padding-detail-header-field description-header ">
+                <span translate="tenderworkApp.project.description" class="projectdetail">Description</span>
             </div>
-            <div class="col-xs-12 col-sm-6 border-top-bottom-padding-1 bg-mobile-gray">
-                <div class="col-xs-4 col-sm-4">
-                    <span translate="tenderworkApp.project.stateDescription" class="projectdetail">StateDescription</span>
-                </div>
-                <div class="col-xs-8 col-sm-8  wrap-field">
-                    <span class="">{{project.stateDescription}}</span>
-                </div>
+            <div class="col-xs-12 padding-detail-text-field preformatted description-text-field "><span class="">{{project.description}}</span>
             </div>
         </div>
-        <div class="row description">
-            <div class="col-xs-12 col-sm-12 bottom-border-1 bg-desktop-gray bg-mobile-white">
-                <div class="col-xs-12 col-sm-12 description-header ">
-                    <span translate="tenderworkApp.project.description" class="projectdetail">Description</span>
-                </div>
+        <div class="col-xs-12 col-sm-12 desktop-border  bg-mobile-white bg-desktop-white box-padding-margin">
+            <div class="col-xs-12 padding-detail-header-field">
+                <span translate="tenderworkApp.project.state" class="projectdetail">State</span>
             </div>
-            <div  class="col-xs-12 col-sm-12 bottom-border-1 bg-desktop-white bg-mobile-gray">
-                <div class="col-xs-12 col-sm-12 preformatted description-text-field "><span class="">{{project.description}}</span>
-                </div>
+            <div class="col-xs-12 padding-detail-text-field">
+                <span ng-show="project.state=='states.new'" class="" translate="states.new">NW: {{ translated.state.new }}</span>
+                <span ng-show="project.state=='states.closed'" class="" translate="states.closed">NW: {{ project.state }}</span>
+                <span ng-show="project.state=='states.pending'" class="" translate="states.pending">NW: {{ project.state }}</span>
+                <span ng-show="project.state=='states.won'" class="" translate="states.won">NW: {{ project.state }}</span>
+                <span ng-show="project.state=='states.lost'" class="" translate="states.lost">NW: {{ project.state }}</span>
+            </div>
+            <div class="col-xs-12 padding-detail-header-field">
+                <span translate="tenderworkApp.project.stateDescription" class="projectdetail">StateDescription</span>
+            </div>
+            <div class="col-xs-12 padding-detail-text-field wrap-field">
+                <span class="">{{project.stateDescription}}</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- tagit -->
+            <div class="col-xs-12 desktop-border bg-mobile-gray bg-desktop-gray box-padding-margin">
+            moi olen tagiboksi
             </div>
         </div>
     </div>
