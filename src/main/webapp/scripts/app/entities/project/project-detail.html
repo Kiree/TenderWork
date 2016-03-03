@@ -175,7 +175,7 @@
             </thead>
             <tbody data-link="row" class="rowlink" infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
                 <tr class="rowLink" ng-repeat="estimate in estimates track by estimate.id">
-                    <td><a href="#" ui-sref="estimate.detail({id:estimate.id})">{{estimate.totalPrice}}</a></td>
+                    <td><a href="#" ui-sref="estimate.detail({id:estimate.id})"></a>{{estimate.totalPrice}}</td>
                     <td>{{estimate.totalDuration}}</td>
                     <td>{{estimate.rounded}}</td>
                     <td>{{estimate.createdBy.login}}</td>
