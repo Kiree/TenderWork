@@ -1,6 +1,7 @@
 package com.tol.tenderwork.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.tol.tenderwork.domain.Project;
 import com.tol.tenderwork.domain.Estimate;
 import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.domain.Task;
@@ -54,6 +55,9 @@ public class EstimateResource {
 
     @Autowired
     private UpdateController updateController;
+
+    @Autowired
+    private DeleteController deleteController;
 
     /**
      * POST  /estimates -> Create a new estimate.
@@ -148,8 +152,9 @@ public class EstimateResource {
     @Timed
     public ResponseEntity<Void> deleteEstimate(@PathVariable Long id) {
         log.debug("REST request to delete Estimate : {}", id);
-        estimateRepository.delete(id);
-        estimateSearchRepository.delete(id);
+
+        deleteController.deleteEstimate(id);
+
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("estimate", id.toString())).build();
     }
 

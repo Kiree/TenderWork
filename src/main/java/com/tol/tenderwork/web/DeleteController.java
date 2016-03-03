@@ -33,6 +33,12 @@ import java.util.Set;
 public class DeleteController {
 
     @Inject
+    private TaskRepository taskRepository;
+
+    @Inject
+    private TaskSearchRepository taskSearchRepository;
+
+    @Inject
     private RequirementRepository requirementRepository;
 
     @Inject
@@ -50,11 +56,8 @@ public class DeleteController {
     @Inject
     private ProjectSearchRepository projectSearchRepository;
 
-    @Inject
-    private TaskRepository taskRepository;
-
-    @Inject
-    private TaskSearchRepository taskSearchRepository;
+    @Autowired
+    private UpdateController updateController;
 
     @Autowired
     private MathController mathController;
@@ -62,4 +65,43 @@ public class DeleteController {
     @Autowired
     private SaveController saveController;
 
+    @Transactional
+    public void deleteTask(Long id){
+
+        // Call to update owner project's edit information
+        updateController.updateProject(taskRepository.findOne(id).getOwnerRequirement().getOwnerEstimate().getOwnerProject(),
+            taskRepository.findOne(id).getOwnedBy());
+
+        taskRepository.delete(id);
+        taskSearchRepository.delete(id);
+    }
+
+    @Transactional
+    public void deleteEstimate(Long id){
+
+        // Call to update owner project's edit information
+        updateController.updateProject(estimateRepository.findOne(id).getOwnerProject(),
+            estimateRepository.findOne(id).getCreatedBy());
+
+        estimateRepository.delete(id);
+        estimateSearchRepository.delete(id);
+    }
+
+    @Transactional
+    public void deleteRequirement(Long id){
+
+        // Call to update owner project's edit information
+        updateController.updateProject(requirementRepository.findOne(id).getOwnerEstimate().getOwnerProject(),
+            requirementRepository.findOne(id).getOwner());
+
+        requirementRepository.delete(id);
+        requirementSearchRepository.delete(id);
+    }
+
+    @Transactional
+    public void deleteProject(Long id){
+
+        projectRepository.delete(id);
+        projectSearchRepository.delete(id);
+    }
 }
