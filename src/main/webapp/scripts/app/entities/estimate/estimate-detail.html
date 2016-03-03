@@ -4,119 +4,180 @@
         <div class="row">
             <div class="col-xs-4 no-padding-left"><h2><span translate="tenderworkApp.estimate.detail.title">Estimate</span> {{estimate.id}}</h2></div>
 
-    <div class="col-xs-8 no-padding-right">
-        <div class="btn-group pull-right">
-            <button type="submit"
-                    ui-sref="project.detail({id:estimate.ownerProject.id})"
-                    class="btn btn-info btn-sm">
-                <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
-            </button>
-            <button type="submit" class="btn btn-primary btn-sm"
-                    ui-sref="estimate.edit({id:estimate.id})" class="btn btn-primary btn-sm">
-                <span class="glyphicon glyphicon-pencil"></span>
-                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
-            </button>
-            <button type="submit"
-                    ui-sref="estimate.delete({id:estimate.id})"
-                    class="btn btn-danger btn-sm">
-                <span class="glyphicon glyphicon-remove-circle"></span>
-                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
-            </button>
+            <div class="col-xs-8 no-padding-right">
+                <div class="btn-group pull-right">
+                    <button type="submit"
+                            ui-sref="project.detail({id:estimate.ownerProject.id})"
+                            class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-sm"
+                            ui-sref="estimate.edit({id:estimate.id})" class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                    </button>
+                    <button type="submit"
+                            ui-sref="estimate.delete({id:estimate.id})"
+                            class="btn btn-danger btn-sm">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                        <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
-    </div>
 
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <tbody>
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.estimate.totalPrice" class="projectdetail">TotalPrice</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.totalPrice}}</span>
-                </td>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row height-hack">
+                    <div class="col-xs-12 col-sm-4 right-padder height-hack-cell">
+                        <div class="row desktop-border bg-desktop-white bg-mobile-white height-hack-content">
 
-                <td>
-                    <span translate="tenderworkApp.estimate.totalDuration" class="projectdetail">TotalDuration</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.totalDuration}}</span>
-                </td>
+                        <div class="row">
 
-                <td>
-                    <span translate="tenderworkApp.estimate.totalSynergyBenefit" class="projectdetail" ng-show="task.synergyCheck=='true'">TotalSynergyBenefit</span>
-                </td>
-                <td>
-                    <span class="form-control-static" ng-show="task.synergyCheck=='true'">{{estimate.totalSynergyBenefit}}</span>
-                </td>
-            </tr>
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="col-sm-12 col-xs-6">
+                                    <span translate="tenderworkApp.estimate.totalPrice" class="projectdetail">TotalPrice</span>
+                                </div>
+                                <div class="col-sm-12 col-xs-6">
+                                    <span class="form-control-static">{{estimate.totalPrice}}</span>
+                                </div>
+                            </div>
 
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.estimate.workdaysInMonth" class="projectdetail">WorkdaysInMonth</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.workdaysInMonth}}</span>
-                </td>
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="col-sm-12 col-xs-6">
+                                    <span translate="tenderworkApp.estimate.totalDuration" class="projectdetail">TotalDuration</span>
+                                </div>
+                                <div class="col-sm-12 col-xs-6">
+                                    <span class="form-control-static">{{estimate.totalDuration}}</span>
+                                </div>
+                            </div>
+                        </div>
 
-                <td>
-                    <span translate="tenderworkApp.estimate.desiredProjectDuration" class="projectdetail">DesiredProjectDuration</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.desiredProjectDuration}}</span>
-                </td>
-                <td>
-                    <span translate="tenderworkApp.estimate.dailyPrice" class="projectdetail">DailyPrice</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.dailyPrice}}</span>
-                </td>
-                </tr>
-                <tr>
-                <td>
-                    <span translate="tenderworkApp.estimate.specificationFactor" class="projectdetail">SpecificationFactor</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.specificationFactor}}</span>
-                </td>
-                <td>
-                    <span translate="tenderworkApp.estimate.implementationFactor" class="projectdetail">ImplementationFactor</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.implementationFactor}}</span>
-                </td>
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="col-sm-12 col-xs-6">
+                                    <span translate="tenderworkApp.estimate.resourcing" class="projectdetail">Resourcing</span>
+                                </div>
+                                <div class="col-sm-12 col-xs-6">
+                                    <span class="form-control-static">{{roundedResourcing}}</span>
+                                </div>
+                            </div>
 
-                <td>
-                    <span translate="tenderworkApp.estimate.testingFactor" class="projectdetail">TestingFactor</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{estimate.testingFactor}}</span>
-                </td>
-            </tr>
-           <tr>
-               <td>
-                   <span translate="tenderworkApp.estimate.synergyBenefit" class="projectdetail">SynergyBenefit</span>
-               </td>
-               <td>
-                   <span class="form-control-static">{{estimate.synergyBenefit}}</span>
-               </td>
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="col-sm-12 col-xs-6">
+                                    <span translate="tenderworkApp.estimate.totalSynergyBenefit" class="projectdetail" ng-show="task.synergyCheck=='true'">TotalSynergyBenefit</span>
+                                </div>
+                                <div class="col-sm-12 col-xs-6">
+                                    <span class="form-control-static" ng-show="task.synergyCheck=='true'">{{estimate.totalSynergyBenefit}}</span>
+                                </div>
+                            </div>
+                        </div>
 
-               <td>
-                    <span translate="tenderworkApp.estimate.resourcing" class="projectdetail">Resourcing</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{roundedResourcing}}</span>
-                </td>
+                        </div>
 
-                <td>
-                    <span translate="tenderworkApp.estimate.createdBy" class="projectdetail">createdBy</span>
-                </td>
-                <td>
-                    {{estimate.createdBy.login}}
-                </td>
-            </tr>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-xs-12 col-sm-4 height-hack-cell right-padder">
+                        <div class="row desktop-border bg-desktop-white bg-mobile-white height-hack-content">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span translate="tenderworkApp.estimate.workdaysInMonth" class="projectdetail">WorkdaysInMonth</span>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span class="form-control-static">{{estimate.workdaysInMonth}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span translate="tenderworkApp.estimate.desiredProjectDuration" class="projectdetail">DesiredProjectDuration</span>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span class="form-control-static">{{estimate.desiredProjectDuration}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span translate="tenderworkApp.estimate.dailyPrice" class="projectdetail">DailyPrice</span>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span class="form-control-static">{{estimate.dailyPrice}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span translate="tenderworkApp.estimate.createdBy" class="projectdetail">createdBy</span>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span class="form-control-static">{{estimate.createdBy.login}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+
+
+
+                    <div class="col-xs-12 col-sm-4 height-hack-cell">
+                        <div class="row desktop-border bg-desktop-white bg-mobile-white height-hack-content">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span translate="tenderworkApp.estimate.specificationFactor" class="projectdetail">SpecificationFactor</span>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span class="form-control-static">{{estimate.specificationFactor}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span translate="tenderworkApp.estimate.implementationFactor" class="projectdetail">ImplementationFactor</span>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span class="form-control-static">{{estimate.implementationFactor}}</span>
+                                        </div>
+                                    </div>
+
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="col-sm-12 col-xs-6">
+                            <span translate="tenderworkApp.estimate.testingFactor" class="projectdetail">TestingFactor</span>
+                        </div>
+                                <div class="col-sm-12 col-xs-6">
+                            <span class="form-control-static">{{estimate.testingFactor}}</span>
+                        </div>
+                        </div>
+
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="col-sm-12 col-xs-6">
+                                    <span translate="tenderworkApp.estimate.synergyBenefit" class="projectdetail">SynergyBenefit</span>
+                                </div>
+                                <div class="col-sm-12 col-xs-6">
+                                    <span class="form-control-static">{{estimate.synergyBenefit}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                </div>
+            </div>
 
             <!--
             <tr>
@@ -128,8 +189,7 @@
                 </td>
             </tr>
             -->
-            </tbody>
-        </table>
+    </div>
     </div>
 
     <div>
