@@ -33,6 +33,13 @@ span.projectdetail{
     .bg-mobile-gray {
 
     }
+    div.left-padder {
+        padding-left:22px;
+    }
+
+    div.right-padder {
+        padding-right:22px;
+    }
 }
 
 @media (max-width: 750px) {
@@ -43,7 +50,9 @@ span.projectdetail{
     }
 
     .desktop-border {
-
+        border-bottom: 2px solid #cfcfcf;
+        border-right: 2px solid #cfcfcf;
+        border-left: 1px solid #efefef;
     }
 
     .bg-desktop-white {
@@ -60,6 +69,14 @@ span.projectdetail{
 
     .bg-mobile-gray {
         background-color:#f9f9f9 !important;
+    }
+
+    div.left-padder {
+        padding-left:15px;
+    }
+
+    div.right-padder {
+        padding-right:15px;
     }
 }
 
@@ -80,11 +97,6 @@ textarea {
     resize:vertical;
 }
 
-div.description {
-
-    margin-bottom:50px;
-}
-
 div.description-header {
 
     padding-bottom:8px;
@@ -92,7 +104,6 @@ div.description-header {
 }
 
 div.description-text-field {
-    padding-bottom:8px;
     padding-top:8px;
 }
 
@@ -123,6 +134,7 @@ div.padding-detail-header-field {
 div.padding-detail-text-field {
     padding-bottom:8px;
 }
+
 
 
 
