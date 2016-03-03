@@ -28,69 +28,73 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12 col-sm-7 right-padder">
-                <div class="row desktop-border bg-desktop-white bg-mobile-white box-padding-margin">
-                    <div class="row">
-                        <div class="col-xs-6">
+            <div class="col-xs-12 bottom-margin-1">
+                <div class="row height-hack">
+                    <div class="col-xs-12 col-sm-7 right-padder height-hack-cell">
+                        <div class="row desktop-border bg-desktop-white bg-mobile-white height-hack-content">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12 padding-detail-header-field">
+                                        <span translate="tenderworkApp.project.client" class="projectdetail">Client</span>
+                                    </div>
+                                    <div class="col-xs-12 padding-detail-text-field wrap-field">
+                                        <span class="">{{project.client}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12 padding-detail-header-field">
+                                        <span translate="tenderworkApp.project.deadline" class="projectdetail">Deadline</span>
+                                    </div>
+                                    <div class="col-xs-12 padding-detail-text-field">
+                                        <span class="">{{project.deadline | date:'mediumDate'}}</span>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-xs-12 padding-detail-header-field">
-                                <span translate="tenderworkApp.project.client" class="projectdetail">Client</span>
+                                <span translate="tenderworkApp.project.docLocation" class="projectdetail">DocLocation</span>
                             </div>
                             <div class="col-xs-12 padding-detail-text-field wrap-field">
-                                <span class="">{{project.client}}</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="col-xs-6 padding-detail-header-field">
-                                <span translate="tenderworkApp.project.deadline" class="projectdetail">Deadline</span>
-                            </div>
-                            <div class="col-xs-6 padding-detail-text-field">
-                                <span class="">{{project.deadline | date:'mediumDate'}}</span>
+                                <span ng-bind-html="project.docLocation | linky"class=""></span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 padding-detail-header-field">
-                        <span translate="tenderworkApp.project.docLocation" class="projectdetail">DocLocation</span>
-                    </div>
-                    <div class="col-xs-12 padding-detail-text-field wrap-field">
-                        <span ng-bind-html="project.docLocation | linky"class=""></span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-5 left-padder">
-                <div class="row desktop-border bg-desktop-white bg-mobile-white box-padding-margin ">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="col-xs-12 padding-detail-header-field">
-                                <span translate="tenderworkApp.project.createdDate" class="projectdetail">CreatedDate</span>
+                    <div class="col-xs-12 col-sm-5 left-padder height-hack-cell">
+                        <div class="row desktop-border bg-desktop-white bg-mobile-white height-hack-content">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12 padding-detail-header-field">
+                                        <span translate="tenderworkApp.project.createdDate" class="projectdetail">CreatedDate</span>
+                                    </div>
+                                    <div class="col-xs-12 padding-detail-text-field">
+                                        <span class="">{{project.createdDate | date:'medium'}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12 padding-detail-header-field">
+                                        <span translate="tenderworkApp.project.createdBy" class="projectdetail">createdBy</span>
+                                    </div>
+                                    <div class="col-xs-12 padding-detail-text-field">
+                                        {{project.createdBy.login}}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-xs-12 padding-detail-text-field">
-                                <span class="">{{project.createdDate | date:'medium'}}</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="col-xs-12 padding-detail-header-field">
-                                <span translate="tenderworkApp.project.createdBy" class="projectdetail">createdBy</span>
-                            </div>
-                            <div class="col-xs-12 padding-detail-text-field">
-                                {{project.createdBy.login}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="col-xs-12 padding-detail-header-field">
-                                <span translate="tenderworkApp.project.editedDate" class="projectdetail">EditedDate</span>
-                            </div>
-                            <div class="col-xs-12 padding-detail-text-field">
-                                <span class="">{{project.editedDate | date:'medium'}}</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="col-xs-12 padding-detail-header-field">
-                                <span translate="tenderworkApp.project.editedBy" class="projectdetail">editedBy</span>
-                            </div>
-                            <div class="col-xs-12 padding-detail-text-field">
-                                {{project.editedBy.login}}
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12 padding-detail-header-field">
+                                        <span translate="tenderworkApp.project.editedDate" class="projectdetail">EditedDate</span>
+                                    </div>
+                                    <div class="col-xs-12 padding-detail-text-field">
+                                        <span class="">{{project.editedDate | date:'medium'}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="col-xs-12 padding-detail-header-field">
+                                        <span translate="tenderworkApp.project.editedBy" class="projectdetail">editedBy</span>
+                                    </div>
+                                    <div class="col-xs-12 padding-detail-text-field">
+                                        {{project.editedBy.login}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

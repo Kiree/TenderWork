@@ -13,9 +13,8 @@ span.projectdetail{
     }
 
     .desktop-border {
-        border-bottom: 2px solid #cfcfcf;
         border-right: 2px solid #cfcfcf;
-        border-left: 1px solid #efefef;
+        border-left: 2px solid #cfcfcf;
     }
 
     .bg-desktop-white {
@@ -40,6 +39,29 @@ span.projectdetail{
     div.right-padder {
         padding-right:22px;
     }
+
+    div.height-hack {
+        display:table;
+    }
+
+    div.height-hack-cell {
+        float: none;
+        display: table-cell;
+        vertical-align: top;
+        overflow: hidden;
+
+    }
+
+    div.height-hack-content {
+        margin-bottom: -99999px;
+        padding-bottom: 99999px;
+    }
+
+}
+
+
+div.border-hack {
+    border: 1px solid #ff0000;
 }
 
 @media (max-width: 750px) {
@@ -78,6 +100,19 @@ span.projectdetail{
     div.right-padder {
         padding-right:15px;
     }
+
+    div.height-hack {
+
+    }
+
+    div.height-hack-cell {
+
+    }
+
+    div.height-hack-content {
+
+    }
+
 }
 
 div.wrap-field {
@@ -124,6 +159,10 @@ span.requirementlisting{
 div.box-padding-margin {
     padding-top:8px;
     padding-bottom:8px;
+    margin-bottom:14px;
+}
+
+div.bottom-margin-1 {
     margin-bottom:14px;
 }
 
