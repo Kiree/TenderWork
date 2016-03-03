@@ -1,13 +1,14 @@
 package com.tol.tenderwork.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.tol.tenderwork.domain.Project;
 import com.tol.tenderwork.domain.Estimate;
 import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.domain.Task;
-import com.tol.tenderwork.repository.TaskRepository;
-import com.tol.tenderwork.repository.search.TaskSearchRepository;
 import com.tol.tenderwork.repository.RequirementRepository;
 import com.tol.tenderwork.repository.search.RequirementSearchRepository;
+import com.tol.tenderwork.repository.TaskRepository;
+import com.tol.tenderwork.repository.search.TaskSearchRepository;
 import com.tol.tenderwork.web.UpdateController;
 import com.tol.tenderwork.web.DeleteController;
 import com.tol.tenderwork.web.SaveController;
@@ -57,6 +58,9 @@ public class TaskResource {
 
     @Autowired
     private UpdateController updateController;
+
+    @Autowired
+    private DeleteController deleteController;
 
     /**
      * POST  /tasks -> Create a new task.
@@ -143,18 +147,13 @@ public class TaskResource {
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         log.debug("REST request to delete Task : {}", id);
 
-        //Remove the task from the owner Requirement
-        Task task = taskRepository.findOne(id);
-        Requirement requirement = requirementRepository.findOne(task.getOwnerRequirement().getId());
-        requirement.getHasTaskss().remove(task);
-
         //Delete the task
-        taskRepository.delete(id);
-        taskSearchRepository.delete(id);
+        deleteController.deleteTask(id);
+        log.debug("Deleted task {}", id);
 
         //Force the Owner Requirement to update its values
         log.error("Forcing update");
-        updateController.updateAllTasks(task.getOwnerRequirement().getOwnerEstimate());
+        //updateController.updateAllTasks(task.getOwnerRequirement().getOwnerEstimate());
 
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("task", id.toString())).build();
     }

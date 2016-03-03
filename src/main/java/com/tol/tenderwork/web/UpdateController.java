@@ -39,6 +39,12 @@ public class UpdateController {
     // Entity repositories //
 
     @Inject
+    private TaskRepository taskRepository;
+
+    @Inject
+    private TaskSearchRepository taskSearchRepository;
+
+    @Inject
     private RequirementRepository requirementRepository;
 
     @Inject
@@ -55,12 +61,6 @@ public class UpdateController {
 
     @Inject
     private ProjectSearchRepository projectSearchRepository;
-
-    @Inject
-    private TaskRepository taskRepository;
-
-    @Inject
-    private TaskSearchRepository taskSearchRepository;
 
     @Autowired
     private MathController mathController;

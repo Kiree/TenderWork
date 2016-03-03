@@ -34,6 +34,12 @@ public class SaveController {
     // Entity repositories //
 
     @Inject
+    private TaskRepository taskRepository;
+
+    @Inject
+    private TaskSearchRepository taskSearchRepository;
+
+    @Inject
     private RequirementRepository requirementRepository;
 
     @Inject
@@ -50,12 +56,6 @@ public class SaveController {
 
     @Inject
     private ProjectSearchRepository projectSearchRepository;
-
-    @Inject
-    private TaskRepository taskRepository;
-
-    @Inject
-    private TaskSearchRepository taskSearchRepository;
 
     // Save entity to repo-methods //
 
@@ -80,6 +80,14 @@ public class SaveController {
         Estimate result = estimateRepository.save(estimate);
         estimateSearchRepository.save(result);
         //log.debug("ESTIMATE SAVED: {}", result.getId());
+
+        return result;
+    }
+
+    @Transactional
+    public Project saveProjectToRepo(Project project) {
+        Project result = projectRepository.save(project);
+        projectSearchRepository.save(result);
 
         return result;
     }

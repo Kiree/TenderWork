@@ -1,10 +1,15 @@
 package com.tol.tenderwork.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.tol.tenderwork.domain.Project;
 import com.tol.tenderwork.domain.Estimate;
 import com.tol.tenderwork.domain.Requirement;
+import com.tol.tenderwork.domain.Task;
 import com.tol.tenderwork.repository.RequirementRepository;
 import com.tol.tenderwork.repository.search.RequirementSearchRepository;
+import com.tol.tenderwork.repository.TaskRepository;
+import com.tol.tenderwork.repository.search.TaskSearchRepository;
+import com.tol.tenderwork.web.DeleteController;
 import com.tol.tenderwork.web.UpdateController;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
@@ -47,6 +52,9 @@ public class RequirementResource {
 
     @Autowired
     private UpdateController updateController;
+
+    @Autowired
+    private DeleteController deleteController;
 
     /**
      * POST  /requirements -> Create a new requirement.
@@ -129,8 +137,7 @@ public class RequirementResource {
     @Timed
     public ResponseEntity<Void> deleteRequirement(@PathVariable Long id) {
         log.debug("REST request to delete Requirement : {}", id);
-        requirementRepository.delete(id);
-        requirementSearchRepository.delete(id);
+        deleteController.deleteRequirement(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("requirement", id.toString())).build();
     }
 

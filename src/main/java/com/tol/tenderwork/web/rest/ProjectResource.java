@@ -4,10 +4,12 @@ import com.codahale.metrics.annotation.Timed;
 import com.tol.tenderwork.domain.Project;
 import com.tol.tenderwork.repository.ProjectRepository;
 import com.tol.tenderwork.repository.search.ProjectSearchRepository;
+import com.tol.tenderwork.web.DeleteController;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -41,6 +43,9 @@ public class ProjectResource {
 
     @Inject
     private ProjectSearchRepository projectSearchRepository;
+
+    @Autowired
+    private DeleteController deleteController;
 
     /**
      * POST  /projects -> Create a new project.
@@ -121,8 +126,7 @@ public class ProjectResource {
     @Timed
     public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
         log.debug("REST request to delete Project : {}", id);
-        projectRepository.delete(id);
-        projectSearchRepository.delete(id);
+        deleteController.deleteProject(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("project", id.toString())).build();
     }
 
