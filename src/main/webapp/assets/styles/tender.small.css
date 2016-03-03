@@ -1,0 +1,34 @@
+@media (min-width: 768px) and (max-width: 991px) {
+    .border-top-bottom-padding-1 {
+        padding-bottom:8px;
+        padding-top:8px;
+    }
+
+    .bg-desktop-white {
+        background-color:#ffffff !important;
+    }
+
+    .bg-desktop-gray {
+        background-color:#f9f9f9 !important;
+    }
+
+    .bg-mobile-white {
+
+    }
+
+    .bg-mobile-gray {
+
+    }
+
+    div.height-hack {
+        display:table;
+    }
+
+    div.height-hack-cell {
+        float: none;
+        display: table-cell;
+        vertical-align: top;
+        overflow: hidden;
+    }
+
+}

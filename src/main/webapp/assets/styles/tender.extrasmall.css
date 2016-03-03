@@ -1,0 +1,49 @@
+@media (max-width: 767px) {
+    .border-top-bottom-padding-1 {
+        padding-bottom:8px;
+        padding-top:8px;
+        border-bottom: 1px solid #cfcfcf;
+    }
+
+    .bg-desktop-white {
+
+    }
+
+    .bg-desktop-gray {
+
+    }
+
+    .bg-mobile-white {
+        background-color:#ffffff !important;
+    }
+
+    .bg-mobile-gray {
+        background-color:#f9f9f9 !important;
+    }
+
+    div.left-padder {
+        padding-left:15px;
+    }
+
+    div.right-padder {
+        padding-right:15px;
+    }
+
+    div.height-hack {
+        margin-bottom:-8px;
+    }
+
+    div.height-hack-cell {
+        margin-top:7px;
+        margin-bottom:8px;
+    }
+
+    div.height-hack-content {
+
+    }
+
+    div.xs-stacked-margin {
+        margin-bottom:15px;
+    }
+
+}

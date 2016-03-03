@@ -5,114 +5,33 @@ tr.rowLink:hover {
 span.projectdetail{
     font-weight: bold !important;
 }
-@media (min-width: 750px) {
-    .border-top-bottom-padding-1 {
-        padding-bottom:8px;
-        padding-top:8px;
-
-    }
-
-    .desktop-border {
-        border-right: 2px solid #cfcfcf;
-        border-left: 2px solid #cfcfcf;
-    }
-
-    .bg-desktop-white {
-        background-color:#ffffff !important;
-    }
-
-    .bg-desktop-gray {
-        background-color:#f9f9f9 !important;
-    }
-
-    .bg-mobile-white {
-
-    }
-
-    .bg-mobile-gray {
-
-    }
-    div.left-padder {
-        padding-left:22px;
-    }
-
-    div.right-padder {
-        padding-right:22px;
-    }
-
-    div.height-hack {
-        display:table;
-    }
-
-    div.height-hack-cell {
-        float: none;
-        display: table-cell;
-        vertical-align: top;
-        overflow: hidden;
-
-    }
-
-    div.height-hack-content {
-        margin-bottom: -99999px;
-        padding-bottom: 99999px;
-    }
-
-}
-
 
 div.border-hack {
     border: 1px solid #ff0000;
 }
 
-@media (max-width: 750px) {
-    .border-top-bottom-padding-1 {
-        padding-bottom:8px;
-        padding-top:8px;
-        border-bottom: 1px solid #cfcfcf;
-    }
+.desktop-border {
+    border-top: 1px solid #cf00cf;
+    border-right: 2px solid #cf00cf;
+    border-left: 1px solid #cf00cf;
+    border-bottom: 2px solid #cf00cf;
+    border-radius: 4px 4px 12px 6px;
+}
 
-    .desktop-border {
-        border-bottom: 2px solid #cfcfcf;
-        border-right: 2px solid #cfcfcf;
-        border-left: 1px solid #efefef;
-    }
+div.left-padder {
+    padding-left:22px;
+}
 
-    .bg-desktop-white {
+div.right-padder {
+    padding-right:22px;
+}
 
-    }
+div.bg-always-white {
+    background-color:#ffffff !important;
+}
 
-    .bg-desktop-gray {
-
-    }
-
-    .bg-mobile-white {
-        background-color:#ffffff !important;
-    }
-
-    .bg-mobile-gray {
-        background-color:#f9f9f9 !important;
-    }
-
-    div.left-padder {
-        padding-left:15px;
-    }
-
-    div.right-padder {
-        padding-right:15px;
-    }
-
-    div.height-hack {
-
-    }
-
-    div.height-hack-cell {
-
-    }
-
-    div.height-hack-content {
-
-    }
-
+div.bg-always-gray {
+    background-color:#f9f9f9 !important;
 }
 
 div.wrap-field {
@@ -173,6 +92,7 @@ div.padding-detail-header-field {
 div.padding-detail-text-field {
     padding-bottom:8px;
 }
+
 
 
 

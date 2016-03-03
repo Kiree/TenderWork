@@ -1,0 +1,19 @@
+@media (min-width: 992px) and (max-width: 1169px) {
+
+    .bg-desktop-white {
+        background-color:#ffffff !important;
+    }
+
+    .bg-desktop-gray {
+        background-color:#f9f9f9 !important;
+    }
+
+    .bg-mobile-white {
+
+    }
+
+    .bg-mobile-gray {
+
+    }
+
+}

@@ -29,9 +29,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12 bottom-margin-1">
-                <div class="row height-hack">
-                    <div class="col-xs-12 col-sm-7 right-padder height-hack-cell">
-                        <div class="row desktop-border bg-desktop-white bg-mobile-white height-hack-content">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-7 right-padder xs-stacked-margin" >
+                        <div class="row desktop-border bg-always-white" ng-style="{'min-height':calculated_height,'max-height':calculated_height}">
                             <div class="row">
                                 <div class="col-xs-6">
                                     <div class="col-xs-12 padding-detail-header-field">
@@ -54,12 +54,12 @@
                                 <span translate="tenderworkApp.project.docLocation" class="projectdetail">DocLocation</span>
                             </div>
                             <div class="col-xs-12 padding-detail-text-field wrap-field">
-                                <span ng-bind-html="project.docLocation | linky"class=""></span>
+                                <span ng-bind-html="project.docLocation | linky" class=""></span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-5 left-padder height-hack-cell">
-                        <div class="row desktop-border bg-desktop-white bg-mobile-white height-hack-content">
+                    <div class="col-xs-12 col-sm-5 left-padder">
+                        <div class="row desktop-border bg-always-white" ng-style="{'min-height':calculated_height,'max-height':calculated_height}">
                             <div class="row">
                                 <div class="col-xs-6">
                                     <div class="col-xs-12 padding-detail-header-field">
@@ -100,7 +100,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 desktop-border box-padding-margin bg-desktop-white bg-mobile-white">
+            <div class="col-xs-12 desktop-border box-padding-margin bg-always-white">
                 <div class="row">
                     <div class="col-xs-12 padding-detail-header-field">
                         <span translate="tenderworkApp.project.description" class="projectdetail">Description</span>
@@ -108,7 +108,7 @@
                     <div class="col-xs-12 padding-detail-text-field preformatted"><span class="">{{project.description}}</span></div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 desktop-border  bg-mobile-white bg-desktop-white box-padding-margin">
+            <div class="col-xs-12 col-sm-12 desktop-border  bg-always-white box-padding-margin">
                 <div class="row">
                     <div class="col-xs-12 padding-detail-header-field">
                         <span translate="tenderworkApp.project.state" class="projectdetail">State</span>
@@ -129,7 +129,7 @@
                 </div>
             </div>
                 <!-- tagit -->
-            <div class="col-xs-12 desktop-border bg-mobile-gray bg-desktop-gray box-padding-margin">
+            <div class="col-xs-12 desktop-border bg-always-gray box-padding-margin">
             moi olen tagiboksi
             </div>
         </div>
