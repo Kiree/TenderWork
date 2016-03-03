@@ -11,6 +11,7 @@ import com.tol.tenderwork.repository.search.RequirementSearchRepository;
 import com.tol.tenderwork.repository.search.TaskSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +34,7 @@ public class UpdateController {
 
     // Logger for debugging the class //
 
-    //private final Logger log = LoggerFactory.getLogger(UpdateController.class);
+   // private final Logger log = LoggerFactory.getLogger(UpdateController.class);
 
     // Entity repositories //
 
@@ -61,6 +62,12 @@ public class UpdateController {
     @Inject
     private TaskSearchRepository taskSearchRepository;
 
+    @Autowired
+    private MathController mathController;
+
+    @Autowired
+    private SaveController saveController;
+
     @Transactional
     public void updateProject(Project project, User user){
         project.setEditedBy(user);
@@ -70,147 +77,12 @@ public class UpdateController {
         projectSearchRepository.save(result);
     }
 
-    // Methods that calculate changes to entities //
-
-    @Transactional
-    public Estimate calculateEstimate(Requirement requirement, Estimate estimateHelper){
-        Estimate estimate = estimateRepository.findOne(requirement.getOwnerEstimate().getId());
-        estimate.setSpecificationFactor(estimateHelper.getSpecificationFactor());
-        estimate.setImplementationFactor(estimateHelper.getImplementationFactor());
-        estimate.setTestingFactor(estimateHelper.getTestingFactor());
-        estimate.setSynergyBenefit(estimateHelper.getSynergyBenefit());
-
-        if (estimate.getHasRequirementss().isEmpty() != true) {
-            Set<Requirement> requirements = estimate.getHasRequirementss();
-            float totalDurationHelper = 0;
-            float totalSynergyHelper = 0;
-
-            for (Requirement r : requirements) {
-                if (r.getTotalDuration() != null) {
-                    totalDurationHelper = totalDurationHelper + r.getTotalDuration();
-                }
-                if (r.getSynergyBenefit() != null) {
-                    totalSynergyHelper = totalSynergyHelper + r.getSynergyBenefit();
-                }
-            }
-
-            if (totalSynergyHelper > 0 || estimate.getSynergyBenefit() > 0) {
-                estimate.setTotalPrice((long) Math.round((totalDurationHelper - totalSynergyHelper) * estimate.getDailyPrice()));
-                estimate.setTotalDuration(totalDurationHelper - totalSynergyHelper);
-                estimate.setResourcing(estimate.getTotalDuration() / (estimate.getWorkdaysInMonth() * estimate.getWorkdaysInMonth()));
-                estimate.setTotalSynergyBenefit(totalSynergyHelper);
-            } else {
-                estimate.setTotalPrice((long) totalDurationHelper * estimate.getDailyPrice());
-                estimate.setResourcing(totalDurationHelper / (estimate.getWorkdaysInMonth() * estimate.getDesiredProjectDuration()));
-                estimate.setTotalDuration(totalDurationHelper);
-                estimate.setTotalSynergyBenefit((float) 0);
-            }
-        }
-        return estimate;
-    }
-
-    @Transactional
-    public Requirement calculateRequirement(Task task){
-        Requirement requirement = requirementRepository.findOne(task.getOwnerRequirement().getId());
-        Set<Task> tasks = requirement.getHasTaskss();
-        float totalDurationHelper = 0;
-        float totalSpecificationHelper = 0;
-        float totalImplementationHelper = 0;
-        float totalTestingHelper = 0;
-        float totalSynergyHelper = 0;
-
-        for (Task t : tasks) {
-            totalDurationHelper = totalDurationHelper + t.getEstimateTotal();
-            totalSpecificationHelper = totalSpecificationHelper + t.getSpecificationTotal();
-            totalImplementationHelper = totalImplementationHelper + t.getImplementationTotal();
-            totalTestingHelper = totalTestingHelper + t.getTestingTotal();
-            totalSynergyHelper = totalSynergyHelper + t.getSynergyTotal();
-        }
-
-        requirement.setTotalDuration(totalDurationHelper);
-        requirement.setDurationSpecification(totalSpecificationHelper);
-        requirement.setDurationImplementation(totalImplementationHelper);
-        requirement.setDurationTesting(totalTestingHelper);
-        requirement.setSynergyBenefit(totalSynergyHelper);
-
-    return requirement;
-    }
-
-    @Transactional
-    public Task calculateTask(Task task, Estimate estimate) {
-
-        task.setImplementationFactor(estimate);
-        task.setSpecificationFactor(estimate);
-        task.setSpecificationFactor(estimate);
-        task.setSynergyBenefit(estimate);
-
-        task.setSynergyTotal((float)0);
-        if (task.getSynergyCheck() && task.getEstimateSynergy() != null && task.getEstimateSynergy() > 0) {
-            float synergyHelper = task.getEstimateSynergy() * estimate.getSynergyBenefit();
-            task.setSynergyTotal(synergyHelper);
-        }
-
-        task.setSpecificationTotal((float)task.getEstimateSpecification());
-        if (estimate.getSpecificationFactor() > 0 && task.getEstimateSpecification() > 0) {
-            float specFactorHelper = task.getEstimateSpecification() * estimate.getSpecificationFactor();
-            task.setSpecificationTotal(specFactorHelper);
-        } else if(estimate.getSpecificationFactor() == 0) {
-            task.setSpecificationTotal((float)0);
-        }
-
-        task.setImplementationTotal((float)task.getEstimateImplementation());
-        if (estimate.getImplementationFactor() > 0 && task.getEstimateImplementation() > 0) {
-            float impFactorHelper = task.getEstimateImplementation() * estimate.getImplementationFactor();
-            task.setImplementationTotal(impFactorHelper);
-        } else if(estimate.getImplementationFactor() == 0) {
-            task.setImplementationTotal((float)0);
-        }
-
-        task.setTestingTotal((float)task.getEstimateTesting());
-        if(estimate.getTestingFactor() > 0 && task.getEstimateImplementation() > 0){
-            float testFactorHelper = task.getEstimateTesting() * estimate.getTestingFactor();
-            task.setTestingTotal(testFactorHelper);
-        } else if(estimate.getTestingFactor() == 0) {
-            task.setTestingTotal((float)0);
-        }
-
-        task.setEstimateTotal(task.getSpecificationTotal() + task.getImplementationTotal() + task.getTestingTotal());
-
-        return task;
-    }
-
-    // Save entity to repo-methods //
-
-    @Transactional
-    public Task saveTaskToRepo(Task task) {
-        Task result = taskRepository.save(task);
-        taskSearchRepository.save(result);
-
-        return result;
-    }
-
-    @Transactional
-    public Requirement saveRequirementToRepo(Requirement requirement) {
-        Requirement result = requirementRepository.save(requirement);
-        requirementSearchRepository.save(result);
-
-        return result;
-    }
-
-    @Transactional
-    public Estimate saveEstimateToRepo(Estimate estimate) {
-        Estimate result = estimateRepository.save(estimate);
-        estimateSearchRepository.save(result);
-        //log.debug("ESTIMATE SAVED: {}", result.getId());
-
-        return result;
-    }
-
     // Method for updating everything, when Estimate is updated //
 
     @Transactional
-    public void updateAllTasks(Estimate estimate) {
+    public Estimate updateAllTasks(Estimate estimate) {
 
+        //log.debug("updateAllTasks aloitus");
         Estimate estimateHelper = estimateRepository.findOne(estimate.getId());
         Set<Requirement> requirements = estimateHelper.getHasRequirementss();
         Set<Requirement> requirementsHelper = new HashSet<>();
@@ -220,28 +92,34 @@ public class UpdateController {
         //log.debug("REQS: {}", requirements);
 
         for(Requirement requirement : requirements){
+            //log.error("Requ looppi");
             Set<Task> tasks = requirement.getHasTaskss();
             Set<Task> tasksHelper = new HashSet<>();
 
             //log.debug("TASKS: {}", tasks);
 
             for(Task task : tasks){
-                Task taskResult = calculateTask(task, estimate);
-                saveTaskToRepo(taskResult);
+                //log.error("Taski looppi");
+                Task taskResult = mathController.calculateTask(task, estimate);
+                saveController.saveTaskToRepo(taskResult);
                 tasksHelper.add(task);
                 taskHelper = task;
 
                 //log.debug("TASK:{}", taskHelper);
 
             }
+            //log.debug("Taski looppi läpi");
             requirementHelper.setHasTaskss(tasksHelper);
-            requirementHelper = calculateRequirement(taskHelper);
+            // Tässä null-pointer, ei edes mene funktioon. taskHelper = null....?
+            requirementHelper = mathController.calculateRequirement(taskHelper);
             requirementsHelper.add(requirementHelper);
-            saveRequirementToRepo(requirementHelper);
+            saveController.saveRequirementToRepo(requirementHelper);
         }
         estimate.setHasRequirementss(requirementsHelper);
         //log.debug("REQHELPER: {}", requirementHelper);
-        estimate = calculateEstimate(requirementHelper, estimate);
+        estimate = mathController.calculateEstimate(requirementHelper, estimate);
+
+        return estimate;
     }
 
     // PUT/POST-methods for adding/updating entities //
@@ -249,18 +127,18 @@ public class UpdateController {
     @Transactional
     public Task modifyTask(Task task) {
 
-        task = calculateTask(task, estimateRepository.findOne(task.getOwnerRequirement().getOwnerEstimate().getId()));
-        Task result = saveTaskToRepo(task);
+        task = mathController.calculateTask(task, estimateRepository.findOne(task.getOwnerRequirement().getOwnerEstimate().getId()));
+        Task result = saveController.saveTaskToRepo(task);
 
         Requirement requirementHelper = requirementRepository.findOne(task.getOwnerRequirement().getId());
         requirementHelper.addTask(task);
-        requirementHelper = calculateRequirement(task);
-        saveRequirementToRepo(requirementHelper);
+        requirementHelper = mathController.calculateRequirement(task);
+        saveController.saveRequirementToRepo(requirementHelper);
 
         Estimate estimateHelper = estimateRepository.findOne(task.getOwnerRequirement().getOwnerEstimate().getId());
         estimateHelper.addRequirement(requirementHelper);
-        estimateHelper = calculateEstimate(requirementHelper, estimateHelper);
-        saveEstimateToRepo(estimateHelper);
+        estimateHelper = mathController.calculateEstimate(requirementHelper, estimateHelper);
+        saveController.saveEstimateToRepo(estimateHelper);
 
         updateProject(task.getOwnerRequirement().getOwnerEstimate().getOwnerProject(), task.getOwnedBy());
 
@@ -271,9 +149,9 @@ public class UpdateController {
     public Requirement modifyRequirement(Requirement requirement) {
         Estimate estimate = estimateRepository.findOne(requirement.getOwnerEstimate().getId());
         estimate.addRequirement(requirement);
-        saveEstimateToRepo(estimate);
+        saveController.saveEstimateToRepo(estimate);
 
-        Requirement result = saveRequirementToRepo(requirement);
+        Requirement result = saveController.saveRequirementToRepo(requirement);
 
         updateProject(requirement.getOwnerEstimate().getOwnerProject(), requirement.getOwner());
 

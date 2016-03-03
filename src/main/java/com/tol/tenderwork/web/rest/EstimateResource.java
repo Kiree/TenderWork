@@ -7,6 +7,9 @@ import com.tol.tenderwork.domain.Task;
 import com.tol.tenderwork.repository.EstimateRepository;
 import com.tol.tenderwork.repository.search.EstimateSearchRepository;
 import com.tol.tenderwork.web.UpdateController;
+import com.tol.tenderwork.web.DeleteController;
+import com.tol.tenderwork.web.SaveController;
+import com.tol.tenderwork.web.MathController;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -90,18 +93,18 @@ public class EstimateResource {
         }
 
         if (estimate.getHasRequirementss().isEmpty() != true) {
-            updateController.updateAllTasks(estimate);
+            Estimate result = updateController.updateAllTasks(estimate);
             updateController.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
         } else {
             log.error("REST Tasolla estimate päivitys, requ oli tyhjä");
         }
 
-        Estimate result = estimateRepository.save(estimate);
-        estimateSearchRepository.save(result);
+        Estimate resultSave = estimateRepository.save(estimate);
+        estimateSearchRepository.save(resultSave);
 
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("estimate", estimate.getId().toString()))
-            .body(result);
+            .body(resultSave);
     }
 
     /**
