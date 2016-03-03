@@ -34,7 +34,7 @@ public class UpdateController {
 
     // Logger for debugging the class //
 
-   // private final Logger log = LoggerFactory.getLogger(UpdateController.class);
+   private final Logger log = LoggerFactory.getLogger(UpdateController.class);
 
     // Entity repositories //
 
@@ -73,21 +73,49 @@ public class UpdateController {
         project.setEditedBy(user);
         project.setEditedDate(ZonedDateTime.now());
 
-        Project result = projectRepository.save(project);
-        projectSearchRepository.save(result);
+        Project result = saveController.saveProjectToRepo(project);
     }
 
     // Method for updating everything, when Estimate is updated //
 
     @Transactional
-    public Estimate updateAllTasks(Estimate estimate) {
+    public Estimate updateEstimateCall(Estimate estimate){
+
+        log.error("UpdateEstimate aloitus:");
+        // Go through all of Estimate's requirements
+
+        // Kuten aiemmin, jostain syystä tämä Hash-set on aina tyhjä.
+        for(Requirement requirement : estimate.getHasRequirementss()) {
+            Requirement requirementHelper = requirementRepository.findOne(requirement.getId());
+
+            // Go through all of Requirement's tasks
+            for (Task task : requirementHelper.getHasTaskss()){
+                Task taskHelper = taskRepository.findOne(task.getId());
+                task = mathController.calculateTask(taskHelper, estimate);
+                Task resultTask = saveController.saveTaskToRepo(task);
+                requirement = mathController.calculateRequirement(resultTask);
+                log.error("Päivitettiin task {}", task);
+            }
+            Requirement resultRequirement = saveController.saveRequirementToRepo(requirement);
+            log.error("Päivitettiin requ {}", requirement);
+        }
+
+        log.error("UpdateEstimate lopetus");
+        return estimate;
+    }
+
+
+    /*
+    @Transactional
+    public Estimate updateEstimate(Estimate estimate) {
 
         //log.debug("updateAllTasks aloitus");
-        Estimate estimateHelper = estimateRepository.findOne(estimate.getId());
-        Set<Requirement> requirements = estimateHelper.getHasRequirementss();
+        //Estimate estimateHelper = estimateRepository.findOne(estimate.getId());
+
+        Set<Requirement> requirements = estimate.getHasRequirementss();
         Set<Requirement> requirementsHelper = new HashSet<>();
-        Task taskHelper = new Task();
-        Requirement requirementHelper = new Requirement();
+        //Task taskHelper = new Task();
+        //Requirement requirementHelper = new Requirement();
 
         //log.debug("REQS: {}", requirements);
 
@@ -103,56 +131,66 @@ public class UpdateController {
                 Task taskResult = mathController.calculateTask(task, estimate);
                 saveController.saveTaskToRepo(taskResult);
                 tasksHelper.add(task);
-                taskHelper = task;
+                //taskHelper = task;
 
                 //log.debug("TASK:{}", taskHelper);
 
             }
             //log.debug("Taski looppi läpi");
-            requirementHelper.setHasTaskss(tasksHelper);
+            //requirementHelper.setHasTaskss(tasksHelper);
             // Tässä null-pointer, ei edes mene funktioon. taskHelper = null....?
-            requirementHelper = mathController.calculateRequirement(taskHelper);
-            requirementsHelper.add(requirementHelper);
-            saveController.saveRequirementToRepo(requirementHelper);
+            //requirementHelper = mathController.calculateRequirement(taskHelper);
+            //requirementsHelper.add(requirementHelper);
+            //saveController.saveRequirementToRepo(requirementHelper);
         }
         estimate.setHasRequirementss(requirementsHelper);
         //log.debug("REQHELPER: {}", requirementHelper);
-        estimate = mathController.calculateEstimate(requirementHelper, estimate);
+        //estimate = mathController.calculateEstimate(requirementHelper, estimate);
 
         return estimate;
     }
 
-    // PUT/POST-methods for adding/updating entities //
+    */
+
+    // PUT/POST-methods for adding/editing entities //
 
     @Transactional
-    public Task modifyTask(Task task) {
+    public Task updateTask(Task task) {
 
+        //Calculate the new values for the task
         task = mathController.calculateTask(task, estimateRepository.findOne(task.getOwnerRequirement().getOwnerEstimate().getId()));
         Task result = saveController.saveTaskToRepo(task);
 
+        //Update owner requirement totals
         Requirement requirementHelper = requirementRepository.findOne(task.getOwnerRequirement().getId());
         requirementHelper.addTask(task);
         requirementHelper = mathController.calculateRequirement(task);
         saveController.saveRequirementToRepo(requirementHelper);
 
+        //Update owner estimate totals
         Estimate estimateHelper = estimateRepository.findOne(task.getOwnerRequirement().getOwnerEstimate().getId());
         estimateHelper.addRequirement(requirementHelper);
         estimateHelper = mathController.calculateEstimate(requirementHelper, estimateHelper);
         saveController.saveEstimateToRepo(estimateHelper);
 
+        //Update owner project edit information
         updateProject(task.getOwnerRequirement().getOwnerEstimate().getOwnerProject(), task.getOwnedBy());
 
         return result;
     }
 
     @Transactional
-    public Requirement modifyRequirement(Requirement requirement) {
-        Estimate estimate = estimateRepository.findOne(requirement.getOwnerEstimate().getId());
-        estimate.addRequirement(requirement);
-        saveController.saveEstimateToRepo(estimate);
+    public Requirement updateRequirement(Requirement requirement) {
 
+        //Find the owner estimate
+        Estimate estimateHelper = estimateRepository.findOne(requirement.getOwnerEstimate().getId());
+        estimateHelper.addRequirement(requirement);
+        saveController.saveEstimateToRepo(estimateHelper);
+
+        //Save the result of the update to the repository
         Requirement result = saveController.saveRequirementToRepo(requirement);
 
+        //Update Project edit information
         updateProject(requirement.getOwnerEstimate().getOwnerProject(), requirement.getOwner());
 
         return result;

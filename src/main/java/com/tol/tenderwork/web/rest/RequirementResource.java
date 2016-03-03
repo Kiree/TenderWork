@@ -10,6 +10,7 @@ import com.tol.tenderwork.repository.search.RequirementSearchRepository;
 import com.tol.tenderwork.repository.TaskRepository;
 import com.tol.tenderwork.repository.search.TaskSearchRepository;
 import com.tol.tenderwork.web.DeleteController;
+import com.tol.tenderwork.web.SaveController;
 import com.tol.tenderwork.web.UpdateController;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
@@ -54,6 +55,9 @@ public class RequirementResource {
     private UpdateController updateController;
 
     @Autowired
+    private SaveController saveController;
+
+    @Autowired
     private DeleteController deleteController;
 
     /**
@@ -69,7 +73,8 @@ public class RequirementResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("requirement", "idexists", "A new requirement cannot already have an ID")).body(null);
         }
 
-        Requirement result = updateController.modifyRequirement(requirement);
+        //Tämä pitäisi olla ok - Petteri 3.3. - 14:29
+        Requirement result = updateController.updateRequirement(requirement);
 
         return ResponseEntity.created(new URI("/api/requirements/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("requirement", result.getId().toString()))
@@ -89,7 +94,8 @@ public class RequirementResource {
             return createRequirement(requirement);
         }
 
-        Requirement result = updateController.modifyRequirement(requirement);
+        //Tämä pitäisi olla ok - Petteri 3.3. 14:30
+        Requirement result = updateController.updateRequirement(requirement);
 
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("requirement", requirement.getId().toString()))

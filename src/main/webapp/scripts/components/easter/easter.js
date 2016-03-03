@@ -4,7 +4,8 @@
 
 angular.module('tenderworkApp').controller('EasterController', ['$scope', '$rootScope', function($scope, $rootScope) {
     var quotes = ['Think different!', 'Work!', 'Null Pointer!', 'Revert!', 'Project Manage!', 'Super Fusion!',
-        'but not with Firefox!', 'do juttuja!', 'work in the right order!', '...coffee.', 'cause issues!', '...paitsi jos Sebastian - niijoo'];
+        'but not with Firefox!', 'do juttuja!', 'work in the right order!', '...coffee.', 'cause issues!',
+        '...paitsi jos Sebastian - niijoo', 'j', 'koo'];
     var current_index = 0;
     $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
       $scope.newIndex();

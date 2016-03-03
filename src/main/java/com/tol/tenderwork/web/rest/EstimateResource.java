@@ -57,6 +57,9 @@ public class EstimateResource {
     private UpdateController updateController;
 
     @Autowired
+    private SaveController saveController;
+
+    @Autowired
     private DeleteController deleteController;
 
     /**
@@ -72,9 +75,7 @@ public class EstimateResource {
         if (estimate.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("estimate", "idexists", "A new estimate cannot already have an ID")).body(null);
         }
-        Estimate result = estimateRepository.save(estimate);
-        estimateSearchRepository.save(result);
-
+        Estimate result = saveController.saveEstimateToRepo(estimate);
         updateController.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
 
         return ResponseEntity.created(new URI("/api/estimates/" + result.getId()))
@@ -96,19 +97,31 @@ public class EstimateResource {
             return createEstimate(estimate);
         }
 
-        if (estimate.getHasRequirementss().isEmpty() != true) {
-            Estimate result = updateController.updateAllTasks(estimate);
-            updateController.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
+
+        // Check if the estimate being edited has no requirements:
+
+        //Jostain syystä tämä ehto täyttyy aina, eli ao. Hash-set on aina tyhjä.
+        if (estimate.getHasRequirementss().isEmpty()) {
+            //Do nothing to requirements
+            log.error("Estimate päivitys, requ oli tyhjä");
+            for (Requirement r : estimate.getHasRequirementss()) {
+                log.debug("Requirement oli: {}", r);
+            }
         } else {
-            log.error("REST Tasolla estimate päivitys, requ oli tyhjä");
+            // Estimate has requirements, update said requirements
+            //log.error("Päästiin oikeaan iffiin.");
+            estimate = updateController.updateEstimateCall(estimate);
+            //log.error("UpdateEstimatesta takaisin EstimateResourceen.");
+            updateController.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
         }
 
-        Estimate resultSave = estimateRepository.save(estimate);
-        estimateSearchRepository.save(resultSave);
+        // Save edited estimate
+        Estimate result = estimateRepository.save(estimate);
+        estimateSearchRepository.save(result);
 
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("estimate", estimate.getId().toString()))
-            .body(resultSave);
+            .body(result);
     }
 
     /**

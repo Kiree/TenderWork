@@ -5,8 +5,11 @@ import com.tol.tenderwork.domain.Project;
 import com.tol.tenderwork.repository.ProjectRepository;
 import com.tol.tenderwork.repository.search.ProjectSearchRepository;
 import com.tol.tenderwork.web.DeleteController;
+import com.tol.tenderwork.web.SaveController;
+import com.tol.tenderwork.web.UpdateController;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
+import org.h2.command.dml.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +48,9 @@ public class ProjectResource {
     private ProjectSearchRepository projectSearchRepository;
 
     @Autowired
+    private SaveController saveController;
+
+    @Autowired
     private DeleteController deleteController;
 
     /**
@@ -59,8 +65,7 @@ public class ProjectResource {
         if (project.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("project", "idexists", "A new project cannot already have an ID")).body(null);
         }
-        Project result = projectRepository.save(project);
-        projectSearchRepository.save(result);
+        Project result = saveController.saveProjectToRepo(project);
         return ResponseEntity.created(new URI("/api/projects/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("project", result.getId().toString()))
             .body(result);
@@ -78,8 +83,9 @@ public class ProjectResource {
         if (project.getId() == null) {
             return createProject(project);
         }
-        Project result = projectRepository.save(project);
-        projectSearchRepository.save(result);
+
+        Project result = saveController.saveProjectToRepo(project);
+
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("project", project.getId().toString()))
             .body(result);

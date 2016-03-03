@@ -60,6 +60,9 @@ public class TaskResource {
     private UpdateController updateController;
 
     @Autowired
+    private SaveController saveController;
+
+    @Autowired
     private DeleteController deleteController;
 
     /**
@@ -76,7 +79,8 @@ public class TaskResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("task", "idexists", "A new task cannot already have an ID")).body(null);
         }
 
-        Task result = updateController.modifyTask(task);
+        //Tämä pitäisi olla OK - Petteri 3.3. 14:15
+        Task result = updateController.updateTask(task);
 
         return ResponseEntity.created(new URI("/api/tasks/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("task", result.getId().toString()))
@@ -97,7 +101,8 @@ public class TaskResource {
             return createTask(task);
         }
 
-        Task result = updateController.modifyTask(task);
+        //Tämä pitäisi olla ok - Petteri 3.3. 14:15
+        Task result = updateController.updateTask(task);
 
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("task", task.getId().toString()))
