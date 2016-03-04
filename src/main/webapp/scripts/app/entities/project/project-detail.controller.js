@@ -12,20 +12,23 @@ angular.module('tenderworkApp')
                 $scope.project = result;
             });
         };
-        // 768 is the limit for change
-        // @ 1200 is the max
+        // calculates the height for the doclocation description box at runtime, which is then set as the min- & max-height
+        // for both columns via ng-style.  items searched through are tagged with check-for-height
         var calculateHeight = function() {
+            var initial_value = 100;
+            $scope.calculated_height = initial_value;
             if($scope.project.docLocation===undefined) {
-                return 0;
+                return;
             }
-            var initial_value = 150;
-            var row_height = 8;
-            var width = $window.innerWidth < 1200 ? $window.innerWidth : 1200;
-            width = width < 768 ? 768 : width;
-            width = width < 992 ? 992 * .2 : width;
-            var multiplier = 1200 / width;
-            var approximate_rows = Math.ceil($scope.project.docLocation.length / (100 * multiplier));
-            return initial_value + (row_height * multiplier) * approximate_rows; //$scope.calculated_height = initial_value * multiplier;
+            var current_max = 0;
+            var current_height = 0;
+            $('.check-for-height').each(function(item) {
+                current_height = parseInt($(this).css('height'));
+                if (current_max < current_height) {
+                    current_max = current_height;
+                }
+            });
+            $scope.calculated_height = initial_value + current_max;
         };
 
         // takes float and rounds it to nearest whole or half
@@ -34,7 +37,7 @@ angular.module('tenderworkApp')
         };
 
         $scope.loadAll = function() {
-            $scope.calculated_height = calculateHeight();
+            calculateHeight();
             EstimateSearch.query({query:"ownerProject.id:" + $scope.project.id}, function(result) {
                 for (var i = 0; i < result.length; i++) {
                     if(result[i].resourcing !== null && entity.resourcing !== undefined) {
@@ -43,14 +46,14 @@ angular.module('tenderworkApp')
                     $scope.estimates.push(result[i]);
                 }
             });
-/*
-            Estimate.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
-                result = result.filter(filterByProjectId);
-                for (var i = 0; i < result.length; i++) {
-                    $scope.estimates.push(result[i]);
-                }
-            }); */
+            /*
+             Estimate.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+             $scope.links = ParseLinks.parse(headers('link'));
+             result = result.filter(filterByProjectId);
+             for (var i = 0; i < result.length; i++) {
+             $scope.estimates.push(result[i]);
+             }
+             }); */
         };
         $scope.reset = function() {
             $scope.page = 0;
