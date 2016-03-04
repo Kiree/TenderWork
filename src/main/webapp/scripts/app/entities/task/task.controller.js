@@ -2,8 +2,7 @@
 
 angular.module('tenderworkApp')
     .controller('TaskController', function ($scope, $state, Task, TaskSearch, ParseLinks) {
-
-        $scope.tasks = [];
+        $scope.tasks2 = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
@@ -11,13 +10,13 @@ angular.module('tenderworkApp')
             Task.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
-                    $scope.tasks.push(result[i]);
+                    $scope.tasks2.push(result[i]);
                 }
             });
         };
         $scope.reset = function() {
             $scope.page = 0;
-            $scope.tasks = [];
+            $scope.tasks2 = [];
             $scope.loadAll();
         };
         $scope.loadPage = function(page) {
@@ -29,7 +28,7 @@ angular.module('tenderworkApp')
 
         $scope.search = function () {
             TaskSearch.query({query: $scope.searchQuery}, function(result) {
-                $scope.tasks = result;
+                $scope.tasks2 = result;
             }, function(response) {
                 if(response.status === 404) {
                     $scope.loadAll();
