@@ -79,31 +79,41 @@ public class UpdateController {
     // Method for updating everything, when Estimate is updated //
 
     @Transactional
-    public Estimate updateEstimateCall(Estimate estimate){
+    public Estimate updateEstimateCall(Estimate estimate) {
 
         log.error("UpdateEstimate aloitus:");
         // Go through all of Estimate's requirements
 
-        // Kuten aiemmin, jostain syystä tämä Hash-set on aina tyhjä.
-        for(Requirement requirement : estimate.getHasRequirementss()) {
-            Requirement requirementHelper = requirementRepository.findOne(requirement.getId());
+        Estimate estimateHelper = estimateRepository.findOne(estimate.getId());
 
-            // Go through all of Requirement's tasks
-            for (Task task : requirementHelper.getHasTaskss()){
-                Task taskHelper = taskRepository.findOne(task.getId());
-                task = mathController.calculateTask(taskHelper, estimate);
-                Task resultTask = saveController.saveTaskToRepo(task);
-                requirement = mathController.calculateRequirement(resultTask);
-                log.error("Päivitettiin task {}", task);
+        if (estimateHelper.getHasRequirementss().isEmpty()) {
+            log.error("Estimatella ei ole Requirementteja: {}", estimateHelper);
+            return estimate;
+        } else {
+
+            // Kuten aiemmin, jostain syystä tämä Hash-set on aina tyhjä.
+            for (Requirement requirement : estimateHelper.getHasRequirementss()) {
+                Requirement requirementHelper = requirementRepository.findOne(requirement.getId());
+
+                // Go through all of Requirement's tasks
+                for (Task task : requirementHelper.getHasTaskss()) {
+                    Task taskHelper = taskRepository.findOne(task.getId());
+                    task = mathController.calculateTask(taskHelper, estimate);
+                    Task resultTask = saveController.saveTaskToRepo(task);
+                    requirement = mathController.calculateRequirement(resultTask);
+                    log.error("Päivitettiin task {}", task);
+                }
+                Requirement resultRequirement = saveController.saveRequirementToRepo(requirement);
+                estimate.addRequirement(resultRequirement);
+                log.error("Päivitettiin requ {}", requirement);
+
             }
-            Requirement resultRequirement = saveController.saveRequirementToRepo(requirement);
-            log.error("Päivitettiin requ {}", requirement);
+
+            log.error("UpdateEstimate lopetus");
+            estimate = mathController.calculateEstimate(estimate);
+            return estimate;
         }
-
-        log.error("UpdateEstimate lopetus");
-        return estimate;
     }
-
 
     /*
     @Transactional
@@ -170,7 +180,7 @@ public class UpdateController {
         //Update owner estimate totals
         Estimate estimateHelper = estimateRepository.findOne(task.getOwnerRequirement().getOwnerEstimate().getId());
         estimateHelper.addRequirement(requirementHelper);
-        estimateHelper = mathController.calculateEstimate(requirementHelper, estimateHelper);
+        estimateHelper = mathController.calculateEstimate(estimateHelper);
         saveController.saveEstimateToRepo(estimateHelper);
 
         //Update owner project edit information

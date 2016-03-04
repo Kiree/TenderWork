@@ -98,22 +98,11 @@ public class EstimateResource {
         }
 
 
-        // Check if the estimate being edited has no requirements:
 
-        //Jostain syystä tämä ehto täyttyy aina, eli ao. Hash-set on aina tyhjä.
-        if (estimate.getHasRequirementss().isEmpty()) {
-            //Do nothing to requirements
-            log.error("Estimate päivitys, requ oli tyhjä");
-            for (Requirement r : estimate.getHasRequirementss()) {
-                log.debug("Requirement oli: {}", r);
-            }
-        } else {
-            // Estimate has requirements, update said requirements
-            //log.error("Päästiin oikeaan iffiin.");
             estimate = updateController.updateEstimateCall(estimate);
-            //log.error("UpdateEstimatesta takaisin EstimateResourceen.");
+
             updateController.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
-        }
+
 
         // Save edited estimate
         Estimate result = estimateRepository.save(estimate);

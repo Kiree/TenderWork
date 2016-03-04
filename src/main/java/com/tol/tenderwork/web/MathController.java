@@ -60,8 +60,8 @@ public class MathController {
     // Methods that calculate changes to entities //
 
     @Transactional
-    public Estimate calculateEstimate(Requirement requirement, Estimate estimateHelper){
-        Estimate estimate = estimateRepository.findOne(requirement.getOwnerEstimate().getId());
+    public Estimate calculateEstimate(Estimate estimateHelper){
+        Estimate estimate = estimateRepository.findOne(estimateHelper.getId());
         estimate.setSpecificationFactor(estimateHelper.getSpecificationFactor());
         estimate.setImplementationFactor(estimateHelper.getImplementationFactor());
         estimate.setTestingFactor(estimateHelper.getTestingFactor());
