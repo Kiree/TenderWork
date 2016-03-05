@@ -55,6 +55,7 @@ angular.module('tenderworkApp')
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
+                        backdrop:'static',
                         templateUrl: 'scripts/app/entities/requirement/requirement-dialog.html',
                         controller: 'RequirementDialogController',
                         size: 'lg',
@@ -87,6 +88,7 @@ angular.module('tenderworkApp')
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
+                        backdrop:'static',
                         templateUrl: 'scripts/app/entities/requirement/requirement-dialog.html',
                         controller: 'RequirementDialogController',
                         size: 'lg',
