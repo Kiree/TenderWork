@@ -9,34 +9,14 @@
         },
         {
             "relationshipId": 2,
-            "relationshipName": "specificationFactor",
+            "relationshipName": "ownerEstimate",
             "otherEntityName": "estimate",
             "relationshipType": "many-to-one",
-            "otherEntityField": "specificationFactor"
+            "otherEntityField": "name"
         },
+
         {
             "relationshipId": 3,
-            "relationshipName": "implementationFactor",
-            "otherEntityName": "estimate",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "implementationFactor"
-        },
-        {
-            "relationshipId": 4,
-            "relationshipName": "testingFactor",
-            "otherEntityName": "estimate",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "testingFactor"
-        },
-        {
-            "relationshipId": 5,
-            "relationshipName": "synergyBenefit",
-            "otherEntityName": "estimate",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "synergyBenefit"
-        },
-        {
-            "relationshipId": 6,
             "relationshipName": "ownerRequirement",
             "otherEntityName": "requirement",
             "relationshipType": "many-to-one",

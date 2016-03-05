@@ -179,25 +179,25 @@
         -->
         <div class="form-group">
             <label translate="tenderworkApp.task.specificationFactor" for="field_specificationFactor">specificationFactor</label>
-            <select class="form-control" id="field_specificationFactor" name="specificationFactor" ng-model="task.specificationFactor" ng-options="estimate as estimate.specificationFactor for estimate in estimates track by estimate.id">
+            <select class="form-control" id="field_specificationFactor" name="specificationFactor" ng-model="task.ownerEstimate" ng-options="estimate as estimate.specificationFactor for estimate in estimates track by estimate.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label translate="tenderworkApp.task.implementationFactor" for="field_implementationFactor">implementationFactor</label>
-            <select class="form-control" id="field_implementationFactor" name="implementationFactor" ng-model="task.implementationFactor" ng-options="estimate as estimate.implementationFactor for estimate in estimates track by estimate.id">
+            <select class="form-control" id="field_implementationFactor" name="implementationFactor" ng-model="task.ownerEstimate" ng-options="estimate as estimate.implementationFactor for estimate in estimates track by estimate.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label translate="tenderworkApp.task.testingFactor" for="field_testingFactor">testingFactor</label>
-            <select class="form-control" id="field_testingFactor" name="testingFactor" ng-model="task.testingFactor" ng-options="estimate as estimate.testingFactor for estimate in estimates track by estimate.id">
+            <select class="form-control" id="field_testingFactor" name="testingFactor" ng-model="task.ownerEstimate" ng-options="estimate as estimate.testingFactor for estimate in estimates track by estimate.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label translate="tenderworkApp.task.synergyBenefit" for="field_synergyBenefit">synergyBenefit</label>
-            <select class="form-control" id="field_synergyBenefit" name="synergyBenefit" ng-model="task.synergyBenefit" ng-options="estimate as estimate.synergyBenefit for estimate in estimates track by estimate.id">
+            <select class="form-control" id="field_synergyBenefit" name="synergyBenefit" ng-model="task.ownerEstimate" ng-options="estimate as estimate.synergyBenefit for estimate in estimates track by estimate.id">
                 <option value=""></option>
             </select>
         </div>

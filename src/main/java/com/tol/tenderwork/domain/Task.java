@@ -81,20 +81,8 @@ public class Task implements Serializable {
     private User ownedBy;
 
     @ManyToOne
-    @JoinColumn(name = "specification_factor_id")
-    private Estimate specificationFactor;
-
-    @ManyToOne
-    @JoinColumn(name = "implementation_factor_id")
-    private Estimate implementationFactor;
-
-    @ManyToOne
-    @JoinColumn(name = "testing_factor_id")
-    private Estimate testingFactor;
-
-    @ManyToOne
-    @JoinColumn(name = "synergy_benefit_id")
-    private Estimate synergyBenefit;
+    @JoinColumn(name = "owner_estimate_id")
+    private Estimate ownerEstimate;
 
     @ManyToOne
     @JoinColumn(name = "owner_requirement_id")
@@ -212,36 +200,12 @@ public class Task implements Serializable {
         this.ownedBy = user;
     }
 
-    public Estimate getSpecificationFactor() {
-        return specificationFactor;
+    public Estimate getOwnerEstimate() {
+        return this.ownerEstimate;
     }
 
-    public void setSpecificationFactor(Estimate estimate) {
-        this.specificationFactor = estimate;
-    }
-
-    public Estimate getImplementationFactor() {
-        return implementationFactor;
-    }
-
-    public void setImplementationFactor(Estimate estimate) {
-        this.implementationFactor = estimate;
-    }
-
-    public Estimate getTestingFactor() {
-        return testingFactor;
-    }
-
-    public void setTestingFactor(Estimate estimate) {
-        this.testingFactor = estimate;
-    }
-
-    public Estimate getSynergyBenefit() {
-        return synergyBenefit;
-    }
-
-    public void setSynergyBenefit(Estimate estimate) {
-        this.synergyBenefit = estimate;
+    public void setOwnerEstimate(Estimate estimate) {
+        this.ownerEstimate = estimate;
     }
 
     public Requirement getOwnerRequirement() {

@@ -44,10 +44,10 @@ class="hidden-xs"                        translate="tenderworkApp.task.home.crea
                     <th jh-sort-by="synergyTotal"><span translate="tenderworkApp.task.synergyTotal">SynergyTotal</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="estimateTotal"><span translate="tenderworkApp.task.estimateTotal">EstimateTotal</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="ownedBy.login"><span translate="tenderworkApp.task.ownedBy">ownedBy</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="specificationFactor.specificationFactor"><span translate="tenderworkApp.task.specificationFactor">specificationFactor</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="implementationFactor.implementationFactor"><span translate="tenderworkApp.task.implementationFactor">implementationFactor</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="testingFactor.testingFactor"><span translate="tenderworkApp.task.testingFactor">testingFactor</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="synergyBenefit.synergyBenefit"><span translate="tenderworkApp.task.synergyBenefit">synergyBenefit</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ownerEstimate.specificationFactor"><span translate="tenderworkApp.task.specificationFactor">specificationFactor</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ownerEstimate.implementationFactor"><span translate="tenderworkApp.task.implementationFactor">implementationFactor</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ownerEstimate.testingFactor"><span translate="tenderworkApp.task.testingFactor">testingFactor</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ownerEstimate.synergyBenefit"><span translate="tenderworkApp.task.synergyBenefit">synergyBenefit</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="ownerRequirement.name"><span translate="tenderworkApp.task.ownerRequirement">ownerRequirement</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -71,16 +71,16 @@ class="hidden-xs"                        translate="tenderworkApp.task.home.crea
                         {{task.ownedBy.login}}
                     </td>
                     <td>
-                        <a ui-sref="estimate.detail({id:task.specificationFactor.id})">{{task.specificationFactor.specificationFactor}}</a>
+                        <a ui-sref="estimate.detail({id:task.ownerEstimate.id})">{{task.ownerEstimate.specificationFactor}}</a>
                     </td>
                     <td>
-                        <a ui-sref="estimate.detail({id:task.implementationFactor.id})">{{task.implementationFactor.implementationFactor}}</a>
+                        <a ui-sref="estimate.detail({id:task.ownerEstimate.id})">{{task.ownerEstimate.implementationFactor}}</a>
                     </td>
                     <td>
-                        <a ui-sref="estimate.detail({id:task.testingFactor.id})">{{task.testingFactor.testingFactor}}</a>
+                        <a ui-sref="estimate.detail({id:task.ownerEstimate.id})">{{task.ownerEstimate.testingFactor}}</a>
                     </td>
                     <td>
-                        <a ui-sref="estimate.detail({id:task.synergyBenefit.id})">{{task.synergyBenefit.synergyBenefit}}</a>
+                        <a ui-sref="estimate.detail({id:task.ownerEstimate.id})">{{task.ownerEstimate.synergyBenefit}}</a>
                     </td>
                     <td>
                         <a ui-sref="requirement.detail({id:task.ownerRequirement.id})">{{task.ownerRequirement.name}}</a>

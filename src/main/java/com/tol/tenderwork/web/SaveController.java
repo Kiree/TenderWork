@@ -79,7 +79,6 @@ public class SaveController {
     public Estimate saveEstimateToRepo(Estimate estimate) {
         Estimate result = estimateRepository.save(estimate);
         estimateSearchRepository.save(result);
-        //log.debug("ESTIMATE SAVED: {}", result.getId());
 
         return result;
     }

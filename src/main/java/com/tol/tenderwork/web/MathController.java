@@ -135,11 +135,6 @@ public class MathController {
     @Transactional
     public Task calculateTask(Task task, Estimate estimate) {
 
-        task.setImplementationFactor(estimate);
-        task.setSpecificationFactor(estimate);
-        task.setSpecificationFactor(estimate);
-        task.setSynergyBenefit(estimate);
-
         task.setSynergyTotal((float)0);
         if (task.getSynergyCheck() && task.getEstimateSynergy() != null && task.getEstimateSynergy() > 0) {
             float synergyHelper = task.getEstimateSynergy() * estimate.getSynergyBenefit();
