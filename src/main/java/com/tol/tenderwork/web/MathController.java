@@ -62,6 +62,7 @@ public class MathController {
     @Transactional
     public Estimate calculateEstimate(Estimate estimateHelper){
         Estimate estimate = estimateRepository.findOne(estimateHelper.getId());
+
         estimate.setSpecificationFactor(estimateHelper.getSpecificationFactor());
         estimate.setImplementationFactor(estimateHelper.getImplementationFactor());
         estimate.setTestingFactor(estimateHelper.getTestingFactor());
@@ -107,23 +108,28 @@ public class MathController {
         float totalTestingHelper = 0;
         float totalSynergyHelper = 0;
 
-        //log.debug("Laskussa taski loop alkaa");
-        for (Task t : tasks) {
-            totalDurationHelper = totalDurationHelper + t.getEstimateTotal();
-            totalSpecificationHelper = totalSpecificationHelper + t.getSpecificationTotal();
-            totalImplementationHelper = totalImplementationHelper + t.getImplementationTotal();
-            totalTestingHelper = totalTestingHelper + t.getTestingTotal();
-            totalSynergyHelper = totalSynergyHelper + t.getSynergyTotal();
+        if(requirement.getHasTaskss().isEmpty()) {
+            //log.debug("Requirementilla ei taskeja: {}", requirement);
+            return requirement;
+        } else {
+            //log.debug("Laskussa taski loop alkaa");
+            for (Task t : tasks) {
+                totalDurationHelper = totalDurationHelper + t.getEstimateTotal();
+                totalSpecificationHelper = totalSpecificationHelper + t.getSpecificationTotal();
+                totalImplementationHelper = totalImplementationHelper + t.getImplementationTotal();
+                totalTestingHelper = totalTestingHelper + t.getTestingTotal();
+                totalSynergyHelper = totalSynergyHelper + t.getSynergyTotal();
+            }
+
+            //log.debug("Laskussa setteri kutsut");
+            requirement.setTotalDuration(totalDurationHelper);
+            requirement.setDurationSpecification(totalSpecificationHelper);
+            requirement.setDurationImplementation(totalImplementationHelper);
+            requirement.setDurationTesting(totalTestingHelper);
+            requirement.setSynergyBenefit(totalSynergyHelper);
+
+            return requirement;
         }
-
-        //log.debug("Laskussa setteri kutsut");
-        requirement.setTotalDuration(totalDurationHelper);
-        requirement.setDurationSpecification(totalSpecificationHelper);
-        requirement.setDurationImplementation(totalImplementationHelper);
-        requirement.setDurationTesting(totalTestingHelper);
-        requirement.setSynergyBenefit(totalSynergyHelper);
-
-        return requirement;
     }
 
     @Transactional

@@ -1,18 +1,13 @@
 package com.tol.tenderwork.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.tol.tenderwork.domain.Project;
-import com.tol.tenderwork.domain.Estimate;
-import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.domain.Task;
 import com.tol.tenderwork.repository.RequirementRepository;
-import com.tol.tenderwork.repository.search.RequirementSearchRepository;
 import com.tol.tenderwork.repository.TaskRepository;
 import com.tol.tenderwork.repository.search.TaskSearchRepository;
 import com.tol.tenderwork.web.UpdateController;
 import com.tol.tenderwork.web.DeleteController;
 import com.tol.tenderwork.web.SaveController;
-import com.tol.tenderwork.web.MathController;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;

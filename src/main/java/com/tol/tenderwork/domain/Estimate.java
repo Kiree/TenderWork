@@ -5,6 +5,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -213,10 +214,14 @@ public class Estimate implements Serializable {
     }
 
     public void addRequirement(Requirement requirement) {
+        removeRequirement(requirement);
+        this.hasRequirementss.add(requirement);
+    }
+
+    public void removeRequirement(Requirement requirement) {
         if(this.hasRequirementss.contains(requirement)) {
             this.hasRequirementss.remove(requirement);
         }
-        this.hasRequirementss.add(requirement);
     }
 
     @Override

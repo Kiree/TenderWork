@@ -1,16 +1,12 @@
 package com.tol.tenderwork.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.tol.tenderwork.domain.Project;
 import com.tol.tenderwork.domain.Estimate;
-import com.tol.tenderwork.domain.Requirement;
-import com.tol.tenderwork.domain.Task;
 import com.tol.tenderwork.repository.EstimateRepository;
 import com.tol.tenderwork.repository.search.EstimateSearchRepository;
 import com.tol.tenderwork.web.UpdateController;
 import com.tol.tenderwork.web.DeleteController;
 import com.tol.tenderwork.web.SaveController;
-import com.tol.tenderwork.web.MathController;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -29,10 +25,8 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -97,10 +91,7 @@ public class EstimateResource {
             return createEstimate(estimate);
         }
 
-
-
             estimate = updateController.updateEstimateCall(estimate);
-
             updateController.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
 
 

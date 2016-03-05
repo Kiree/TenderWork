@@ -18,8 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 
 /**
@@ -87,7 +85,13 @@ public class UpdateController {
         Estimate estimateHelper = estimateRepository.findOne(estimate.getId());
 
         if (estimateHelper.getHasRequirementss().isEmpty()) {
+
             log.error("Estimatella ei ole Requirementteja: {}", estimateHelper);
+            estimate.setResourcing(null);
+            estimate.setTotalDuration(null);
+            estimate.setTotalPrice(null);
+            estimate.setTotalSynergyBenefit(null);
+
             return estimate;
         } else {
 
