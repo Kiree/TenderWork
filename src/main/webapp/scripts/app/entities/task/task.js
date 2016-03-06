@@ -55,6 +55,7 @@ angular.module('tenderworkApp')
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
+                        backdrop:'static',
                         templateUrl: 'scripts/app/entities/task/task-dialog.html',
                         controller: 'TaskDialogController',
                         size: 'lg',
@@ -92,6 +93,7 @@ angular.module('tenderworkApp')
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
+                        backdrop:'static',
                         templateUrl: 'scripts/app/entities/task/task-dialog.html',
                         controller: 'TaskDialogController',
                         size: 'lg',
