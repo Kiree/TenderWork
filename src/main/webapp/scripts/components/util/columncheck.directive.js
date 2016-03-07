@@ -14,21 +14,24 @@ angular.module('tenderworkApp')
            restrict:'A',
            link:
                function (scope, element, attrs) {
+                   scope.initial_value = scope.initial_value === undefined ? 0 : scope.initial_value;
                    if (scope.currentMaxHeight === null || scope.currentMaxHeight === undefined) {
                        scope.currentMaxHeight = 0;
                    }
-                   var initial_value = 100;
-                   if(attrs.tndrHeightMaxCheck!= "") {
-                       initial_value = parseInt(attrs.tndrHeightMaxCheck);
+                   var initial_value = attrs.tndrHeightMaxCheck !== "" ? parseInt(attrs.tndrHeightMaxCheck) : 0;
+                   scope.initial_value = initial_value > scope.initial_value ? initial_value : scope.initial_value;
+
+                   if(scope.calculated_max_height === null || scope.calculated_max_height === undefined) {
+                       scope.calculated_max_height = scope.initial_value;
                    }
-                   if(scope.calculated_max_height === null || scope.calculated_height === undefined) {
-                       scope.calculated_max_height = initial_value;
-                   }
+
                    var current_height = parseInt(element.height());
+
                    if (scope.currentMaxHeight < current_height) {
                        scope.currentMaxHeight = current_height;
-                       scope.calculated_max_height = initial_value + scope.currentMaxHeight;
+                       scope.calculated_max_height = scope.initial_value + scope.currentMaxHeight;
                    }
+
                }
            }
 }).directive('tndrHeightMaxTarget', function() {
@@ -36,7 +39,7 @@ angular.module('tenderworkApp')
         restrict:'A',
         link:
             function(scope, element, attrs) {
-                scope.$watch(scope.calculated_max_height, function() {
+                scope.$watch('calculated_max_height', function(newVal, oldVal) {
                     element.css('min-height', scope.calculated_max_height);
                     element.css('max-height', scope.calculated_max_height);
                 });

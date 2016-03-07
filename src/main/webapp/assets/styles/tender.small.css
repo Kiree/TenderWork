@@ -20,15 +20,4 @@
 
     }
 
-    div.height-hack {
-        display:table;
-    }
-
-    div.height-hack-cell {
-        float: none;
-        display: table-cell;
-        vertical-align: top;
-        overflow: hidden;
-    }
-
 }

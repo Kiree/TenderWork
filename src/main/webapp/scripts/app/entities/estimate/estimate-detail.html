@@ -30,62 +30,54 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12">
-                <div class="row height-hack">
-                    <div class="col-xs-12 col-sm-4 right-padder height-hack-cell">
-                        <div class="row desktop-border bg-desktop-white bg-mobile-white height-hack-content">
+                <div class="row" data-tndr-height-max-check>
+                    <div class="col-xs-12 col-sm-4 right-padder">
+                        <div class="row desktop-border bg-desktop-white bg-mobile-white" data-tndr-height-max-target>
+                            <div class="row" data-tndr-height-max-check>
+                                <div class="col-xs-12">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-header-field">
+                                            <span translate="tenderworkApp.estimate.totalPrice" class="projectdetail">TotalPrice</span>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span class="form-control-static">{{estimate.totalPrice}}</span>
+                                        </div>
+                                    </div>
 
-                        <div class="row">
-
-                        <div class="col-xs-12">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="col-sm-12 col-xs-6 padding-detail-header-field">
-                                    <span translate="tenderworkApp.estimate.totalPrice" class="projectdetail">TotalPrice</span>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-header-field">
+                                            <span translate="tenderworkApp.estimate.totalDuration" class="projectdetail">TotalDuration</span>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span class="form-control-static">{{estimate.totalDuration}}</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-sm-12 col-xs-6">
-                                    <span class="form-control-static">{{estimate.totalPrice}}</span>
+                                <div class="col-xs-12">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-header-field">
+                                            <span translate="tenderworkApp.estimate.resourcing" class="projectdetail">Resourcing</span>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span class="form-control-static">{{roundedResourcing}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-header-field">
+                                            <span translate="tenderworkApp.estimate.totalSynergyBenefit" class="projectdetail" ng-show="task.synergyCheck=='true'">TotalSynergyBenefit</span>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span class="form-control-static" ng-show="task.synergyCheck=='true'">{{estimate.totalSynergyBenefit}}</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="col-sm-12 col-xs-6 padding-detail-header-field">
-                                    <span translate="tenderworkApp.estimate.totalDuration" class="projectdetail">TotalDuration</span>
-                                </div>
-                                <div class="col-sm-12 col-xs-6">
-                                    <span class="form-control-static">{{estimate.totalDuration}}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="col-sm-12 col-xs-6 padding-detail-header-field">
-                                    <span translate="tenderworkApp.estimate.resourcing" class="projectdetail">Resourcing</span>
-                                </div>
-                                <div class="col-sm-12 col-xs-6">
-                                    <span class="form-control-static">{{roundedResourcing}}</span>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="col-sm-12 col-xs-6 padding-detail-header-field">
-                                    <span translate="tenderworkApp.estimate.totalSynergyBenefit" class="projectdetail" ng-show="task.synergyCheck=='true'">TotalSynergyBenefit</span>
-                                </div>
-                                <div class="col-sm-12 col-xs-6">
-                                    <span class="form-control-static" ng-show="task.synergyCheck=='true'">{{estimate.totalSynergyBenefit}}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        </div>
-
                         </div>
                     </div>
-
-
-
-                    <div class="col-xs-12 col-sm-4 height-hack-cell right-padder">
-                        <div class="row desktop-border bg-desktop-white bg-mobile-white height-hack-content">
-                            <div class="row">
+                    <div class="col-xs-12 col-sm-4 right-padder" data-tndr-height-max-check>
+                        <div class="row desktop-border bg-desktop-white bg-mobile-white" data-tndr-height-max-target>
+                            <div class="row" data-tndr-height-max-check>
                                 <div class="col-xs-12">
                                     <div class="col-xs-12 col-sm-6">
                                         <div class="col-sm-12 col-xs-6 padding-detail-header-field">
@@ -127,13 +119,9 @@
                                 </div>
                             </div>
                         </div>
-                        </div>
-
-
-
-
-                    <div class="col-xs-12 col-sm-4 height-hack-cell">
-                        <div class="row desktop-border bg-desktop-white bg-mobile-white height-hack-content">
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="row desktop-border bg-desktop-white bg-mobile-white" data-tndr-height-max-target>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="col-xs-12 col-sm-6">
@@ -154,28 +142,27 @@
                                         </div>
                                     </div>
 
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="col-sm-12 col-xs-6 padding-detail-header-field">
-                            <span translate="tenderworkApp.estimate.testingFactor" class="projectdetail">TestingFactor</span>
-                        </div>
-                                <div class="col-sm-12 col-xs-6">
-                            <span class="form-control-static">{{estimate.testingFactor}}</span>
-                        </div>
-                        </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-header-field">
+                                            <span translate="tenderworkApp.estimate.testingFactor" class="projectdetail">TestingFactor</span>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span class="form-control-static">{{estimate.testingFactor}}</span>
+                                        </div>
+                                    </div>
 
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="col-sm-12 col-xs-6 padding-detail-header-field">
-                                    <span translate="tenderworkApp.estimate.synergyBenefit" class="projectdetail">SynergyBenefit</span>
-                                </div>
-                                <div class="col-sm-12 col-xs-6">
-                                    <span class="form-control-static">{{estimate.synergyBenefit}}</span>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-header-field">
+                                            <span translate="tenderworkApp.estimate.synergyBenefit" class="projectdetail">SynergyBenefit</span>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-6">
+                                            <span class="form-control-static">{{estimate.synergyBenefit}}</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
                 </div>
             </div>
 
