@@ -12,24 +12,6 @@ angular.module('tenderworkApp')
                 $scope.project = result;
             });
         };
-        // calculates the height for the doclocation description box at runtime, which is then set as the min- & max-height
-        // for both columns via ng-style.  items searched through are tagged with check-for-height
-        var calculateHeight = function() {
-            var initial_value = 100;
-            $scope.calculated_height = initial_value;
-            if($scope.project.docLocation===undefined) {
-                return;
-            }
-            var current_max = 0;
-            var current_height = 0;
-            $('.check-for-height').each(function(item) {
-                current_height = parseInt($(this).css('height'));
-                if (current_max < current_height) {
-                    current_max = current_height;
-                }
-            });
-            $scope.calculated_height = initial_value + current_max;
-        };
 
         // takes float and rounds it to nearest whole or half
         var roundResourcing = function(resourcing) {
@@ -37,7 +19,6 @@ angular.module('tenderworkApp')
         };
 
         $scope.loadAll = function() {
-            calculateHeight();
             EstimateSearch.query({query:"ownerProject.id:" + $scope.project.id}, function(result) {
                 for (var i = 0; i < result.length; i++) {
                     if(result[i].resourcing !== null && entity.resourcing !== undefined) {
@@ -67,7 +48,7 @@ angular.module('tenderworkApp')
         $scope.loadAll();
 
         $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-            $scope.calculated_height = calculateHeight();
+        //    calculateHeight();
         });
 
         var unsubscribe = $rootScope.$on('tenderworkApp:projectUpdate', function(event, result) {
