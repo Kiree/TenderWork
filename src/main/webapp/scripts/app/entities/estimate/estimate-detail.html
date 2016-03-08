@@ -29,8 +29,8 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12">
-                <div class="row" data-tndr-height-max-check>
+            <div class="col-xs-12" data-tndr-height-max-check="estimate.synergyBenefit">
+                <div class="row">
                     <div class="col-xs-12 col-sm-4 right-padder">
                         <div class="row desktop-border bg-desktop-white bg-mobile-white" data-tndr-height-max-target>
                             <div class="row" data-tndr-height-max-check>
@@ -39,7 +39,7 @@
                                         <div class="col-sm-12 col-xs-6 padding-detail-header-field">
                                             <span translate="tenderworkApp.estimate.totalPrice" class="projectdetail">TotalPrice</span>
                                         </div>
-                                        <div class="col-sm-12 col-xs-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-text-field">
                                             <span class="form-control-static">{{estimate.totalPrice}}</span>
                                         </div>
                                     </div>
@@ -48,7 +48,7 @@
                                         <div class="col-sm-12 col-xs-6 padding-detail-header-field">
                                             <span translate="tenderworkApp.estimate.totalDuration" class="projectdetail">TotalDuration</span>
                                         </div>
-                                        <div class="col-sm-12 col-xs-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-text-field">
                                             <span class="form-control-static">{{estimate.totalDuration}}</span>
                                         </div>
                                     </div>
@@ -58,7 +58,7 @@
                                         <div class="col-sm-12 col-xs-6 padding-detail-header-field">
                                             <span translate="tenderworkApp.estimate.resourcing" class="projectdetail">Resourcing</span>
                                         </div>
-                                        <div class="col-sm-12 col-xs-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-text-field">
                                             <span class="form-control-static">{{roundedResourcing}}</span>
                                         </div>
                                     </div>
@@ -67,7 +67,7 @@
                                         <div class="col-sm-12 col-xs-6 padding-detail-header-field">
                                             <span translate="tenderworkApp.estimate.totalSynergyBenefit" class="projectdetail" ng-show="task.synergyCheck=='true'">TotalSynergyBenefit</span>
                                         </div>
-                                        <div class="col-sm-12 col-xs-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-text-field">
                                             <span class="form-control-static" ng-show="task.synergyCheck=='true'">{{estimate.totalSynergyBenefit}}</span>
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-4 right-padder" data-tndr-height-max-check>
+                    <div class="col-xs-12 col-sm-4 right-padder">
                         <div class="row desktop-border bg-desktop-white bg-mobile-white" data-tndr-height-max-target>
                             <div class="row" data-tndr-height-max-check>
                                 <div class="col-xs-12">
@@ -83,7 +83,7 @@
                                         <div class="col-sm-12 col-xs-6 padding-detail-header-field">
                                             <span translate="tenderworkApp.estimate.workdaysInMonth" class="projectdetail">WorkdaysInMonth</span>
                                         </div>
-                                        <div class="col-sm-12 col-xs-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-text-field">
                                             <span class="form-control-static">{{estimate.workdaysInMonth}}</span>
                                         </div>
                                     </div>
@@ -92,7 +92,7 @@
                                         <div class="col-sm-12 col-xs-6 padding-detail-header-field">
                                             <span translate="tenderworkApp.estimate.desiredProjectDuration" class="projectdetail">DesiredProjectDuration</span>
                                         </div>
-                                        <div class="col-sm-12 col-xs-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-text-field">
                                             <span class="form-control-static">{{estimate.desiredProjectDuration}}</span>
                                         </div>
                                     </div>
@@ -103,7 +103,7 @@
                                         <div class="col-sm-12 col-xs-6 padding-detail-header-field">
                                             <span translate="tenderworkApp.estimate.dailyPrice" class="projectdetail">DailyPrice</span>
                                         </div>
-                                        <div class="col-sm-12 col-xs-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-text-field">
                                             <span class="form-control-static">{{estimate.dailyPrice}}</span>
                                         </div>
                                     </div>
@@ -112,7 +112,7 @@
                                         <div class="col-sm-12 col-xs-6 padding-detail-header-field">
                                             <span translate="tenderworkApp.estimate.createdBy" class="projectdetail">createdBy</span>
                                         </div>
-                                        <div class="col-sm-12 col-xs-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-text-field">
                                             <span class="form-control-static">{{estimate.createdBy.login}}</span>
                                         </div>
                                     </div>
@@ -128,7 +128,7 @@
                                         <div class="col-sm-12 col-xs-6 padding-detail-header-field">
                                             <span translate="tenderworkApp.estimate.specificationFactor" class="projectdetail">SpecificationFactor</span>
                                         </div>
-                                        <div class="col-sm-12 col-xs-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-text-field">
                                             <span class="form-control-static">{{estimate.specificationFactor}}</span>
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@
                                         <div class="col-sm-12 col-xs-6 padding-detail-header-field">
                                             <span translate="tenderworkApp.estimate.implementationFactor" class="projectdetail">ImplementationFactor</span>
                                         </div>
-                                        <div class="col-sm-12 col-xs-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-text-field">
                                             <span class="form-control-static">{{estimate.implementationFactor}}</span>
                                         </div>
                                     </div>
@@ -146,7 +146,7 @@
                                         <div class="col-sm-12 col-xs-6 padding-detail-header-field">
                                             <span translate="tenderworkApp.estimate.testingFactor" class="projectdetail">TestingFactor</span>
                                         </div>
-                                        <div class="col-sm-12 col-xs-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-text-field">
                                             <span class="form-control-static">{{estimate.testingFactor}}</span>
                                         </div>
                                     </div>
@@ -155,7 +155,7 @@
                                         <div class="col-sm-12 col-xs-6 padding-detail-header-field">
                                             <span translate="tenderworkApp.estimate.synergyBenefit" class="projectdetail">SynergyBenefit</span>
                                         </div>
-                                        <div class="col-sm-12 col-xs-6">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-text-field">
                                             <span class="form-control-static">{{estimate.synergyBenefit}}</span>
                                         </div>
                                     </div>

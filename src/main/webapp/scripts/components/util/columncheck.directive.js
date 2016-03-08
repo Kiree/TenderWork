@@ -14,24 +14,21 @@ angular.module('tenderworkApp')
            restrict:'A',
            link:
                function (scope, element, attrs) {
-                   scope.initial_value = scope.initial_value === undefined ? 0 : scope.initial_value;
-                   if (scope.currentMaxHeight === null || scope.currentMaxHeight === undefined) {
-                       scope.currentMaxHeight = 0;
-                   }
-                   var initial_value = attrs.tndrHeightMaxCheck !== "" ? parseInt(attrs.tndrHeightMaxCheck) : 0;
-                   scope.initial_value = initial_value > scope.initial_value ? initial_value : scope.initial_value;
-
-                   if(scope.calculated_max_height === null || scope.calculated_max_height === undefined) {
-                       scope.calculated_max_height = scope.initial_value;
-                   }
-
-                   var current_height = parseInt(element.height());
-
-                   if (scope.currentMaxHeight < current_height) {
-                       scope.currentMaxHeight = current_height;
-                       scope.calculated_max_height = scope.initial_value + scope.currentMaxHeight;
-                   }
-
+                   var recalculate = function() {
+                       if (scope.currentMaxHeight === null || scope.currentMaxHeight === undefined) {
+                           scope.currentMaxHeight = 0;
+                       }
+                       var initial_value = 0;
+                       if(scope.calculated_max_height === null || scope.calculated_max_height === undefined) {
+                           scope.calculated_max_height = initial_value;
+                       }
+                       var current_height = parseInt(element.height());
+                       if (scope.currentMaxHeight < current_height) {
+                           scope.currentMaxHeight = current_height;
+                       }
+                       scope.calculated_max_height = initial_value + scope.currentMaxHeight;
+                   };
+                   scope.$watch(attrs.tndrHeightMaxCheck, recalculate);
                }
            }
 }).directive('tndrHeightMaxTarget', function() {
@@ -40,8 +37,10 @@ angular.module('tenderworkApp')
         link:
             function(scope, element, attrs) {
                 scope.$watch('calculated_max_height', function(newVal, oldVal) {
-                    element.css('min-height', scope.calculated_max_height);
-                    element.css('max-height', scope.calculated_max_height);
+                    if(!newVal) {
+                        return;
+                    }
+                    element.height(newVal);
                 });
             }
     }
