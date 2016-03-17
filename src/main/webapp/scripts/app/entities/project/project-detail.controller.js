@@ -20,11 +20,22 @@ angular.module('tenderworkApp')
 
         $scope.loadAll = function() {
             EstimateSearch.query({query:"ownerProject.id:" + $scope.project.id}, function(result) {
-                for (var i = 0; i < result.length; i++) {
+                var i;
+                var found;
+                var checkIfExists = function(e) {
+                    if(e.id === result[i].id) {
+                        return true;
+                    }
+                    return false;
+                };
+                for (i = 0; i < result.length; i++) {
                     if(result[i].resourcing !== null && entity.resourcing !== undefined) {
                         result[i].rounded = roundResourcing(result[i].resourcing);
                     }
-                    $scope.estimates.push(result[i]);
+                    found = $scope.estimates.some(checkIfExists);
+                    if(!found) {
+                        $scope.estimates.push(result[i]);
+                    }
                 }
             });
             /*
