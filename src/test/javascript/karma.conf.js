@@ -33,11 +33,23 @@ module.exports = function (config) {
             'main/webapp/bower_components/json3/lib/json3.js',
             'main/webapp/bower_components/ng-file-upload/ng-file-upload.js',
             'main/webapp/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
+            'main/webapp/bower_components/angularjs-slider/dist/rzslider.js',
             'main/webapp/bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'main/webapp/scripts/app/app.js',
-            'main/webapp/scripts/app/**/*.js',
+            'main/webapp/scripts/app/app.constants.js',
+            'main/webapp/bower_components/messageformat/locale/en.js',
+            'main/webapp/bower_components/messageformat/locale/fi.js',
             'main/webapp/scripts/components/**/*.+(js|html)',
+            'main/webapp/scripts/app/account/**/*.js',
+            'main/webapp/scripts/app/admin/**/*.js',
+            'main/webapp/scripts/app/error/**/*.js',
+            'main/webapp/scripts/app/entities/entity.js',
+            'main/webapp/scripts/app/main/**/*.js',
+            'main/webapp/scripts/app/entities/project/**/*.js',
+            'main/webapp/scripts/app/entities/estimate/**/*.js',
+            'main/webapp/scripts/app/entities/requirement/**/*.js',
+            'main/webapp/scripts/app/entities/task/**/*.js',
             'test/javascript/spec/helpers/module.js',
             'test/javascript/spec/helpers/httpBackend.js',
             'test/javascript/**/!(karma.conf|protractor.conf).js'
@@ -45,8 +57,23 @@ module.exports = function (config) {
 
 
         // list of files / patterns to exclude
-        exclude: ['test/javascript/e2e/**'],
+        exclude: ['test/javascript/e2e/**'
 
+
+
+        ],
+/*
+ 'main/webapp/scripts/app/entities/estimate/estimate.controller.js',
+ 'main/webapp/scripts/app/entities/estimate/estimate-delete-dialog.controller.js',
+ 'main/webapp/scripts/app/entities/estimate/estimate-detail.controller.js',
+ 'main/webapp/scripts/app/entities/estimate/estimate-dialog.controller.js',
+
+ 'main/webapp/scripts/app/entities/requirement/requirement.controller.js',
+ 'main/webapp/scripts/app/entities/requirement/requirement-delete-dialog.controller.js',
+ 'main/webapp/scripts/app/entities/requirement/requirement-detail.controller.js',
+ 'main/webapp/scripts/app/entities/requirement/requirement-dialog.controller.js'
+
+*/
         preprocessors: {
             './**/*.js': ['coverage']
         },
@@ -54,12 +81,12 @@ module.exports = function (config) {
         reporters: ['dots', 'jenkins', 'coverage', 'progress'],
 
         jenkinsReporter: {
-            
+
             outputFile: '../target/test-results/karma/TESTS-results.xml'
         },
 
         coverageReporter: {
-            
+
             dir: '../target/test-results/coverage',
             reporters: [
                 {type: 'lcov', subdir: 'report-lcov'}
