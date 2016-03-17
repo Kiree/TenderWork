@@ -5,7 +5,7 @@ describe('Controller Tests', function() {
     describe('Estimate Detail Controller', function() {
         var $scope, $rootScope;
         var MockEntity, MockEstimate, MockUser, MockProject, MockRequirement;
-        var createController;
+        var createController, $controller;
 
         beforeEach(inject(function($injector) {
             $rootScope = $injector.get('$rootScope');
@@ -15,7 +15,6 @@ describe('Controller Tests', function() {
             MockUser = jasmine.createSpy('MockUser');
             MockProject = jasmine.createSpy('MockProject');
             MockRequirement = jasmine.createSpy('MockRequirement');
-            
 
             var locals = {
                 '$scope': $scope,
@@ -42,6 +41,14 @@ describe('Controller Tests', function() {
                 $scope.$destroy();
                 expect($rootScope.$$listenerCount[eventType]).toBeUndefined();
             });
+        });
+
+        describe('Some test LOL', function() {
+           it('tests', function() {
+               createController();
+               expect($scope.roundResourcing(.7)).toEqual(1);
+               expect($scope.roundResourcing(.1)).toEqual(.5);
+           });
         });
     });
 
