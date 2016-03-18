@@ -11,10 +11,10 @@ div.border-hack {
 }
 
 .desktop-border {
-    border-top: 1px solid #cf00cf;
-    border-right: 2px solid #cf00cf;
-    border-left: 1px solid #cf00cf;
-    border-bottom: 2px solid #cf00cf;
+    border-top: 1px solid #c0c0c0;
+    border-right: 2px solid #c0c0c0;
+    border-left: 1px solid #c0c0c0;
+    border-bottom: 2px solid #c0c0c0;
     border-radius: 4px 4px 12px 6px;
 }
 
@@ -29,6 +29,8 @@ div.right-padder {
 div.bg-always-white {
     background-color:#ffffff !important;
 }
+
+
 
 div.bg-always-gray {
     background-color:#f9f9f9 !important;
@@ -61,6 +63,10 @@ div.description-text-field {
     padding-top:8px;
 }
 
+div.reqtitle-text-field {
+    padding-top:15px;
+}
+
 div.bottom-border-1 {
     border-bottom: 1px solid #cfcfcf;
 }
@@ -69,6 +75,22 @@ div.bottom-border-1 {
     bottom: 15px;
     position: relative;
     top: 15px;
+}
+
+.btn-newrequirement{
+    bottom: 7px;
+    position: relative;
+    top: 20px;
+}
+
+.btn-newtask{
+    bottom: 15px;
+    position: relative;
+    top: 20px;
+}
+
+div.btn-bottom{
+    padding-bottom:5px;
 }
 
 span.requirementlisting{

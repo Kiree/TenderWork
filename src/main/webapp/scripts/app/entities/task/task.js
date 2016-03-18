@@ -48,8 +48,8 @@ angular.module('tenderworkApp')
                 }
             })
             .state('task.new', {
-                parent: 'task',
-                url: '/new',
+                parent: 'estimate.detail',
+                url: '/task/new',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -79,9 +79,9 @@ angular.module('tenderworkApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('task', null, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.id }, { reload: true });
                     }, function() {
-                        $state.go('task');
+                        $state.go('estimate.detail', { id:$stateParams.id });
                     })
                 }]
             })

@@ -41,6 +41,7 @@ angular.module('tenderworkApp')
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('estimate');
                         $translatePartialLoader.addPart('requirement');
+                        $translatePartialLoader.addPart('task');
                         return $translate.refresh();
                     }],
                     entity: ['$stateParams', 'Estimate', function($stateParams, Estimate) {
