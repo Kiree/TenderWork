@@ -50,6 +50,9 @@ angular.module('tenderworkApp')
             .state('task.new', {
                 parent: 'estimate.detail',
                 url: '/task/new',
+                params: {
+                    requirementId:null
+                },
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -86,7 +89,7 @@ angular.module('tenderworkApp')
                 }]
             })
             .state('task.edit', {
-                parent: 'task',
+                parent: 'estimate.detail',
                 url: '/{id}/edit',
                 data: {
                     authorities: ['ROLE_USER'],
@@ -103,14 +106,14 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('task', null, { reload: true });
+                        $state.go('estimate.detail', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
                 }]
             })
             .state('task.delete', {
-                parent: 'task',
+                parent: 'estimate.detail',
                 url: '/{id}/delete',
                 data: {
                     authorities: ['ROLE_USER'],
@@ -126,7 +129,7 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('task', null, { reload: true });
+                        $state.go('estimate.detail', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })

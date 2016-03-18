@@ -3,25 +3,73 @@
 angular.module('tenderworkApp').controller('TaskDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Task', 'User', 'Principal', 'Estimate', 'Requirement',
         function($scope, $stateParams, $uibModalInstance, entity, Task, User, Principal, Estimate, Requirement) {
-
         $scope.task = entity;
         $scope.users = User.query();
-        $scope.estimates = Estimate.query();
-            // this does nothing as of yet, need to finish html views
+        var setDefaultsForTask = function() {
+            if($scope.task === null) {
+                return;
+            }
+            $scope.task.ownerEstimate = $scope.estimateLinkedToTask;
+            $scope.task.ownerRequirement = $scope.requirementLinkedToTask;
+        };
 
-        $scope.requirements = Requirement.query();/*.$promise.then(function(results) {
-            results.some(function(item) {
-                console.log(item.id);
-                if(item.id == $stateParams.id) {
-                    Estimate.get({id:item.ownerEstimate.id}, function(estimate) {
-                       console.log(estimate.id);
-                    });
-                    $scope.attachToRequirement = item;
-                    return true;
+        // creates a copy of a resource object stripping unnecessary info
+        // params: Requirement   Resource-object
+        var copyRequirement = function(inputResource) {
+            return {
+                id:inputResource.id,
+                description:inputResource.description,
+                durationImplementation:inputResource.durationImplementation,
+                durationSpecification:inputResource.durationSpecification,
+                durationTesting:inputResource.durationTesting,
+                name:inputResource.name,
+                owner:inputResource.owner,
+                ownerEstimate:inputResource.ownerEstimate,
+                synergyBenefit:inputResource.synergyBenefit,
+                totalDuration:inputResource.totalDuration
+            }
+        };
+
+        // creates a copy of a estimate resource stripping bunch of stuff
+        // params: Estimate Resource-object
+        var copyEstimate = function(inputResource) {
+            return {
+                createdBy:inputResource.createdBy,
+                dailyPrice:inputResource.dailyPrice,
+                desiredProjectDuration:inputResource.desiredProjectDuration,
+                id:inputResource.id,
+                implementationFactor:inputResource.implementationFactor,
+                ownerProject:inputResource.ownerProject,
+                resourcing:inputResource.resourcing,
+                specificationFactor:inputResource.specificationFactor,
+                synergyBenefit:inputResource.synergyBenefit,
+                testingFactor:inputResource.testingFactor,
+                totalDuration:inputResource.totalDuration,
+                totalPrice:inputResource.totalPrice,
+                totalSynergyBenefit:inputResource.totalSynergyBenefit,
+                workdaysInMonth:inputResource.workdaysInMonth
+            }
+        };
+
+        // this does nothing as of yet, need to finish html views
+        Requirement.get({id:$stateParams.requirementId}, function(responseRequirement) {
+            if(responseRequirement === null) {
+                $scope.requirementLinkedToTask = null;
+                $scope.estimateLinkedToTask = null;
+                return;
+            }
+            $scope.requirementLinkedToTask = copyRequirement(responseRequirement);
+            $scope.requirements = [$scope.requirementLinkedToTask];
+            Estimate.get({id:responseRequirement.ownerEstimate.id}, function(responseEstimate) {
+                if(responseEstimate === null) {
+                    return;
                 }
+                $scope.estimateLinkedToTask = copyEstimate(responseEstimate);
+                $scope.estimates = [$scope.estimateLinkedToTask];
+                setDefaultsForTask();
             });
-            return results;
-        });*/
+        });
+
         $scope.load = function(id) {
             Task.get({id : id}, function(result) {
                 $scope.task = result;

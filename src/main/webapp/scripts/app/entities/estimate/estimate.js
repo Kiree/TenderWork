@@ -63,7 +63,6 @@ angular.module('tenderworkApp')
                         size: 'lg',
                         resolve: {
                             entity: function () {
-                                console.log("entity");
                                 return {
                                     workdaysInMonth: null,
                                     desiredProjectDuration: null,

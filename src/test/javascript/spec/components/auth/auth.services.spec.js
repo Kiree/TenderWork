@@ -22,7 +22,7 @@ describe('Service Tests', function () {
             $httpBackend.verifyNoOutstandingExpectation();
             $httpBackend.verifyNoOutstandingRequest();
         });
-        
+
         it('should call backend on logout then call authServerProvider.logout', function(){
             //GIVEN
             //Set spy
