@@ -4,8 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.tol.tenderwork.domain.Project;
 import com.tol.tenderwork.repository.ProjectRepository;
 import com.tol.tenderwork.repository.search.ProjectSearchRepository;
-import com.tol.tenderwork.web.DeleteController;
-import com.tol.tenderwork.web.SaveController;
+import com.tol.tenderwork.service.DeleteService;
+import com.tol.tenderwork.service.SaveService;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -46,10 +46,10 @@ public class ProjectResource {
     private ProjectSearchRepository projectSearchRepository;
 
     @Autowired
-    private SaveController saveController;
+    private SaveService saveService;
 
     @Autowired
-    private DeleteController deleteController;
+    private DeleteService deleteService;
 
     /**
      * POST  /projects -> Create a new project.
@@ -63,7 +63,7 @@ public class ProjectResource {
         if (project.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("project", "idexists", "A new project cannot already have an ID")).body(null);
         }
-        Project result = saveController.saveProjectToRepo(project);
+        Project result = saveService.saveProjectToRepo(project);
         return ResponseEntity.created(new URI("/api/projects/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("project", result.getId().toString()))
             .body(result);
@@ -82,7 +82,7 @@ public class ProjectResource {
             return createProject(project);
         }
 
-        Project result = saveController.saveProjectToRepo(project);
+        Project result = saveService.saveProjectToRepo(project);
 
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("project", project.getId().toString()))
@@ -130,7 +130,7 @@ public class ProjectResource {
     @Timed
     public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
         log.debug("REST request to delete Project : {}", id);
-        deleteController.deleteProject(id);
+        deleteService.deleteProject(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("project", id.toString())).build();
     }
 

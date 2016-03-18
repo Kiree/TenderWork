@@ -1,4 +1,4 @@
-package com.tol.tenderwork.web;
+package com.tol.tenderwork.service;
 
 import com.tol.tenderwork.domain.*;
 import com.tol.tenderwork.repository.EstimateRepository;
@@ -28,11 +28,11 @@ import java.time.ZonedDateTime;
 
 @Service
 @Transactional
-public class UpdateController {
+public class UpdateService {
 
     // Logger for debugging the class //
 
-   private final Logger log = LoggerFactory.getLogger(UpdateController.class);
+   private final Logger log = LoggerFactory.getLogger(UpdateService.class);
 
     // Entity repositories //
 
@@ -61,17 +61,17 @@ public class UpdateController {
     private ProjectSearchRepository projectSearchRepository;
 
     @Autowired
-    private MathController mathController;
+    private MathService mathService;
 
     @Autowired
-    private SaveController saveController;
+    private SaveService saveService;
 
     @Transactional
     public void updateProject(Project project, User user){
         project.setEditedBy(user);
         project.setEditedDate(ZonedDateTime.now());
 
-        Project result = saveController.saveProjectToRepo(project);
+        Project result = saveService.saveProjectToRepo(project);
     }
 
     // Method for updating everything, when Estimate is updated //
@@ -102,19 +102,19 @@ public class UpdateController {
                 // Go through all of Requirement's tasks
                 for (Task task : requirementHelper.getHasTaskss()) {
                     Task taskHelper = taskRepository.findOne(task.getId());
-                    task = mathController.calculateTask(taskHelper, estimate);
-                    Task resultTask = saveController.saveTaskToRepo(task);
-                    requirement = mathController.calculateRequirement(resultTask);
+                    task = mathService.calculateTask(taskHelper, estimate);
+                    Task resultTask = saveService.saveTaskToRepo(task);
+                    requirement = mathService.calculateRequirement(resultTask);
                     log.error("Päivitettiin task {}", task);
                 }
-                Requirement resultRequirement = saveController.saveRequirementToRepo(requirement);
+                Requirement resultRequirement = saveService.saveRequirementToRepo(requirement);
                 estimate.addRequirement(resultRequirement);
                 log.error("Päivitettiin requ {}", requirement);
 
             }
 
             log.error("UpdateEstimate lopetus");
-            estimate = mathController.calculateEstimate(estimate);
+            estimate = mathService.calculateEstimate(estimate);
             return estimate;
         }
     }
@@ -172,20 +172,20 @@ public class UpdateController {
     public Task updateTask(Task task) {
 
         //Calculate the new values for the task
-        task = mathController.calculateTask(task, estimateRepository.findOne(task.getOwnerRequirement().getOwnerEstimate().getId()));
-        Task result = saveController.saveTaskToRepo(task);
+        task = mathService.calculateTask(task, estimateRepository.findOne(task.getOwnerRequirement().getOwnerEstimate().getId()));
+        Task result = saveService.saveTaskToRepo(task);
 
         //Update owner requirement totals
         Requirement requirementHelper = requirementRepository.findOne(task.getOwnerRequirement().getId());
         requirementHelper.addTask(task);
-        requirementHelper = mathController.calculateRequirement(task);
-        saveController.saveRequirementToRepo(requirementHelper);
+        requirementHelper = mathService.calculateRequirement(task);
+        saveService.saveRequirementToRepo(requirementHelper);
 
         //Update owner estimate totals
         Estimate estimateHelper = estimateRepository.findOne(task.getOwnerRequirement().getOwnerEstimate().getId());
         estimateHelper.addRequirement(requirementHelper);
-        estimateHelper = mathController.calculateEstimate(estimateHelper);
-        saveController.saveEstimateToRepo(estimateHelper);
+        estimateHelper = mathService.calculateEstimate(estimateHelper);
+        saveService.saveEstimateToRepo(estimateHelper);
 
         //Update owner project edit information
         updateProject(task.getOwnerRequirement().getOwnerEstimate().getOwnerProject(), task.getOwnedBy());
@@ -199,10 +199,10 @@ public class UpdateController {
         //Find the owner estimate
         Estimate estimateHelper = estimateRepository.findOne(requirement.getOwnerEstimate().getId());
         estimateHelper.addRequirement(requirement);
-        saveController.saveEstimateToRepo(estimateHelper);
+        saveService.saveEstimateToRepo(estimateHelper);
 
         //Save the result of the update to the repository
-        Requirement result = saveController.saveRequirementToRepo(requirement);
+        Requirement result = saveService.saveRequirementToRepo(requirement);
 
         //Update Project edit information
         updateProject(requirement.getOwnerEstimate().getOwnerProject(), requirement.getOwner());

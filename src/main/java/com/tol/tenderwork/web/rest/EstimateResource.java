@@ -4,9 +4,9 @@ import com.codahale.metrics.annotation.Timed;
 import com.tol.tenderwork.domain.Estimate;
 import com.tol.tenderwork.repository.EstimateRepository;
 import com.tol.tenderwork.repository.search.EstimateSearchRepository;
-import com.tol.tenderwork.web.UpdateController;
-import com.tol.tenderwork.web.DeleteController;
-import com.tol.tenderwork.web.SaveController;
+import com.tol.tenderwork.service.UpdateService;
+import com.tol.tenderwork.service.DeleteService;
+import com.tol.tenderwork.service.SaveService;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -48,13 +48,13 @@ public class EstimateResource {
     private EstimateSearchRepository estimateSearchRepository;
 
     @Autowired
-    private UpdateController updateController;
+    private UpdateService updateService;
 
     @Autowired
-    private SaveController saveController;
+    private SaveService saveService;
 
     @Autowired
-    private DeleteController deleteController;
+    private DeleteService deleteService;
 
     /**
      * POST  /estimates -> Create a new estimate.
@@ -69,8 +69,8 @@ public class EstimateResource {
         if (estimate.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("estimate", "idexists", "A new estimate cannot already have an ID")).body(null);
         }
-        Estimate result = saveController.saveEstimateToRepo(estimate);
-        updateController.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
+        Estimate result = saveService.saveEstimateToRepo(estimate);
+        updateService.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
 
         return ResponseEntity.created(new URI("/api/estimates/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("estimate", result.getId().toString()))
@@ -91,8 +91,8 @@ public class EstimateResource {
             return createEstimate(estimate);
         }
 
-            estimate = updateController.updateEstimateCall(estimate);
-            updateController.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
+            estimate = updateService.updateEstimateCall(estimate);
+            updateService.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
 
 
         // Save edited estimate
@@ -146,7 +146,7 @@ public class EstimateResource {
     public ResponseEntity<Void> deleteEstimate(@PathVariable Long id) {
         log.debug("REST request to delete Estimate : {}", id);
 
-        deleteController.deleteEstimate(id);
+        deleteService.deleteEstimate(id);
 
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("estimate", id.toString())).build();
     }

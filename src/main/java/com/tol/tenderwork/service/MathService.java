@@ -1,4 +1,4 @@
-package com.tol.tenderwork.web;
+package com.tol.tenderwork.service;
 
 import com.tol.tenderwork.domain.*;
 import com.tol.tenderwork.repository.EstimateRepository;
@@ -29,7 +29,7 @@ import java.util.Set;
  */
 @Service
 @Transactional
-public class MathController {
+public class MathService {
 
     // Entity repositories //
 

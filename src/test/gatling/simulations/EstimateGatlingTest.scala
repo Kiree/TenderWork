@@ -67,7 +67,7 @@ class EstimateGatlingTest extends Simulation {
             .exec(http("Create new estimate")
             .post("/api/estimates")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "workdaysInMonth":"0", "desiredProjectDuration":"0", "dailyPrice":null, "specificationFactor":null, "testingFactor":null, "implementationFactor":null, "synergyBenefit":null, "totalPrice":null, "totalDuration":"0", "resourcing":"0", "totalSynergyBenefit":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "workdaysInMonth":"0", "desiredProjectDuration":"0", "dailyPrice":"0", "specificationFactor":"1", "testingFactor":"1", "implementationFactor":"1", "synergyBenefit":"0", "totalPrice":"0", "totalDuration":"0", "resourcing":"0", "totalSynergyBenefit":"0"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_estimate_url")))
             .pause(10)

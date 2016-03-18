@@ -4,9 +4,9 @@ import com.codahale.metrics.annotation.Timed;
 import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.repository.RequirementRepository;
 import com.tol.tenderwork.repository.search.RequirementSearchRepository;
-import com.tol.tenderwork.web.DeleteController;
-import com.tol.tenderwork.web.SaveController;
-import com.tol.tenderwork.web.UpdateController;
+import com.tol.tenderwork.service.DeleteService;
+import com.tol.tenderwork.service.SaveService;
+import com.tol.tenderwork.service.UpdateService;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -47,13 +47,13 @@ public class RequirementResource {
     private RequirementSearchRepository requirementSearchRepository;
 
     @Autowired
-    private UpdateController updateController;
+    private UpdateService updateService;
 
     @Autowired
-    private SaveController saveController;
+    private SaveService saveService;
 
     @Autowired
-    private DeleteController deleteController;
+    private DeleteService deleteService;
 
     /**
      * POST  /requirements -> Create a new requirement.
@@ -69,7 +69,7 @@ public class RequirementResource {
         }
 
         //Tämä pitäisi olla ok - Petteri 3.3. - 14:29
-        Requirement result = updateController.updateRequirement(requirement);
+        Requirement result = updateService.updateRequirement(requirement);
 
         return ResponseEntity.created(new URI("/api/requirements/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("requirement", result.getId().toString()))
@@ -90,7 +90,7 @@ public class RequirementResource {
         }
 
         //Tämä pitäisi olla ok - Petteri 3.3. 14:30
-        Requirement result = updateController.updateRequirement(requirement);
+        Requirement result = updateService.updateRequirement(requirement);
 
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("requirement", requirement.getId().toString()))
@@ -138,7 +138,7 @@ public class RequirementResource {
     @Timed
     public ResponseEntity<Void> deleteRequirement(@PathVariable Long id) {
         log.debug("REST request to delete Requirement : {}", id);
-        deleteController.deleteRequirement(id);
+        deleteService.deleteRequirement(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("requirement", id.toString())).build();
     }
 

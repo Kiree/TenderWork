@@ -1,4 +1,4 @@
-package com.tol.tenderwork.web;
+package com.tol.tenderwork.service;
 
 import com.tol.tenderwork.domain.*;
 import com.tol.tenderwork.repository.EstimateRepository;
@@ -25,7 +25,7 @@ import javax.inject.Inject;
  */
 @Service
 @Transactional
-public class DeleteController {
+public class DeleteService {
 
     @Inject
     private TaskRepository taskRepository;
@@ -52,13 +52,13 @@ public class DeleteController {
     private ProjectSearchRepository projectSearchRepository;
 
     @Autowired
-    private UpdateController updateController;
+    private UpdateService updateService;
 
     @Autowired
-    private MathController mathController;
+    private MathService mathService;
 
     @Autowired
-    private SaveController saveController;
+    private SaveService saveService;
 
     @Transactional
     public void deleteTask(Long id){
@@ -68,18 +68,18 @@ public class DeleteController {
         // Update owner requirement
         Requirement requirement = requirementRepository.findOne(task.getOwnerRequirement().getId());
         requirement.removeTask(task);
-        requirement = mathController.calculateRequirement(task);
-        saveController.saveRequirementToRepo(requirement);
+        requirement = mathService.calculateRequirement(task);
+        saveService.saveRequirementToRepo(requirement);
 
         // Update owner estimate
-        Estimate estimate = mathController.calculateEstimate(requirement.getOwnerEstimate());
-        saveController.saveEstimateToRepo(estimate);
+        Estimate estimate = mathService.calculateEstimate(requirement.getOwnerEstimate());
+        saveService.saveEstimateToRepo(estimate);
 
         taskRepository.delete(id);
         taskSearchRepository.delete(id);
 
         // Call to update owner project's edit information
-        updateController.updateProject(task.getOwnerRequirement().getOwnerEstimate().getOwnerProject(), task.getOwnedBy());
+        updateService.updateProject(task.getOwnerRequirement().getOwnerEstimate().getOwnerProject(), task.getOwnedBy());
     }
 
     @Transactional
@@ -101,7 +101,7 @@ public class DeleteController {
         estimateSearchRepository.delete(id);
 
         // Call to update owner project's edit information
-        updateController.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
+        updateService.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
     }
 
     @Transactional
@@ -118,14 +118,14 @@ public class DeleteController {
         // Update owner estimate
         Estimate estimate = estimateRepository.findOne(requirement.getOwnerEstimate().getId());
         estimate.removeRequirement(requirement);
-        estimate = mathController.calculateEstimate(estimate);
-        saveController.saveEstimateToRepo(estimate);
+        estimate = mathService.calculateEstimate(estimate);
+        saveService.saveEstimateToRepo(estimate);
 
         requirementRepository.delete(id);
         requirementSearchRepository.delete(id);
 
         // Call to update owner project's edit information
-        updateController.updateProject(requirement.getOwnerEstimate().getOwnerProject(), requirement.getOwner());
+        updateService.updateProject(requirement.getOwnerEstimate().getOwnerProject(), requirement.getOwner());
     }
 
     @Transactional

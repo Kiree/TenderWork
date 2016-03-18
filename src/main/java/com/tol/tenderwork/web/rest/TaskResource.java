@@ -5,9 +5,9 @@ import com.tol.tenderwork.domain.Task;
 import com.tol.tenderwork.repository.RequirementRepository;
 import com.tol.tenderwork.repository.TaskRepository;
 import com.tol.tenderwork.repository.search.TaskSearchRepository;
-import com.tol.tenderwork.web.UpdateController;
-import com.tol.tenderwork.web.DeleteController;
-import com.tol.tenderwork.web.SaveController;
+import com.tol.tenderwork.service.UpdateService;
+import com.tol.tenderwork.service.DeleteService;
+import com.tol.tenderwork.service.SaveService;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -52,13 +52,13 @@ public class TaskResource {
     private RequirementRepository requirementRepository;
 
     @Autowired
-    private UpdateController updateController;
+    private UpdateService updateService;
 
     @Autowired
-    private SaveController saveController;
+    private SaveService saveService;
 
     @Autowired
-    private DeleteController deleteController;
+    private DeleteService deleteService;
 
     /**
      * POST  /tasks -> Create a new task.
@@ -75,7 +75,7 @@ public class TaskResource {
         }
 
         //Tämä pitäisi olla OK - Petteri 3.3. 14:15
-        Task result = updateController.updateTask(task);
+        Task result = updateService.updateTask(task);
 
         return ResponseEntity.created(new URI("/api/tasks/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("task", result.getId().toString()))
@@ -97,7 +97,7 @@ public class TaskResource {
         }
 
         //Tämä pitäisi olla ok - Petteri 3.3. 14:15
-        Task result = updateController.updateTask(task);
+        Task result = updateService.updateTask(task);
 
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("task", task.getId().toString()))
@@ -148,7 +148,7 @@ public class TaskResource {
         log.debug("REST request to delete Task : {}", id);
 
         //Delete the task
-        deleteController.deleteTask(id);
+        deleteService.deleteTask(id);
         log.debug("Deleted task {}", id);
 
         //Force the Owner Requirement to update its values
