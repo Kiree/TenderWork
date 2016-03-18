@@ -76,6 +76,11 @@ public class Project implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Estimate> hasEstimatess = new HashSet<>();
 
+    @ManyToMany(mappedBy = "belongsToProjectss")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Tag> hasTagss = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -178,6 +183,14 @@ public class Project implements Serializable {
 
     public void setHasEstimatess(Set<Estimate> estimates) {
         this.hasEstimatess = estimates;
+    }
+
+    public Set<Tag> getHasTagss() {
+        return hasTagss;
+    }
+
+    public void setHasTagss(Set<Tag> tags) {
+        this.hasTagss = tags;
     }
 
     @Override

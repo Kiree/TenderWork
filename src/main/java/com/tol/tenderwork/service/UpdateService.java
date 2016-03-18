@@ -5,6 +5,7 @@ import com.tol.tenderwork.repository.EstimateRepository;
 import com.tol.tenderwork.repository.ProjectRepository;
 import com.tol.tenderwork.repository.RequirementRepository;
 import com.tol.tenderwork.repository.TaskRepository;
+import com.tol.tenderwork.repository.TagRepository;
 import com.tol.tenderwork.repository.search.EstimateSearchRepository;
 import com.tol.tenderwork.repository.search.ProjectSearchRepository;
 import com.tol.tenderwork.repository.search.RequirementSearchRepository;
@@ -35,6 +36,9 @@ public class UpdateService {
    private final Logger log = LoggerFactory.getLogger(UpdateService.class);
 
     // Entity repositories //
+
+    @Inject
+    private TagRepository tagRepository;
 
     @Inject
     private TaskRepository taskRepository;
