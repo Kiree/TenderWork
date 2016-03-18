@@ -12,6 +12,7 @@
                 "testity": "Testity",
                 "requirement": "Requirement",
                 "task": "Task",
+                "tag": "Tag",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

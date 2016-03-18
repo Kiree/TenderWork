@@ -10,23 +10,28 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A Testity.
+ * A Tag.
  */
 @Entity
-@Table(name = "testity")
+@Table(name = "tag")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "testity")
-public class Testity implements Serializable {
+@Document(indexName = "tag")
+public class Tag implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
-    @Size(min = 0, max = 20)
-    @Column(name = "nimi", length = 20, nullable = false)
-    private String nimi;
-    
+    @Size(min = 2, max = 30)
+    @Column(name = "name", length = 30, nullable = false)
+    private String name;
+
+    @NotNull
+    @Min(value = 0)
+    @Column(name = "counter", nullable = false)
+    private Integer counter = 1;
+
     public Long getId() {
         return id;
     }
@@ -35,12 +40,32 @@ public class Testity implements Serializable {
         this.id = id;
     }
 
-    public String getNimi() {
-        return nimi;
+    public String getName() {
+        return name;
     }
-    
-    public void setNimi(String nimi) {
-        this.nimi = nimi;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void addOne() {
+        this.counter++;
+    }
+
+    public void removeOne() {
+        if(this.counter == 1){
+            //poistaTagi
+        } else {
+            this.counter--;
+        }
+    }
+
+    public Integer getCounter(){
+        return this.counter;
+    }
+
+    public void setCounter(Integer counter) {
+        this.counter = counter;
     }
 
     @Override
@@ -51,11 +76,11 @@ public class Testity implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Testity testity = (Testity) o;
-        if(testity.id == null || id == null) {
+        Tag tag = (Tag) o;
+        if(tag.id == null || id == null) {
             return false;
         }
-        return Objects.equals(id, testity.id);
+        return Objects.equals(id, tag.id);
     }
 
     @Override
@@ -65,9 +90,10 @@ public class Testity implements Serializable {
 
     @Override
     public String toString() {
-        return "Testity{" +
+        return "Tag{" +
             "id=" + id +
-            ", nimi='" + nimi + "'" +
+            ", name='" + name + "'" +
+            ", counter='" + counter + "'" +
             '}';
     }
 }
