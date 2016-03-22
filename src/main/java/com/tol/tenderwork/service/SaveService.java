@@ -99,7 +99,7 @@ public class SaveService {
     @Transactional
     public Tag saveTagToRepo(Tag tag) {
         Tag result = tagRepository.save(tag);
-        tagSearchRepository.save(tag);
+        tagSearchRepository.save(result);
 
         return result;
     }
