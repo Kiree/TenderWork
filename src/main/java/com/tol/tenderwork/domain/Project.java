@@ -71,7 +71,7 @@ public class Project implements Serializable {
     @JoinColumn(name = "edited_by_id")
     private User editedBy;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private Set<Tag> tags = new HashSet<>();
 
     @OneToMany(mappedBy = "ownerProject")

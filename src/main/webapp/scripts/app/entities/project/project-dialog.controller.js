@@ -19,9 +19,9 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
 
         var createTag = function(tagTextObject) {
             return {
-                id:null,
+                //id:null,
                 name:tagTextObject.text,
-                counter:null
+                counter:0
             }
         };
 
@@ -92,10 +92,18 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
             $scope.isSaving = true;
             if ($scope.project.id != null) {
                 Project.update($scope.project, onSaveSuccess, onSaveError);
+                for (var i = 0; tags.length; i++){
+                    if($scope.tag.id != null){
+                        Tag.update($scope.tag, onSaveSuccess, onSaveError)
+                    }
+                }
             } else {
                 $scope.project.createdDate = today;
                 $scope.project.createdBy = $scope.currentUserAccount;
                 Project.save($scope.project, onSaveSuccess, onSaveError);
+                for (var i = 0; tags.length; i++ ){
+                    Tag.save($scope.tag, onSaveSuccess, onSaveError);
+                }
             }
         };
 
