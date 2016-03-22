@@ -9,7 +9,6 @@
                 "main": "Entiteetit",
                 "project": "Projektit",
                 "estimate": "Arviot",
-                "testity": "Testityt",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
