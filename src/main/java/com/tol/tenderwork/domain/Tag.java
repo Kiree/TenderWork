@@ -28,12 +28,12 @@ public class Tag implements Serializable {
     @Size(min = 2, max = 30)
     @Column(name = "name", length = 30, nullable = false)
     private String name;
-    
+
     @NotNull
     @Min(value = 0)
     @Column(name = "counter", nullable = false)
     private Integer counter;
-    
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "tag_belongs_to_projects",
@@ -52,7 +52,7 @@ public class Tag implements Serializable {
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
@@ -60,7 +60,7 @@ public class Tag implements Serializable {
     public Integer getCounter() {
         return counter;
     }
-    
+
     public void setCounter(Integer counter) {
         this.counter = counter;
     }
@@ -71,6 +71,14 @@ public class Tag implements Serializable {
 
     public void setBelongsToProjectss(Set<Project> projects) {
         this.belongsToProjectss = projects;
+    }
+
+    public void addProject(Project project) {
+        this.belongsToProjectss.add(project);
+    }
+
+    public void removeProject(Project project) {
+        this.belongsToProjectss.remove(project);
     }
 
     @Override
