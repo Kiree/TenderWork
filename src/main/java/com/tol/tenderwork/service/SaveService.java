@@ -88,13 +88,18 @@ public class SaveService {
         Project result = projectRepository.save(project);
         projectSearchRepository.save(result);
 
+        for (Tag tag : project.getHasTagss()){
+            tag.addProject(project);
+            saveTagToRepo(tag);
+        }
+
         return result;
     }
 
     @Transactional
     public Tag saveTagToRepo(Tag tag) {
         Tag result = tagRepository.save(tag);
-        tagSearchRepository.save(result);
+        tagSearchRepository.save(tag);
 
         return result;
     }
