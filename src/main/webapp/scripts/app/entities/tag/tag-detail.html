@@ -26,6 +26,16 @@
                     <span class="form-control-static">{{tag.counter}}</span>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <span translate="tenderworkApp.tag.belongsToProjects">belongsToProjects</span>
+                </td>
+                <td>
+                    <span ng-repeat="belongsToProjects in tag.belongsToProjectss">
+                        <a class="form-control-static" ui-sref="project.detail({id: {{belongsToProjects.id}}})">{{belongsToProjects.id}}</a>{{$last ? '' : ', '}}
+                    </span>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

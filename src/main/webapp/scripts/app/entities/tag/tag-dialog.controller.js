@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('tenderworkApp').controller('TagDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Tag',
-        function($scope, $stateParams, $uibModalInstance, entity, Tag) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Tag', 'Project',
+        function($scope, $stateParams, $uibModalInstance, entity, Tag, Project) {
 
         $scope.tag = entity;
+        $scope.projects = Project.query();
         $scope.load = function(id) {
             Tag.get({id : id}, function(result) {
                 $scope.tag = result;
