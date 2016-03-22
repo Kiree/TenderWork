@@ -1,14 +1,8 @@
 package com.tol.tenderwork.service;
 
 import com.tol.tenderwork.domain.*;
-import com.tol.tenderwork.repository.EstimateRepository;
-import com.tol.tenderwork.repository.ProjectRepository;
-import com.tol.tenderwork.repository.RequirementRepository;
-import com.tol.tenderwork.repository.TaskRepository;
-import com.tol.tenderwork.repository.search.EstimateSearchRepository;
-import com.tol.tenderwork.repository.search.ProjectSearchRepository;
-import com.tol.tenderwork.repository.search.RequirementSearchRepository;
-import com.tol.tenderwork.repository.search.TaskSearchRepository;
+import com.tol.tenderwork.repository.*;
+import com.tol.tenderwork.repository.search.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -57,6 +51,12 @@ public class SaveService {
     @Inject
     private ProjectSearchRepository projectSearchRepository;
 
+    @Inject
+    private TagRepository tagRepository;
+
+    @Inject
+    private TagSearchRepository tagSearchRepository;
+
     // Save entity to repo-methods //
 
     @Transactional
@@ -87,6 +87,14 @@ public class SaveService {
     public Project saveProjectToRepo(Project project) {
         Project result = projectRepository.save(project);
         projectSearchRepository.save(result);
+
+        return result;
+    }
+
+    @Transactional
+    public Tag saveTagToRepo(Tag tag) {
+        Tag result = tagRepository.save(tag);
+        tagSearchRepository.save(result);
 
         return result;
     }
