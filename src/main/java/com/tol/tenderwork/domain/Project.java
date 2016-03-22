@@ -71,6 +71,9 @@ public class Project implements Serializable {
     @JoinColumn(name = "edited_by_id")
     private User editedBy;
 
+    @ManyToMany
+    private Set<Tag> tags = new HashSet<>();
+
     @OneToMany(mappedBy = "ownerProject")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -235,5 +238,13 @@ public class Project implements Serializable {
             ", state='" + state + "'" +
             ", stateDescription='" + stateDescription + "'" +
             '}';
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 }
