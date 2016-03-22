@@ -34,6 +34,7 @@ module.exports = function (config) {
             'main/webapp/bower_components/ng-file-upload/ng-file-upload.js',
             'main/webapp/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
             'main/webapp/bower_components/angularjs-slider/dist/rzslider.js',
+            'main/webapp/bower_components/ng-tags-input/ng-tags-input.min.js',
             'main/webapp/bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'main/webapp/scripts/app/app.js',

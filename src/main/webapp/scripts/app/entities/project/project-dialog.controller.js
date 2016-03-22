@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tenderworkApp').controller('ProjectDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Project', 'User', 'Estimate', 'Principal','$translate',
-        function($scope, $stateParams, $uibModalInstance, entity, Project, User, Estimate, Principal, $translate) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Project', 'User', 'Estimate', 'Principal','$translate', 'Tag',
+        function($scope, $stateParams, $uibModalInstance, entity, Project, User, Estimate, Principal, $translate, Tag) {
         $scope.stateTranslations = ['states.new', 'states.pending', 'states.won', 'states.lost', 'states.closed'];
         $scope.states = {
             'New':'states.new',
@@ -16,6 +16,24 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
             'Hävitty':'states.lost',
             'Suljettu':'states.closed'
         };
+
+        var createTag = function(tagTextObject) {
+            return {
+                id:null,
+                name:tagTextObject.text,
+                counter:null
+            }
+        };
+
+        var updateTag = function(tag) {
+            return {
+                id:tag.id,
+                name:tag.name,
+                counter:tag.counter + 1
+            }
+        };
+
+        $scope.tags = Tag.query();
 
         $scope.project = entity;
         $scope.users = User.query();
@@ -66,6 +84,8 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
 
         $scope.save = function () {
             var today = new Date();
+            $scope.project.tags = $scope.tags.map(createTag);
+            console.log($scope.project);
             $scope.project.state = $scope.states[$scope.stateTracker];
             $scope.project.editedBy = $scope.currentUserAccount;
             $scope.project.editedDate = today;
