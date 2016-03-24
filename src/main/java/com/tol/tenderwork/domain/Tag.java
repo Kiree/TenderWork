@@ -35,13 +35,10 @@ public class Tag implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Project> belongsToProjectss = new HashSet<>();
 
-    public void addProject(Project project) {
-        this.belongsToProjectss.add(project);
-    }
-
-    public void removeProject(Project project) {
-        this.belongsToProjectss.remove(project);
-    }
+    @ManyToMany(mappedBy = "hasTagss")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Requirement> belongsToRequirementss = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -59,12 +56,28 @@ public class Tag implements Serializable {
         this.name = name;
     }
 
+    public void addProject(Project project) {
+        this.belongsToProjectss.add(project);
+    }
+
+    public void removeProject(Project project) {
+        this.belongsToProjectss.remove(project);
+    }
+
     public Set<Project> getBelongsToProjectss() {
         return belongsToProjectss;
     }
 
     public void setBelongsToProjectss(Set<Project> projects) {
         this.belongsToProjectss = projects;
+    }
+
+    public Set<Requirement> getBelongsToRequirementss() {
+        return belongsToRequirementss;
+    }
+
+    public void setBelongsToRequirementss(Set<Requirement> requirements) {
+        this.belongsToRequirementss = requirements;
     }
 
     @Override

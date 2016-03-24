@@ -17,7 +17,8 @@
                 "title": "Tag"
             },
             "name": "Name",
-            "belongsToProjects": "BelongsToProjects"
+            "belongsToProjects": "BelongsToProjects",
+            "belongsToRequirements": "BelongsToRequirements"
         }
     }
 }

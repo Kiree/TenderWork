@@ -62,10 +62,20 @@ public class Requirement implements Serializable {
     @JoinColumn(name = "owner_estimate_id")
     private Estimate ownerEstimate;
 
+    @ManyToMany
+    private Set<Tag> tags = new HashSet<>();
+
     @OneToMany(mappedBy = "ownerRequirement")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Task> hasTaskss = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "requirement_has_tags",
+               joinColumns = @JoinColumn(name="requirements_id", referencedColumnName="ID"),
+               inverseJoinColumns = @JoinColumn(name="has_tagss_id", referencedColumnName="ID"))
+    private Set<Tag> hasTagss = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -147,14 +157,6 @@ public class Requirement implements Serializable {
         this.ownerEstimate = estimate;
     }
 
-    public Set<Task> getHasTaskss() {
-        return hasTaskss;
-    }
-
-    public void setHasTaskss(Set<Task> tasks) {
-        this.hasTaskss = tasks;
-    }
-
     public void addTask(Task task) {
         removeTask(task);
         this.hasTaskss.add(task);
@@ -164,6 +166,30 @@ public class Requirement implements Serializable {
         if(this.hasTaskss.contains(task)) {
             this.hasTaskss.remove(task);
         }
+    }
+
+    public Set<Task> getHasTaskss() {
+        return hasTaskss;
+    }
+
+    public void setHasTaskss(Set<Task> tasks) {
+        this.hasTaskss = tasks;
+    }
+
+    public Set<Tag> getHasTagss() {
+        return hasTagss;
+    }
+
+    public void setHasTagss(Set<Tag> tags) {
+        this.hasTagss = tags;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 
     @Override

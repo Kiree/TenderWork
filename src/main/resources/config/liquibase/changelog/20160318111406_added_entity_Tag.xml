@@ -26,6 +26,14 @@
             </column>
         </createTable>
 
+        <createTable tableName="requirement_tags">
+            <column name="requirement_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tags_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
 
     </changeSet>
 </databaseChangeLog>

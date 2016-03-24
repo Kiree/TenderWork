@@ -7,6 +7,14 @@
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "hasTags",
             "ownerSide": false
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "belongsToRequirements",
+            "otherEntityName": "requirement",
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "hasTags",
+            "ownerSide": false
         }
     ],
     "fields": [
