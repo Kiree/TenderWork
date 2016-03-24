@@ -10,6 +10,7 @@ import com.tol.tenderwork.repository.search.EstimateSearchRepository;
 import com.tol.tenderwork.repository.search.ProjectSearchRepository;
 import com.tol.tenderwork.repository.search.RequirementSearchRepository;
 import com.tol.tenderwork.repository.search.TaskSearchRepository;
+import org.elasticsearch.index.engine.Engine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,9 @@ public class UpdateService {
     @Autowired
     private SaveService saveService;
 
+    @Autowired
+    private DeleteService deleteService;
+
     @Transactional
     public Project updateProject(Project project){
         project.setEditedDate(ZonedDateTime.now());
@@ -87,6 +91,7 @@ public class UpdateService {
             if(!(project.getHasTagss().contains(tag))) {
                 tag.removeProject(project);
                 saveService.saveTagToRepo(tag);
+                deleteService.deleteTag(tag);
             }
         }
 
