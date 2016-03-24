@@ -71,7 +71,7 @@ public class SaveService {
     public Requirement saveRequirementToRepo(Requirement requirement) {
         Requirement result = requirementRepository.save(requirement);
         requirementSearchRepository.save(result);
-        
+
         return result;
     }
 

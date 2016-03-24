@@ -72,6 +72,7 @@ public class TaskResource {
         }
 
         for (Tag tag : task.getTags()){
+            tag.setName(tag.getName().toLowerCase());
             tag.addTask(task);
             saveService.saveTagToRepo(tag);
         }
@@ -97,7 +98,6 @@ public class TaskResource {
             return createTask(task);
         }
 
-        //Tämä pitäisi olla ok - Petteri 3.3. 14:15
         Task result = updateService.updateTask(task);
 
         return ResponseEntity.ok()

@@ -66,6 +66,7 @@ public class ProjectResource {
     public ResponseEntity<Project> createProject(@Valid @RequestBody Project project) throws URISyntaxException {
         log.debug("REST request to save Project : {}", project);
         for(Tag tag : project.getTags()) {
+            tag.setName(tag.getName().toLowerCase());
             tag.addProject(project);
             saveService.saveTagToRepo(tag);
         }

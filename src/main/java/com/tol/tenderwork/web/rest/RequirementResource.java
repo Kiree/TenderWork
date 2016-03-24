@@ -70,6 +70,7 @@ public class RequirementResource {
         }
 
         for (Tag tag : requirement.getTags()){
+            tag.setName(tag.getName().toLowerCase());
             tag.addRequirement(requirement);
             saveService.saveTagToRepo(tag);
         }
