@@ -21,7 +21,7 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
             return {
                 id:null,
                 name:tagTextObject.text,
-                counter:null
+                counter:0
             }
         };
 

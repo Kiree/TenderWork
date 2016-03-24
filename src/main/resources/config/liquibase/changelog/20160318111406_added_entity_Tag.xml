@@ -24,16 +24,25 @@
             <column name="name" type="varchar(30)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="counter" type="integer">
                 <constraints nullable="false" />
             </column>
-            
+
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
         <createTable tableName="tag_belongs_to_projects">
             <column name="belongs_to_projectss_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tags_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="project_tags">
+            <column name="project_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="tags_id" type="bigint">
@@ -54,6 +63,6 @@
                                  constraintName="fk_tag_belongs_to_projects_tag_id"
                                  referencedColumnNames="id"
                                  referencedTableName="project"/>
-        
+
     </changeSet>
 </databaseChangeLog>
