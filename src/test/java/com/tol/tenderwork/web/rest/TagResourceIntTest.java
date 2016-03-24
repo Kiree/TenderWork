@@ -45,9 +45,6 @@ public class TagResourceIntTest {
     private static final String DEFAULT_NAME = "AA";
     private static final String UPDATED_NAME = "BB";
 
-    private static final Integer DEFAULT_COUNTER = 0;
-    private static final Integer UPDATED_COUNTER = 1;
-
     @Inject
     private TagRepository tagRepository;
 
@@ -79,7 +76,6 @@ public class TagResourceIntTest {
     public void initTest() {
         tag = new Tag();
         tag.setName(DEFAULT_NAME);
-        tag.setCounter(DEFAULT_COUNTER);
     }
 
     @Test
@@ -99,7 +95,6 @@ public class TagResourceIntTest {
         assertThat(tags).hasSize(databaseSizeBeforeCreate + 1);
         Tag testTag = tags.get(tags.size() - 1);
         assertThat(testTag.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testTag.getCounter()).isEqualTo(DEFAULT_COUNTER);
     }
 
     @Test
@@ -108,24 +103,6 @@ public class TagResourceIntTest {
         int databaseSizeBeforeTest = tagRepository.findAll().size();
         // set the field null
         tag.setName(null);
-
-        // Create the Tag, which fails.
-
-        restTagMockMvc.perform(post("/api/tags")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(tag)))
-                .andExpect(status().isBadRequest());
-
-        List<Tag> tags = tagRepository.findAll();
-        assertThat(tags).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkCounterIsRequired() throws Exception {
-        int databaseSizeBeforeTest = tagRepository.findAll().size();
-        // set the field null
-        tag.setCounter(null);
 
         // Create the Tag, which fails.
 
@@ -149,8 +126,7 @@ public class TagResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(tag.getId().intValue())))
-                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-                .andExpect(jsonPath("$.[*].counter").value(hasItem(DEFAULT_COUNTER)));
+                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
     }
 
     @Test
@@ -164,8 +140,7 @@ public class TagResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(tag.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.counter").value(DEFAULT_COUNTER));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
     }
 
     @Test
@@ -186,7 +161,6 @@ public class TagResourceIntTest {
 
         // Update the tag
         tag.setName(UPDATED_NAME);
-        tag.setCounter(UPDATED_COUNTER);
 
         restTagMockMvc.perform(put("/api/tags")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -198,7 +172,6 @@ public class TagResourceIntTest {
         assertThat(tags).hasSize(databaseSizeBeforeUpdate);
         Tag testTag = tags.get(tags.size() - 1);
         assertThat(testTag.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testTag.getCounter()).isEqualTo(UPDATED_COUNTER);
     }
 
     @Test

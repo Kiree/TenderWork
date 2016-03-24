@@ -20,6 +20,15 @@
             "otherEntityName": "estimate",
             "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "ownerProject"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "hasTags",
+            "otherEntityName": "tag",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "belongsToProjects",
+            "ownerSide": true
         }
     ],
     "fields": [

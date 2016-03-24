@@ -17,7 +17,9 @@
                 "title": "Tag"
             },
             "name": "Name",
-            "counter": "Counter"
+            "belongsToProjects": "BelongsToProjects",
+            "belongsToRequirements": "BelongsToRequirements",
+            "belongsToTasks": "BelongsToTasks"
         }
     }
 }

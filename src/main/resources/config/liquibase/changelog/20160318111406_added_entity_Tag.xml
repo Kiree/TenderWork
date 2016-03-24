@@ -17,20 +17,30 @@
         Added the entity Tag.
     -->
     <changeSet id="20160318111406" author="jhipster">
-        <createTable tableName="tag">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
-                <constraints primaryKey="true" nullable="false"/>
+        <createTable tableName="project_tags">
+            <column name="project_id" type="bigint">
+                <constraints nullable="false"/>
             </column>
-            <column name="name" type="varchar(30)">
-                <constraints nullable="false" />
+            <column name="tags_id" type="bigint">
+                <constraints nullable="false"/>
             </column>
-            
-            <column name="counter" type="integer">
-                <constraints nullable="false" />
-            </column>
-            
-            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+        <createTable tableName="requirement_tags">
+            <column name="requirement_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tags_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="task_tags">
+            <column name="task_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tags_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
     </changeSet>
 </databaseChangeLog>

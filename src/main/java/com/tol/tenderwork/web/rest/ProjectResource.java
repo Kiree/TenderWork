@@ -2,8 +2,11 @@ package com.tol.tenderwork.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.tol.tenderwork.domain.Project;
+import com.tol.tenderwork.domain.Tag;
 import com.tol.tenderwork.repository.ProjectRepository;
+import com.tol.tenderwork.repository.TagRepository;
 import com.tol.tenderwork.repository.search.ProjectSearchRepository;
+import com.tol.tenderwork.repository.search.TagSearchRepository;
 import com.tol.tenderwork.service.DeleteService;
 import com.tol.tenderwork.service.SaveService;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
@@ -60,10 +63,15 @@ public class ProjectResource {
     @Timed
     public ResponseEntity<Project> createProject(@Valid @RequestBody Project project) throws URISyntaxException {
         log.debug("REST request to save Project : {}", project);
+        for(Tag tag : project.getTags()) {
+            tag.addProject(project);
+            saveService.saveTagToRepo(tag);
+        }
         if (project.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("project", "idexists", "A new project cannot already have an ID")).body(null);
         }
         Project result = saveService.saveProjectToRepo(project);
+
         return ResponseEntity.created(new URI("/api/projects/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("project", result.getId().toString()))
             .body(result);

@@ -45,7 +45,6 @@ angular.module('tenderworkApp')
         $scope.clear = function () {
             $scope.tag = {
                 name: null,
-                counter: null,
                 id: null
             };
         };

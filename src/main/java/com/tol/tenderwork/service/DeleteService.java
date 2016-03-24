@@ -9,6 +9,7 @@ import com.tol.tenderwork.repository.search.EstimateSearchRepository;
 import com.tol.tenderwork.repository.search.ProjectSearchRepository;
 import com.tol.tenderwork.repository.search.RequirementSearchRepository;
 import com.tol.tenderwork.repository.search.TaskSearchRepository;
+import com.tol.tenderwork.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,9 @@ import javax.inject.Inject;
 @Service
 @Transactional
 public class DeleteService {
+
+    @Inject
+    private TagRepository tagRepository;
 
     @Inject
     private TaskRepository taskRepository;

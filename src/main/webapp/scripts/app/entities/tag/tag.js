@@ -62,7 +62,6 @@ angular.module('tenderworkApp')
                             entity: function () {
                                 return {
                                     name: null,
-                                    counter: null,
                                     id: null
                                 };
                             }

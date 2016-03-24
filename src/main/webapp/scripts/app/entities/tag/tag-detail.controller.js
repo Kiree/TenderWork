@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tenderworkApp')
-    .controller('TagDetailController', function ($scope, $rootScope, $stateParams, entity, Tag) {
+    .controller('TagDetailController', function ($scope, $rootScope, $stateParams, entity, Tag, Project, Requirement, Task) {
         $scope.tag = entity;
         $scope.load = function (id) {
             Tag.get({id: id}, function(result) {

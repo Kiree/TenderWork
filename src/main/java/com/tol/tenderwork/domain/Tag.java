@@ -1,5 +1,6 @@
 package com.tol.tenderwork.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -7,6 +8,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -27,10 +30,20 @@ public class Tag implements Serializable {
     @Column(name = "name", length = 30, nullable = false)
     private String name;
 
-    @NotNull
-    @Min(value = 0)
-    @Column(name = "counter", nullable = false)
-    private Integer counter = 1;
+    @ManyToMany(mappedBy = "hasTagss")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Project> belongsToProjectss = new HashSet<>();
+
+    @ManyToMany(mappedBy = "hasTagss")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Requirement> belongsToRequirementss = new HashSet<>();
+
+    @ManyToMany(mappedBy = "hasTagss")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Task> belongsToTaskss = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -48,24 +61,36 @@ public class Tag implements Serializable {
         this.name = name;
     }
 
-    public void addOne() {
-        this.counter++;
+    public Set<Project> getBelongsToProjectss() {
+        return belongsToProjectss;
     }
 
-    public void removeOne() {
-        if(this.counter == 1){
-            //poistaTagi
-        } else {
-            this.counter--;
-        }
+    public void setBelongsToProjectss(Set<Project> projects) {
+        this.belongsToProjectss = projects;
     }
 
-    public Integer getCounter(){
-        return this.counter;
+    public Set<Requirement> getBelongsToRequirementss() {
+        return belongsToRequirementss;
     }
 
-    public void setCounter(Integer counter) {
-        this.counter = counter;
+    public void setBelongsToRequirementss(Set<Requirement> requirements) {
+        this.belongsToRequirementss = requirements;
+    }
+
+    public Set<Task> getBelongsToTaskss() {
+        return belongsToTaskss;
+    }
+
+    public void setBelongsToTaskss(Set<Task> tasks) {
+        this.belongsToTaskss = tasks;
+    }
+
+    public void addProject(Project project) {
+        this.belongsToProjectss.add(project);
+    }
+
+    public void removeProject(Project project) {
+        this.belongsToProjectss.remove(project);
     }
 
     @Override
@@ -93,7 +118,6 @@ public class Tag implements Serializable {
         return "Tag{" +
             "id=" + id +
             ", name='" + name + "'" +
-            ", counter='" + counter + "'" +
             '}';
     }
 }
