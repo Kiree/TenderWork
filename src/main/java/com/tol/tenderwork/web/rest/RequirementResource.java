@@ -2,6 +2,7 @@ package com.tol.tenderwork.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.tol.tenderwork.domain.Requirement;
+import com.tol.tenderwork.domain.Tag;
 import com.tol.tenderwork.repository.RequirementRepository;
 import com.tol.tenderwork.repository.search.RequirementSearchRepository;
 import com.tol.tenderwork.service.DeleteService;
@@ -68,7 +69,11 @@ public class RequirementResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("requirement", "idexists", "A new requirement cannot already have an ID")).body(null);
         }
 
-        //Tämä pitäisi olla ok - Petteri 3.3. - 14:29
+        for (Tag tag : requirement.getTags()){
+            tag.addRequirement(requirement);
+            saveService.saveTagToRepo(tag);
+        }
+
         Requirement result = updateService.updateRequirement(requirement);
 
         return ResponseEntity.created(new URI("/api/requirements/" + result.getId()))

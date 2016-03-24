@@ -98,11 +98,6 @@ public class SaveService {
         Project result = projectRepository.save(project);
         projectSearchRepository.save(result);
 
-        for (Tag tag : project.getHasTagss()){
-            tag.addProject(project);
-            saveTagToRepo(tag);
-        }
-
         return result;
     }
 
