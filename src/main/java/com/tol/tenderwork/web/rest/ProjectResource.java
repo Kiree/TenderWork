@@ -93,7 +93,7 @@ public class ProjectResource {
         if (project.getId() == null) {
             return createProject(project);
         }
-        project = updateService.updateProject(project);
+        project = updateService.updateProjectTags(project);
         Project result = saveService.saveProjectToRepo(project);
 
         return ResponseEntity.ok()
