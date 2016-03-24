@@ -67,7 +67,7 @@ class TaskGatlingTest extends Simulation {
             .exec(http("Create new task")
             .post("/api/tasks")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "description":"SAMPLE_TEXT", "estimateSpecification":"0", "estimateImplementation":"0", "estimateTesting":"0", "estimateSynergy":"0", "synergyCheck":null, "synergyTotal":"0", "estimateTotal":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "description":"SAMPLE_TEXT", "estimateSpecification":"0", "estimateImplementation":"0", "estimateTesting":"0", "estimateSynergy":"0", "synergyCheck":null, "synergyTotal":null, "estimateTotal":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_task_url")))
             .pause(10)

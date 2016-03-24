@@ -15,6 +15,14 @@
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "hasTags",
             "ownerSide": false
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "belongsToTasks",
+            "otherEntityName": "task",
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "hasTags",
+            "ownerSide": false
         }
     ],
     "fields": [

@@ -18,7 +18,8 @@
             },
             "name": "Name",
             "belongsToProjects": "BelongsToProjects",
-            "belongsToRequirements": "BelongsToRequirements"
+            "belongsToRequirements": "BelongsToRequirements",
+            "belongsToTasks": "BelongsToTasks"
         }
     }
 }

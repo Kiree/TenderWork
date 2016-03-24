@@ -88,6 +88,16 @@ public class Task implements Serializable {
     @JoinColumn(name = "owner_requirement_id")
     private Requirement ownerRequirement;
 
+    @ManyToMany
+    private Set<Tag> tags = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "task_has_tags",
+               joinColumns = @JoinColumn(name="tasks_id", referencedColumnName="ID"),
+               inverseJoinColumns = @JoinColumn(name="has_tagss_id", referencedColumnName="ID"))
+    private Set<Tag> hasTagss = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -201,7 +211,7 @@ public class Task implements Serializable {
     }
 
     public Estimate getOwnerEstimate() {
-        return this.ownerEstimate;
+        return ownerEstimate;
     }
 
     public void setOwnerEstimate(Estimate estimate) {
@@ -214,6 +224,22 @@ public class Task implements Serializable {
 
     public void setOwnerRequirement(Requirement requirement) {
         this.ownerRequirement = requirement;
+    }
+
+    public Set<Tag> getHasTagss() {
+        return hasTagss;
+    }
+
+    public void setHasTagss(Set<Tag> tags) {
+        this.hasTagss = tags;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 
     @Override

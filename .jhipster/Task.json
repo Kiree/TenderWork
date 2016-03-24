@@ -21,6 +21,15 @@
             "otherEntityName": "requirement",
             "relationshipType": "many-to-one",
             "otherEntityField": "name"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "hasTags",
+            "otherEntityName": "tag",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "belongsToTasks",
+            "ownerSide": true
         }
     ],
     "fields": [
@@ -95,7 +104,7 @@
         {
             "fieldId": 8,
             "fieldName": "synergyTotal",
-            "fieldType": "Integer",
+            "fieldType": "Float",
             "fieldValidateRules": [
                 "min"
             ],
@@ -104,7 +113,7 @@
         {
             "fieldId": 9,
             "fieldName": "estimateTotal",
-            "fieldType": "Integer",
+            "fieldType": "Float",
             "fieldValidateRules": [
                 "min"
             ],

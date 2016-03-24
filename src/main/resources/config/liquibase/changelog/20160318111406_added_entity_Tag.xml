@@ -25,9 +25,16 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-
         <createTable tableName="requirement_tags">
             <column name="requirement_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tags_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="task_tags">
+            <column name="task_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="tags_id" type="bigint">
