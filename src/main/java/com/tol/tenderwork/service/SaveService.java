@@ -64,11 +64,6 @@ public class SaveService {
         Task result = taskRepository.save(task);
         taskSearchRepository.save(result);
 
-        for (Tag tag : task.getHasTagss()){
-            tag.addTask(task);
-            saveTagToRepo(tag);
-        }
-
         return result;
     }
 
@@ -76,11 +71,6 @@ public class SaveService {
     public Requirement saveRequirementToRepo(Requirement requirement) {
         Requirement result = requirementRepository.save(requirement);
         requirementSearchRepository.save(result);
-
-        for (Tag tag : requirement.getHasTagss()){
-            tag.addRequirement(requirement);
-            saveTagToRepo(tag);
-        }
 
         return result;
     }
@@ -98,12 +88,15 @@ public class SaveService {
         Project result = projectRepository.save(project);
         projectSearchRepository.save(result);
 
+<<<<<<< HEAD
         for (Tag tag : project.getHasTagss()){
             tag.addProject(project);
             saveTagToRepo(tag);
             project.addTag(tag);
         }
 
+=======
+>>>>>>> origin/master
         return result;
     }
 

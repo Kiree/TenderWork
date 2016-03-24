@@ -1,8 +1,8 @@
 package com.tol.tenderwork.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.tol.tenderwork.domain.Tag;
 import com.tol.tenderwork.domain.Task;
-import com.tol.tenderwork.repository.RequirementRepository;
 import com.tol.tenderwork.repository.TaskRepository;
 import com.tol.tenderwork.repository.search.TaskSearchRepository;
 import com.tol.tenderwork.service.UpdateService;
@@ -48,9 +48,6 @@ public class TaskResource {
     @Inject
     private TaskSearchRepository taskSearchRepository;
 
-    @Inject
-    private RequirementRepository requirementRepository;
-
     @Autowired
     private UpdateService updateService;
 
@@ -74,7 +71,12 @@ public class TaskResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("task", "idexists", "A new task cannot already have an ID")).body(null);
         }
 
-        //Tämä pitäisi olla OK - Petteri 3.3. 14:15
+        for (Tag tag : task.getTags()){
+            tag.setName(tag.getName().toLowerCase());
+            tag.addTask(task);
+            saveService.saveTagToRepo(tag);
+        }
+
         Task result = updateService.updateTask(task);
 
         return ResponseEntity.created(new URI("/api/tasks/" + result.getId()))
@@ -96,7 +98,6 @@ public class TaskResource {
             return createTask(task);
         }
 
-        //Tämä pitäisi olla ok - Petteri 3.3. 14:15
         Task result = updateService.updateTask(task);
 
         return ResponseEntity.ok()
