@@ -26,8 +26,9 @@
             "relationshipName": "hasTags",
             "otherEntityName": "tag",
             "relationshipType": "many-to-many",
+            "otherEntityField": "id",
             "otherEntityRelationshipName": "belongsToProjects",
-            "ownerSide": false
+            "ownerSide": true
         }
     ],
     "fields": [

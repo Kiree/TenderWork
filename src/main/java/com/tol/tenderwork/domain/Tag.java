@@ -1,5 +1,6 @@
 package com.tol.tenderwork.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -29,17 +30,18 @@ public class Tag implements Serializable {
     @Column(name = "name", length = 30, nullable = false)
     private String name;
 
-    @NotNull
-    @Min(value = 0)
-    @Column(name = "counter", nullable = false)
-    private Integer counter;
-
-    @ManyToMany
+    @ManyToMany(mappedBy = "hasTagss")
+    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "tag_belongs_to_projects",
-               joinColumns = @JoinColumn(name="tags_id", referencedColumnName="ID"),
-               inverseJoinColumns = @JoinColumn(name="belongs_to_projectss_id", referencedColumnName="ID"))
     private Set<Project> belongsToProjectss = new HashSet<>();
+
+    public void addProject(Project project) {
+        this.belongsToProjectss.add(project);
+    }
+
+    public void removeProject(Project project) {
+        this.belongsToProjectss.remove(project);
+    }
 
     public Long getId() {
         return id;
@@ -57,28 +59,12 @@ public class Tag implements Serializable {
         this.name = name;
     }
 
-    public Integer getCounter() {
-        return counter;
-    }
-
-    public void setCounter(Integer counter) {
-        this.counter = counter;
-    }
-
     public Set<Project> getBelongsToProjectss() {
         return belongsToProjectss;
     }
 
     public void setBelongsToProjectss(Set<Project> projects) {
         this.belongsToProjectss = projects;
-    }
-
-    public void addProject(Project project) {
-        this.belongsToProjectss.add(project);
-    }
-
-    public void removeProject(Project project) {
-        this.belongsToProjectss.remove(project);
     }
 
     @Override
@@ -106,7 +92,6 @@ public class Tag implements Serializable {
         return "Tag{" +
             "id=" + id +
             ", name='" + name + "'" +
-            ", counter='" + counter + "'" +
             '}';
     }
 }

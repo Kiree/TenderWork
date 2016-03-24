@@ -17,7 +17,6 @@
                 "title": "Tag"
             },
             "name": "Name",
-            "counter": "Counter",
             "belongsToProjects": "BelongsToProjects"
         }
     }

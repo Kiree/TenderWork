@@ -6,7 +6,7 @@
             "otherEntityName": "project",
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "hasTags",
-            "ownerSide": true
+            "ownerSide": false
         }
     ],
     "fields": [
@@ -21,16 +21,6 @@
             ],
             "fieldValidateRulesMinlength": "2",
             "fieldValidateRulesMaxlength": "30"
-        },
-        {
-            "fieldId": 2,
-            "fieldName": "counter",
-            "fieldType": "Integer",
-            "fieldValidateRules": [
-                "required",
-                "min"
-            ],
-            "fieldValidateRulesMin": "0"
         }
     ],
     "changelogDate": "20160318111406",
