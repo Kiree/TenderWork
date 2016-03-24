@@ -67,9 +67,11 @@ public class ProjectResource {
     @Timed
     public ResponseEntity<Project> createProject(@Valid @RequestBody Project project) throws URISyntaxException {
         log.debug("REST request to save Project : {}", project);
-        for(Tag tag : project.getTags()) {
-            tag.addProject(project);
-            saveService.saveTagToRepo(tag);
+        if(!(project.getTags().isEmpty())) {
+            for (Tag tag : project.getTags()) {
+                tag.addProject(project);
+                saveService.saveTagToRepo(tag);
+            }
         }
         if (project.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("project", "idexists", "A new project cannot already have an ID")).body(null);

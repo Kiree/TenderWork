@@ -27,7 +27,7 @@ public class Tag implements Serializable {
 
     @NotNull
     @Size(min = 2, max = 30)
-    @Column(name = "name", length = 30, nullable = false)
+    @Column(name = "name", length = 30, nullable = false, unique = true)
     private String name;
 
     @ManyToMany(mappedBy = "hasTagss")
@@ -126,7 +126,7 @@ public class Tag implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id+name);
+        return Objects.hashCode(name);
     }
 
     @Override
