@@ -9,6 +9,7 @@ import com.tol.tenderwork.repository.search.ProjectSearchRepository;
 import com.tol.tenderwork.repository.search.TagSearchRepository;
 import com.tol.tenderwork.service.DeleteService;
 import com.tol.tenderwork.service.SaveService;
+import com.tol.tenderwork.service.UpdateService;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -54,6 +55,9 @@ public class ProjectResource {
     @Autowired
     private DeleteService deleteService;
 
+    @Autowired
+    private UpdateService updateService;
+
     /**
      * POST  /projects -> Create a new project.
      */
@@ -89,7 +93,7 @@ public class ProjectResource {
         if (project.getId() == null) {
             return createProject(project);
         }
-
+        project = updateService.updateProject(project);
         Project result = saveService.saveProjectToRepo(project);
 
         return ResponseEntity.ok()

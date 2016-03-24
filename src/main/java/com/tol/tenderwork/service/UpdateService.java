@@ -71,11 +71,26 @@ public class UpdateService {
     private SaveService saveService;
 
     @Transactional
-    public void updateProject(Project project, User user){
-        project.setEditedBy(user);
+    public Project updateProject(Project project){
         project.setEditedDate(ZonedDateTime.now());
 
-        Project result = saveService.saveProjectToRepo(project);
+        Project oldProject = projectRepository.findOne(project.getId());
+
+        for(Tag tag : project.getTags()) {
+            if(!(oldProject.getHasTagss().contains(tag))) {
+                tag.addProject(project);
+                saveService.saveTagToRepo(tag);
+            }
+        }
+
+        for(Tag tag : oldProject.getHasTagss()) {
+            if(!(project.getHasTagss().contains(tag))) {
+                tag.removeProject(project);
+                saveService.saveTagToRepo(tag);
+            }
+        }
+
+        return project;
     }
 
     // Method for updating everything, when Estimate is updated //
@@ -192,7 +207,7 @@ public class UpdateService {
         saveService.saveEstimateToRepo(estimateHelper);
 
         //Update owner project edit information
-        updateProject(task.getOwnerRequirement().getOwnerEstimate().getOwnerProject(), task.getOwnedBy());
+        updateProject(task.getOwnerRequirement().getOwnerEstimate().getOwnerProject());
 
         return result;
     }
@@ -209,7 +224,7 @@ public class UpdateService {
         Requirement result = saveService.saveRequirementToRepo(requirement);
 
         //Update Project edit information
-        updateProject(requirement.getOwnerEstimate().getOwnerProject(), requirement.getOwner());
+        updateProject(requirement.getOwnerEstimate().getOwnerProject());
 
         return result;
     }
