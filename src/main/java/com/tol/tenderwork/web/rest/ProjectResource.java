@@ -65,32 +65,35 @@ public class ProjectResource {
     @Timed
     public ResponseEntity<Project> createProject(@Valid @RequestBody Project project) throws URISyntaxException {
         log.debug("REST request to save Project : {}", project);
-<<<<<<< HEAD
-        if(!(project.getTags().isEmpty())) {
+
+        if (!(project.getTags().isEmpty())) {
             for (Tag tag : project.getTags()) {
                 tag.addProject(project);
                 saveService.saveTagToRepo(tag);
             }
-=======
-        for(Tag tag : project.getTags()) {
-            tag.setName(tag.getName().toLowerCase());
-            tag.addProject(project);
-            saveService.saveTagToRepo(tag);
->>>>>>> origin/master
-        }
-        if (project.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("project", "idexists", "A new project cannot already have an ID")).body(null);
-        }
-        Project result = saveService.saveProjectToRepo(project);
 
-        return ResponseEntity.created(new URI("/api/projects/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("project", result.getId().toString()))
-            .body(result);
-    }
+            for (Tag tag : project.getTags()) {
+                tag.setName(tag.getName().toLowerCase());
+                tag.addProject(project);
+                saveService.saveTagToRepo(tag);
+
+            }
+        }
+            if (project.getId() != null) {
+                return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("project", "idexists", "A new project cannot already have an ID")).body(null);
+            }
+            Project result = saveService.saveProjectToRepo(project);
+
+            return ResponseEntity.created(new URI("/api/projects/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert("project", result.getId().toString()))
+                .body(result);
+        }
+
 
     /**
      * PUT  /projects -> Updates an existing project.
      */
+
     @RequestMapping(value = "/projects",
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -168,3 +171,4 @@ public class ProjectResource {
             .collect(Collectors.toList());
     }
 }
+
