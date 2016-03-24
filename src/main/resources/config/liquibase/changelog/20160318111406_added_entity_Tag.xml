@@ -17,6 +17,14 @@
         Added the entity Tag.
     -->
     <changeSet id="20160318111406" author="jhipster">
+        <createTable tableName="project_tags">
+            <column name="project_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tags_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
 
 
     </changeSet>
