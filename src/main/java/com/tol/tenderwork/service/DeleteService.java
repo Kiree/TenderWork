@@ -83,7 +83,7 @@ public class DeleteService {
         taskSearchRepository.delete(id);
 
         // Call to update owner project's edit information
-        updateService.updateProject(task.getOwnerRequirement().getOwnerEstimate().getOwnerProject(), task.getOwnedBy());
+        updateService.updateProject(task.getOwnerRequirement().getOwnerEstimate().getOwnerProject());
     }
 
     @Transactional
@@ -105,7 +105,7 @@ public class DeleteService {
         estimateSearchRepository.delete(id);
 
         // Call to update owner project's edit information
-        updateService.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
+        updateService.updateProject(estimate.getOwnerProject());
     }
 
     @Transactional
@@ -129,7 +129,7 @@ public class DeleteService {
         requirementSearchRepository.delete(id);
 
         // Call to update owner project's edit information
-        updateService.updateProject(requirement.getOwnerEstimate().getOwnerProject(), requirement.getOwner());
+        updateService.updateProject(requirement.getOwnerEstimate().getOwnerProject());
     }
 
     @Transactional
