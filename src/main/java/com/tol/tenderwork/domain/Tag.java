@@ -63,20 +63,28 @@ public class Tag implements Serializable {
         this.name = name;
     }
 
-    public Integer getCounter() {
-        return counter;
-    }
-
-    public void setCounter(Integer counter) {
-        this.counter = counter;
-    }
-
     public Set<Project> getBelongsToProjectss() {
         return belongsToProjectss;
     }
 
     public void setBelongsToProjectss(Set<Project> projects) {
         this.belongsToProjectss = projects;
+    }
+
+    public Set<Requirement> getBelongsToRequirementss() {
+        return belongsToRequirementss;
+    }
+
+    public void setBelongsToRequirementss(Set<Requirement> requirements) {
+        this.belongsToRequirementss = requirements;
+    }
+
+    public Set<Task> getBelongsToTaskss() {
+        return belongsToTaskss;
+    }
+
+    public void setBelongsToTaskss(Set<Task> tasks) {
+        this.belongsToTaskss = tasks;
     }
 
     public void addProject(Project project) {
@@ -104,7 +112,7 @@ public class Tag implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(id+name);
     }
 
     @Override
@@ -112,7 +120,6 @@ public class Tag implements Serializable {
         return "Tag{" +
             "id=" + id +
             ", name='" + name + "'" +
-            ", counter='" + counter + "'" +
             '}';
     }
 

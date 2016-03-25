@@ -70,7 +70,7 @@ public class EstimateResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("estimate", "idexists", "A new estimate cannot already have an ID")).body(null);
         }
         Estimate result = saveService.saveEstimateToRepo(estimate);
-        updateService.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
+        updateService.updateProject(estimate.getOwnerProject());
 
         return ResponseEntity.created(new URI("/api/estimates/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("estimate", result.getId().toString()))
@@ -92,7 +92,7 @@ public class EstimateResource {
         }
 
             estimate = updateService.updateEstimateCall(estimate);
-            updateService.updateProject(estimate.getOwnerProject(), estimate.getCreatedBy());
+            updateService.updateProject(estimate.getOwnerProject());
 
 
         // Save edited estimate

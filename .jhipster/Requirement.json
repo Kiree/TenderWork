@@ -20,6 +20,15 @@
             "otherEntityName": "task",
             "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "ownerRequirement"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "hasTags",
+            "otherEntityName": "tag",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "belongsToRequirements",
+            "ownerSide": true
         }
     ],
     "fields": [
@@ -47,7 +56,7 @@
         {
             "fieldId": 3,
             "fieldName": "totalDuration",
-            "fieldType": "Integer",
+            "fieldType": "Float",
             "fieldValidateRules": [
                 "min"
             ],
@@ -56,7 +65,7 @@
         {
             "fieldId": 4,
             "fieldName": "durationSpecification",
-            "fieldType": "Integer",
+            "fieldType": "Float",
             "fieldValidateRules": [
                 "min"
             ],
@@ -65,7 +74,7 @@
         {
             "fieldId": 5,
             "fieldName": "durationImplementation",
-            "fieldType": "Integer",
+            "fieldType": "Float",
             "fieldValidateRules": [
                 "min"
             ],
@@ -74,7 +83,7 @@
         {
             "fieldId": 6,
             "fieldName": "durationTesting",
-            "fieldType": "Integer",
+            "fieldType": "Float",
             "fieldValidateRules": [
                 "min"
             ],
@@ -83,7 +92,7 @@
         {
             "fieldId": 7,
             "fieldName": "synergyBenefit",
-            "fieldType": "Integer",
+            "fieldType": "Float",
             "fieldValidateRules": [
                 "min"
             ],

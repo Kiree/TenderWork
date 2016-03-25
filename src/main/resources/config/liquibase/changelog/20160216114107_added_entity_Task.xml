@@ -24,43 +24,37 @@
             <column name="name" type="varchar(60)">
                 <constraints nullable="false" />
             </column>
-
+            
             <column name="description" type="varchar(1000)"/>
-
+            
             <column name="estimate_specification" type="integer">
                 <constraints nullable="false" />
             </column>
-
+            
             <column name="estimate_implementation" type="integer">
                 <constraints nullable="false" />
             </column>
-
+            
             <column name="estimate_testing" type="integer">
                 <constraints nullable="false" />
             </column>
-
+            
             <column name="estimate_synergy" type="integer"/>
-
+            
             <column name="synergy_check" type="bit">
                 <constraints nullable="false" />
             </column>
-
-            <column name="specification_total" type="${floatType}"/>
-
-            <column name="implementation_total" type="${floatType}"/>
-
-            <column name="testing_total" type="${floatType}"/>
-
+            
             <column name="synergy_total" type="${floatType}"/>
-
+            
             <column name="estimate_total" type="${floatType}"/>
-
+            
             <column name="owned_by_id" type="bigint"/>
             <column name="owner_estimate_id" type="bigint"/>
             <column name="owner_requirement_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-
+        
         <addForeignKeyConstraint baseColumnNames="owned_by_id"
                                  baseTableName="task"
                                  constraintName="fk_task_ownedby_id"
@@ -79,5 +73,28 @@
                                  referencedColumnNames="id"
                                  referencedTableName="requirement"/>
 
+        <createTable tableName="task_has_tags">
+            <column name="has_tagss_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tasks_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="tasks_id, has_tagss_id" tableName="task_has_tags"/>
+
+        <addForeignKeyConstraint baseColumnNames="tasks_id"
+                                 baseTableName="task_has_tags"
+                                 constraintName="fk_task_has_tags_tag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="task"/>
+
+        <addForeignKeyConstraint baseColumnNames="has_tagss_id"
+                                 baseTableName="task_has_tags"
+                                 constraintName="fk_task_has_tags_task_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"/>
+        
     </changeSet>
 </databaseChangeLog>

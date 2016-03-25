@@ -82,9 +82,11 @@ public class Project implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Estimate> hasEstimatess = new HashSet<>();
 
-    @ManyToMany(mappedBy = "belongsToProjectss")
-    @JsonIgnore
+    @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "project_has_tags",
+               joinColumns = @JoinColumn(name="projects_id", referencedColumnName="ID"),
+               inverseJoinColumns = @JoinColumn(name="has_tagss_id", referencedColumnName="ID"))
     private Set<Tag> hasTagss = new HashSet<>();
 
     public Long getId() {
@@ -199,13 +201,14 @@ public class Project implements Serializable {
         this.hasTagss = tags;
     }
 
-    public void addTag(Tag tag) {
-        this.hasTagss.add(tag);
+    public Set<Tag> getTags() {
+        return tags;
     }
 
-    public void removeTag(Tag tag){
-        this.hasTagss.remove(tag);
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -241,13 +244,5 @@ public class Project implements Serializable {
             ", state='" + state + "'" +
             ", stateDescription='" + stateDescription + "'" +
             '}';
-    }
-
-    public Set<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
     }
 }

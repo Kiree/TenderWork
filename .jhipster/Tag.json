@@ -6,7 +6,23 @@
             "otherEntityName": "project",
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "hasTags",
-            "ownerSide": true
+            "ownerSide": false
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "belongsToRequirements",
+            "otherEntityName": "requirement",
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "hasTags",
+            "ownerSide": false
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "belongsToTasks",
+            "otherEntityName": "task",
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "hasTags",
+            "ownerSide": false
         }
     ],
     "fields": [
@@ -21,16 +37,6 @@
             ],
             "fieldValidateRulesMinlength": "2",
             "fieldValidateRulesMaxlength": "30"
-        },
-        {
-            "fieldId": 2,
-            "fieldName": "counter",
-            "fieldType": "Integer",
-            "fieldValidateRules": [
-                "required",
-                "min"
-            ],
-            "fieldValidateRulesMin": "0"
         }
     ],
     "changelogDate": "20160318111406",

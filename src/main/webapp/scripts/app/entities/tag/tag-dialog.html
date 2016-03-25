@@ -33,31 +33,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" translate="tenderworkApp.tag.counter" for="field_counter">Counter</label>
-            <input type="number" class="form-control" name="counter" id="field_counter"
-                    ng-model="tag.counter"
-                    required min="0" />
-            <div ng-show="editForm.counter.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.counter.$error.required" translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.counter.$error.min" translate="entity.validation.min" translate-value-min="0">
-                    This field should be more than 0.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.counter.$error.number" translate="entity.validation.number">
-                    This field should be a number.
-                </p>
-            </div>
-        </div>
 
-        <div class="form-group">
-            <label translate="tenderworkApp.tag.belongsToProjects" for="field_belongsToProjects">belongsToProjects</label>
-            <select class="form-control" id="field_belongsToProjects" multiple name="belongsToProjects" ng-model="tag.belongsToProjectss" ng-options="project as project.id for project in projects track by project.id"></select>
-        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">

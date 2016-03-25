@@ -9,6 +9,7 @@ import com.tol.tenderwork.repository.search.ProjectSearchRepository;
 import com.tol.tenderwork.repository.search.TagSearchRepository;
 import com.tol.tenderwork.service.DeleteService;
 import com.tol.tenderwork.service.SaveService;
+import com.tol.tenderwork.service.UpdateService;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -54,6 +55,9 @@ public class ProjectResource {
     @Autowired
     private DeleteService deleteService;
 
+    @Autowired
+    private UpdateService updateService;
+
     /**
      * POST  /projects -> Create a new project.
      */
@@ -64,12 +68,14 @@ public class ProjectResource {
     public ResponseEntity<Project> createProject(@Valid @RequestBody Project project) throws URISyntaxException {
         log.debug("REST request to save Project : {}", project);
         for(Tag tag : project.getTags()) {
+            tag.addProject(project);
             saveService.saveTagToRepo(tag);
         }
         if (project.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("project", "idexists", "A new project cannot already have an ID")).body(null);
         }
         Project result = saveService.saveProjectToRepo(project);
+
         return ResponseEntity.created(new URI("/api/projects/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("project", result.getId().toString()))
             .body(result);
@@ -87,7 +93,7 @@ public class ProjectResource {
         if (project.getId() == null) {
             return createProject(project);
         }
-
+        project = updateService.updateProject(project);
         Project result = saveService.saveProjectToRepo(project);
 
         return ResponseEntity.ok()

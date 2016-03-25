@@ -32,7 +32,6 @@ class="hidden-xs"                        translate="tenderworkApp.tag.home.creat
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span translate="tenderworkApp.tag.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="counter"><span translate="tenderworkApp.tag.counter">Counter</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -40,7 +39,6 @@ class="hidden-xs"                        translate="tenderworkApp.tag.home.creat
                 <tr ng-repeat="tag in tags track by tag.id">
                     <td><a ui-sref="tag.detail({id:tag.id})">{{tag.id}}</a></td>
                     <td>{{tag.name}}</td>
-                    <td>{{tag.counter}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

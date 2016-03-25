@@ -104,7 +104,7 @@ public class TagResource {
     @Timed
     public ResponseEntity<Tag> getTag(@PathVariable Long id) {
         log.debug("REST request to get Tag : {}", id);
-        Tag tag = tagRepository.findOneWithEagerRelationships(id);
+        Tag tag = tagRepository.findOne(id);
         return Optional.ofNullable(tag)
             .map(result -> new ResponseEntity<>(
                 result,

@@ -34,7 +34,6 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
             return {
                 id:tag.id,
                 name:tag.name,
-                counter:tag.counter + 1
             }
         };
 
