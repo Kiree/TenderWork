@@ -64,5 +64,18 @@
                                  referencedColumnNames="id"
                                  referencedTableName="project"/>
 
+        <addPrimaryKey columnNames="tags_id, project_id" tableName="project_tags"/>
+
+        <addForeignKeyConstraint baseColumnNames="tags_id"
+                                 baseTableName="project_tags"
+                                 constraintName="fk_project_tags_tag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"/>
+
+        <addForeignKeyConstraint baseColumnNames="project_id"
+                                 baseTableName="project_tags"
+                                 constraintName="fk_project_tags_project_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project"/>
     </changeSet>
 </databaseChangeLog>

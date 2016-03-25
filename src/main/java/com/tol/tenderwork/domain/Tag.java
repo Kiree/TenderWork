@@ -1,5 +1,6 @@
 package com.tol.tenderwork.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -40,6 +41,11 @@ public class Tag implements Serializable {
                joinColumns = @JoinColumn(name="tags_id", referencedColumnName="ID"),
                inverseJoinColumns = @JoinColumn(name="belongs_to_projectss_id", referencedColumnName="ID"))
     private Set<Project> belongsToProjectss = new HashSet<>();
+
+    @ManyToMany(mappedBy = "tags", targetEntity = Project.class)
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Tag> projectTags = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -108,5 +114,13 @@ public class Tag implements Serializable {
             ", name='" + name + "'" +
             ", counter='" + counter + "'" +
             '}';
+    }
+
+    public Set<Tag> getProjectTags() {
+        return projectTags;
+    }
+
+    public void setProjectTags(Set<Tag> projectTags) {
+        this.projectTags = projectTags;
     }
 }

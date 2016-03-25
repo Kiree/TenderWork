@@ -71,7 +71,10 @@ public class Project implements Serializable {
     @JoinColumn(name = "edited_by_id")
     private User editedBy;
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.MERGE)
+    @JoinTable(name = "project_tags",
+        joinColumns = @JoinColumn(name="project_id"),
+        inverseJoinColumns = @JoinColumn(name="tags_id"))
     private Set<Tag> tags = new HashSet<>();
 
     @OneToMany(mappedBy = "ownerProject")
