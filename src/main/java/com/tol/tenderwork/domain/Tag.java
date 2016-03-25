@@ -71,22 +71,6 @@ public class Tag implements Serializable {
         this.belongsToProjectss = projects;
     }
 
-    public Set<Requirement> getBelongsToRequirementss() {
-        return belongsToRequirementss;
-    }
-
-    public void setBelongsToRequirementss(Set<Requirement> requirements) {
-        this.belongsToRequirementss = requirements;
-    }
-
-    public Set<Task> getBelongsToTaskss() {
-        return belongsToTaskss;
-    }
-
-    public void setBelongsToTaskss(Set<Task> tasks) {
-        this.belongsToTaskss = tasks;
-    }
-
     public void addProject(Project project) {
         this.belongsToProjectss.add(project);
     }

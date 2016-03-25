@@ -42,19 +42,6 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="tags_id, belongs_to_projectss_id" tableName="tag_belongs_to_projects"/>
-
-        <addForeignKeyConstraint baseColumnNames="tags_id"
-                                 baseTableName="tag_belongs_to_projects"
-                                 constraintName="fk_tag_belongs_to_projects_project_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="tag"/>
-
-        <addForeignKeyConstraint baseColumnNames="belongs_to_projectss_id"
-                                 baseTableName="tag_belongs_to_projects"
-                                 constraintName="fk_tag_belongs_to_projects_tag_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="project"/>
 
         <addPrimaryKey columnNames="tags_id, project_id" tableName="project_tags"/>
 
