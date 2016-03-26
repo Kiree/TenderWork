@@ -148,14 +148,15 @@ public class DeleteService {
     @Transactional
     public void deleteTag(Tag tag) {
         Tag dbTag = tagRepository.findOne(tag.getId());
-        if(dbTag.getBelongsToProjectss().isEmpty()) {
+        //if(dbTag.getBelongsToProjectss().isEmpty()) {
+        /*
             if(dbTag.getBelongsToRequirementss().isEmpty()) {
                 if(dbTag.getBelongsToTaskss().isEmpty()) {
                     tagRepository.delete(tag.getId());
                     tagSearchRepository.delete(tag.getId());
                 }
-            }
-        }
+            }*/
+        //}
 
     }
 }

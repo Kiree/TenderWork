@@ -30,22 +30,10 @@ public class Tag implements Serializable {
     @Column(name = "name", length = 30, nullable = false, unique = true)
     private String name;
 
-    @NotNull
-    @Min(value = 0)
-    @Column(name = "counter", nullable = false)
-    private Integer counter;
-
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "tag_belongs_to_projects",
-               joinColumns = @JoinColumn(name="tags_id", referencedColumnName="ID"),
-               inverseJoinColumns = @JoinColumn(name="belongs_to_projectss_id", referencedColumnName="ID"))
-    private Set<Project> belongsToProjectss = new HashSet<>();
-
     @ManyToMany(mappedBy = "tags", targetEntity = Project.class)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Tag> projectTags = new HashSet<>();
+    private Set<Project> projectTags = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -63,22 +51,7 @@ public class Tag implements Serializable {
         this.name = name;
     }
 
-    public Set<Project> getBelongsToProjectss() {
-        return belongsToProjectss;
-    }
-
-    public void setBelongsToProjectss(Set<Project> projects) {
-        this.belongsToProjectss = projects;
-    }
-
-    public void addProject(Project project) {
-        this.belongsToProjectss.add(project);
-    }
-
-    public void removeProject(Project project) {
-        this.belongsToProjectss.remove(project);
-    }
-
+/*
     public void addRequirement(Requirement requirement) {
         this.belongsToRequirementss.add(requirement);
     }
@@ -94,7 +67,7 @@ public class Tag implements Serializable {
     public void removeTask(Task task) {
         this.belongsToTaskss.remove(task);
     }
-
+*/
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -123,11 +96,11 @@ public class Tag implements Serializable {
             '}';
     }
 
-    public Set<Tag> getProjectTags() {
+    public Set<Project> getProjectTags() {
         return projectTags;
     }
 
-    public void setProjectTags(Set<Tag> projectTags) {
+    public void setProjectTags(Set<Project> projectTags) {
         this.projectTags = projectTags;
     }
 }

@@ -224,7 +224,7 @@ public Project updateProjectTags(Project project) {
         for (Tag tag : project.getTags()) {
             tag.setName(tag.getName().toLowerCase());
              if (!(oldProject.getHasTagss().contains(tag))) {
-                  tag.addProject(project);
+                  //tag.addProject(project);
                   saveService.saveTagToRepo(tag);
                 }
          }
@@ -234,7 +234,7 @@ public Project updateProjectTags(Project project) {
         for (Tag tag : oldProject.getHasTagss()) {
             tag.setName(tag.getName().toLowerCase());
             if (!(project.getHasTagss().contains(tag))) {
-                tag.removeProject(project);
+                //tag.removeProject(project);
                 saveService.saveTagToRepo(tag);
                 deleteService.deleteTag(tag);
             }

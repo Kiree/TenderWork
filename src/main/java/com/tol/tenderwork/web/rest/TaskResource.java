@@ -73,7 +73,7 @@ public class TaskResource {
 
         for (Tag tag : task.getTags()){
             tag.setName(tag.getName().toLowerCase());
-            tag.addTask(task);
+           // tag.addTask(task);
             saveService.saveTagToRepo(tag);
         }
 

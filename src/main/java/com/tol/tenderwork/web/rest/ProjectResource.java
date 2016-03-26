@@ -68,13 +68,13 @@ public class ProjectResource {
 
         if (!(project.getTags().isEmpty())) {
             for (Tag tag : project.getTags()) {
-                tag.addProject(project);
+                //tag.addProject(project);
                 saveService.saveTagToRepo(tag);
             }
 
             for (Tag tag : project.getTags()) {
                 tag.setName(tag.getName().toLowerCase());
-                tag.addProject(project);
+                //tag.addProject(project);
                 saveService.saveTagToRepo(tag);
 
             }
