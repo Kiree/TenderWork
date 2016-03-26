@@ -30,20 +30,22 @@ public class Tag implements Serializable {
     @Column(name = "name", length = 30, nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "hasTagss")
-    @JsonIgnore
+    @NotNull
+    @Min(value = 0)
+    @Column(name = "counter", nullable = false)
+    private Integer counter;
+
+    @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "tag_belongs_to_projects",
+               joinColumns = @JoinColumn(name="tags_id", referencedColumnName="ID"),
+               inverseJoinColumns = @JoinColumn(name="belongs_to_projectss_id", referencedColumnName="ID"))
     private Set<Project> belongsToProjectss = new HashSet<>();
 
-    @ManyToMany(mappedBy = "hasTagss")
+    @ManyToMany(mappedBy = "tags", targetEntity = Project.class)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Requirement> belongsToRequirementss = new HashSet<>();
-
-    @ManyToMany(mappedBy = "hasTagss")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Task> belongsToTaskss = new HashSet<>();
+    private Set<Tag> projectTags = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -67,22 +69,6 @@ public class Tag implements Serializable {
 
     public void setBelongsToProjectss(Set<Project> projects) {
         this.belongsToProjectss = projects;
-    }
-
-    public Set<Requirement> getBelongsToRequirementss() {
-        return belongsToRequirementss;
-    }
-
-    public void setBelongsToRequirementss(Set<Requirement> requirements) {
-        this.belongsToRequirementss = requirements;
-    }
-
-    public Set<Task> getBelongsToTaskss() {
-        return belongsToTaskss;
-    }
-
-    public void setBelongsToTaskss(Set<Task> tasks) {
-        this.belongsToTaskss = tasks;
     }
 
     public void addProject(Project project) {
@@ -135,5 +121,13 @@ public class Tag implements Serializable {
             "id=" + id +
             ", name='" + name + "'" +
             '}';
+    }
+
+    public Set<Tag> getProjectTags() {
+        return projectTags;
+    }
+
+    public void setProjectTags(Set<Tag> projectTags) {
+        this.projectTags = projectTags;
     }
 }

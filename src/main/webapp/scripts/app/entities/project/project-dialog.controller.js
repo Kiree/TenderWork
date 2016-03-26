@@ -17,11 +17,17 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
             'Suljettu':'states.closed'
         };
 
+            // creates a new tag javascript object or just returns a resource
         var createTag = function(tagTextObject) {
-            return {
-                id:null,
-                name:tagTextObject.text,
+            console.log(tagTextObject);
+            if(tagTextObject.id === undefined) {
+                return {
+                    id:null,
+                    name:tagTextObject.name,
+                    counter:0
+                };
             }
+            return tagTextObject;
         };
 
         var updateTag = function(tag) {
@@ -31,7 +37,8 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
             }
         };
 
-        $scope.tags = Tag.query();
+        $scope.tags = [];
+        $scope.tagCloud = Tag.query();
 
         $scope.project = entity;
         $scope.users = User.query();
@@ -83,11 +90,21 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
         $scope.save = function () {
             var today = new Date();
             $scope.project.tags = $scope.tags.map(createTag);
-            console.log($scope.project);
             $scope.project.state = $scope.states[$scope.stateTracker];
             $scope.project.editedBy = $scope.currentUserAccount;
             $scope.project.editedDate = today;
             $scope.isSaving = true;
+            var proper = $scope.project.tags.map(function(item) {
+                $scope.tagCloud.some(function(cloudItem) {
+                    if(item.name === cloudItem.name) {
+                        item = cloudItem;
+                        return true;
+                    }
+                    return false;
+                });
+                return item;
+            });
+            $scope.project.tags = proper;
             if ($scope.project.id != null) {
                 Project.update($scope.project, onSaveSuccess, onSaveError);
             } else {
