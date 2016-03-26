@@ -245,4 +245,8 @@ public class Project implements Serializable {
             ", stateDescription='" + stateDescription + "'" +
             '}';
     }
+
+    public void addTag(Tag tag) {
+        this.hasTagss.add(tag);
+    }
 }

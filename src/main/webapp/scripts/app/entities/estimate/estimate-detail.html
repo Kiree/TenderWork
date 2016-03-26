@@ -32,7 +32,7 @@
             <div class="col-xs-12" data-tndr-height-max-check="estimate.synergyBenefit">
                 <div class="row">
                     <div class="col-xs-12 col-sm-4 right-padder">
-                        <div class="row desktop-border bg-desktop-white bg-mobile-white" data-tndr-height-max-target>
+                        <div class="row desktop-border bg-always-gray" data-tndr-height-max-target>
                             <div class="row" data-tndr-height-max-check>
                                 <div class="col-xs-12">
                                     <div class="col-xs-12 col-sm-6">
@@ -77,7 +77,7 @@
                     </div>
 
                     <div class="col-xs-12 col-sm-4 right-padder">
-                        <div class="row desktop-border bg-desktop-white bg-mobile-white" data-tndr-height-max-target>
+                        <div class="row desktop-border bg-always-gray" data-tndr-height-max-target>
                             <div class="row" data-tndr-height-max-check>
                                 <div class="col-xs-12">
                                     <div class="col-xs-12 col-sm-6">
@@ -122,7 +122,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-4">
-                        <div class="row desktop-border bg-desktop-white bg-mobile-white" data-tndr-height-max-target>
+                        <div class="row desktop-border bg-always-gray" data-tndr-height-max-target>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="col-xs-12 col-sm-6">
@@ -207,144 +207,163 @@
 
     <jh-alert></jh-alert>
 
+
+
+
+
+
     <div class="container-fluid">
-        <div class="panel-group" id="demo">
-            <div class="panel panel-default desktop-border">
-                <div class="bg-always-gray">
-                <div class="panel-heading" ng-controller="RequirementController">
-                    <div data-toggle="collapse" data-parent="#accordion" data-target="#demo{{requirement.id}}" class="accordion-toggle" ng-repeat="requirement in requirements track by requirement.id">
-                        <div class="row">
-                            <div class="col-lg-1">
-                                <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
-                            </div>
 
-                            <div class="col-lg-2">
-                                <span translate="global.field.id" class="projectdetail">ID</span>
-                                <span class="requirementlisting">{{requirement.id}}</span>
-                            </div>
+<!--
+        <div id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Collapsible Group Item #1
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+            </div>
+        </div>-->
 
-                            <div class="col-lg-9">
-                                <span translate="tenderworkApp.requirement.name" class="projectdetail">Name</span>
-                                <span class="requirementlisting">{{requirement.name}}</span>
-                            </div>
+
+            <div class="panel-group" id="accordionReq" ng-controller="RequirementController" aria-multiselectable="true">
+                <div class="panel panel-default desktop-border" ng-repeat="requirement in requirements track by requirement.id">
+
+                    <div class="panel-heading" id="head{{requirement.id}}">
+                        <div class="col-lg-10 col-xs-10">
+                           {{requirement.name}}
                         </div>
+                        <div class="accordion-toggle col-lg-2 col-xs-2" data-toggle="collapse" data-parent="#accordionReq" data-target="#body{{requirement.id}}" href="#body{{requirement.id}}">
+                            <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="body{{requirement.id}}" class="panel-collapse collapse in" aria-labelledby="head{{requirement.id}}">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                    <div class="col-lg-12">
+                                        <table class="table">
+                                            <tr>
+                                                <td>
+                                                    <span translate="tenderworkApp.requirement.description" class="projectdetail">Desc</span>
+                                                </td>
+                                                <td>
+                                                    <span class="form-control-static">{{requirement.description}}</span>
+                                                </td>
 
-                        <div class="row">
-                            <div class="accordion-body collapse" id="demo{{requirement.id}}">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <tbody>
-                                            <div class="col-lg-12">
-                                                <table class="table">
-                                                <tr>
-                                                    <td>
-                                                        <span translate="tenderworkApp.requirement.description" class="projectdetail">Desc</span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="form-control-static">{{requirement.description}}</span>
-                                                    </td>
+                                                <td>
+                                                    <span translate="tenderworkApp.requirement.totalDuration" class="projectdetail">TotalDuration</span>
+                                                </td>
+                                                <td>
+                                                    <span class="form-control-static">{{requirement.totalDuration}}</span>
+                                                </td>
 
-                                                    <td>
-                                                        <span translate="tenderworkApp.requirement.totalDuration" class="projectdetail">TotalDuration</span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="form-control-static">{{requirement.totalDuration}}</span>
-                                                    </td>
+                                                <td>
+                                                    <span translate="tenderworkApp.requirement.durationSpecification" class="projectdetail">DurationSpecification</span>
+                                                </td>
+                                                <td>
+                                                    <span class="form-control-static">{{requirement.durationSpecification}}</span>
+                                                </td>
+                                            </tr>
 
-                                                    <td>
-                                                        <span translate="tenderworkApp.requirement.durationSpecification" class="projectdetail">DurationSpecification</span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="form-control-static">{{requirement.durationSpecification}}</span>
-                                                    </td>
-                                                </tr>
+                                            <tr>
+                                                <td>
+                                                    <span translate="tenderworkApp.requirement.durationImplementation" class="projectdetail">DurationImplementation</span>
+                                                </td>
+                                                <td>
+                                                    <span class="form-control-static">{{requirement.durationImplementation}}</span>
+                                                </td>
 
-                                                <tr>
-                                                    <td>
-                                                        <span translate="tenderworkApp.requirement.durationImplementation" class="projectdetail">DurationImplementation</span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="form-control-static">{{requirement.durationImplementation}}</span>
-                                                    </td>
+                                                <td>
+                                                    <span translate="tenderworkApp.requirement.durationTesting" class="projectdetail">DurationTesting</span>
+                                                </td>
+                                                <td>
+                                                    <span class="form-control-static">{{requirement.durationTesting}}</span>
+                                                </td>
 
-                                                    <td>
-                                                        <span translate="tenderworkApp.requirement.durationTesting" class="projectdetail">DurationTesting</span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="form-control-static">{{requirement.durationTesting}}</span>
-                                                    </td>
+                                                <td>
+                                                    <span translate="tenderworkApp.requirement.synergyBenefit" class="projectdetail">SynergyBenefit</span>
+                                                </td>
+                                                <td>
+                                                    <span class="form-control-static">{{requirement.synergyBenefit}}</span>
+                                                </td>
+                                            </tr>
+                                        </table>
 
-                                                    <td>
-                                                        <span translate="tenderworkApp.requirement.synergyBenefit" class="projectdetail">SynergyBenefit</span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="form-control-static">{{requirement.synergyBenefit}}</span>
-                                                    </td>
-                                                </tr>
-                                                </table>
 
-                                                <div class="container-fluid">
-                                                    <div class="row btn-bottom">
-                                                        <div class="col-xs-4 requirementlisting reqtitle-text-field"><h4 translate="tenderworkApp.task.home.title">Tasks</h4></div>
-                                                        <div class="col-xs-8 btn-newtask">
-                                                            <button class="btn btn-primary pull-right" ui-sref="task.new({requirementId:requirement.id})" >
-                                                                <span class="glyphicon glyphicon-plus"></span>
-                                                                <span class="hidden-xs" translate="tenderworkApp.task.home.createLabel">Create new Task</span>
-                                                            </button>
+                                        <!--TASKIN LUONTI-->
+                                        <div class="container-fluid">
+                                            <div class="row btn-bottom">
+                                                <div class="col-xs-4 requirementlisting reqtitle-text-field"><h4 translate="tenderworkApp.task.home.title">Tasks</h4></div>
+                                                <div class="col-xs-8 btn-newtask">
+                                                    <button class="btn btn-primary pull-right" ui-sref="task.new({requirementId:requirement.id})" >
+                                                        <span class="glyphicon glyphicon-plus"></span>
+                                                        <span class="hidden-xs" translate="tenderworkApp.task.home.createLabel">Create new Task</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--TASK-->
+                                        <div class="panel-group" id="accordionTask" ng-controller="TaskController" aria-multiselectable="true">
+                                            <div class="panel panel-default desktop-border" ng-repeat="task in tasks track by task.id">
+                                                    <div class="panel-heading" id="head2{{task.id}}">
+                                                            <div class="col-lg-10 col-xs-10" id="head2{task.id}}">
+                                                                {{task.name}}
+                                                            </div>
+                                                            <div class="accordion-toggle col-lg-2 col-xs-2"  data-toggle="collapse" data-parent="#accordionTask" data-target="#body2{{task.id}}" href="#body2{{task.id}}">
+                                                                <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
+                                                            </div>
                                                         </div>
-                                                        </div>
 
-                                                            <div class="panel-group" id="demo2">
-                                                            <div class="panel panel-default">
-                                                                <div class="panel-body" ng-controller="TaskController">
-                                                                    <div data-toggle="collapse" data-parent="#demo2" data-target="#demo2{{task.id}}" class="accordion-toggle" ng-repeat="task in tasks track by task.id">
-                                                                        <div class="row">
-                                                                            <div class="col-lg-1">
-                                                                                <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
-                                                                            </div>
+                                                        <div class="panel-body">
+                                                            <div id="body2{{task.id}}" class="panel-collapse collapse in" aria-labelledby="head2{{task.id}}">
+                                                                <div class="table-responsive">
+                                                                    <table class="table">
+                                                                        <tbody>
+                                                                        <div class="col-lg-12">
+                                                                            <table class="table">
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <span translate="tenderworkApp.task.name" class="projectdetail">name</span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
 
-                                                                            <div class="col-lg-2">
-                                                                                <span translate="global.field.id" class="projectdetail">ID</span>
-                                                                                <span class="requirementlisting">{{task.id}}</span>
-                                                                            </div>
+
                                                                         </div>
-
-
-                                                                    <div class="row">
-                                                                        <div class="accordion-body collapse" id="demo2{{task.id}}">
-                                                                            <div class="table-responsive">
-                                                                                <table class="table">
-                                                                                    <tbody>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <span translate="tenderworkApp.task.id" class="projectdetail">ID</span>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <span class="form-control-static">{{task.id}}</span>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                                                                        </tbody>
+                                                                    </table>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                             </div>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        </div>
+                                    </div>
+
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
+
+
+                        <!--SISÄLTÖ LOPPUU-->
                     </div>
                 </div>
-                </div>
             </div>
+
         </div>
     </div>
+</div>
+</div>
         <button type="submit" ui-sref="project.detail({id:estimate.ownerProject.id})" class="btn btn-info">
             <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
         </button>

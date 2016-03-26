@@ -2,9 +2,24 @@
 'use strict';
 
 angular.module('tenderworkApp').controller('RequirementDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Requirement', 'User', 'Principal', 'Estimate', 'Task',
-        function($scope, $stateParams, $uibModalInstance, entity, Requirement, User, Principal, Estimate, Task) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Requirement', 'User', 'Principal', 'Estimate', 'Task', 'Tag',
+        function($scope, $stateParams, $uibModalInstance, entity, Requirement, User, Principal, Estimate, Task, Tag) {
 
+        var createTag = function(tagTextObject) {
+            return {
+                id:null,
+                name:tagTextObject.text,
+            }
+        };
+
+        var updateTag = function(tag) {
+            return {
+                id:tag.id,
+                name:tag.name,
+            }
+        };
+
+        $scope.tags = Tag.query();
         $scope.requirement = entity;
         $scope.users = User.query();
         $scope.estimates = Estimate.query().$promise.then(function(results) {
@@ -52,6 +67,7 @@ angular.module('tenderworkApp').controller('RequirementDialogController',
         };
 
         $scope.save = function () {
+            $scope.requirement.tags = $scope.tags.map(createTag);
             $scope.isSaving = true;
             if ($scope.requirement.id != null) {
                 Requirement.update($scope.requirement, onSaveSuccess, onSaveError);

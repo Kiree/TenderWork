@@ -95,6 +95,8 @@ div.btn-bottom{
 
 span.requirementlisting{
     padding-left:5px;
+    padding-top:10px;
+    font-weight: bold !important;
 }
 
 div.box-padding-margin {

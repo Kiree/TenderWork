@@ -4,9 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.tol.tenderwork.domain.Project;
 import com.tol.tenderwork.domain.Tag;
 import com.tol.tenderwork.repository.ProjectRepository;
-import com.tol.tenderwork.repository.TagRepository;
 import com.tol.tenderwork.repository.search.ProjectSearchRepository;
-import com.tol.tenderwork.repository.search.TagSearchRepository;
 import com.tol.tenderwork.service.DeleteService;
 import com.tol.tenderwork.service.SaveService;
 import com.tol.tenderwork.service.UpdateService;
@@ -67,23 +65,35 @@ public class ProjectResource {
     @Timed
     public ResponseEntity<Project> createProject(@Valid @RequestBody Project project) throws URISyntaxException {
         log.debug("REST request to save Project : {}", project);
-        for(Tag tag : project.getTags()) {
-            tag.addProject(project);
-            saveService.saveTagToRepo(tag);
-        }
-        if (project.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("project", "idexists", "A new project cannot already have an ID")).body(null);
-        }
-        Project result = saveService.saveProjectToRepo(project);
 
-        return ResponseEntity.created(new URI("/api/projects/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("project", result.getId().toString()))
-            .body(result);
-    }
+        if (!(project.getTags().isEmpty())) {
+            for (Tag tag : project.getTags()) {
+                tag.addProject(project);
+                saveService.saveTagToRepo(tag);
+            }
+
+            for (Tag tag : project.getTags()) {
+                tag.setName(tag.getName().toLowerCase());
+                tag.addProject(project);
+                saveService.saveTagToRepo(tag);
+
+            }
+        }
+            if (project.getId() != null) {
+                return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("project", "idexists", "A new project cannot already have an ID")).body(null);
+            }
+            Project result = saveService.saveProjectToRepo(project);
+
+            return ResponseEntity.created(new URI("/api/projects/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert("project", result.getId().toString()))
+                .body(result);
+        }
+
 
     /**
      * PUT  /projects -> Updates an existing project.
      */
+
     @RequestMapping(value = "/projects",
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -93,7 +103,7 @@ public class ProjectResource {
         if (project.getId() == null) {
             return createProject(project);
         }
-        project = updateService.updateProject(project);
+        project = updateService.updateProjectTags(project);
         Project result = saveService.saveProjectToRepo(project);
 
         return ResponseEntity.ok()
@@ -161,3 +171,4 @@ public class ProjectResource {
             .collect(Collectors.toList());
     }
 }
+

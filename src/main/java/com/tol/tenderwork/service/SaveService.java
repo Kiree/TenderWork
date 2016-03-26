@@ -91,6 +91,7 @@ public class SaveService {
         for (Tag tag : project.getHasTagss()){
             tag.addProject(project);
             saveTagToRepo(tag);
+            project.addTag(tag);
         }
 
         return result;
@@ -98,9 +99,11 @@ public class SaveService {
 
     @Transactional
     public Tag saveTagToRepo(Tag tag) {
-        Tag result = tagRepository.save(tag);
-        tagSearchRepository.save(result);
 
-        return result;
-    }
+
+    Tag result = tagRepository.save(tag);
+    tagSearchRepository.save(result);
+    return result;
+        }
+
 }

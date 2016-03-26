@@ -5,10 +5,7 @@ import com.tol.tenderwork.repository.EstimateRepository;
 import com.tol.tenderwork.repository.ProjectRepository;
 import com.tol.tenderwork.repository.RequirementRepository;
 import com.tol.tenderwork.repository.TaskRepository;
-import com.tol.tenderwork.repository.search.EstimateSearchRepository;
-import com.tol.tenderwork.repository.search.ProjectSearchRepository;
-import com.tol.tenderwork.repository.search.RequirementSearchRepository;
-import com.tol.tenderwork.repository.search.TaskSearchRepository;
+import com.tol.tenderwork.repository.search.*;
 import com.tol.tenderwork.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +27,9 @@ public class DeleteService {
 
     @Inject
     private TagRepository tagRepository;
+
+    @Inject
+    private TagSearchRepository tagSearchRepository;
 
     @Inject
     private TaskRepository taskRepository;
@@ -143,5 +143,19 @@ public class DeleteService {
         }
         projectRepository.delete(id);
         projectSearchRepository.delete(id);
+    }
+
+    @Transactional
+    public void deleteTag(Tag tag) {
+        Tag dbTag = tagRepository.findOne(tag.getId());
+        if(dbTag.getBelongsToProjectss().isEmpty()) {
+            if(dbTag.getBelongsToRequirementss().isEmpty()) {
+                if(dbTag.getBelongsToTaskss().isEmpty()) {
+                    tagRepository.delete(tag.getId());
+                    tagSearchRepository.delete(tag.getId());
+                }
+            }
+        }
+
     }
 }

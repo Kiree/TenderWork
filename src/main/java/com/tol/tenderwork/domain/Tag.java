@@ -27,7 +27,7 @@ public class Tag implements Serializable {
 
     @NotNull
     @Size(min = 2, max = 30)
-    @Column(name = "name", length = 30, nullable = false)
+    @Column(name = "name", length = 30, nullable = false, unique = true)
     private String name;
 
     @NotNull
@@ -79,6 +79,22 @@ public class Tag implements Serializable {
         this.belongsToProjectss.remove(project);
     }
 
+    public void addRequirement(Requirement requirement) {
+        this.belongsToRequirementss.add(requirement);
+    }
+
+    public void removeRequirement(Requirement requirement) {
+        this.belongsToRequirementss.remove(requirement);
+    }
+
+    public void addTask(Task task) {
+        this.belongsToTaskss.add(task);
+    }
+
+    public void removeTask(Task task) {
+        this.belongsToTaskss.remove(task);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -96,7 +112,7 @@ public class Tag implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id+name);
+        return Objects.hashCode(name);
     }
 
     @Override

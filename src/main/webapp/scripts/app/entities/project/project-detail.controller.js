@@ -27,7 +27,7 @@ angular.module('tenderworkApp')
 
         $scope.loadAll = function() {
             var found;
-            TagSearch.query({query:"belongsToProjectss.id:" + $scope.project.id}, function(result) {
+            TagSearch.query({query:"belongsToProject.id:" + $scope.project.id}, function(result) {
                 if(result === "undefined" || result === null) {
                     return;
                 }
