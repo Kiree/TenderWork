@@ -61,6 +61,7 @@ public class Tag implements Serializable {
         this.name = name;
     }
 
+<<<<<<< HEAD
     public void addProject(Project project) { this.getProjectTags().add(project); }
 
     public void removeProject(Project project) { this.getProjectTags().remove(project); }
@@ -68,20 +69,32 @@ public class Tag implements Serializable {
 /*
     public void addRequirement(Requirement requirement) {
         this.belongsToRequirementss.add(requirement);
+=======
+    public Set<Project> getProjectTags() {
+        return projectTags;
+>>>>>>> origin/master
     }
 
-    public void removeRequirement(Requirement requirement) {
-        this.belongsToRequirementss.remove(requirement);
+    public void setProjectTags(Set<Project> projectTags) {
+        this.projectTags = projectTags;
     }
 
-    public void addTask(Task task) {
-        this.belongsToTaskss.add(task);
+    public Set<Requirement> getRequirementTags() {
+        return requirementTags;
     }
 
-    public void removeTask(Task task) {
-        this.belongsToTaskss.remove(task);
+    public void setRequirementTags(Set<Requirement> requirementTags) {
+        this.requirementTags = requirementTags;
     }
-*/
+
+    public Set<Task> getTaskTags() {
+        return taskTags;
+    }
+
+    public void setTaskTags(Set<Task> taskTags) {
+        this.taskTags = taskTags;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -108,30 +121,6 @@ public class Tag implements Serializable {
             "id=" + id +
             ", name='" + name + "'" +
             '}';
-    }
-
-    public Set<Project> getProjectTags() {
-        return projectTags;
-    }
-
-    public void setProjectTags(Set<Project> projectTags) {
-        this.projectTags = projectTags;
-    }
-
-    public Set<Requirement> getRequirementTags() {
-        return requirementTags;
-    }
-
-    public void setRequirementTags(Set<Requirement> requirementTags) {
-        this.requirementTags = requirementTags;
-    }
-
-    public Set<Task> getTaskTags() {
-        return taskTags;
-    }
-
-    public void setTaskTags(Set<Task> taskTags) {
-        this.taskTags = taskTags;
     }
 
 }

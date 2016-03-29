@@ -71,16 +71,16 @@ public class Project implements Serializable {
     @JoinColumn(name = "edited_by_id")
     private User editedBy;
 
+    @OneToMany(mappedBy = "ownerProject", cascade = CascadeType.REFRESH)
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Estimate> hasEstimatess = new HashSet<>();
+
     @ManyToMany(cascade=CascadeType.MERGE)
     @JoinTable(name = "project_tags",
         joinColumns = @JoinColumn(name="project_id"),
         inverseJoinColumns = @JoinColumn(name="tags_id"))
     private Set<Tag> tags = new HashSet<>();
-
-    @OneToMany(mappedBy = "ownerProject")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Estimate> hasEstimatess = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
