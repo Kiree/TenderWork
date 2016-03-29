@@ -102,20 +102,71 @@ public class TagResource {
     /**
      * GET  /tags/:id -> get the "id" tag.
      */
-    @RequestMapping(value = "/tags/{id}/{string}",
+    @RequestMapping(value = "/tags/{id}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Tag> getTag(@PathVariable Long id, @PathVariable String string) {
+    public ResponseEntity<Tag> getTag(@PathVariable Long id) {
         log.debug("REST request to get Tag : {}", id);
         Tag tag = tagRepository.findOne(id);
-        if(string.equals("project")) {
-            Set<Project> tagSet = tag.getProjectTags();
-        } else if(string.equals("requirement")) {
-            Set<Requirement> tagSet = tag.getRequirementTags();
-        } else if(string.equals("task")) {
-            Set<Task> tagSet = tag.getTaskTags();
-        }
+
+        return Optional.ofNullable(tag)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    /**
+     * GET  /tags/projects/:id -> get the "id" tag's projects.
+     */
+    @RequestMapping(value = "/tags/projects/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Set<Project>> getProjectTag(@PathVariable Long id) {
+        log.debug("REST request to get Project Tag : {}", id);
+        Tag tag = tagRepository.findOne(id);
+        Set<Project> tagSet = tag.getProjectTags();
+
+        return Optional.ofNullable(tagSet)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    /**
+     * GET  /tags/requirements/:id -> get the "id" tag's requirements.
+     */
+    @RequestMapping(value = "/tags/requirements/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Set<Requirement>> getRequirementTag(@PathVariable Long id) {
+        log.debug("REST request to get Tag : {}", id);
+        Tag tag = tagRepository.findOne(id);
+        Set<Requirement> tagSet = tag.getRequirementTags();
+
+        return Optional.ofNullable(tagSet)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    /**
+     * GET  /tags/tasks/:id -> get the "id" tag's tasks.
+     */
+    @RequestMapping(value = "/tags/tasks/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Set<Task>> getTaskTag(@PathVariable Long id) {
+        log.debug("REST request to get Tag : {}", id);
+        Tag tag = tagRepository.findOne(id);
+        Set<Task> tagSet = tag.getTaskTags();
+
         return Optional.ofNullable(tagSet)
             .map(result -> new ResponseEntity<>(
                 result,
