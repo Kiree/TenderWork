@@ -102,7 +102,7 @@ public class SaveService {
 
         Tag result = tagRepository.save(tag);
         tagSearchRepository.save(result);
-    return result;
-        }
+        return result;
+    }
 
 }
