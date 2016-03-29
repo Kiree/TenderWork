@@ -223,17 +223,17 @@ public Project updateProjectTags(Project project) {
     if(!project.getTags().isEmpty()) {
         for (Tag tag : project.getTags()) {
             tag.setName(tag.getName().toLowerCase());
-             if (!(oldProject.getHasTagss().contains(tag))) {
+             if (!(oldProject.getTags().contains(tag))) {
                   //tag.addProject(project);
                   saveService.saveTagToRepo(tag);
                 }
          }
     }
 
-    if(!oldProject.getHasTagss().isEmpty()) {
-        for (Tag tag : oldProject.getHasTagss()) {
+    if(!oldProject.getTags().isEmpty()) {
+        for (Tag tag : oldProject.getTags()) {
             tag.setName(tag.getName().toLowerCase());
-            if (!(project.getHasTagss().contains(tag))) {
+            if (!(project.getTags().contains(tag))) {
                 //tag.removeProject(project);
                 saveService.saveTagToRepo(tag);
                 deleteService.deleteTag(tag);

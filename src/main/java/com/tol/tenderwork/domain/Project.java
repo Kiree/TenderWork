@@ -247,6 +247,6 @@ public class Project implements Serializable {
     }
 
     public void addTag(Tag tag) {
-        this.hasTagss.add(tag);
+        this.tags.add(tag);
     }
 }

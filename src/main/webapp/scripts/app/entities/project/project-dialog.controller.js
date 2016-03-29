@@ -37,7 +37,7 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
             }
         };
 
-        $scope.tags = [];
+        $scope.tags = entity.id === null ? [] : entity.tags;
         $scope.tagCloud = Tag.query();
 
         $scope.project = entity;

@@ -76,7 +76,11 @@
                    ng-maxlength="1000" />
         </div>
 
-
+        <div class="form-group">
+            <tags-input ng-model="project.tags" display-property="name">
+                <auto-complete source="tagCloud"></auto-complete>
+            </tags-input>
+        </div>
         <!--<div class="form-group">
             <label translate="tenderworkApp.project.createdBy" for="field_createdBy">createdBy</label>
             <input type="text" class="form-control" name="createdBy" id="field_createdBy"
