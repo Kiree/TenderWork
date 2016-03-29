@@ -1,7 +1,10 @@
 package com.tol.tenderwork.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.tol.tenderwork.domain.Project;
+import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.domain.Tag;
+import com.tol.tenderwork.domain.Task;
 import com.tol.tenderwork.repository.TagRepository;
 import com.tol.tenderwork.repository.search.TagSearchRepository;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
@@ -22,6 +25,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -35,13 +39,13 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class TagResource {
 
     private final Logger log = LoggerFactory.getLogger(TagResource.class);
-        
+
     @Inject
     private TagRepository tagRepository;
-    
+
     @Inject
     private TagSearchRepository tagSearchRepository;
-    
+
     /**
      * POST  /tags -> Create a new tag.
      */
@@ -90,7 +94,7 @@ public class TagResource {
     public ResponseEntity<List<Tag>> getAllTags(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Tags");
-        Page<Tag> page = tagRepository.findAll(pageable); 
+        Page<Tag> page = tagRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tags");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -98,14 +102,21 @@ public class TagResource {
     /**
      * GET  /tags/:id -> get the "id" tag.
      */
-    @RequestMapping(value = "/tags/{id}",
+    @RequestMapping(value = "/tags/{id}/{string}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Tag> getTag(@PathVariable Long id) {
+    public ResponseEntity<Tag> getTag(@PathVariable Long id, @PathVariable String string) {
         log.debug("REST request to get Tag : {}", id);
         Tag tag = tagRepository.findOne(id);
-        return Optional.ofNullable(tag)
+        if(string.equals("project")) {
+            Set<Project> tagSet = tag.getProjectTags();
+        } else if(string.equals("requirement")) {
+            Set<Requirement> tagSet = tag.getRequirementTags();
+        } else if(string.equals("task")) {
+            Set<Task> tagSet = tag.getTaskTags();
+        }
+        return Optional.ofNullable(tagSet)
             .map(result -> new ResponseEntity<>(
                 result,
                 HttpStatus.OK))
