@@ -135,7 +135,7 @@ public class ProjectResource {
     @Timed
     public ResponseEntity<Project> getProject(@PathVariable Long id) {
         log.debug("REST request to get Project : {}", id);
-        Project project = projectRepository.findOne(id);
+        Project project = projectRepository.findOneWithEagerRelationships(id);
         return Optional.ofNullable(project)
             .map(result -> new ResponseEntity<>(
                 result,

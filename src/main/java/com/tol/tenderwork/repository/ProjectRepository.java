@@ -18,10 +18,10 @@ public interface ProjectRepository extends JpaRepository<Project,Long> {
     @Query("select project from Project project where project.editedBy.login = ?#{principal.username}")
     List<Project> findByEditedByIsCurrentUser();
 
-    @Query("select distinct project from Project project left join fetch project.hasTagss")
+    @Query("select distinct project from Project project left join fetch project.tags")
     List<Project> findAllWithEagerRelationships();
 
-    @Query("select project from Project project left join fetch project.hasTagss where project.id =:id")
+    @Query("select project from Project project left join fetch project.tags where project.id =:id")
     Project findOneWithEagerRelationships(@Param("id") Long id);
 
 }

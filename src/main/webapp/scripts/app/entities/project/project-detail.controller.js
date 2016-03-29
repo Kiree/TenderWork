@@ -26,7 +26,7 @@ angular.module('tenderworkApp')
         };
 
         $scope.loadAll = function() {
-            var found;
+            var found;/*
             TagSearch.query({query:"belongsToProject.id:" + $scope.project.id}, function(result) {
                 if(result === "undefined" || result === null) {
                     return;
@@ -37,7 +37,8 @@ angular.module('tenderworkApp')
                         $scope.tags.push(result[i]);
                     }
                 }
-            });
+            });*/
+            console.log($scope.project);
             EstimateSearch.query({query:"ownerProject.id:" + $scope.project.id}, function(result) {
                 if(result === "undefined" || result === null) {
                     return;
