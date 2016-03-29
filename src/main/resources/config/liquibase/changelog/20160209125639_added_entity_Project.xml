@@ -68,15 +68,6 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
-        <createTable tableName="project_has_tags">
-            <column name="has_tagss_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="projects_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
         <createTable tableName="tag">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
@@ -85,20 +76,6 @@
                 <constraints nullable="false" />
             </column>
         </createTable>
-
-        <addPrimaryKey columnNames="projects_id, has_tagss_id" tableName="project_has_tags"/>
-
-        <addForeignKeyConstraint baseColumnNames="projects_id"
-                                 baseTableName="project_has_tags"
-                                 constraintName="fk_project_has_tags_tag_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="project"/>
-
-        <addForeignKeyConstraint baseColumnNames="has_tagss_id"
-                                 baseTableName="project_has_tags"
-                                 constraintName="fk_project_has_tags_project_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="tag"/>
 
     </changeSet>
 </databaseChangeLog>
