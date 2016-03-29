@@ -35,6 +35,16 @@ public class Tag implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Project> projectTags = new HashSet<>();
 
+    @ManyToMany(mappedBy = "tags", targetEntity = Requirement.class)
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Requirement> requirementTags = new HashSet<>();
+
+    @ManyToMany(mappedBy = "tags", targetEntity = Task.class)
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Task> taskTags = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -103,4 +113,21 @@ public class Tag implements Serializable {
     public void setProjectTags(Set<Project> projectTags) {
         this.projectTags = projectTags;
     }
+
+    public Set<Requirement> getRequirementTags() {
+        return requirementTags;
+    }
+
+    public void setRequirementTags(Set<Requirement> requirementTags) {
+        this.requirementTags = requirementTags;
+    }
+
+    public Set<Task> getTaskTags() {
+        return taskTags;
+    }
+
+    public void setTaskTags(Set<Task> taskTags) {
+        this.taskTags = taskTags;
+    }
+
 }
