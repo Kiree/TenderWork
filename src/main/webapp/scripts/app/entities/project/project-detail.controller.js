@@ -25,20 +25,10 @@ angular.module('tenderworkApp')
             });
         };
 
+        $scope.empty = "\u00A0";
+
         $scope.loadAll = function() {
-            var found;/*
-            TagSearch.query({query:"belongsToProject.id:" + $scope.project.id}, function(result) {
-                if(result === "undefined" || result === null) {
-                    return;
-                }
-                for (var i = 0; i < result.length; i++) {
-                    found = checkIfExists($scope.tags, result[i]);
-                    if(!found) {
-                        $scope.tags.push(result[i]);
-                    }
-                }
-            });*/
-            console.log($scope.project);
+            var found;
             EstimateSearch.query({query:"ownerProject.id:" + $scope.project.id}, function(result) {
                 if(result === "undefined" || result === null) {
                     return;
@@ -53,14 +43,6 @@ angular.module('tenderworkApp')
                     }
                 }
             });
-            /*
-             Estimate.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
-             $scope.links = ParseLinks.parse(headers('link'));
-             result = result.filter(filterByProjectId);
-             for (var i = 0; i < result.length; i++) {
-             $scope.estimates.push(result[i]);
-             }
-             }); */
         };
         $scope.reset = function() {
             $scope.page = 0;
