@@ -62,10 +62,13 @@ public class Requirement implements Serializable {
     @JoinColumn(name = "owner_estimate_id")
     private Estimate ownerEstimate;
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.MERGE)
+    @JoinTable(name = "requirement_tags",
+        joinColumns = @JoinColumn(name="requirement_id"),
+        inverseJoinColumns = @JoinColumn(name="tags_id"))
     private Set<Tag> tags = new HashSet<>();
 
-    @OneToMany(mappedBy = "ownerRequirement")
+    @OneToMany(mappedBy = "ownerRequirement", cascade = CascadeType.REFRESH)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Task> hasTaskss = new HashSet<>();
