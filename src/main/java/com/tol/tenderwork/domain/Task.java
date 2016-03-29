@@ -88,7 +88,10 @@ public class Task implements Serializable {
     @JoinColumn(name = "owner_requirement_id")
     private Requirement ownerRequirement;
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.MERGE)
+    @JoinTable(name = "task_tags",
+        joinColumns = @JoinColumn(name="task_id"),
+        inverseJoinColumns = @JoinColumn(name="tags_id"))
     private Set<Tag> tags = new HashSet<>();
 
     @ManyToMany
