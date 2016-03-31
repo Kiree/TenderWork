@@ -43,15 +43,17 @@ angular.module('tenderworkApp')
                     for (var i = 0; i < result.length; i++) {
                         $scope.requirements.push(result[i]);
                         TaskSearch.query({query: "ownerRequirement.id:" + result[i].id}, function(results_tasks) {
-                            var tasksContainer = {requirementId:results_tasks[0].ownerRequirement.id, tasks:[]};
-                            var tasksArray = [];
-                            console.log($scope.requirements);
-                            for (var j = 0; j < results_tasks.length; j++) {
-                                tasksArray.push(results_tasks[j]);
+                            if(results_tasks.length > 0) {
+                                var tasksContainer = {requirementId: results_tasks[0].ownerRequirement.id, tasks: []};
+                                var tasksArray = [];
+                                console.log($scope.requirements);
+                                for (var j = 0; j < results_tasks.length; j++) {
+                                    tasksArray.push(results_tasks[j]);
+                                }
+                                tasksContainer.tasks = tasksArray;
+                                console.log($scope.tasks, tasksContainer);
+                                $scope.tasks.push(tasksContainer);
                             }
-                            tasksContainer.tasks = tasksArray;
-                            console.log($scope.tasks, tasksContainer);
-                            $scope.tasks.push(tasksContainer);
                         });
                     }
                     populated = true;

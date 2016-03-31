@@ -7,6 +7,7 @@ angular.module('tenderworkApp').controller('TaskDialogController',
         $scope.tags = entity.id === null ? [] : entity.tags;
         $scope.task = entity;
         $scope.users = User.query();
+        $scope.tagCloud = Tag.query();
         var setDefaultsForTask = function() {
             if($scope.task === null) {
                 return;

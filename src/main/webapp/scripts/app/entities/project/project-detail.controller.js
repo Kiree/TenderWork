@@ -21,7 +21,7 @@ angular.module('tenderworkApp')
 
         var checkIfExists = function(array, element) {
             return array.some(function(item) {
-               return item === element;
+               return item.id === element.id;
             });
         };
 
@@ -42,6 +42,7 @@ angular.module('tenderworkApp')
                         $scope.estimates.push(result[i]);
                     }
                 }
+                console.log($scope.estimates);
             });
         };
         $scope.reset = function() {

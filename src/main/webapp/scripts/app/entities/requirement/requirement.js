@@ -76,7 +76,7 @@ angular.module('tenderworkApp')
                     }).result.then(function(result) {
                         $state.go('estimate.detail', { id:$stateParams.id }, { reload: true });
                     }, function() {
-                        $state.go('estimate.detail', { id:$stateParams.id });
+                        $state.go('estimate.detail', { id:$stateParams.id }, { reload:true });
                     })
                 }]
             })
