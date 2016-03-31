@@ -65,6 +65,9 @@ public class ProjectResource {
     @Timed
     public ResponseEntity<Project> createProject(@Valid @RequestBody Project project) throws URISyntaxException {
         log.debug("REST request to save Project : {}", project);
+        if (project.getId() != null) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("project", "idexists", "A new project cannot already have an ID")).body(null);
+        }
 
         // Jos projektilla on tageja, ne käsitellään
         if (!(project.getTags().isEmpty())) {
@@ -75,15 +78,13 @@ public class ProjectResource {
             }
 
         }
-            if (project.getId() != null) {
-                return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("project", "idexists", "A new project cannot already have an ID")).body(null);
-            }
-            Project result = saveService.saveProjectToRepo(project);
 
-            return ResponseEntity.created(new URI("/api/projects/" + result.getId()))
-                .headers(HeaderUtil.createEntityCreationAlert("project", result.getId().toString()))
-                .body(result);
-        }
+        Project result = saveService.saveProjectToRepo(project);
+
+        return ResponseEntity.created(new URI("/api/projects/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert("project", result.getId().toString()))
+            .body(result);
+    }
 
 
     /**

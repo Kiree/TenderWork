@@ -69,10 +69,13 @@ public class RequirementResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("requirement", "idexists", "A new requirement cannot already have an ID")).body(null);
         }
 
-        for (Tag tag : requirement.getTags()){
-            tag.setName(tag.getName().toLowerCase());
-            //tag.addRequirement(requirement);
-            saveService.saveTagToRepo(tag);
+        // Jos vaatimuksella on tageja, ne käsitellään
+        if (!(requirement.getTags().isEmpty())) {
+            for (Tag tag : requirement.getTags()) {
+                tag.setName(tag.getName().toLowerCase());
+                tag.addRequirement(requirement);
+                saveService.saveTagToRepo(tag);
+            }
         }
 
         Requirement result = updateService.updateRequirement(requirement);
@@ -95,7 +98,7 @@ public class RequirementResource {
             return createRequirement(requirement);
         }
 
-        //Tämä pitäisi olla ok - Petteri 3.3. 14:30
+        requirement = updateService.updateRequirementTags(requirement);
         Requirement result = updateService.updateRequirement(requirement);
 
         return ResponseEntity.ok()

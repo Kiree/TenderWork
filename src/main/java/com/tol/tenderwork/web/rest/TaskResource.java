@@ -71,10 +71,13 @@ public class TaskResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("task", "idexists", "A new task cannot already have an ID")).body(null);
         }
 
-        for (Tag tag : task.getTags()){
-            tag.setName(tag.getName().toLowerCase());
-           // tag.addTask(task);
-            saveService.saveTagToRepo(tag);
+        // Jos taskilla on tageja, ne käsitellään
+        if (!(task.getTags().isEmpty())) {
+            for (Tag tag : task.getTags()) {
+                tag.setName(tag.getName().toLowerCase());
+                tag.addTask(task);
+                saveService.saveTagToRepo(tag);
+            }
         }
 
         Task result = updateService.updateTask(task);
@@ -98,6 +101,7 @@ public class TaskResource {
             return createTask(task);
         }
 
+        task = updateService.updateTaskTags(task);
         Task result = updateService.updateTask(task);
 
         return ResponseEntity.ok()

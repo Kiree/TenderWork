@@ -23,8 +23,7 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
             if(tagTextObject.id === undefined) {
                 return {
                     id:null,
-                    name:tagTextObject.name,
-                    counter:0
+                    name:tagTextObject.name
                 };
             }
             return tagTextObject;
@@ -33,7 +32,7 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
         var updateTag = function(tag) {
             return {
                 id:tag.id,
-                name:tag.name,
+                name:tag.name
             }
         };
 
