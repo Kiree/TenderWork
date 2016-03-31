@@ -33,6 +33,7 @@ angular.module('tenderworkApp').controller('TaskDialogController',
                     return;
                 }
                 $scope.estimateLinkedToTask = $scope.helperFunctions.copyEstimate(responseEstimate);
+                console.log($scope.estimateLinkedToTask);
                 $scope.estimates = [$scope.estimateLinkedToTask];
                 setDefaultsForTask();
             });
