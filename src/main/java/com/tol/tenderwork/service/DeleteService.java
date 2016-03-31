@@ -68,6 +68,7 @@ public class DeleteService {
     public void deleteTask(Long id){
 
         Task task = taskRepository.findOne(id);
+        task = deleteTaskTags(task);
 
         // Update owner requirement
         Requirement requirement = requirementRepository.findOne(task.getOwnerRequirement().getId());
@@ -94,9 +95,11 @@ public class DeleteService {
         // Delete everything that estimate owns
         for(Requirement requirement : estimate.getHasRequirementss()) {
             for(Task task : requirement.getHasTaskss()) {
+                task = deleteTaskTags(task);
                 taskRepository.delete(task.getId());
                 taskSearchRepository.delete(task.getId());
             }
+            requirement = deleteRequirementTags(requirement);
             requirementRepository.delete(requirement.getId());
             requirementSearchRepository.delete(requirement.getId());
         }
@@ -115,10 +118,11 @@ public class DeleteService {
 
         // Delete requirement's tasks
         for(Task task : requirement.getHasTaskss()) {
+            deleteTaskTags(task);
             taskRepository.delete(task.getId());
             taskSearchRepository.delete(task.getId());
         }
-
+        requirement = deleteRequirementTags(requirement);
         // Update owner estimate
         Estimate estimate = estimateRepository.findOne(requirement.getOwnerEstimate().getId());
         estimate.removeRequirement(requirement);
@@ -141,6 +145,7 @@ public class DeleteService {
         for(Estimate estimate : project.getHasEstimatess()) {
             deleteEstimate(estimate.getId());
         }
+        deleteProjectTags(project);
         projectRepository.delete(id);
         projectSearchRepository.delete(id);
     }
@@ -156,5 +161,35 @@ public class DeleteService {
                 }
             }
         }
+    }
+
+    @Transactional
+    public Task deleteTaskTags(Task task) {
+        for(Tag tag : task.getTags()) {
+            tag.removeTask(task);
+            saveService.saveTagToRepo(tag);
+            deleteTag(tag.getId());
+        }
+        return task;
+    }
+
+    @Transactional
+    public Requirement deleteRequirementTags(Requirement requirement) {
+        for(Tag tag : requirement.getTags()) {
+            tag.removeRequirement(requirement);
+            saveService.saveTagToRepo(tag);
+            deleteTag(tag.getId());
+        }
+        return requirement;
+    }
+
+    @Transactional
+    public Project deleteProjectTags(Project project) {
+        for(Tag tag : project.getTags()) {
+            tag.removeProject(project);
+            saveService.saveTagToRepo(tag);
+            deleteTag(tag.getId());
+        }
+        return project;
     }
 }
