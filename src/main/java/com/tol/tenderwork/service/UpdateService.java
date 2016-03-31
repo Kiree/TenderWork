@@ -268,7 +268,6 @@ public class UpdateService {
             for (Tag tag : dbProject.getTags()) {
                 if (!(project.getTags().contains(tag))) {
                     forRemoval.add(tag);
-                    project.removeTag(tag);
                 }
             }
         }
@@ -301,7 +300,6 @@ public class UpdateService {
             for(Tag tag : dbRequirement.getTags()) {
                 if(!(requirement.getTags().contains(tag))) {
                     forRemoval.add(tag);
-                    requirement.removeTag(tag);
                 }
             }
         }
@@ -315,5 +313,37 @@ public class UpdateService {
             }
         }
         return requirement;
+    }
+
+    public Task updateTaskTags(Task task) {
+        Task dbTask = taskRepository.findOne(task.getId());
+
+        if(!task.getTags().isEmpty()) {
+            for(Tag tag : task.getTags()) {
+                tag.setName(tag.getName().toLowerCase());
+                if(!(dbTask.getTags().contains(tag))) {
+                    tag.addTask(task);
+                    saveService.saveTagToRepo(tag);
+                }
+            }
+        }
+        Set<Tag> forRemoval = new HashSet<>();
+        if(!dbTask.getTags().isEmpty()) {
+            for(Tag tag : dbTask.getTags()) {
+                if(!(task.getTags().contains(tag))) {
+                    forRemoval.add(tag);
+                }
+            }
+        }
+
+        saveService.saveTaskToRepo(task);
+        if(!forRemoval.isEmpty()) {
+            for(Tag tag : forRemoval) {
+                tag.removeTask(task);
+                saveService.saveTagToRepo(tag);
+                deleteService.deleteTag(tag.getId());
+            }
+        }
+        return task;
     }
 }

@@ -245,6 +245,8 @@ public class Task implements Serializable {
         this.tags = tags;
     }
 
+    public void removeTag(Tag tag) { this.tags.remove(tags); }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
