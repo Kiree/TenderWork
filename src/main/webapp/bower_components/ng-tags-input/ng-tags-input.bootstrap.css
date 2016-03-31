@@ -44,11 +44,11 @@ tags-input .autocomplete {
 }
 tags-input .autocomplete .suggestion-item.selected {
   color: #262626;
-  background-color: #f5f5f5;
+  background-color: #f50000;
 }
 tags-input .autocomplete .suggestion-item.selected em {
   color: #262626;
-  background-color: #f5f5f5;
+  background-color: #f50000;
 }
 tags-input .autocomplete .suggestion-item em {
   color: #000;
