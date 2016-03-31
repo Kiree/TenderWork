@@ -54,28 +54,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="estimate"/>
 
-        <createTable tableName="requirement_has_tags">
-            <column name="has_tagss_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="requirements_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="requirements_id, has_tagss_id" tableName="requirement_has_tags"/>
-
-        <addForeignKeyConstraint baseColumnNames="requirements_id"
-                                 baseTableName="requirement_has_tags"
-                                 constraintName="fk_requirement_has_tags_tag_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="requirement"/>
-
-        <addForeignKeyConstraint baseColumnNames="has_tagss_id"
-                                 baseTableName="requirement_has_tags"
-                                 constraintName="fk_requirement_has_tags_requirement_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="tag"/>
-
     </changeSet>
 </databaseChangeLog>

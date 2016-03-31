@@ -42,7 +42,6 @@
             </column>
         </createTable>
 
-
         <addPrimaryKey columnNames="tags_id, project_id" tableName="project_tags"/>
 
         <addForeignKeyConstraint baseColumnNames="tags_id"
@@ -56,5 +55,34 @@
                                  constraintName="fk_project_tags_project_id"
                                  referencedColumnNames="id"
                                  referencedTableName="project"/>
+
+        <addPrimaryKey columnNames="tags_id, requirement_id" tableName="requirement_tags"/>
+
+        <addForeignKeyConstraint baseColumnNames="tags_id"
+                                 baseTableName="requirement_tags"
+                                 constraintName="fk_requirement_tags_tag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"/>
+
+        <addForeignKeyConstraint baseColumnNames="requirement_id"
+                                 baseTableName="requirement_tags"
+                                 constraintName="fk_requirement_tags_requirement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="requirement"/>
+
+        <addPrimaryKey columnNames="tags_id, task_id" tableName="task_tags"/>
+
+        <addForeignKeyConstraint baseColumnNames="tags_id"
+                                 baseTableName="task_tags"
+                                 constraintName="fk_task_tags_tag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"/>
+
+        <addForeignKeyConstraint baseColumnNames="task_id"
+                                 baseTableName="task_tags"
+                                 constraintName="fk_task_tags_task_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="task"/>
+
     </changeSet>
 </databaseChangeLog>
