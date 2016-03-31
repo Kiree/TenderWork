@@ -73,13 +73,6 @@ public class Requirement implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Task> hasTaskss = new HashSet<>();
 
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "requirement_has_tags",
-               joinColumns = @JoinColumn(name="requirements_id", referencedColumnName="ID"),
-               inverseJoinColumns = @JoinColumn(name="has_tagss_id", referencedColumnName="ID"))
-    private Set<Tag> hasTagss = new HashSet<>();
-
     public Long getId() {
         return id;
     }
@@ -177,14 +170,6 @@ public class Requirement implements Serializable {
 
     public void setHasTaskss(Set<Task> tasks) {
         this.hasTaskss = tasks;
-    }
-
-    public Set<Tag> getHasTagss() {
-        return hasTagss;
-    }
-
-    public void setHasTagss(Set<Tag> tags) {
-        this.hasTagss = tags;
     }
 
     public Set<Tag> getTags() {

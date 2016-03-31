@@ -18,7 +18,7 @@ public interface RequirementRepository extends JpaRepository<Requirement,Long> {
     @Query("select distinct requirement from Requirement requirement left join fetch requirement.tags")
     List<Requirement> findAllWithEagerRelationships();
 
-    @Query("select requirement from Requirement requirement left join fetch requirement.hasTagss where requirement.id =:id")
+    @Query("select requirement from Requirement requirement left join fetch requirement.tags where requirement.id =:id")
     Requirement findOneWithEagerRelationships(@Param("id") Long id);
 
 }

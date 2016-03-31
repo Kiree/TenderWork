@@ -18,7 +18,7 @@ public interface TaskRepository extends JpaRepository<Task,Long> {
     @Query("select distinct task from Task task left join fetch task.tags")
     List<Task> findAllWithEagerRelationships();
 
-    @Query("select task from Task task left join fetch task.hasTagss where task.id =:id")
+    @Query("select task from Task task left join fetch task.tags where task.id =:id")
     Task findOneWithEagerRelationships(@Param("id") Long id);
 
 }

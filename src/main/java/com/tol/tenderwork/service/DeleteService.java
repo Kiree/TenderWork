@@ -149,19 +149,12 @@ public class DeleteService {
     public void deleteTag(Long id) {
         Tag dbTag = tagRepository.findOne(id);
         if (dbTag.getProjectTags().isEmpty()) {
-            tagRepository.delete(id);
-            tagSearchRepository.delete(id);
-        }
-    }
-    /*
-            if(dbTag.getRequirementTags().isEmpty()) {
-                if(dbTag.getTaskTags().isEmpty()) {
+            if (dbTag.getRequirementTags().isEmpty()) {
+                if (dbTag.getTaskTags().isEmpty()) {
                     tagRepository.delete(id);
                     tagSearchRepository.delete(id);
                 }
             }
         }
-
     }
-    */
 }

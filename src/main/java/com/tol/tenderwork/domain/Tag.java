@@ -67,14 +67,20 @@ public class Tag implements Serializable {
     public void removeProject(Project project) { this.getProjectTags().remove(project); }
 
     public void addRequirement(Requirement requirement) {
-        this.requirementTags.add(requirement);
+        this.getRequirementTags().add(requirement);
     }
 
-    public void removeRequirement(Requirement requirement) {this.requirementTags.remove(requirement); }
+    public void removeRequirement(Requirement requirement) {
+        this.getRequirementTags().remove(requirement);
+    }
 
-    public void addTask(Task task) {this.taskTags.add(task); }
+    public void addTask (Task task) {
+        this.getTaskTags().add(task);
+    }
 
-    public void removeTask(Task task) {this.taskTags.remove(task); }
+    public void removeTask (Task task){
+        this.getTaskTags().remove(task);
+    }
 
     public Set<Project> getProjectTags() {
         return projectTags;

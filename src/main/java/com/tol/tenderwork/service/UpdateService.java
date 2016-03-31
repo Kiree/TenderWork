@@ -219,36 +219,6 @@ public class UpdateService {
         return result;
     }
 
-    /*
-    public Project updateProjectTags(Project project) {
-        Project oldProject = projectRepository.findOne(project.getId());
-
-        if(!project.getTags().isEmpty()) {
-            for (Tag tag : project.getTags()) {
-                tag.setName(tag.getName().toLowerCase());
-                if (!(oldProject.getTags().contains(tag))) {
-                    tag.addProject(project);
-                    saveService.saveTagToRepo(tag);
-                }
-            }
-        }
-
-        if(!oldProject.getTags().isEmpty()) {
-            for (Tag tag : oldProject.getTags()) {
-                if (!(project.getTags().contains(tag))) {
-                    project.removeTag(tag);
-                    saveService.saveProjectToRepo(project);
-                    tag.removeProject(project);
-                    saveService.saveTagToRepo(tag);
-                    deleteService.deleteTag(tag.getId());
-                }
-            }
-        }
-
-    return project;
-    }
-    */
-
     public Project updateProjectTags(Project project) {
 
         Project dbProject = projectRepository.findOne(project.getId());
