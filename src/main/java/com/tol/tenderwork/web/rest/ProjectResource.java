@@ -76,7 +76,6 @@ public class ProjectResource {
                 tag.addProject(project);
                 saveService.saveTagToRepo(tag);
             }
-
         }
 
         Project result = saveService.saveProjectToRepo(project);
