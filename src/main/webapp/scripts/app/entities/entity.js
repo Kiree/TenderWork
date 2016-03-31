@@ -7,4 +7,7 @@ angular.module('tenderworkApp')
                 abstract: true,
                 parent: 'site'
             });
-    });
+    })
+    .run(function($rootScope, EntityHelperFactory) {
+        $rootScope.helperFunctions = new EntityHelperFactory();
+});

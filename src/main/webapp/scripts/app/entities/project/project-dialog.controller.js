@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tenderworkApp').controller('ProjectDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Project', 'User', 'Estimate', 'Principal','$translate', 'Tag',
+    ['$scope','$stateParams', '$uibModalInstance', 'entity', 'Project', 'User', 'Estimate', 'Principal','$translate', 'Tag',
         function($scope, $stateParams, $uibModalInstance, entity, Project, User, Estimate, Principal, $translate, Tag) {
         $scope.stateTranslations = ['states.new', 'states.pending', 'states.won', 'states.lost', 'states.closed'];
         $scope.states = {
@@ -17,17 +17,6 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
             'Suljettu':'states.closed'
         };
 
-            // creates a new tag javascript object or just returns a resource
-        var createTag = function(tagTextObject) {
-            console.log(tagTextObject);
-            if(tagTextObject.id === undefined) {
-                return {
-                    id:null,
-                    name:tagTextObject.name
-                };
-            }
-            return tagTextObject;
-        };
 
         var updateTag = function(tag) {
             return {
@@ -59,22 +48,11 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
         };
 
         Principal.identity().then(function(account) {
-            var myAccount = copyAccount(account);
+            var myAccount = $scope.helperFunctions.copyAccount(account);
             User.get({login:myAccount.login}, function(result) {
                 $scope.currentUserAccount = result;
             });
         });
-
-        var copyAccount = function(account) {
-            return {
-                activated:account.activated,
-                email:account.email,
-                firstName:account.firstName,
-                langKey: account.langKey,
-                lastName: account.lastName,
-                login: account.login
-            }
-        };
 
         var onSaveSuccess = function (result) {
             $scope.$emit('tenderworkApp:projectUpdate', result);
@@ -88,7 +66,7 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
 
         $scope.save = function () {
             var today = new Date();
-            $scope.project.tags = $scope.tags.map(createTag);
+            $scope.project.tags = $scope.tags.map($scope.helperFunctions.createTag);
             $scope.project.state = $scope.states[$scope.stateTracker];
             $scope.project.editedBy = $scope.currentUserAccount;
             $scope.project.editedDate = today;

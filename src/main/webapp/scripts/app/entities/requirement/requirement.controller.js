@@ -15,6 +15,10 @@ angular.module('tenderworkApp')
         // and the contents being an array with all tasks associated with that particular
         // requirement
         // ie:
+        {
+        requirement-id:n,
+        tasks:[]
+        }
             req-id = 1:
                 [
                     task-1,
@@ -39,13 +43,15 @@ angular.module('tenderworkApp')
                     for (var i = 0; i < result.length; i++) {
                         $scope.requirements.push(result[i]);
                         TaskSearch.query({query: "ownerRequirement.id:" + result[i].id}, function(results_tasks) {
+                            var tasksContainer = {requirementId:results_tasks[0].ownerRequirement.id, tasks:[]};
+                            var tasksArray = [];
+                            console.log($scope.requirements);
                             for (var j = 0; j < results_tasks.length; j++) {
-                                if ($scope.tasks[results_tasks[j].ownerRequirement.id] === undefined) {
-                                    $scope.tasks[results_tasks[j].ownerRequirement.id] = new Array(results_tasks[j]);
-                                } else {
-                                    $scope.tasks[results_tasks[j].ownerRequirement.id].push(results_tasks[j]);
-                                }
+                                tasksArray.push(results_tasks[j]);
                             }
+                            tasksContainer.tasks = tasksArray;
+                            console.log($scope.tasks, tasksContainer);
+                            $scope.tasks.push(tasksContainer);
                         });
                     }
                     populated = true;

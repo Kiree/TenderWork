@@ -5,22 +5,14 @@ angular.module('tenderworkApp').controller('RequirementDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Requirement', 'User', 'Principal', 'Estimate', 'Task', 'Tag',
         function($scope, $stateParams, $uibModalInstance, entity, Requirement, User, Principal, Estimate, Task, Tag) {
 
-        var createTag = function(tagTextObject) {
-            console.log(tagTextObject);
+        var updateTag = function(tagTextObject) {
             if(tagTextObject.id === undefined) {
                 return {
-                    id:null,
-                    name:tagTextObject.name
-                };
+                    id: tagTextObject.id,
+                    name: tagTextObject.name
+                }
             }
             return tagTextObject;
-        };
-
-        var updateTag = function(tag) {
-            return {
-                id:tag.id,
-                name:tag.name,
-            }
         };
 
         $scope.tags = entity.id === null ? [] : entity.tags;
@@ -44,22 +36,11 @@ angular.module('tenderworkApp').controller('RequirementDialogController',
         };
 
         Principal.identity().then(function(account) {
-            $scope.myAccount = copyAccount(account);
+            $scope.myAccount = $scope.helperFunctions.copyAccount(account);
             User.get({login: $scope.myAccount.login}, function(result) {
                 $scope.currentUserAccount = result;
             });
         });
-
-        var copyAccount = function(account) {
-            return {
-                activated:account.activated,
-                email:account.email,
-                firstName:account.firstName,
-                langKey: account.langKey,
-                lastName: account.lastName,
-                login: account.login
-            }
-        };
 
         var onSaveSuccess = function (result) {
             $scope.$emit('tenderworkApp:requirementUpdate', result);
@@ -72,7 +53,8 @@ angular.module('tenderworkApp').controller('RequirementDialogController',
         };
 
         $scope.save = function () {
-            $scope.requirement.tags = $scope.tags.map(createTag);
+            console.log($scope.requirement.tags, $scope.tags);
+            $scope.requirement.tags = $scope.tags.map($scope.helperFunctions.createTag);
             $scope.isSaving = true;
             var proper = $scope.requirement.tags.map(function(item) {
                 $scope.tagCloud.some(function(cloudItem) {

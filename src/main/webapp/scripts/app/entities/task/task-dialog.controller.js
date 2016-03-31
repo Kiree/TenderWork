@@ -3,26 +3,8 @@
 angular.module('tenderworkApp').controller('TaskDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Task', 'User', 'Principal', 'Estimate', 'Requirement', 'Tag',
         function($scope, $stateParams, $uibModalInstance, entity, Task, User, Principal, Estimate, Requirement, Tag) {
-            
-        var createTag = function(tagTextObject) {
-            console.log(tagTextObject);
-            if(tagTextObject.id === undefined) {
-                return {
-                    id: null,
-                    name: tagTextObject.name
-                }
-            }
-        };
-
-        var updateTag = function(tag) {
-            return {
-                id:tag.id,
-                name:tag.name,
-            }
-        };
 
         $scope.tags = entity.id === null ? [] : entity.tags;
-        $scope.tagCloud = Tag.query();
         $scope.task = entity;
         $scope.users = User.query();
         var setDefaultsForTask = function() {
@@ -125,7 +107,7 @@ angular.module('tenderworkApp').controller('TaskDialogController',
         };
 
         $scope.save = function () {
-            $scope.task.tags = $scope.tags.map(createTag);
+            $scope.task.tags = $scope.tags.map($scope.helperFunctions.createTag);
             $scope.isSaving = true;
             var proper = $scope.task.tags.map(function(item) {
                 $scope.tagCloud.some(function(cloudItem) {
