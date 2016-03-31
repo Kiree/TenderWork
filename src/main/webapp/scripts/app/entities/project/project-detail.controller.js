@@ -23,7 +23,7 @@ angular.module('tenderworkApp')
                     return;
                 }
                 for (var i = 0; i < result.length; i++) {
-                    if(result[i].resourcing !== null && entity.resourcing !== undefined) {
+                    if(result[i].resourcing !== null && result[i].resourcing !== "undefined") {
                         result[i].rounded = $scope.helperFunctions.roundResourcing(result[i].resourcing);
                     }
                     found = $scope.helperFunctions.checkIfExists($scope.estimates, result[i]);

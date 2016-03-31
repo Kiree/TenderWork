@@ -16,14 +16,6 @@ angular.module('tenderworkApp').controller('TaskDialogController',
             $scope.task.ownerRequirement = $scope.requirementLinkedToTask;
         };
 
-        // creates a copy of a resource object stripping unnecessary info
-        // params: Requirement   Resource-object
-
-
-        // creates a copy of a estimate resource stripping bunch of stuff
-        // params: Estimate Resource-object
-
-
         // this does nothing as of yet, need to finish html views
         Requirement.get({id:$stateParams.requirementId}, function(responseRequirement) {
             if(responseRequirement === null) {
