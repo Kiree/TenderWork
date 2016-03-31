@@ -5,7 +5,7 @@
 angular.module('tenderworkApp').factory('EntityHelperFactory', function() {
     var __createTag = function(tagJSObject) {
         console.log("create tag called");
-        if(tagJSObject.id === undefined) {
+        if(tagJSObject.id === "undefined") {
             return {
                 id:null,
                 name:tagJSObject.text
