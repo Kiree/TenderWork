@@ -27,7 +27,9 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
 
         $scope.tags = entity.id === null ? [] : entity.tags;
         $scope.tagCloud = Tag.query();
-
+        $scope.tagFilter = function($query) {
+            return $scope.helperFunctions.tagCloudFilter($query, $scope.tagCloud);
+        };
         $scope.project = entity;
         $scope.users = User.query();
         $scope.estimates = Estimate.query();

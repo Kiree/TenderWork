@@ -25,6 +25,11 @@ angular.module('tenderworkApp').factory('EntityHelperFactory', function() {
             return item.id === element.id;
         });
     };
+    var __tagCloudFiltering = function(query, input) {
+        return input.filter(function(item) {
+            return item.name.toLowerCase().indexOf(query.toLowerCase()) != -1;
+        })
+    };
     var __copyAccount = function(account) {
         return {
             activated:account.activated,
@@ -91,7 +96,8 @@ angular.module('tenderworkApp').factory('EntityHelperFactory', function() {
             copyProject:__copyProject,
             checkIfExists:__checkIfExists,
             copyEstimate:__copyEstimate,
-            copyRequirement:__copyRequirement
+            copyRequirement:__copyRequirement,
+            tagCloudFilter:__tagCloudFiltering
         }
     };
     return entityHelper;
