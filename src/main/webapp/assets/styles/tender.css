@@ -10,6 +10,15 @@ div.border-hack {
     border: 1px solid #ff0000;
 }
 
+.reqtitle{
+    font-weight: bold !important;
+}
+
+.reqname{
+    font-weight: bold !important;
+    font-size: medium;
+}
+
 .desktop-border {
     border-top: 1px solid #c0c0c0;
     border-right: 2px solid #c0c0c0;
