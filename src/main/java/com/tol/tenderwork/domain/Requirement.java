@@ -195,6 +195,8 @@ public class Requirement implements Serializable {
         this.tags = tags;
     }
 
+    public void removeTag(Tag tag) { this.tags.remove(tag); }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

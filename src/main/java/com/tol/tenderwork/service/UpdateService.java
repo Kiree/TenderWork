@@ -180,6 +180,7 @@ public class UpdateService {
     public Task updateTask(Task task) {
 
         //Calculate the new values for the task
+        log.error("TASK: {}", task);
         task = mathService.calculateTask(task, estimateRepository.findOne(task.getOwnerRequirement().getOwnerEstimate().getId()));
         Task result = saveService.saveTaskToRepo(task);
 
@@ -252,31 +253,67 @@ public class UpdateService {
 
         Project dbProject = projectRepository.findOne(project.getId());
 
-            if(!project.getTags().isEmpty()) {
-                for(Tag tag : project.getTags()) {
-                    tag.setName(tag.getName().toLowerCase());
-                    if(!(dbProject.getTags().contains(tag))) {
-                        tag.addProject(project);
-                        saveService.saveTagToRepo(tag);
-                    }
-                }
-            }
-
-            if(!dbProject.getTags().isEmpty()) {
-                Set<Tag> forRemoval = new HashSet<>();
-                for(Tag tag : dbProject.getTags()) {
-                    if(!(project.getTags().contains(tag))) {
-                        forRemoval.add(tag);
-                        project.removeTag(tag);
-                    }
-                }
-                saveService.saveProjectToRepo(project);
-                for(Tag tag : forRemoval) {
-                    tag.removeProject(project);
+        if(!project.getTags().isEmpty()) {
+            for(Tag tag : project.getTags()) {
+                tag.setName(tag.getName().toLowerCase());
+                if(!(dbProject.getTags().contains(tag))) {
+                    tag.addProject(project);
                     saveService.saveTagToRepo(tag);
-                    deleteService.deleteTag(tag.getId());
                 }
             }
+        }
+
+        Set<Tag> forRemoval = new HashSet<>();
+        if(!dbProject.getTags().isEmpty()) {
+            for (Tag tag : dbProject.getTags()) {
+                if (!(project.getTags().contains(tag))) {
+                    forRemoval.add(tag);
+                    project.removeTag(tag);
+                }
+            }
+        }
+
+        saveService.saveProjectToRepo(project);
+        if(!forRemoval.isEmpty()) {
+            for (Tag tag : forRemoval) {
+                tag.removeProject(project);
+                saveService.saveTagToRepo(tag);
+                deleteService.deleteTag(tag.getId());
+            }
+        }
         return project;
+    }
+
+    public Requirement updateRequirementTags(Requirement requirement) {
+        Requirement dbRequirement = requirementRepository.findOne(requirement.getId());
+
+        if(!requirement.getTags().isEmpty()) {
+            for(Tag tag : requirement.getTags()) {
+                tag.setName(tag.getName().toLowerCase());
+                if(!(dbRequirement.getTags().contains(tag))) {
+                    tag.addRequirement(requirement);
+                    saveService.saveTagToRepo(tag);
+                }
+            }
+        }
+        Set<Tag> forRemoval = new HashSet<>();
+        if(!dbRequirement.getTags().isEmpty()) {
+            for(Tag tag : dbRequirement.getTags()) {
+                if(!(requirement.getTags().contains(tag))) {
+                    forRemoval.add(tag);
+                    requirement.removeTag(tag);
+                }
+            }
+        }
+
+        saveService.saveRequirementToRepo(requirement);
+        if(!forRemoval.isEmpty()) {
+            for(Tag tag : forRemoval) {
+                tag.removeRequirement(requirement);
+                saveService.saveTagToRepo(tag);
+                deleteService.deleteTag(tag.getId());
+            }
+        }
+        return requirement;
     }
 }
