@@ -14,17 +14,6 @@ angular.module('tenderworkApp')
             });
         };
 
-        // takes float and rounds it to nearest whole or half
-        var roundResourcing = function(resourcing) {
-            return resourcing - Math.floor(resourcing) > .5 ? Math.ceil(resourcing) : Math.floor(resourcing) + .5;
-        };
-
-        var checkIfExists = function(array, element) {
-            return array.some(function(item) {
-               return item.id === element.id;
-            });
-        };
-
         $scope.empty = "\u00A0";
 
         $scope.loadAll = function() {
@@ -35,9 +24,9 @@ angular.module('tenderworkApp')
                 }
                 for (var i = 0; i < result.length; i++) {
                     if(result[i].resourcing !== null && entity.resourcing !== undefined) {
-                        result[i].rounded = roundResourcing(result[i].resourcing);
+                        result[i].rounded = $scope.helperFunctions.roundResourcing(result[i].resourcing);
                     }
-                    found = checkIfExists($scope.estimates, result[i]);
+                    found = $scope.helperFunctions.checkIfExists($scope.estimates, result[i]);
                     if(!found) {
                         $scope.estimates.push(result[i]);
                     }

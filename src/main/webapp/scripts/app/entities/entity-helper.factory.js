@@ -16,8 +16,14 @@ angular.module('tenderworkApp').factory('EntityHelperFactory', function() {
     var __updateTag = function(tagJSObject) {
        console.log("update called");
     };
-    var __roundResourcing = function (givenValue) {
-        console.log("round called");
+    var __roundResourcing = function (resourcing) {
+        return resourcing - Math.floor(resourcing) > .5 ? Math.ceil(resourcing) : Math.floor(resourcing) + .5;
+    };
+
+    var __checkIfExists = function(array, element) {
+        return array.some(function(item) {
+            return item.id === element.id;
+        });
     };
     var __copyAccount = function(account) {
         return {
@@ -44,13 +50,48 @@ angular.module('tenderworkApp').factory('EntityHelperFactory', function() {
             stateDescription:project.stateDescription
         }
     };
+    var __copyRequirement = function(inputResource) {
+        return {
+            id:inputResource.id,
+            description:inputResource.description,
+            durationImplementation:inputResource.durationImplementation,
+            durationSpecification:inputResource.durationSpecification,
+            durationTesting:inputResource.durationTesting,
+            name:inputResource.name,
+            owner:inputResource.owner,
+            ownerEstimate:inputResource.ownerEstimate,
+            synergyBenefit:inputResource.synergyBenefit,
+            totalDuration:inputResource.totalDuration
+        }
+    };
+    var __copyEstimate = function(inputResource) {
+        return {
+            createdBy:inputResource.createdBy,
+            dailyPrice:inputResource.dailyPrice,
+            desiredProjectDuration:inputResource.desiredProjectDuration,
+            id:inputResource.id,
+            implementationFactor:inputResource.implementationFactor,
+            ownerProject:inputResource.ownerProject,
+            resourcing:inputResource.resourcing,
+            specificationFactor:inputResource.specificationFactor,
+            synergyBenefit:inputResource.synergyBenefit,
+            testingFactor:inputResource.testingFactor,
+            totalDuration:inputResource.totalDuration,
+            totalPrice:inputResource.totalPrice,
+            totalSynergyBenefit:inputResource.totalSynergyBenefit,
+            workdaysInMonth:inputResource.workdaysInMonth
+        }
+    };
     var entityHelper = function($scope) {
         return {
             createTag:__createTag,
             updateTag:__updateTag,
             roundResourcing:__roundResourcing,
             copyAccount:__copyAccount,
-            copyProject:__copyProject
+            copyProject:__copyProject,
+            checkIfExists:__checkIfExists,
+            copyEstimate:__copyEstimate,
+            copyRequirement:__copyRequirement
         }
     };
     return entityHelper;

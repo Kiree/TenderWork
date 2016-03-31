@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tenderworkApp')
-    .controller('RequirementController', function ($scope, $state, Requirement, RequirementSearch, ParseLinks, Task, TaskSearch) {
+    .controller('RequirementController', function ($rootScope, $scope, $state, Requirement, RequirementSearch, ParseLinks, Task, TaskSearch) {
 
         $scope.requirements = [];
         $scope.tasks = [];
@@ -36,6 +36,7 @@ angular.module('tenderworkApp')
          */
         $scope.loadAll = function() {
             if($scope.estimate) {
+                $rootScope.roundedResourcing = $scope.helperFunctions.roundResourcing($scope.estimate.resourcing);
                 RequirementSearch.query({query: "ownerEstimate.id:" + $scope.estimate.id}, function (result) {
                     if (populated) {
                         return;
@@ -46,12 +47,10 @@ angular.module('tenderworkApp')
                             if(results_tasks.length > 0) {
                                 var tasksContainer = {requirementId: results_tasks[0].ownerRequirement.id, tasks: []};
                                 var tasksArray = [];
-                                console.log($scope.requirements);
                                 for (var j = 0; j < results_tasks.length; j++) {
                                     tasksArray.push(results_tasks[j]);
                                 }
                                 tasksContainer.tasks = tasksArray;
-                                console.log($scope.tasks, tasksContainer);
                                 $scope.tasks.push(tasksContainer);
                             }
                         });
@@ -80,7 +79,14 @@ angular.module('tenderworkApp')
             $scope.page = page;
             $scope.loadAll();
         };
-        $scope.loadAll();
+        if($scope.estimate.$resolved === false) {
+            console.log("estimate not resolved yet!")
+            $scope.estimate.$promise.then($scope.loadAll);
+
+        } else {
+            console.log("estimate resolved!")
+            $scope.loadAll();
+        }
 
 
         $scope.search = function () {
