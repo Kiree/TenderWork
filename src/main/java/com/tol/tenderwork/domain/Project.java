@@ -3,9 +3,12 @@ package com.tol.tenderwork.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -81,6 +84,13 @@ public class Project implements Serializable {
         joinColumns = @JoinColumn(name="project_id"),
         inverseJoinColumns = @JoinColumn(name="tags_id"))
     private Set<Tag> tags = new HashSet<>();
+
+    @Column(name = "owner")
+    private String owner;
+
+    public void setOwner(String user) { this.owner = user; }
+
+    public String getOwner() { return this.owner; }
 
     public Long getId() {
         return id;
