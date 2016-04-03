@@ -39,6 +39,8 @@ div.bg-always-white {
     background-color:#ffffff !important;
 }
 
+.panel-default > .panel-heading-custom {
+    background: #ffffff; }
 
 
 div.bg-always-gray {

@@ -234,7 +234,7 @@
             <div class="panel-group" id="accordionReq" ng-controller="RequirementController" aria-multiselectable="true">
                 <div class="panel panel-default desktop-border" ng-repeat="requirement in requirements track by requirement.id">
 
-                    <div class="panel-heading bg-always-white" id="head{{requirement.id}}">
+                    <div class="panel-heading panel-heading-custom" id="head{{requirement.id}}">
                         <div class="col-lg-10 col-xs-10">
                            <span class="reqname">{{requirement.name}}</span>
                         </div>
@@ -311,10 +311,9 @@
                                         </div>
 
                                         <!--TASK-->
-                                        <div class="panel-group" id="accordionTask" ng-controller="TaskController" aria-multiselectable="true">
-                                            <div class="panel panel-default desktop-border" ng-repeat="taskObject in tasks | filter: { requirementId:requirement.id } "><!--track by task.id-->
-                                                <div ng-repeat="task in taskObject.tasks track by task.id">
-                                                    <div class="panel-heading" id="head2{{task.id}}">
+                                        <div class="panel-group" id="accordionTask" ng-controller="TaskController" aria-multiselectable="true" ng-repeat="taskObject in tasks | filter: { requirementId:requirement.id } ">
+                                            <div class="panel panel-default desktop-border" ng-repeat="task in taskObject.tasks track by task.id"><!--track by task.id-->
+                                                    <div class="panel-heading panel-heading-custom" id="head2{{task.id}}">
                                                             <div class="col-lg-10 col-xs-10" id="head2{task.id}}">
                                                                 <span class="reqname">{{task.name}}</span>
                                                             </div>
