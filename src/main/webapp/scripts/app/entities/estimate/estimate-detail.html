@@ -231,19 +231,17 @@
         </div>-->
         <div class="panel-group" id="accordionReq" ng-controller="RequirementController" aria-multiselectable="true">
             <div class="panel panel-default desktop-border" ng-repeat="requirement in requirements track by requirement.id">
-                <div class="panel-heading" id="head{{requirement.id}}">
+                <div class="panel-heading panel-heading-req" id="head{{requirement.id}}">
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-10">
                             <h4 class="panel-title">{{requirement.name}}</h4>
                         </div>
-                        <div class="col-xs-6">
-                            <button class="btn btn-default btn-xs accordion-toggle pull-right" data-toggle="collapse" data-target="#body{{requirement.id}}"><span class="glyphicon glyphicon-eye-open"></span></button>
-                            <button class="btn btn-primary btn-xs pull-right" ui-sref="requirement.edit({id:requirement.id})"><span class="glyphicon glyphicon-pencil"></span><span class="hidden-xs hidden-sm" translate="entity.action.edit"></span></button>
-                            <button class="btn btn-danger btn-xs pull-right" ui-sref="requirement.delete({id:requirement.id})" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove-circle"></span><span class="hidden-xs hidden-sm" translate="entity.action.delete"></span></button>
-
-
-
-
+                        <div class="col-xs-2">
+                            <div class="btn-group pull-right no-padding-right">
+                                <button class="btn btn-default btn-xs accordion-toggle" data-toggle="collapse" data-target="#body{{requirement.id}}"><span class="glyphicon glyphicon-eye-open"></span></button>
+                                <button class="btn btn-primary btn-xs" ui-sref="requirement.edit({id:requirement.id})"><span class="glyphicon glyphicon-pencil"></span></button>
+                                <button class="btn btn-danger btn-xs" ui-sref="requirement.delete({id:requirement.id})" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -318,16 +316,17 @@
                                     <!--TASK-->
                                     <div class="panel-group" id="accordionTask" ng-controller="TaskController" aria-multiselectable="true" ng-repeat="taskObject in tasks | filter: { requirementId:requirement.id } ">
                                         <div class="panel panel-default desktop-border" ng-repeat="task in taskObject.tasks track by task.id"><!--track by task.id-->
-                                            <div class="panel-heading" id="head2{{task.id}}">
+                                            <div class="panel-heading panel-heading-task" id="head2{{task.id}}">
                                                 <div class="row">
-                                                    <div class="col-xs-6">
+                                                    <div class="col-xs-10">
                                                         <h4 class="panel-title">{{task.name}}</h4>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <button class="btn btn-default btn-xs accordion-toggle pull-right" data-toggle="collapse" data-target="#body2{{task.id}}"><span class="glyphicon glyphicon-eye-open"></span></button>
-                                                        <button class="btn btn-primary btn-xs pull-right" ui-sref="task.edit({id:task.id})"><span class="glyphicon glyphicon-pencil"></span><span class="hidden-xs hidden-sm" translate="entity.action.edit"></span></button>
-                                                        <button class="btn btn-danger btn-xs pull-right" ui-sref="task.delete({id:task.id})" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove-circle"></span><span class="hidden-xs hidden-sm" translate="entity.action.delete"></span></button>
-
+                                                    <div class="col-xs-2">
+                                                        <div class="btn-group pull-right no-padding-right">
+                                                            <button class="btn btn-default btn-xs accordion-toggle" data-toggle="collapse" data-target="#body2{{task.id}}"><span class="glyphicon glyphicon-eye-open"></span></button>
+                                                            <button class="btn btn-primary btn-xs" ui-sref="task.edit({id:task.id})"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                            <button class="btn btn-danger btn-xs" ui-sref="task.delete({id:task.id})" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -434,7 +433,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                 </tbody>
                             </table>
                         </div>

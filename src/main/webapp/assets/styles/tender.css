@@ -39,9 +39,11 @@ div.bg-always-white {
     background-color:#ffffff !important;
 }
 
-.panel-default > .panel-heading-custom {
-    background: #ffffff; }
+.panel-default > .panel-heading-req {
+    background: #f0f0f0; }
 
+.panel-default > .panel-heading-task {
+    background: #f9f9f9; }
 
 
 
