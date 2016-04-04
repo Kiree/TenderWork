@@ -49,7 +49,6 @@
 
             <column name="created_by_id" type="bigint"/>
             <column name="edited_by_id" type="bigint"/>
-            <column name="owner" type="varchar(200)"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="project" columnName="created_date" columnDataType="datetime"/>
