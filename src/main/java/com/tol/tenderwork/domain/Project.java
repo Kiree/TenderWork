@@ -85,13 +85,6 @@ public class Project implements Serializable {
         inverseJoinColumns = @JoinColumn(name="tags_id"))
     private Set<Tag> tags = new HashSet<>();
 
-    @Column(name = "owner")
-    private String owner;
-
-    public void setOwner(String user) { this.owner = user; }
-
-    public String getOwner() { return this.owner; }
-
     public Long getId() {
         return id;
     }

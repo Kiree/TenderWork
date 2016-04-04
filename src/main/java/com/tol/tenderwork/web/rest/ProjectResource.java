@@ -82,16 +82,6 @@ public class ProjectResource {
             }
         }
 
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = new String();
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-
-        project.setOwner(username);
-
         Project result = saveService.saveProjectToRepo(project);
 
         return ResponseEntity.created(new URI("/api/projects/" + result.getId()))
@@ -108,7 +98,7 @@ public class ProjectResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @PreAuthorize("#project.owner == authentication.name")
+    @PreAuthorize("#project.getCreatedBy().getLogin().equals(authentication.name) OR hasRole('ROLE_ADMIN')")
     public ResponseEntity<Project> updateProject(@Valid @RequestBody Project project) throws URISyntaxException {
         log.debug("REST request to update Project : {}", project);
         if (project.getId() == null) {
@@ -161,7 +151,7 @@ public class ProjectResource {
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @PreAuthorize("#project.owner == authentication.name")
+    @PreAuthorize("@projectRepository.findOne(#id).getCreatedBy().getLogin().equals(authentication.name) OR hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
         log.debug("REST request to delete Project : {}", id);
         deleteService.deleteProject(id);
