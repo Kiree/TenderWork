@@ -12,6 +12,23 @@ angular.module('tenderworkApp')
             isAuthenticated: function () {
                 return _authenticated;
             },
+            isCreator: function(creator) {
+                // promise not loaded yet
+                if(typeof creator == 'undefined') {
+                    return false;
+                }
+                if(!_identity || !_authenticated) {
+                    return false;
+                }
+                if(creator.login === _identity.login) {
+                    return true;
+                } else {
+                    if(_identity.authorities.indexOf('ROLE_ADMIN') !== -1) {
+                        return true;
+                    }
+                }
+                return false;
+            },
             hasAuthority: function (authority) {
                 if (!_authenticated) {
                     return $q.when(false);

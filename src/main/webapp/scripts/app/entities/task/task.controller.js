@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tenderworkApp')
-    .controller('TaskController', function ($scope, $state, Task, TaskSearch, ParseLinks) {
+    .controller('TaskController', function ($scope, $state, Task, TaskSearch, ParseLinks, Principal) {
 
         //$scope.tasks = [];
         $scope.predicate = 'id';
@@ -14,6 +14,16 @@ angular.module('tenderworkApp')
          //           $scope.tasks.push(result[i]);
                 }
             });
+        };
+        $scope.isCreator = function(task) {
+            return Principal.isCreator(task.ownedBy);
+        };
+        $scope.deleteTask = function(task) {
+            if(Principal.isCreator(task.ownedBy)) {
+                Task.delete({id: task.id}, function() {
+                    $state.go($state.current, {}, {reload: true});
+                });
+            }
         };
         $scope.reset = function() {
             $scope.page = 0;

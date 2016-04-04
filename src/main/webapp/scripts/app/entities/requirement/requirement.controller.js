@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tenderworkApp')
-    .controller('RequirementController', function ($rootScope, $scope, $state, Requirement, RequirementSearch, ParseLinks, Task, TaskSearch) {
+    .controller('RequirementController', function ($rootScope, $scope, $state, Requirement, RequirementSearch, ParseLinks, Task, TaskSearch, Principal) {
 
         $scope.requirements = [];
         $scope.tasks = [];
@@ -88,7 +88,9 @@ angular.module('tenderworkApp')
             $scope.loadAll();
         }
 
-
+        $scope.isCreator = function(ent) {
+            return Principal.isCreator(ent.owner);
+        };
         $scope.search = function () {
             RequirementSearch.query({query: $scope.searchQuery}, function(result) {
                 $scope.requirements = result;

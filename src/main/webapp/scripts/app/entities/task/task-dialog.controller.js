@@ -46,22 +46,11 @@ angular.module('tenderworkApp').controller('TaskDialogController',
         };
 
         Principal.identity().then(function(account) {
-            $scope.myAccount = copyAccount(account);
+            $scope.myAccount = $scope.helperFunctions.copyAccount(account);
             User.get({login: $scope.myAccount.login}, function(result) {
                 $scope.currentUserAccount = result;
                 });
             });
-
-            var copyAccount = function(account) {
-                return {
-                    activated:account.activated,
-                    email:account.email,
-                    firstName:account.firstName,
-                    langKey: account.langKey,
-                    lastName: account.lastName,
-                    login: account.login
-                }
-            };
 
             var onSaveSuccess = function (result) {
             $scope.$emit('tenderworkApp:taskUpdate', result);

@@ -24,7 +24,9 @@ angular.module('tenderworkApp')
             $scope.loadAll();
         };
         $scope.loadAll();
-
+        $scope.isCreator = function(ent) {
+            return Principal.isCreator(ent.createdBy);
+        };
 
         $scope.search = function () {
             ProjectSearch.query({query: $scope.searchQuery}, function(result) {

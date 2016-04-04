@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tenderworkApp')
-    .controller('EstimateDetailController', function ($scope, $rootScope, $stateParams, entity, Estimate, User, Project, Requirement) {
+    .controller('EstimateDetailController', function ($scope, $rootScope, $stateParams, entity, Estimate, User, Project, Requirement, Principal ) {
         $scope.estimate = entity;
 
         $scope.load = function (id) {
@@ -9,6 +9,10 @@ angular.module('tenderworkApp')
                 $scope.estimate = result;
 
             });
+        };
+
+        $scope.isCreator = function(ent) {
+            return Principal.isCreator(ent.createdBy);
         };
         // takes float and rounds it to nearest whole or half
 

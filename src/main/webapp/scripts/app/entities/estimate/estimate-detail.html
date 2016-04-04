@@ -11,12 +11,12 @@
                             class="btn btn-info btn-sm">
                         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
                     </button>
-                    <button type="submit" class="btn btn-primary btn-sm"
+                    <button type="submit" class="btn btn-primary btn-sm"  ng-show="isCreator(estimate)"
                             ui-sref="estimate.edit({id:estimate.id})" class="btn btn-primary btn-sm">
                         <span class="glyphicon glyphicon-pencil"></span>
                         <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
                     </button>
-                    <button type="submit"
+                    <button type="submit" ng-show="isCreator(estimate)"
                             ui-sref="estimate.delete({id:estimate.id})"
                             class="btn btn-danger btn-sm">
                         <span class="glyphicon glyphicon-remove-circle"></span>
@@ -239,8 +239,8 @@
                         <div class="col-xs-2">
                             <div class="btn-group pull-right no-padding-right">
                                 <button class="btn btn-default btn-xs accordion-toggle" data-toggle="collapse" data-target="#body{{requirement.id}}"><span class="glyphicon glyphicon-eye-open"></span></button>
-                                <button class="btn btn-primary btn-xs" ui-sref="requirement.edit({id:requirement.id})"><span class="glyphicon glyphicon-pencil"></span></button>
-                                <button class="btn btn-danger btn-xs" ui-sref="requirement.delete({id:requirement.id})" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                                <button ng-show="isCreator(requirement)" class="btn btn-primary btn-xs" ui-sref="requirement.edit({id:requirement.id})"><span class="glyphicon glyphicon-pencil"></span></button>
+                                <button ng-show="isCreator(requirement)" class="btn btn-danger btn-xs" ui-sref="requirement.delete({id:requirement.id})" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove-circle"></span></button>
                             </div>
                         </div>
                     </div>
@@ -324,8 +324,8 @@
                                                     <div class="col-xs-2">
                                                         <div class="btn-group pull-right no-padding-right">
                                                             <button class="btn btn-default btn-xs accordion-toggle" data-toggle="collapse" data-target="#body2{{task.id}}"><span class="glyphicon glyphicon-eye-open"></span></button>
-                                                            <button class="btn btn-primary btn-xs" ui-sref="task.edit({id:task.id})"><span class="glyphicon glyphicon-pencil"></span></button>
-                                                            <button class="btn btn-danger btn-xs" ui-sref="task.delete({id:task.id})" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                                                            <button ng-show="isCreator(task)" class="btn btn-primary btn-xs" ui-sref="task.edit({id:task.id})"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                            <button ng-show="isCreator(task)" class="btn btn-danger btn-xs" ng-click="deleteTask(task)"><span class="glyphicon glyphicon-remove-circle"></span></button>
                                                         </div>
                                                     </div>
                                                 </div>

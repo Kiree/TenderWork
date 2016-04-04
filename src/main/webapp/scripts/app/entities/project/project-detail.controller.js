@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tenderworkApp')
-    .controller('ProjectDetailController', function ($window, $scope, $rootScope, $stateParams, entity, Project, User, Estimate, ParseLinks, EstimateSearch, $translate, Tag, TagSearch) {
+    .controller('ProjectDetailController', function ($window, $scope, $rootScope, $stateParams, entity, Project, User, Estimate, ParseLinks, EstimateSearch, $translate, Tag, TagSearch, Principal) {
         $scope.project = entity;
         $scope.estimates = [];
         $scope.tags = [];
@@ -44,7 +44,9 @@ angular.module('tenderworkApp')
             $scope.loadAll();
         };
         $scope.loadAll();
-
+        $scope.isCreator = function(ent) {
+            return Principal.isCreator(ent.createdBy);
+        };
         $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
         //    calculateHeight();
         });

@@ -111,28 +111,5 @@ angular.module('tenderworkApp')
                         $state.go('^');
                     })
                 }]
-            })
-            .state('task.delete', {
-                parent: 'estimate.detail',
-                url: '/{id}/delete',
-                data: {
-                    authorities: ['ROLE_USER'],
-                },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                    $uibModal.open({
-                        templateUrl: 'scripts/app/entities/task/task-delete-dialog.html',
-                        controller: 'TaskDeleteController',
-                        size: 'md',
-                        resolve: {
-                            entity: ['Task', function(Task) {
-                                return Task.get({id : $stateParams.id});
-                            }]
-                        }
-                    }).result.then(function(result) {
-                        $state.go('estimate.detail', null, { reload: true });
-                    }, function() {
-                        $state.go('^');
-                    })
-                }]
             });
     });
