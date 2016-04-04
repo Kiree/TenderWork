@@ -106,6 +106,10 @@ angular.module('tenderworkApp')
             $scope.clear();
         };
 
+        $scope.copyRequirement = function(reqId) {
+            Requirement.copy({id:reqId});
+        };
+
         $scope.clear = function () {
             $scope.requirement = {
                 name: null,

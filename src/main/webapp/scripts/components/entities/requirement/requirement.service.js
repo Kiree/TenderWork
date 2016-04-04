@@ -11,6 +11,14 @@ angular.module('tenderworkApp')
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'copy': {
+                method: 'POST',
+                url: 'api/requirements/:id',
+                params:{ id: '@id'},
+                transformRequest: function(data) {
+                    return angular.toJson(data);
+                }
+            }
         });
     });

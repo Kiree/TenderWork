@@ -81,8 +81,8 @@ angular.module('tenderworkApp')
                 }]
             })
             .state('requirement.edit', {
-                parent: 'requirement',
-                url: '/{id}/edit',
+                parent: 'estimate.detail',
+                url: '/{id}/requirement/edit',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -98,15 +98,15 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('requirement', null, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.id }, { reload: true });
                     }, function() {
-                        $state.go('^');
+                        $state.go('estimate.detail', { id:$stateParams.id }, { reload: true });
                     })
                 }]
             })
             .state('requirement.delete', {
-                parent: 'requirement',
-                url: '/{id}/delete',
+                parent: 'estimate.detail',
+                url: '/{id}/requirement/delete',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -121,9 +121,9 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('requirement', null, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.id }, { reload: true });
                     }, function() {
-                        $state.go('^');
+                        $state.go('estimate.detail', { id:$stateParams.id }, { reload: true });
                     })
                 }]
             });
