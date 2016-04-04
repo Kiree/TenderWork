@@ -56,8 +56,7 @@ angular.module('tenderworkApp').controller('RequirementDialogController',
         };
 
         $scope.save = function () {
-            console.log($scope.requirement.tags, $scope.tags);
-            $scope.requirement.tags = $scope.tags.map($scope.helperFunctions.createTag);
+            $scope.requirement.tags = typeof $scope.tags == 'undefined' ? [] : $scope.tags.map($scope.helperFunctions.createTag);
             $scope.isSaving = true;
             var proper = $scope.requirement.tags.map(function(item) {
                 $scope.tagCloud.some(function(cloudItem) {

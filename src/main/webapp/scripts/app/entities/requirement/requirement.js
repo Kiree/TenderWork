@@ -49,11 +49,15 @@ angular.module('tenderworkApp')
             })
             .state('requirement.new', {
                 parent: 'estimate.detail',
-                url: '/new',
+                url: '/requirement/new',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
+                params: {
+                    estimateId:null
+                },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    console.log($stateParams);
                     $uibModal.open({
                         backdrop:'static',
                         templateUrl: 'scripts/app/entities/requirement/requirement-dialog.html',
@@ -74,9 +78,9 @@ angular.module('tenderworkApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('estimate.detail', { id:$stateParams.id }, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.estimateId }, { reload: true });
                     }, function() {
-                        $state.go('estimate.detail', { id:$stateParams.id }, { reload:true });
+                        $state.go('estimate.detail', { id:$stateParams.estimateId }, { reload:true });
                     })
                 }]
             })
@@ -86,7 +90,11 @@ angular.module('tenderworkApp')
                 data: {
                     authorities: ['ROLE_USER'],
                 },
+                params: {
+                    estimateId:null
+                },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    console.log($stateParams);
                     $uibModal.open({
                         backdrop:'static',
                         templateUrl: 'scripts/app/entities/requirement/requirement-dialog.html',
@@ -98,9 +106,9 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('estimate.detail', { id:$stateParams.id }, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.estimateId }, { reload: true });
                     }, function() {
-                        $state.go('estimate.detail', { id:$stateParams.id }, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.estimateId }, { reload: true });
                     })
                 }]
             })
@@ -109,6 +117,9 @@ angular.module('tenderworkApp')
                 url: '/{id}/requirement/delete',
                 data: {
                     authorities: ['ROLE_USER'],
+                },
+                params: {
+                    estimateId:null
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -121,9 +132,9 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('estimate.detail', { id:$stateParams.id }, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.estimateId }, { reload: true });
                     }, function() {
-                        $state.go('estimate.detail', { id:$stateParams.id }, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.estimateId }, { reload: true });
                     })
                 }]
             });

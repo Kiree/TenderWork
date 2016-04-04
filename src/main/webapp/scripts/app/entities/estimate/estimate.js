@@ -37,6 +37,9 @@ angular.module('tenderworkApp')
                         controller: 'EstimateDetailController'
                     }
                 },
+                params: {
+                    estimateId:null
+                },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('estimate');
@@ -45,6 +48,9 @@ angular.module('tenderworkApp')
                         return $translate.refresh();
                     }],
                     entity: ['$stateParams', 'Estimate', function($stateParams, Estimate) {
+                        if ($stateParams.estimateId) {
+                            return Estimate.get({id : $stateParams.estimateId});
+                        }
                         return Estimate.get({id : $stateParams.id});
                     }]
                 }

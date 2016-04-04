@@ -245,8 +245,8 @@
                                     <span class="glyphicon glyphicon-plus-sign"></span>
                                     <span class="hidden-xs hidden-sm">SEBASTIANIN OMA KOPIONAPPI</span>
                                 </button>
-                                <button ng-show="isCreator(requirement)" class="btn btn-primary btn-xs" ui-sref="requirement.edit({id:requirement.id})"><span class="glyphicon glyphicon-pencil"></span></button>
-                                <button ng-show="isCreator(requirement)" class="btn btn-danger btn-xs" ui-sref="requirement.delete({id:requirement.id})" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                                <button ng-show="isCreator(requirement)" class="btn btn-primary btn-xs" ui-sref="requirement.edit({id:requirement.id, estimateId:estimate.id})"><span class="glyphicon glyphicon-pencil"></span></button>
+                                <button ng-show="isCreator(requirement)" class="btn btn-danger btn-xs" ui-sref="requirement.delete({id:requirement.id, estimateId:estimate.id})" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove-circle"></span></button>
                             </div>
                         </div>
                     </div>
