@@ -122,8 +122,12 @@ angular.module('tenderworkApp')
                 data: {
                     authorities: ['ROLE_USER'],
                 },
+                params: {
+                    projectId:null
+                },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
+                        backdrop:'static',
                         templateUrl: 'scripts/app/entities/estimate/estimate-delete-dialog.html',
                         controller: 'EstimateDeleteController',
                         size: 'md',
@@ -133,7 +137,7 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('project.detail', { id:result.ownerProject.id }, { reload: true });
+                        $state.go('project.detail', { id:$stateParams.projectId }, { reload: true });
                     }, function() {
                         $state.go('estimate.detail', { id:$stateParams.id }, { reload: true });
                     })

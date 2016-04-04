@@ -16,4 +16,7 @@ angular.module('tenderworkApp').controller('EasterController', ['$scope', '$root
     $scope.randomQuote = function() {
         return quotes[current_index];
     };
+    $scope.randomHours = function() {
+        return Math.floor(Math.random() * 50);
+    };
 }]);

@@ -120,6 +120,7 @@ angular.module('tenderworkApp')
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
+                        backdrop:'static',
                         templateUrl: 'scripts/app/entities/project/project-delete-dialog.html',
                         controller: 'ProjectDeleteController',
                         size: 'md',

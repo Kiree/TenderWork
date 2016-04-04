@@ -123,6 +123,7 @@ angular.module('tenderworkApp')
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
+                        backdrop:'static',
                         templateUrl: 'scripts/app/entities/requirement/requirement-delete-dialog.html',
                         controller: 'RequirementDeleteController',
                         size: 'md',

@@ -11,13 +11,19 @@
                             class="btn btn-info btn-sm">
                         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
                     </button>
+                    <button type="submit"
+                            class="btn btn-info btn-sm"
+                            ng-click="copyRequirement(requirement.id)">
+                        <span class="glyphicon glyphicon-plus-sign"></span>
+                        <span class="hidden-xs hidden-sm">YLEINEN KOPIONAPPI JOLLA EI OLE TRANSLATEA JA JOKA EI TEE MITÄÄN</span>
+                    </button>
                     <button type="submit" class="btn btn-primary btn-sm"  ng-show="isCreator(estimate)"
                             ui-sref="estimate.edit({id:estimate.id})" class="btn btn-primary btn-sm">
                         <span class="glyphicon glyphicon-pencil"></span>
                         <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
                     </button>
                     <button type="submit" ng-show="isCreator(estimate)"
-                            ui-sref="estimate.delete({id:estimate.id})"
+                            ui-sref="estimate.delete({id:estimate.id, projectId:estimate.ownerProject.id})"
                             class="btn btn-danger btn-sm">
                         <span class="glyphicon glyphicon-remove-circle"></span>
                         <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
@@ -234,11 +240,13 @@
                 <div class="panel-heading panel-heading-req" id="head{{requirement.id}}">
                     <div class="row">
                         <div class="col-xs-10">
-                            <h4 class="panel-title">{{requirement.name}}</h4>
+                            <div class="row">
+                                <div class="col-xs-1"><button class="btn btn-xs accordion-toggle" data-toggle="collapse" data-target="#body{{requirement.id}}"><span class="glyphicon glyphicon-triangle-bottom"></span></button></div>
+                                <div class="col-xs-11"><h4 class="panel-title">{{requirement.name}}</h4></div>
+                            </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="btn-group pull-right no-padding-right">
-                                <button class="btn btn-default btn-xs accordion-toggle" data-toggle="collapse" data-target="#body{{requirement.id}}"><span class="glyphicon glyphicon-eye-open"></span></button>
                                 <button type="submit"
                                         class="btn btn-info btn-xs"
                                         ng-click="copyRequirement(requirement.id)">
