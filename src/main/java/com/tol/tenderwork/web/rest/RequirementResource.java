@@ -3,6 +3,7 @@ package com.tol.tenderwork.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.domain.Tag;
+import com.tol.tenderwork.domain.Task;
 import com.tol.tenderwork.repository.RequirementRepository;
 import com.tol.tenderwork.repository.search.RequirementSearchRepository;
 import com.tol.tenderwork.service.DeleteService;
@@ -23,6 +24,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -56,6 +58,9 @@ public class RequirementResource {
 
     @Autowired
     private DeleteService deleteService;
+
+    @Autowired
+    private EntityManager entityManager;
 
     /**
      * POST  /requirements -> Create a new requirement.
@@ -168,5 +173,56 @@ public class RequirementResource {
         return StreamSupport
             .stream(requirementSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
+    }
+
+    /**
+     * POST  /requirement/{id} -> Clone requirement.
+     */
+    @RequestMapping(value = "/requirements/{id}",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @PreAuthorize("#requirement.getOwnerEstimate().getCreatedBy().getLogin().equals(authentication.name) OR hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Requirement> cloneRequirement(@PathVariable Long id) throws URISyntaxException {
+        log.debug("REST request to clone Requirement : {}", id);
+        Requirement clone = entityManager.find(Requirement.class, id);
+        if (clone.getId() == null) {
+            return createRequirement(clone);
+        }
+
+        entityManager.detach(clone);
+        clone.setId(null);
+        clone.setName(clone.getName() + " - Kopio");
+        entityManager.persist(clone);
+        saveService.saveRequirementToRepo(clone);
+
+        if(!clone.getHasTaskss().isEmpty()) {
+            for (Task task : clone.getHasTaskss()) {
+                Task taskClone = task;
+                entityManager.detach(taskClone);
+                taskClone.setId(null);
+                taskClone.setOwnerRequirement(clone);
+                entityManager.persist(taskClone);
+                if (!taskClone.getTags().isEmpty()) {
+                    for (Tag tag : taskClone.getTags()) {
+                        tag.addTask(taskClone);
+                        saveService.saveTagToRepo(tag);
+                    }
+                }
+                saveService.saveTaskToRepo(taskClone);
+            }
+        }
+        if(!clone.getTags().isEmpty()) {
+            for (Tag tag : clone.getTags()) {
+                tag.addRequirement(clone);
+                saveService.saveTagToRepo(tag);
+            }
+        }
+
+        Requirement result = saveService.saveRequirementToRepo(clone);
+
+        return ResponseEntity.created(new URI("/api/requirements/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert("requirement", result.getId().toString()))
+            .body(result);
     }
 }
