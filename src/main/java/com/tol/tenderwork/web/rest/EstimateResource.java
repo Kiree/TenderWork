@@ -145,7 +145,7 @@ public class EstimateResource {
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @PreAuthorize("@estimateRepository.findOne(#id).getCreatedBy().getLogin().equals(authentication.name) OR hasRole('ROLE_ADMIN')")
+    @PreAuthorize("@estimateRepository.findOne(#id).getCreatedBy().getLogin().equals(authentication.name) OR hasRole('ROLE_ADMIN') OR @estimateRepository.findOne(#id).getOwnerProject().getCreatedBy().getLogin().equals(authentication.name)")
     public ResponseEntity<Void> deleteEstimate(@PathVariable Long id) {
         log.debug("REST request to delete Estimate : {}", id);
 
