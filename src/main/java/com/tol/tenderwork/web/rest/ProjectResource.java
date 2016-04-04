@@ -168,8 +168,9 @@ public class ProjectResource {
     @Timed
     public List<Project> searchProjects(@PathVariable String query) {
         log.debug("REST request to search Projects for query {}", query);
+
         return StreamSupport
-            .stream(projectSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .stream(projectSearchRepository.findByNameOrClientOrTags(query, query, query).spliterator(), false)
             .collect(Collectors.toList());
     }
 }
