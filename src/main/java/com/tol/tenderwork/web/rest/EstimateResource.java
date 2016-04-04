@@ -18,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -85,6 +86,7 @@ public class EstimateResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @Transactional
+    @PreAuthorize("#estimate.getCreatedBy().getLogin().equals(authentication.name) OR hasRole('ROLE_ADMIN')")
     public ResponseEntity<Estimate> updateEstimate(@Valid @RequestBody Estimate estimate) throws URISyntaxException {
         log.debug("REST request to update Estimate : {}", estimate);
         if (estimate.getId() == null) {
@@ -143,6 +145,7 @@ public class EstimateResource {
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @PreAuthorize("@estimateRepository.findOne(#id).getCreatedBy().getLogin().equals(authentication.name) OR hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteEstimate(@PathVariable Long id) {
         log.debug("REST request to delete Estimate : {}", id);
 

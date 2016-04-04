@@ -19,6 +19,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -92,6 +93,7 @@ public class RequirementResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @PreAuthorize("#requirement.getOwner().getLogin().equals(authentication.name) OR hasRole('ROLE_ADMIN')")
     public ResponseEntity<Requirement> updateRequirement(@Valid @RequestBody Requirement requirement) throws URISyntaxException {
         log.debug("REST request to update Requirement : {}", requirement);
         if (requirement.getId() == null) {
@@ -145,6 +147,7 @@ public class RequirementResource {
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @PreAuthorize("@requirementRepository.findOne(#id).getOwner().getLogin().equals(authentication.name) OR hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteRequirement(@PathVariable Long id) {
         log.debug("REST request to delete Requirement : {}", id);
         deleteService.deleteRequirement(id);

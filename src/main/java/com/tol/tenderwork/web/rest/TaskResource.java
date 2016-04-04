@@ -19,6 +19,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -95,6 +96,7 @@ public class TaskResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @Transactional
+    @PreAuthorize("#task.getOwnedBy().getLogin().equals(authentication.name) OR hasRole('ROLE_ADMIN')")
     public ResponseEntity<Task> updateTask(@Valid @RequestBody Task task) throws URISyntaxException {
         log.debug("REST request to update Task : {}", task);
         if (task.getId() == null) {
@@ -149,6 +151,7 @@ public class TaskResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @Transactional
+    @PreAuthorize("@taskRepository.findOne(#id).getOwnedBy().getLogin().equals(authentication.name) OR hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         log.debug("REST request to delete Task : {}", id);
 
