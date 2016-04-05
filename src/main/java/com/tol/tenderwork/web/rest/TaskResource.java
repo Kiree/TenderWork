@@ -136,7 +136,7 @@ public class TaskResource {
     @Timed
     public ResponseEntity<Task> getTask(@PathVariable Long id) {
         log.debug("REST request to get Task : {}", id);
-        Task task = taskRepository.findOne(id);
+        Task task = taskRepository.findOneWithEagerRelationships(id);
         return Optional.ofNullable(task)
             .map(result -> new ResponseEntity<>(
                 result,

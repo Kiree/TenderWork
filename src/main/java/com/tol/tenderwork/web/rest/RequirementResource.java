@@ -138,7 +138,7 @@ public class RequirementResource {
     @Timed
     public ResponseEntity<Requirement> getRequirement(@PathVariable Long id) {
         log.debug("REST request to get Requirement : {}", id);
-        Requirement requirement = requirementRepository.findOne(id);
+        Requirement requirement = requirementRepository.findOneWithEagerRelationships(id);
         return Optional.ofNullable(requirement)
             .map(result -> new ResponseEntity<>(
                 result,
