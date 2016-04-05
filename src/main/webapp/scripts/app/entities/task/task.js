@@ -50,14 +50,12 @@ angular.module('tenderworkApp')
             .state('task.new', {
                 parent: 'estimate.detail',
                 url: '/task/new',
-                params: {
-                    requirementId:null
-                },
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 params: {
-                    estimateId:0
+                    requirementId:null,
+                    estimateId:null
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
