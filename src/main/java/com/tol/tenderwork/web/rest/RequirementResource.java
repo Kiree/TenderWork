@@ -11,6 +11,7 @@ import com.tol.tenderwork.service.SaveService;
 import com.tol.tenderwork.service.UpdateService;
 import com.tol.tenderwork.web.rest.util.HeaderUtil;
 import com.tol.tenderwork.web.rest.util.PaginationUtil;
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -28,8 +30,9 @@ import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -61,6 +64,9 @@ public class RequirementResource {
 
     @Autowired
     private EntityManager entityManager;
+
+    @Autowired
+    private EntityManager taskEntityManager;
 
     /**
      * POST  /requirements -> Create a new requirement.
@@ -182,47 +188,71 @@ public class RequirementResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @PreAuthorize("#requirement.getOwnerEstimate().getCreatedBy().getLogin().equals(authentication.name) OR hasRole('ROLE_ADMIN')")
+    @Transactional
+    @PreAuthorize("@requirementRepository.findOne(#id).getOwner().getLogin().equals(authentication.name) OR hasRole('ROLE_ADMIN')")
     public ResponseEntity<Requirement> cloneRequirement(@PathVariable Long id) throws URISyntaxException {
         log.debug("REST request to clone Requirement : {}", id);
         Requirement clone = entityManager.find(Requirement.class, id);
         if (clone.getId() == null) {
             return createRequirement(clone);
         }
-
         entityManager.detach(clone);
         clone.setId(null);
         clone.setName(clone.getName() + " - Kopio");
-        entityManager.persist(clone);
-        saveService.saveRequirementToRepo(clone);
-
-        if(!clone.getHasTaskss().isEmpty()) {
-            for (Task task : clone.getHasTaskss()) {
-                Task taskClone = task;
-                entityManager.detach(taskClone);
-                taskClone.setId(null);
-                taskClone.setOwnerRequirement(clone);
-                entityManager.persist(taskClone);
-                if (!taskClone.getTags().isEmpty()) {
-                    for (Tag tag : taskClone.getTags()) {
-                        tag.addTask(taskClone);
-                        saveService.saveTagToRepo(tag);
-                    }
-                }
-                saveService.saveTaskToRepo(taskClone);
-            }
-        }
+        Set<Task> newSet = new HashSet<>();
         if(!clone.getTags().isEmpty()) {
             for (Tag tag : clone.getTags()) {
                 tag.addRequirement(clone);
                 saveService.saveTagToRepo(tag);
             }
         }
+        entityManager.persist(clone);
+        entityManager.merge(clone);
+        clone = saveService.saveRequirementToRepo(clone);
+        Long cloneID = clone.getId();
 
+        Hibernate.initialize(clone.getHasTaskss());
+        log.error("TASKS: {}", clone.getHasTaskss());
+
+        clone = entityManager.find(Requirement.class, cloneID);
+        List<Task> tempSet = new ArrayList<>();
+        if(!clone.getHasTaskss().isEmpty()) {
+            for (Task task : clone.getHasTaskss()) {
+                tempSet.add(task);
+            }
+
+            for (Task task : tempSet) {
+                Task clonedTask = cloneTask(task, clone);
+                newSet.add(clonedTask);
+            }
+            clone.setHasTaskss(newSet);
+        }
         Requirement result = saveService.saveRequirementToRepo(clone);
 
         return ResponseEntity.created(new URI("/api/requirements/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("requirement", result.getId().toString()))
             .body(result);
+    }
+
+    @Transactional
+    public Task cloneTask(Task task, Requirement clone) {
+        log.error("Request to CLONE TASK {}: ", task);
+        Task taskClone = taskEntityManager.find(Task.class, task.getId());
+        taskEntityManager.detach(taskClone);
+        taskClone.setId(null);
+        taskClone.setOwnerRequirement(clone);
+        log.error("TASK: {}", taskClone);
+        taskEntityManager.persist(taskClone);
+        Hibernate.initialize(taskClone.getTags());
+        if (!taskClone.getTags().isEmpty()) {
+            for (Tag tag : taskClone.getTags()) {
+                tag.addTask(taskClone);
+                saveService.saveTagToRepo(tag);
+            }
+        }
+        taskClone = updateService.updateTask(taskClone);
+        saveService.saveTaskToRepo(taskClone);
+
+        return taskClone;
     }
 }

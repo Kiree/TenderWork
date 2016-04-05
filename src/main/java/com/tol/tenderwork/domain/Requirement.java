@@ -62,7 +62,7 @@ public class Requirement implements Serializable {
     @JoinColumn(name = "owner_estimate_id")
     private Estimate ownerEstimate;
 
-    @ManyToMany(cascade=CascadeType.MERGE)
+    @ManyToMany(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "requirement_tags",
         joinColumns = @JoinColumn(name="requirement_id"),
         inverseJoinColumns = @JoinColumn(name="tags_id"))
