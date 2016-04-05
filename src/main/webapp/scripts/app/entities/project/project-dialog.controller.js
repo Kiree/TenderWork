@@ -24,12 +24,16 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
                 name:tag.name
             }
         };
-        if(entity.$resolved) {
+        if(entity.$resolved === false) {
             $scope.tags = entity.id === null ? [] : entity.tags;
         } else {
-            entity.$promise.then(function() {
+            if(typeof entity.$resolved == 'undefined') {
                 $scope.tags = entity.id === null ? [] : entity.tags;
-            });
+            } else {
+                entity.$promise.then(function () {
+                    $scope.tags = entity.id === null ? [] : entity.tags;
+                });
+            }
         }
         $scope.tagCloud = Tag.query();
         $scope.tagFilter = function($query) {

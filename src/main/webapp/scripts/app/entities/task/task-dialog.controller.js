@@ -8,10 +8,14 @@ angular.module('tenderworkApp').controller('TaskDialogController',
             console.log('task resolved');
             $scope.tags = entity.id === null ? [] : entity.tags;
         } else {
-            console.log('task not yet resolved');
-            entity.$promise.then(function() {
+            if(typeof entity.$resolved == 'undefined') {
                 $scope.tags = entity.id === null ? [] : entity.tags;
-            });
+            } else {
+                console.log('task not yet resolved');
+                entity.$promise.then(function () {
+                    $scope.tags = entity.id === null ? [] : entity.tags;
+                });
+            }
         }
         $scope.task = entity;
         $scope.users = User.query();

@@ -18,10 +18,14 @@ angular.module('tenderworkApp').controller('RequirementDialogController',
             console.log('requirement resolved');
             $scope.tags = entity.id === null ? [] : entity.tags;
         } else {
-            console.log('requirement not yet resolved');
-            entity.$promise.then(function() {
+            if(typeof entity.$resolved == 'undefined') {
                 $scope.tags = entity.id === null ? [] : entity.tags;
-            });
+            } else {
+                console.log('requirement not yet resolved');
+                entity.$promise.then(function() {
+                    $scope.tags = entity.id === null ? [] : entity.tags;
+                });
+            }
         }
         $scope.tagCloud = Tag.query();
         $scope.tagFilter = function($query) {
