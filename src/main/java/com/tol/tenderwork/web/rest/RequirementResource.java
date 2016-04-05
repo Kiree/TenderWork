@@ -5,6 +5,8 @@ import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.domain.Tag;
 import com.tol.tenderwork.domain.Task;
 import com.tol.tenderwork.repository.RequirementRepository;
+import com.tol.tenderwork.repository.TagRepository;
+import com.tol.tenderwork.repository.TaskRepository;
 import com.tol.tenderwork.repository.search.RequirementSearchRepository;
 import com.tol.tenderwork.service.DeleteService;
 import com.tol.tenderwork.service.SaveService;
@@ -52,6 +54,12 @@ public class RequirementResource {
 
     @Inject
     private RequirementSearchRepository requirementSearchRepository;
+
+    @Inject
+    private TagRepository tagRepository;
+
+    @Inject
+    private TaskRepository taskRepository;
 
     @Autowired
     private UpdateService updateService;
@@ -199,23 +207,21 @@ public class RequirementResource {
         entityManager.detach(clone);
         clone.setId(null);
         clone.setName(clone.getName() + " - Kopio");
-        Set<Task> newSet = new HashSet<>();
-        if(!clone.getTags().isEmpty()) {
-            for (Tag tag : clone.getTags()) {
-                tag.addRequirement(clone);
-                saveService.saveTagToRepo(tag);
-            }
-        }
+        log.error("TAGS: ", clone.getTags());
         entityManager.persist(clone);
-        entityManager.merge(clone);
-        clone = saveService.saveRequirementToRepo(clone);
-        Long cloneID = clone.getId();
 
-        Hibernate.initialize(clone.getHasTaskss());
-        log.error("TASKS: {}", clone.getHasTaskss());
-
-        clone = entityManager.find(Requirement.class, cloneID);
+        Set<Task> newSet = new HashSet<>();
         List<Task> tempSet = new ArrayList<>();
+
+
+        Set<Tag> emptySet = new HashSet<>();
+        if(!clone.getTags().isEmpty()) {
+            for(Tag tag : clone.getTags()) {
+                emptySet.add(tag);
+            }
+            clone.setTags(emptySet);
+        }
+
         if(!clone.getHasTaskss().isEmpty()) {
             for (Task task : clone.getHasTaskss()) {
                 tempSet.add(task);
@@ -227,7 +233,10 @@ public class RequirementResource {
             }
             clone.setHasTaskss(newSet);
         }
+
         Requirement result = saveService.saveRequirementToRepo(clone);
+
+        log.error("EQUALS: {}", result.equals(requirementRepository.findOne(id)));
 
         return ResponseEntity.created(new URI("/api/requirements/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("requirement", result.getId().toString()))
@@ -237,21 +246,32 @@ public class RequirementResource {
     @Transactional
     public Task cloneTask(Task task, Requirement clone) {
         log.error("Request to CLONE TASK {}: ", task);
-        Task taskClone = taskEntityManager.find(Task.class, task.getId());
-        taskEntityManager.detach(taskClone);
+
+        Task taskClone = entityManager.find(Task.class, task.getId());
+        entityManager.detach(taskClone);
         taskClone.setId(null);
+        taskClone.setName(taskClone.getName() + " - Kopio");
         taskClone.setOwnerRequirement(clone);
-        log.error("TASK: {}", taskClone);
-        taskEntityManager.persist(taskClone);
-        Hibernate.initialize(taskClone.getTags());
-        if (!taskClone.getTags().isEmpty()) {
-            for (Tag tag : taskClone.getTags()) {
-                tag.addTask(taskClone);
-                saveService.saveTagToRepo(tag);
+        Set<Tag> emptySet = new HashSet<>();
+
+        entityManager.persist(taskClone);
+
+        if(!taskClone.getTags().isEmpty()) {
+            for(Tag tag : taskClone.getTags()) {
+                emptySet.add(tag);
             }
+            taskClone.setTags(emptySet);
         }
-        taskClone = updateService.updateTask(taskClone);
+
+        log.error("TASK: {}", taskClone.hashCode());
+        log.error("TASK: {}", taskRepository.findOne(task.getId()).hashCode());
+        log.error("EQUALS: {}", taskClone.equals(taskRepository.findOne(task.getId())));
+
+
+
+        //taskClone = updateService.updateTask(taskClone);
         saveService.saveTaskToRepo(taskClone);
+
 
         return taskClone;
     }
