@@ -26,7 +26,7 @@ angular.module('tenderworkApp').controller('TaskDialogController',
             return $scope.helperFunctions.tagCloudFilter($query, $scope.tagCloud);
         };
         var setDefaultsForTask = function() {
-            if($scope.task === null || $scope.task.id === null) {
+            if($scope.task === null || $scope.task.id !== null) {
                 return;
             }
             $scope.task.ownerEstimate = $scope.estimateLinkedToTask;
@@ -89,6 +89,7 @@ angular.module('tenderworkApp').controller('TaskDialogController',
                 return item;
             });
             $scope.task.tags = proper;
+            console.log($scope.task);
             if ($scope.task.id != null) {
                 Task.update($scope.task, onSaveSuccess, onSaveError);
             } else {

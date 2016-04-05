@@ -24,7 +24,7 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
                 name:tag.name
             }
         };
-        if(entity.$resolved === false) {
+        if(entity.$resolved) {
             $scope.tags = entity.id === null ? [] : entity.tags;
         } else {
             if(typeof entity.$resolved == 'undefined') {
