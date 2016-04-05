@@ -13,7 +13,6 @@ angular.module('tenderworkApp')
                 $scope.project = result;
             });
         };
-
         $scope.empty = "\u00A0";
 
         $scope.loadAll = function() {

@@ -14,8 +14,15 @@ angular.module('tenderworkApp').controller('RequirementDialogController',
             }
             return tagTextObject;
         };
-
-        $scope.tags = entity.id === null ? [] : entity.tags;
+        if(entity.$resolved) {
+            console.log('requirement resolved');
+            $scope.tags = entity.id === null ? [] : entity.tags;
+        } else {
+            console.log('requirement not yet resolved');
+            entity.$promise.then(function() {
+                $scope.tags = entity.id === null ? [] : entity.tags;
+            });
+        }
         $scope.tagCloud = Tag.query();
         $scope.tagFilter = function($query) {
             return $scope.helperFunctions.tagCloudFilter($query, $scope.tagCloud);

@@ -4,21 +4,29 @@ angular.module('tenderworkApp').controller('TaskDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Task', 'User', 'Principal', 'Estimate', 'Requirement', 'Tag',
         function($scope, $stateParams, $uibModalInstance, entity, Task, User, Principal, Estimate, Requirement, Tag) {
 
-        $scope.tags = entity.id === null ? [] : entity.tags;
+        if(entity.$resolved) {
+            console.log('task resolved');
+            $scope.tags = entity.id === null ? [] : entity.tags;
+        } else {
+            console.log('task not yet resolved');
+            entity.$promise.then(function() {
+                $scope.tags = entity.id === null ? [] : entity.tags;
+            });
+        }
         $scope.task = entity;
         $scope.users = User.query();
         $scope.tagCloud = Tag.query();
+            console.log(entity);
         $scope.tagFilter = function($query) {
             return $scope.helperFunctions.tagCloudFilter($query, $scope.tagCloud);
         };
         var setDefaultsForTask = function() {
-            if($scope.task === null) {
+            if($scope.task === null || $scope.task.id === null) {
                 return;
             }
             $scope.task.ownerEstimate = $scope.estimateLinkedToTask;
             $scope.task.ownerRequirement = $scope.requirementLinkedToTask;
         };
-
         // this does nothing as of yet, need to finish html views
         Requirement.get({id:$stateParams.requirementId}, function(responseRequirement) {
             if(responseRequirement === null) {

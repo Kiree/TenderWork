@@ -56,6 +56,9 @@ angular.module('tenderworkApp')
                 data: {
                     authorities: ['ROLE_USER'],
                 },
+                params: {
+                    estimateId:0
+                },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
                         backdrop:'static',
@@ -82,9 +85,9 @@ angular.module('tenderworkApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('estimate.detail', { id:$stateParams.id }, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.estimateId }, { reload: true });
                     }, function() {
-                        $state.go('estimate.detail', { id:$stateParams.id });
+                        $state.go('estimate.detail', { id:$stateParams.estimateId });
                     })
                 }]
             })
@@ -93,6 +96,10 @@ angular.module('tenderworkApp')
                 url: '/{id}/edit',
                 data: {
                     authorities: ['ROLE_USER'],
+                },
+                params:{
+                    estimateId:0,
+                    requirementId:0
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -106,9 +113,9 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('estimate.detail', null, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.estimateId }, { reload: true });
                     }, function() {
-                        $state.go('^');
+                        $state.go('estimate.detail', { id:$stateParams.estimateId });
                     })
                 }]
             });

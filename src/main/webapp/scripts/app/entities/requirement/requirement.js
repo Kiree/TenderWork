@@ -94,7 +94,6 @@ angular.module('tenderworkApp')
                     estimateId:null
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                    console.log($stateParams);
                     $uibModal.open({
                         backdrop:'static',
                         templateUrl: 'scripts/app/entities/requirement/requirement-dialog.html',

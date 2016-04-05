@@ -24,8 +24,13 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
                 name:tag.name
             }
         };
-
-        $scope.tags = entity.id === null ? [] : entity.tags;
+        if(entity.$resolved) {
+            $scope.tags = entity.id === null ? [] : entity.tags;
+        } else {
+            entity.$promise.then(function() {
+                $scope.tags = entity.id === null ? [] : entity.tags;
+            });
+        }
         $scope.tagCloud = Tag.query();
         $scope.tagFilter = function($query) {
             return $scope.helperFunctions.tagCloudFilter($query, $scope.tagCloud);
