@@ -262,8 +262,6 @@ public class RequirementResource {
         Requirement clone = requirementRepository.findOne(cloneId);
 
         Set<Task> oldTaskSet = requirementRepository.findOne(originalId).getHasTaskss();
-        List<Task> tempTaskList = new ArrayList<>();
-        List<Task> newTaskList = new ArrayList<>();
         Set<Task> newTaskSet = new HashSet<>();
 
         Set<Tag> tempTagSet = requirementRepository.findOne(originalId).getTags();
@@ -277,17 +275,12 @@ public class RequirementResource {
         }
 
         if(!oldTaskSet.isEmpty()) {
+
             for (Task task : oldTaskSet) {
-                tempTaskList.add(task);
+                Task clonedTask = cloneTask(task.getId(), clone);
+                newTaskSet.add(clonedTask);
             }
 
-            for (Task task : tempTaskList) {
-                Task clonedTask = cloneTask(task.getId(), clone);
-                newTaskList.add(clonedTask);
-            }
-            for (Task task : newTaskList) {
-                newTaskSet.add(task);
-            }
             clone.setHasTaskss(newTaskSet);
         }
 
