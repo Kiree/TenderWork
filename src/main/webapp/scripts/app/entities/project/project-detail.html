@@ -16,6 +16,11 @@
                         <span class="glyphicon glyphicon-pencil"></span>
                         <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
                     </button>
+                    <button type="submit"
+                            class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-plus-sign"></span>
+                        <span class="hidden-xs hidden-sm">Kopioi</span>
+                    </button>
                     <button ng-show="isCreator(project)" type="submit"
                             ui-sref="project.delete({id:project.id})"
                             class="btn btn-danger btn-sm">
@@ -175,7 +180,7 @@
             </thead>
             <tbody data-link="row" class="rowlink" infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
             <tr class="rowLink" ng-repeat="estimate in estimates track by estimate.id">
-                <td><a href="#" ui-sref="estimate.detail({id:estimate.id})"></a>{{estimate.totalPrice}}</td>
+                <td><a href="#" ui-sref="estimate.detail({estimateId:estimate.id})"></a>{{estimate.totalPrice}}</td>
                 <td>{{estimate.totalDuration}}</td>
                 <td>{{estimate.rounded}}</td>
                 <td>{{estimate.createdBy.login}}</td>

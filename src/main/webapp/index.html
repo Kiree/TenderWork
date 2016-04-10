@@ -35,8 +35,8 @@
         <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div>
         <div ui-view="navbar" ng-cloak=""></div>
         <div class="container">
+            <div class="row"><div class="col-xs-12"><tender-trail/></div></div>
             <div class="well" ui-view="content"></div>
-
             <div class="footer">
                 <span translate="footer">This is your footer</span> <span ng-show="{{ENV==='dev'}}" ng-cloak="" ng-controller="EasterController"> - It just might {{ randomQuote() }}
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="enableLSD()">
@@ -122,6 +122,8 @@
     <script src="scripts/components/util/columncheck.directive.js"></script>
     <script src="scripts/components/rowlink/rowlink.js"></script>
     <script src="scripts/components/easter/easter.js"></script>
+    <script src="scripts/components/tendertrail/tendertrail.controller.js"></script>
+    <script src="scripts/components/tendertrail/tendertrail.directive.js"></script>
     <script src="scripts/app/entities/entity-helper.factory.js"></script>
     <script src="scripts/app/account/account.js"></script>
     <script src="scripts/app/account/activate/activate.js"></script>

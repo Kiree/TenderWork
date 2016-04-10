@@ -26,12 +26,13 @@ angular.module('tenderworkApp')
                 }
             })
             .state('project.detail', {
-                parent: 'entity',
+                parent: 'project',
                 url: '/project/{id}',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'tenderworkApp.project.detail.title'
                 },
+                params:{projectId:null},
                 views: {
                     'content@': {
                         templateUrl: 'scripts/app/entities/project/project-detail.html',

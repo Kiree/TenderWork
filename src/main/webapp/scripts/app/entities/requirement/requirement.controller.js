@@ -42,13 +42,13 @@ angular.module('tenderworkApp')
                         return;
                     }
                     for (var i = 0; i < result.length; i++) {
-                        $scope.requirements.push(result[i]);
+                        $scope.requirements.push($scope.helperFunctions.fillEmptyEntityDetails(result[i]));
                         TaskSearch.query({query: "ownerRequirement.id:" + result[i].id}, function(results_tasks) {
                             if(results_tasks.length > 0) {
                                 var tasksContainer = {requirementId: results_tasks[0].ownerRequirement.id, tasks: []};
                                 var tasksArray = [];
                                 for (var j = 0; j < results_tasks.length; j++) {
-                                    tasksArray.push(results_tasks[j]);
+                                    tasksArray.push($scope.helperFunctions.fillEmptyEntityDetails(results_tasks[j]));
                                 }
                                 tasksContainer.tasks = tasksArray;
                                 $scope.tasks.push(tasksContainer);
@@ -107,8 +107,10 @@ angular.module('tenderworkApp')
         };
 
         $scope.copyRequirement = function(reqId) {
-            Requirement.copy({id:reqId});
-            $state.go($state.current, {id:$scope.estimate.id }, {reload:true});
+            Requirement.copy({id:reqId}, function() {
+                $state.go($state.current, {id:$scope.estimate.id }, {reload:true});
+            });
+
         };
 
         $scope.clear = function () {

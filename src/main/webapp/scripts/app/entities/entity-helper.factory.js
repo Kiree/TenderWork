@@ -30,6 +30,15 @@ angular.module('tenderworkApp').factory('EntityHelperFactory', function() {
             return item.name.toLowerCase().indexOf(query.toLowerCase()) != -1;
         })
     };
+    // prefills all properties of that were not filled
+    var __fillEmptyEntityDetails = function(project) {
+        for (var property in project) {
+            if(project.hasOwnProperty(property)) {
+                project[property] = project[property] === null ? 'n/a' : project[property];
+            }
+        }
+        return project;
+    };
     var __copyAccount = function(account) {
         return {
             activated:account.activated,
@@ -97,7 +106,8 @@ angular.module('tenderworkApp').factory('EntityHelperFactory', function() {
             checkIfExists:__checkIfExists,
             copyEstimate:__copyEstimate,
             copyRequirement:__copyRequirement,
-            tagCloudFilter:__tagCloudFiltering
+            tagCloudFilter:__tagCloudFiltering,
+            fillEmptyEntityDetails:__fillEmptyEntityDetails
         }
     };
     return entityHelper;

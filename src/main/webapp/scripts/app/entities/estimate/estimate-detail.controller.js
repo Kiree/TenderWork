@@ -2,7 +2,7 @@
 
 angular.module('tenderworkApp')
     .controller('EstimateDetailController', function ($scope, $rootScope, $stateParams, entity, Estimate, User, Project, Requirement, Principal ) {
-        $scope.estimate = entity;
+        $scope.estimate = $scope.helperFunctions.fillEmptyEntityDetails(entity);
 
         $scope.load = function (id) {
             Estimate.get({id: id}, function(result) {
@@ -22,7 +22,7 @@ angular.module('tenderworkApp')
 
         $scope.copyEstimate = function(estId) {
             // do copy here
-            $state.go($state.current, {id:$scope.estimate.id}, {reload:true});
+            $state.go($state.current, {id:estId}, {reload:true});
         };
 
         var unsubscribe = $rootScope.$on('tenderworkApp:estimateUpdate', function(event, result) {

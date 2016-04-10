@@ -2,6 +2,7 @@
 
 angular.module('tenderworkApp')
     .controller('ProjectDetailController', function ($window, $scope, $rootScope, $stateParams, entity, Project, User, Estimate, ParseLinks, EstimateSearch, $translate, Tag, TagSearch, Principal) {
+
         $scope.project = entity;
         $scope.estimates = [];
         $scope.tags = [];
@@ -30,7 +31,7 @@ angular.module('tenderworkApp')
                         $scope.estimates.push(result[i]);
                     }
                 }
-                console.log($scope.estimates);
+                $scope.project = $scope.helperFunctions.fillEmptyEntityDetails($scope.project);
             });
         };
         $scope.reset = function() {

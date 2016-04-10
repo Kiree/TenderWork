@@ -25,7 +25,7 @@ angular.module('tenderworkApp')
                 }
             })
             .state('estimate.detail', {
-                parent: 'entity',
+                parent: 'project.detail',
                 url: '/estimate/{id}',
                 data: {
                     authorities: ['ROLE_USER'],
@@ -38,7 +38,8 @@ angular.module('tenderworkApp')
                     }
                 },
                 params: {
-                    estimateId:null
+                    estimateId:null,
+                    projectId:null
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
@@ -60,6 +61,10 @@ angular.module('tenderworkApp')
                 url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
+                },
+                params: {
+                    estimateId:null,
+                    projectId:null
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -97,6 +102,10 @@ angular.module('tenderworkApp')
                 url: '/estimate/edit',
                 data: {
                     authorities: ['ROLE_USER'],
+                },
+                params: {
+                    estimateId:null,
+                    projectId:null
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({

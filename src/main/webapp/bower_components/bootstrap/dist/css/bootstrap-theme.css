@@ -586,7 +586,7 @@ fieldset[disabled] .btn-danger.active {
   background-image: -webkit-linear-gradient(top, #e8e8ff 0%, #f5f5ff 100%);
   background-image:      -o-linear-gradient(top, #e8e8ff 0%, #f5f5ff 100%);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#e8e8ff), to(#f5f5ff));
-  background-image:         linear-gradient(top, #e8e8ff 0%, #f5f5ff 100%);
+  background-image:         linear-gradient(to bottom, #cce7ff 0%, #9bc4ff 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffe8e8ff', endColorstr='#fff5f5f5', GradientType=0);
   background-repeat: repeat-x;
   border-color: #dcdcff;
