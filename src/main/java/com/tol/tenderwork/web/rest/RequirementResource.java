@@ -70,11 +70,12 @@ public class RequirementResource {
     @Autowired
     private DeleteService deleteService;
 
-    @Autowired
+    @Inject
     private EntityManager entityManager;
 
-    @Autowired
+    @Inject
     private EntityManager taskEntityManager;
+
 
     /**
      * POST  /requirements -> Create a new requirement.
@@ -205,36 +206,14 @@ public class RequirementResource {
             return createRequirement(clone);
         }
         entityManager.detach(clone);
+
         clone.setId(null);
         clone.setName(clone.getName() + " - Kopio");
         log.error("TAGS: ", clone.getTags());
         entityManager.persist(clone);
+        Long cloneId = clone.getId();
 
-        Set<Task> newSet = new HashSet<>();
-        List<Task> tempSet = new ArrayList<>();
-
-
-        Set<Tag> emptySet = new HashSet<>();
-        if(!clone.getTags().isEmpty()) {
-            for(Tag tag : clone.getTags()) {
-                emptySet.add(tag);
-            }
-            clone.setTags(emptySet);
-        }
-
-        if(!clone.getHasTaskss().isEmpty()) {
-            for (Task task : clone.getHasTaskss()) {
-                tempSet.add(task);
-            }
-
-            for (Task task : tempSet) {
-                Task clonedTask = cloneTask(task, clone);
-                newSet.add(clonedTask);
-            }
-            clone.setHasTaskss(newSet);
-        }
-
-        Requirement result = saveService.saveRequirementToRepo(clone);
+        Requirement result = copySettings(cloneId, id);
 
         log.error("EQUALS: {}", result.equals(requirementRepository.findOne(id)));
 
@@ -244,35 +223,76 @@ public class RequirementResource {
     }
 
     @Transactional
-    public Task cloneTask(Task task, Requirement clone) {
-        log.error("Request to CLONE TASK {}: ", task);
+    public Task cloneTask(Long taskId, Requirement clone) {
+        log.error("Request to CLONE TASK ID {}: ", taskId);
 
-        Task taskClone = entityManager.find(Task.class, task.getId());
+        Task taskClone = entityManager.find(Task.class, taskId);
         entityManager.detach(taskClone);
         taskClone.setId(null);
         taskClone.setName(taskClone.getName() + " - Kopio");
         taskClone.setOwnerRequirement(clone);
         Set<Tag> emptySet = new HashSet<>();
-
         entityManager.persist(taskClone);
+        long clonedTaskId = taskClone.getId();
 
-        if(!taskClone.getTags().isEmpty()) {
-            for(Tag tag : taskClone.getTags()) {
-                emptySet.add(tag);
-            }
-            taskClone.setTags(emptySet);
-        }
-
-        log.error("TASK: {}", taskClone.hashCode());
-        log.error("TASK: {}", taskRepository.findOne(task.getId()).hashCode());
-        log.error("EQUALS: {}", taskClone.equals(taskRepository.findOne(task.getId())));
-
-
-
-        //taskClone = updateService.updateTask(taskClone);
-        saveService.saveTaskToRepo(taskClone);
-
+        taskClone = copyTaskSettings(clonedTaskId, taskId);
 
         return taskClone;
+    }
+
+    @Transactional
+    public Task copyTaskSettings(Long cloneId, Long originalId) {
+        Task clonedTask = taskRepository.findOne(cloneId);
+
+        Set<Tag> oldTaskTags = taskRepository.findOne(originalId).getTags();
+        Set<Tag> tempTagSet = new HashSet<>();
+
+        if(!oldTaskTags.isEmpty()) {
+            for(Tag tag : oldTaskTags) {
+                tempTagSet.add(tag);
+            }
+            clonedTask.setTags(tempTagSet);
+        }
+        clonedTask = saveService.saveTaskToRepo(clonedTask);
+        return clonedTask;
+    }
+
+    @Transactional
+    public Requirement copySettings(Long cloneId, Long originalId) {
+        Requirement clone = requirementRepository.findOne(cloneId);
+
+        Set<Task> oldTaskSet = requirementRepository.findOne(originalId).getHasTaskss();
+        List<Task> tempTaskList = new ArrayList<>();
+        List<Task> newTaskList = new ArrayList<>();
+        Set<Task> newTaskSet = new HashSet<>();
+
+        Set<Tag> tempTagSet = requirementRepository.findOne(originalId).getTags();
+        Set<Tag> newTagSet = new HashSet<>();
+
+        if(!tempTagSet.isEmpty()) {
+            for(Tag tag : clone.getTags()) {
+                newTagSet.add(tag);
+            }
+            clone.setTags(newTagSet);
+        }
+
+        if(!oldTaskSet.isEmpty()) {
+            for (Task task : oldTaskSet) {
+                tempTaskList.add(task);
+            }
+
+            for (Task task : tempTaskList) {
+                Task clonedTask = cloneTask(task.getId(), clone);
+                newTaskList.add(clonedTask);
+            }
+            for (Task task : newTaskList) {
+                newTaskSet.add(task);
+            }
+            clone.setHasTaskss(newTaskSet);
+        }
+
+        clone = saveService.saveRequirementToRepo(clone);
+
+        return clone;
     }
 }
