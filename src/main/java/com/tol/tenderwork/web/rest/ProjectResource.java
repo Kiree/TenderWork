@@ -5,7 +5,6 @@ import com.tol.tenderwork.domain.Project;
 import com.tol.tenderwork.domain.Tag;
 import com.tol.tenderwork.repository.ProjectRepository;
 import com.tol.tenderwork.repository.search.ProjectSearchRepository;
-import com.tol.tenderwork.security.SecurityUtils;
 import com.tol.tenderwork.service.DeleteService;
 import com.tol.tenderwork.service.SaveService;
 import com.tol.tenderwork.service.UpdateService;
@@ -21,8 +20,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -170,7 +167,7 @@ public class ProjectResource {
         log.debug("REST request to search Projects for query {}", query);
 
         return StreamSupport
-            .stream(projectSearchRepository.findByNameOrClientOrTags(query, query, query).spliterator(), false)
+            .stream(projectSearchRepository.findByNameOrClientOrTags_NameOrHasEstimatess_HasRequirementss_Tags_Name(query, query, query, query).spliterator(), false)
             .collect(Collectors.toList());
     }
 }
