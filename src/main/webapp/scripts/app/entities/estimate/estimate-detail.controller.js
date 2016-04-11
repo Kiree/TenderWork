@@ -21,8 +21,10 @@ angular.module('tenderworkApp')
         }
 
         $scope.copyEstimate = function(estId) {
-            // do copy here
-            $state.go($state.current, {id:estId}, {reload:true});
+            Estimate.copy({id:estId}, function(result) {
+                console.log(result);
+                $state.go($state.current, {id:estId}, {reload:true});
+            });
         };
 
         var unsubscribe = $rootScope.$on('tenderworkApp:estimateUpdate', function(event, result) {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tenderworkApp')
-    .controller('RequirementController', function ($rootScope, $scope, $state, Requirement, RequirementSearch, ParseLinks, Task, TaskSearch, Principal) {
+    .controller('RequirementController', function ($rootScope, $scope, $state, Requirement, RequirementSearch, ParseLinks, Task, TaskSearch, Principal, Estimate) {
 
         $scope.requirements = [];
         $scope.tasks = [];
@@ -107,7 +107,14 @@ angular.module('tenderworkApp')
         };
 
         $scope.copyRequirement = function(reqId) {
-            Requirement.copy({id:reqId}, function() {
+            Requirement.copy({id:reqId}, function(result) {
+                console.log($scope.estimate, result);
+                Estimate.update($scope.estimate, function() {
+                    console.log('succes');
+                }, function() {
+                    console.log('fail');
+                }
+                );
                 $state.go($state.current, {id:$scope.estimate.id }, {reload:true});
             });
 
