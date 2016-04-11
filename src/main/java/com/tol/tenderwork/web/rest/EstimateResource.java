@@ -2,6 +2,7 @@ package com.tol.tenderwork.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.tol.tenderwork.domain.Estimate;
+import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.repository.EstimateRepository;
 import com.tol.tenderwork.repository.search.EstimateSearchRepository;
 import com.tol.tenderwork.service.UpdateService;
@@ -23,11 +24,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -56,6 +60,12 @@ public class EstimateResource {
 
     @Autowired
     private DeleteService deleteService;
+
+    @Autowired
+    private RequirementResource rr;
+
+    @Inject
+    private EntityManager entityManager;
 
     /**
      * POST  /estimates -> Create a new estimate.
@@ -167,5 +177,53 @@ public class EstimateResource {
         return StreamSupport
             .stream(estimateSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
+    }
+
+    /**
+     * POST  /estimates/{id} -> Clone requirement.
+     */
+    @RequestMapping(value = "/estimates/{id}",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional
+    @PreAuthorize("@estimateRepository.findOne(#id).getCreatedBy().getLogin().equals(authentication.name) OR hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Estimate> cloneEstimate(@PathVariable Long id) throws URISyntaxException {
+        log.debug("REST request to clone ESTIMATE : {}", id);
+        Estimate clone = entityManager.find(Estimate.class, id);
+        if (clone.getId() == null) {
+            return createEstimate(clone);
+        }
+        entityManager.detach(clone);
+        clone.setId(null);
+        entityManager.persist(clone);
+
+        Long cloneId = clone.getId();
+
+        Estimate result = copyEstimateSettings(cloneId, id);
+
+        return ResponseEntity.created(new URI("/api/requirements/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert("requirement", result.getId().toString()))
+            .body(result);
+    }
+
+    @Transactional
+    public Estimate copyEstimateSettings(Long cloneId, Long originalId) {
+        Estimate clonedEstimate = estimateRepository.findOne(cloneId);
+
+        Set<Requirement> oldReqSet = estimateRepository.findOne(originalId).getHasRequirementss();
+        Set<Requirement> newReqSet = new HashSet<>();
+
+        if(!oldReqSet.isEmpty()) {
+            for (Requirement requirement : oldReqSet) {
+                Requirement clonedRequirement = rr.createRequirementClone(requirement.getId(), clonedEstimate);
+                clonedRequirement = rr.copySettings(clonedRequirement.getId(), requirement.getId());
+                newReqSet.add(clonedRequirement);
+            }
+            clonedEstimate.setHasRequirementss(newReqSet);
+        }
+
+        clonedEstimate = saveService.saveEstimateToRepo(clonedEstimate);
+        return clonedEstimate;
     }
 }

@@ -1,6 +1,7 @@
 package com.tol.tenderwork.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.tol.tenderwork.domain.Estimate;
 import com.tol.tenderwork.domain.Requirement;
 import com.tol.tenderwork.domain.Tag;
 import com.tol.tenderwork.domain.Task;
@@ -202,11 +203,8 @@ public class RequirementResource {
     public ResponseEntity<Requirement> cloneRequirement(@PathVariable Long id) throws URISyntaxException {
         log.debug("REST request to clone Requirement : {}", id);
         Requirement clone = entityManager.find(Requirement.class, id);
-        if (clone.getId() == null) {
-            return createRequirement(clone);
-        }
-        entityManager.detach(clone);
 
+        entityManager.detach(clone);
         clone.setId(null);
         clone.setName(clone.getName() + " - Kopio");
         log.error("TAGS: ", clone.getTags());
@@ -231,7 +229,7 @@ public class RequirementResource {
         taskClone.setId(null);
         taskClone.setName(taskClone.getName() + " - Kopio");
         taskClone.setOwnerRequirement(clone);
-        Set<Tag> emptySet = new HashSet<>();
+        taskClone.setOwnerEstimate(clone.getOwnerEstimate());
         entityManager.persist(taskClone);
         long clonedTaskId = taskClone.getId();
 
@@ -286,6 +284,19 @@ public class RequirementResource {
 
         clone = saveService.saveRequirementToRepo(clone);
 
+        return clone;
+    }
+
+    @Transactional
+    public Requirement createRequirementClone(Long id, Estimate ownerEstimate) {
+        Requirement clone = entityManager.find(Requirement.class, id);
+        log.error("CLONE: {}", clone);
+        entityManager.detach(clone);
+        clone.setId(null);
+        clone.setName(clone.getName() + " - Kopio");
+        clone.setOwnerEstimate(ownerEstimate);
+        log.error("TAGS: ", clone.getTags());
+        entityManager.persist(clone);
         return clone;
     }
 }
