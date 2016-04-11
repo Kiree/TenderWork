@@ -111,11 +111,13 @@ angular.module('tenderworkApp')
                 console.log($scope.estimate, result);
                 Estimate.update($scope.estimate, function() {
                     console.log('succes');
+                        $state.go($state.current, {id:$scope.estimate.id }, {reload:true});
                 }, function() {
                     console.log('fail');
+                        $state.go($state.current, {id:$scope.estimate.id }, {reload:true});
                 }
                 );
-                $state.go($state.current, {id:$scope.estimate.id }, {reload:true});
+
             });
 
         };
