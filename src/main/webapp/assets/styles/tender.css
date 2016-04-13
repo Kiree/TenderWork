@@ -51,6 +51,10 @@ div.bg-always-gray {
     background-color:#f9f9f9 !important;
 }
 
+div.bg-always-darkgray {
+    background-color:#f0f0f0 !important;
+}
+
 div.wrap-field {
     text-overflow:ellipsis;
     overflow:hidden;
@@ -133,6 +137,12 @@ div.padding-detail-text-field {
 }
 
 
+/*MOI*/
 
+.row-eq-height {
 
+    display:         flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
 
