@@ -8,5 +8,5 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  */
 public interface ProjectSearchRepository extends ElasticsearchRepository<Project, Long> {
 
-    Iterable<Project> findByNameOrClientOrTags_NameOrHasEstimatess_HasRequirementss_Tags_Name(String name, String client, String tag, String asd);
+    Iterable<Project> findByNameOrClientOrTags(String name, String client, String tag);
 }
