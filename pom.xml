@@ -791,6 +791,9 @@
                             <executable>true</executable>
                             <arguments>
                                 <argument>--spring.profiles.active=prod</argument>
+                                <argument>--spring.datasource.url=${jdbc.url}</argument>
+                                <argument>--spring.datasource.username=${jdbc.username}</argument>
+                                <argument>--spring.datasource.password=${jdbc.password}</argument>
                             </arguments>
                         </configuration>
                     </plugin>
