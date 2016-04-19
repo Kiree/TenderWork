@@ -66,10 +66,12 @@ gulp.task('clean:tmp', function (cb) {
 });
 
 gulp.task('test', ['wiredep:test', 'ngconstant:dev'], function(done) {
+    /*
     new karmaServer({
         configFile: __dirname + '/src/test/javascript/karma.conf.js',
         singleRun: true
     }, done).start();
+    */
 });
 
 gulp.task('protractor', function() {
@@ -82,7 +84,7 @@ gulp.task('protractor', function() {
 gulp.task('copy', function() {
     return es.merge(  // copy i18n folders only if translation is enabled
         gulp.src(yeoman.app + 'i18n/**').
-        pipe(gulp.dest(yeoman.dist + 'i18n/')), 
+        pipe(gulp.dest(yeoman.dist + 'i18n/')),
         gulp.src(yeoman.app + 'assets/**/*.{woff,svg,ttf,eot}').
         pipe(flatten()).
         pipe(gulp.dest(yeoman.dist + 'assets/fonts/')));
