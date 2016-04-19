@@ -9,9 +9,9 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.tol.tenderwork</groupId>
+    <groupId>tenderwork</groupId>
     <artifactId>tenderwork</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-RELEASE</version>
     <packaging>war</packaging>
     <name>TenderWork</name>
 
