@@ -138,11 +138,10 @@ div.padding-detail-text-field {
 
 
 /*MOI*/
-
-.row-eq-height {
-
+.row-eq-height-xs {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display:         flex;
-    flex-wrap: wrap;
     flex-direction: row;
 }
-
