@@ -2,6 +2,27 @@
     "global": {
         "title": "TenderWork",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
+        "trail": {
+            "project":"Project list",
+            "project.detail":"Project details",
+            "estimate.detail":"Estimate details",
+            "user-management": "User management",
+            "tracker": "User tracker",
+            "metrics": "Metrics",
+            "health": "Health",
+            "configuration": "Configuration",
+            "logs": "Logs",
+            "audits": "Audits",
+            "apidocs": "API",
+            "database": "Database",
+            "settings": "Settings",
+            "password": "Password",
+            "sessions": "Sessions",
+            "login": "Sign in",
+            "logout": "Sign out",
+            "register": "Register",
+            "docs":"API"
+        },
         "menu": {
             "home": "Home",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",

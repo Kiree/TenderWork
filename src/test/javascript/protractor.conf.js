@@ -3,15 +3,19 @@ var JasmineReporters = require('jasmine-reporters');
 
 exports.config = {
     seleniumServerJar: '../../../node_modules/protractor/selenium/selenium-server-standalone-2.47.1.jar',
-    chromeDriver: '../../../node_modules/protractor/selenium/chromedriver',
+    chromeDriver: '../../../node_modules/protractor/selenium/chromedriver.exe',
     allScriptsTimeout: 20000,
 
     specs: [
-        'e2e/*.js'
+        'e2e/project.spec.js',
+        'e2e/estimate.spec.js',
+        'e2e/requirement.spec.js',
+        'e2e/task.spec.js',
+        'e2e/clone.spec.js'
     ],
 
     capabilities: {
-        'browserName': 'firefox',
+        'browserName': 'chrome',
         'phantomjs.binary.path': require('phantomjs').path,
         'phantomjs.ghostdriver.cli.args': ['--loglevel=DEBUG']
     },
@@ -36,5 +40,6 @@ exports.config = {
         jasmine.getEnv().addReporter(new HtmlScreenshotReporter({
             dest: "target/reports/e2e/screenshots"
         }));
+        require('protractor-uisref-locator')(protractor);
     }
 };

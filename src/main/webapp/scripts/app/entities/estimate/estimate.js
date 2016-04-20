@@ -26,7 +26,7 @@ angular.module('tenderworkApp')
             })
             .state('estimate.detail', {
                 parent: 'project.detail',
-                url: '/estimate/{id}',
+                url: '/estimate/{eid}',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'tenderworkApp.estimate.detail.title'
@@ -38,8 +38,8 @@ angular.module('tenderworkApp')
                     }
                 },
                 params: {
-                    estimateId:null,
-                    projectId:null
+                    eid:null,
+                    pid:null
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
@@ -49,10 +49,10 @@ angular.module('tenderworkApp')
                         return $translate.refresh();
                     }],
                     entity: ['$stateParams', 'Estimate', function($stateParams, Estimate) {
-                        if ($stateParams.estimateId) {
-                            return Estimate.get({id : $stateParams.estimateId});
+                        if ($stateParams.eid) {
+                            return Estimate.get({id : $stateParams.eid});
                         }
-                        return Estimate.get({id : $stateParams.id});
+                        return Estimate.get({id : $stateParams.eid});
                     }]
                 }
             })
@@ -63,8 +63,8 @@ angular.module('tenderworkApp')
                     authorities: ['ROLE_USER'],
                 },
                 params: {
-                    estimateId:null,
-                    projectId:null
+                    eid:null,
+                    pid:null
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -93,19 +93,19 @@ angular.module('tenderworkApp')
                     }).result.then(function(result) {
                         $state.go('project.detail', { id:result.ownerProject.id }, { reload: true });
                     }, function() {
-                        $state.go('project.detail', { id:$stateParams.id});
+                        $state.go('project.detail', { id:$stateParams.pid});
                     })
                 }]
             })
             .state('estimate.edit', {
                 parent: 'estimate.detail',
-                url: '/estimate/edit',
+                url: '/edit',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 params: {
-                    estimateId:null,
-                    projectId:null
+                    eid:null,
+                    pid:null
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -115,24 +115,25 @@ angular.module('tenderworkApp')
                         size: 'lg',
                         resolve: {
                             entity: ['Estimate', function(Estimate) {
-                                return Estimate.get({id : $stateParams.id});
+                                return Estimate.get({id : $stateParams.eid});
                             }]
                         }
                     }).result.then(function(result) {
                         $state.go('estimate.detail', { id:result.id }, { reload: true });
                     }, function() {
-                        $state.go('estimate.detail', { id:$stateParams.id} );
+                        $state.go('estimate.detail', { id:$stateParams.eid} );
                     })
                 }]
             })
             .state('estimate.delete', {
                 parent: 'estimate.detail',
-                url: '/{id}/estimate/delete',
+                url: '/delete',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 params: {
-                    projectId:null
+                    pid:null,
+                    eid:null
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -142,13 +143,13 @@ angular.module('tenderworkApp')
                         size: 'md',
                         resolve: {
                             entity: ['Estimate', function(Estimate) {
-                                return Estimate.get({id : $stateParams.id});
+                                return Estimate.get({id : $stateParams.eid});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('project.detail', { id:$stateParams.projectId }, { reload: true });
+                        $state.go('project.detail', { id:$stateParams.pid }, { reload: true });
                     }, function() {
-                        $state.go('estimate.detail', { id:$stateParams.id }, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.eid }, { reload: true });
                     })
                 }]
             });

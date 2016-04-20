@@ -31,18 +31,32 @@ angular.module('tenderworkApp').controller('RequirementDialogController',
         $scope.tagFilter = function($query) {
             return $scope.helperFunctions.tagCloudFilter($query, $scope.tagCloud);
         };
+        $scope.page = 0;
         $scope.requirement = entity;
         $scope.users = User.query();
-        $scope.estimates = Estimate.query().$promise.then(function(results) {
-            results.some(function(item) {
-               if(item.id == $stateParams.id) {
-                   $scope.attachToEstimate = item;//copyEstimate(item);
-                   return true;
-               }
+        var loadEstimates = function() {
+            $scope.estimates = Estimate.query({
+                page:$scope.page,
+                size:20
+            }).$promise.then(function(results) {
+                results.some(function(item) {
+                   if(item.id == $stateParams.eid) {
+                       $scope.attachToEstimate = $scope.helperFunctions.copyEstimate(item);//copyEstimate(item);
+                       return true;
+                   }
+                });
+                if(!$scope.attachToEstimate) {
+                    $scope.page += 1;
+                    loadEstimates();
+                } else {
+                    $scope.page = 0;
+                }
+
             });
-        });
+        };
+        loadEstimates(0);
         $scope.tasks = Task.query();
-        $scope.estimateId = $stateParams.id;
+        $scope.eid = $stateParams.eid;
         $scope.load = function(id) {
             Requirement.get({id : id}, function(result) {
                 $scope.requirement = result;
@@ -90,6 +104,6 @@ angular.module('tenderworkApp').controller('RequirementDialogController',
         };
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss({id:$scope.estimateId, message:'cancel'});
+            $uibModalInstance.dismiss({id:$scope.eid, message:'cancel'});
         };
 }]);

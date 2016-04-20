@@ -4,48 +4,7 @@ angular.module('tenderworkApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('task', {
-                parent: 'entity',
-                url: '/tasks',
-                data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'tenderworkApp.task.home.title'
-                },
-                views: {
-                    'content@': {
-                        templateUrl: 'scripts/app/entities/task/tasks.html',
-                        controller: 'TaskController'
-                    }
-                },
-                resolve: {
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('task');
-                        $translatePartialLoader.addPart('global');
-                        return $translate.refresh();
-                    }]
-                }
-            })
-            .state('task.detail', {
-                parent: 'entity',
-                url: '/task/{id}',
-                data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'tenderworkApp.task.detail.title'
-                },
-                views: {
-                    'content@': {
-                        templateUrl: 'scripts/app/entities/task/task-detail.html',
-                        controller: 'TaskDetailController'
-                    }
-                },
-                resolve: {
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('task');
-                        return $translate.refresh();
-                    }],
-                    entity: ['$stateParams', 'Task', function($stateParams, Task) {
-                        return Task.get({id : $stateParams.id});
-                    }]
-                }
+                abstract: true
             })
             .state('task.new', {
                 parent: 'estimate.detail',
@@ -54,8 +13,8 @@ angular.module('tenderworkApp')
                     authorities: ['ROLE_USER'],
                 },
                 params: {
-                    requirementId:null,
-                    estimateId:null
+                    rid:null,
+                    eid:null,
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -83,21 +42,22 @@ angular.module('tenderworkApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('estimate.detail', { id:$stateParams.estimateId }, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.eid }, { reload: true });
                     }, function() {
-                        $state.go('estimate.detail', { id:$stateParams.estimateId });
+                        $state.go('estimate.detail', { id:$stateParams.eid });
                     })
                 }]
             })
             .state('task.edit', {
                 parent: 'estimate.detail',
-                url: '/{id}/edit',
+                url: '/{tid}/task/edit',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 params:{
-                    estimateId:0,
-                    requirementId:0
+                    eid:null,
+                    rid:null,
+                    tid:null
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -107,13 +67,13 @@ angular.module('tenderworkApp')
                         size: 'lg',
                         resolve: {
                             entity: ['Task', function(Task) {
-                                return Task.get({id : $stateParams.id});
+                                return Task.get({id : $stateParams.tid});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('estimate.detail', { id:$stateParams.estimateId }, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.eid }, { reload: true });
                     }, function() {
-                        $state.go('estimate.detail', { id:$stateParams.estimateId });
+                        $state.go('estimate.detail', { id:$stateParams.eid });
                     })
                 }]
             });

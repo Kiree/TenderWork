@@ -1,1 +1,1 @@
-<span ng-repeat="t in trail"><span class="glyphicon glyphicon-arrow-right"></span><span><a href="#" ui-sref="{{t.name}}({{t.params}})"> {{ t.name }} </a></span></span>
+<a href="#" ui-sref="project"><span class="glyphicon glyphicon-home"> </span></a><span ng-repeat="t in trail"><span class="glyphicon glyphicon-triangle-right blue small" style="color: #3a6499"></span><a href="#" ui-sref="{{t.name}}({{t.params}})"><span translate="global.trail.{{t.name}}"> {{ t.name }} </span></a></span></span>

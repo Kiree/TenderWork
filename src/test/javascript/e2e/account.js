@@ -24,7 +24,7 @@ describe('account', function () {
         expect(element.all(by.css('h1')).first().getText()).toMatch(/Sign in/);
 
         element(by.model('username')).clear().sendKeys('admin');
-        element(by.model('password')).clear().sendKeys('admin');
+        element(by.model('password')).clear().sendKeys('newpassword');
         element(by.css('button[type=submit]')).click();
 
         expect(element(by.css('.alert-success')).getText()).toMatch(/You are logged in as user "admin"/);

@@ -39,7 +39,7 @@
             </thead>
             <tbody data-link="row" class="rowlink" infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
                 <tr class="rowLink" ng-repeat="project in projects track by project.id">
-                    <td><a ui-sref="project.detail({id:project.id})"></a>{{project.name}}</td>
+                    <td><a ui-sref="project.detail({id:project.id, pid:project.id})">{{project.name}}</a></td>
                     <td>{{project.client}}</td>
                     <td>{{project.deadline | date:'mediumDate'}}</td>
                     <td>{{project.editedDate | date:'medium'}}</td>
@@ -49,28 +49,7 @@
                         <span ng-show="project.state=='states.won'" class="" translate="states.won">NW: {{ project.state }}</span>
                         <span ng-show="project.state=='states.lost'" class="" translate="states.lost">NW: {{ project.state }}</span>
                     <td>{{project.editedBy.login}}</td>
-                    <!--<td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="project.detail({id:project.id})"
-                                    class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="project.edit({id:project.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="project.delete({id:project.id})"
-                                    class="btn btn-danger btn-sm">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
-                            </button>
-                        </div>
-                    </td>-->
+
                 </tr>
             </tbody>
         </table>
