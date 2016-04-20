@@ -92,6 +92,8 @@ public class UpdateService {
 
         Estimate estimateHelper = estimateRepository.findOne(estimate.getId());
 
+        log.error("REQT ESTIMATECALLISSA: {}", estimateHelper.getHasRequirementss());
+
         if (estimateHelper.getHasRequirementss().isEmpty()) {
 
             log.error("Estimatella ei ole Requirementteja: {}", estimateHelper);
@@ -106,17 +108,17 @@ public class UpdateService {
             // Kuten aiemmin, jostain syystä tämä Hash-set on aina tyhjä.
             for (Requirement requirement : estimateHelper.getHasRequirementss()) {
                 Requirement requirementHelper = requirementRepository.findOne(requirement.getId());
+                Task resultTask = new Task();
 
                 // Go through all of Requirement's tasks
                 for (Task task : requirementHelper.getHasTaskss()) {
                     Task taskHelper = taskRepository.findOne(task.getId());
                     task = mathService.calculateTask(taskHelper, estimate);
-                    Task resultTask = saveService.saveTaskToRepo(task);
-                    requirement = mathService.calculateRequirement(resultTask);
+                    resultTask = saveService.saveTaskToRepo(task);
                     log.error("Päivitettiin task {}", task);
                 }
-                Requirement resultRequirement = saveService.saveRequirementToRepo(requirement);
-                estimate.addRequirement(resultRequirement);
+                requirement = mathService.calculateRequirement(resultTask);
+                saveService.saveRequirementToRepo(requirement);
                 log.error("Päivitettiin requ {}", requirement);
 
             }
