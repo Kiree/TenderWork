@@ -9,9 +9,9 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.tol.tenderwork</groupId>
+    <groupId>tenderwork</groupId>
     <artifactId>tenderwork</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-RELEASE</version>
     <packaging>war</packaging>
     <name>TenderWork</name>
 
@@ -377,6 +377,16 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>net.sourceforge.jtds</groupId>
+            <artifactId>jtds</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.sabomichal</groupId>
+            <artifactId>liquibase-mssql</artifactId>
+            <version>1.5</version>
+        </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
     </dependencies>
     <build>
@@ -486,6 +496,7 @@
                                 <exclude>**/Abstract*.java</exclude>
                                 <exclude>**/*Cucumber*.java</exclude>
                             </excludes>
+                            <skipTests>true</skipTests>
                         </configuration>
                     </execution>
                     <execution>
@@ -507,10 +518,14 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
                 <configuration>
-                    <packagingExcludes>WEB-INF/lib/tomcat-*.jar</packagingExcludes>
+                    <webResources>
+                        <resource>
+                            <directory>yo/dist</directory>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
             <plugin>
@@ -776,6 +791,9 @@
                             <executable>true</executable>
                             <arguments>
                                 <argument>--spring.profiles.active=prod</argument>
+                                <argument>--spring.datasource.url=${jdbc.url}</argument>
+                                <argument>--spring.datasource.username=${jdbc.username}</argument>
+                                <argument>--spring.datasource.password=${jdbc.password}</argument>
                             </arguments>
                         </configuration>
                     </plugin>

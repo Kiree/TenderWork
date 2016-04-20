@@ -19,14 +19,13 @@ spring:
         livereload:
             enabled: false
     datasource:
-        driver-class-name: com.mysql.jdbc.jdbc2.optional.MysqlDataSource
-        url: jdbc:mysql://localhost:3306/TenderWork?useUnicode=true&characterEncoding=utf8
-        name:
-        username: root
-        password:
+        driver-class-name: net.sourceforge.jtds.jdbc.Driver
+        url: ${jdbc.url}
+        username: ${jdbc.username}
+        password: ${jdbc.password}
     jpa:
-        database-platform: org.hibernate.dialect.MySQLInnoDBDialect
-        database: MYSQL
+        database-platform: org.hibernate.dialect.SQLServerDialect
+        database: SQL_SERVER
         show_sql: false
         properties:
             hibernate.cache.use_second_level_cache: true
