@@ -68,7 +68,7 @@ public class MathService {
         estimate.setTestingFactor(estimateHelper.getTestingFactor());
         estimate.setSynergyBenefit(estimateHelper.getSynergyBenefit());
 
-        if (estimate.getHasRequirementss().isEmpty() != true) {
+        if (!estimate.getHasRequirementss().isEmpty()) {
             Set<Requirement> requirements = estimate.getHasRequirementss();
             float totalDurationHelper = 0;
             float totalSynergyHelper = 0;
@@ -94,6 +94,13 @@ public class MathService {
                 estimate.setTotalSynergyBenefit((float) 0);
             }
         }
+
+        else {
+            estimate.setResourcing(null);
+            estimate.setTotalDuration(null);
+            estimate.setTotalPrice(null);
+            estimate.setTotalSynergyBenefit(null);
+        }
         return estimate;
     }
 
@@ -108,11 +115,7 @@ public class MathService {
         float totalTestingHelper = 0;
         float totalSynergyHelper = 0;
 
-        if(requirement.getHasTaskss().isEmpty()) {
-            //log.debug("Requirementilla ei taskeja: {}", requirement);
-            return requirement;
-        } else {
-            //log.debug("Laskussa taski loop alkaa");
+        if(!requirement.getHasTaskss().isEmpty()) {
             for (Task t : tasks) {
                 totalDurationHelper = totalDurationHelper + t.getEstimateTotal();
                 totalSpecificationHelper = totalSpecificationHelper + t.getSpecificationTotal();
@@ -120,16 +123,14 @@ public class MathService {
                 totalTestingHelper = totalTestingHelper + t.getTestingTotal();
                 totalSynergyHelper = totalSynergyHelper + t.getSynergyTotal();
             }
-
-            //log.debug("Laskussa setteri kutsut");
-            requirement.setTotalDuration(totalDurationHelper);
-            requirement.setDurationSpecification(totalSpecificationHelper);
-            requirement.setDurationImplementation(totalImplementationHelper);
-            requirement.setDurationTesting(totalTestingHelper);
-            requirement.setSynergyBenefit(totalSynergyHelper);
-
-            return requirement;
         }
+        requirement.setTotalDuration(totalDurationHelper);
+        requirement.setDurationSpecification(totalSpecificationHelper);
+        requirement.setDurationImplementation(totalImplementationHelper);
+        requirement.setDurationTesting(totalTestingHelper);
+        requirement.setSynergyBenefit(totalSynergyHelper);
+
+        return requirement;
     }
 
     @Transactional
