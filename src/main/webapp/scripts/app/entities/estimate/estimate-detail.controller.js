@@ -3,11 +3,11 @@
 angular.module('tenderworkApp')
     .controller('EstimateDetailController', function ($scope, $rootScope, $stateParams, entity, Estimate, User, Project, Requirement, Principal ) {
         $scope.estimate = $scope.helperFunctions.fillEmptyEntityDetails(entity);
-
+        $scope.needToRecalculate = true;
         $scope.load = function (id) {
             Estimate.get({id: id}, function(result) {
                 $scope.estimate = result;
-
+                $scope.needToRecalculate = true;
             });
         };
 
@@ -16,13 +16,12 @@ angular.module('tenderworkApp')
         };
         // takes float and rounds it to nearest whole or half
 
-        if(entity.resourcing !== null && entity.resourcing !== undefined) {
+        if(entity.resourcing !== null && typeof entity.resourcing != 'undefined') {
             $scope.roundedResourcing = $scope.helperFunctions.roundResourcing(entity.resourcing);
         }
 
         $scope.copyEstimate = function(estId) {
             Estimate.copy({id:estId}, function(result) {
-                console.log(result);
                 $state.go($state.current, {id:estId}, {reload:true});
             });
         };

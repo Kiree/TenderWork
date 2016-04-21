@@ -2,9 +2,6 @@
 
 angular.module('tenderworkApp')
     .controller('RequirementController', function ($rootScope, $scope, $state, Requirement, RequirementSearch, ParseLinks, Task, TaskSearch, Principal, Estimate) {
-        $state.get().map(function(item) {
-            console.log(item.name);
-        });
         $scope.requirements = [];
         $scope.tasks = [];
         $scope.predicate = 'id';
@@ -55,8 +52,10 @@ angular.module('tenderworkApp')
                                 tasksContainer.tasks = tasksArray;
                                 $scope.tasks.push(tasksContainer);
                             }
+                            $scope.needToRecalculate = true;
                         });
                     }
+                    $scope.needToRecalculate = true;
                     populated = true;
                 });
             } else {
@@ -82,12 +81,14 @@ angular.module('tenderworkApp')
             $scope.loadAll();
         };
         if($scope.estimate.$resolved === false) {
-            console.log("estimate not resolved yet!")
+            console.log("estimate not resolved yet!");
             $scope.estimate.$promise.then($scope.loadAll);
+            $scope.needToRecalculate = true;
 
         } else {
-            console.log("estimate resolved!")
+            console.log("estimate resolved!");
             $scope.loadAll();
+            $scope.needToRecalculate = true;
         }
 
         $scope.isCreator = function(ent) {
@@ -110,7 +111,6 @@ angular.module('tenderworkApp')
 
         $scope.copyRequirement = function(reqId) {
             Requirement.copy({id:reqId}, function(result) {
-                console.log($scope.estimate, result);
                 Estimate.update($scope.estimate, function() {
                     console.log('succes');
                         $state.go($state.current, {id:$scope.estimate.id }, {reload:true});

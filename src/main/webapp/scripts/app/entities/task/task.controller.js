@@ -13,6 +13,7 @@ angular.module('tenderworkApp')
                 for (var i = 0; i < result.length; i++) {
          //           $scope.tasks.push(result[i]);
                 }
+
             });
         };
         $scope.isCreator = function(task) {
