@@ -32,6 +32,7 @@ describe('project', function() {
         element(by.model('project.docLocation')).sendKeys('http://www.google.com');
         element(by.model('project.stateDescription')).sendKeys('Ihan mahtava');
         element(by.css('.tags-input')).element(by.model('newTag.text')).click().sendKeys('Tagi, Toinen, Kolmas,');
+        element(by.model('project.name')).sendKeys('');
         element(by.css('button[type=submit]')).click();
         expect(element(by.css('h2')).getText()).toMatch(/Testiprojekti/);
     });
@@ -41,6 +42,7 @@ describe('project', function() {
         element(by.css('[ui-sref*="project.edit"]')).click();
         element(by.model('project.name')).sendKeys(' - muokattu');
         element(by.css('.tags-input')).element(by.model('newTag.text')).click().sendKeys('Yksi,');
+        element(by.model('project.name')).sendKeys('');
         element(by.css(".modal-footer")).element(by.css('button[type=submit]')).click();
         expect(element(by.css('h2')).getText()).toMatch(/Testiprojekti - muokattu/);
     });

@@ -55,8 +55,10 @@ angular.module('tenderworkApp')
                                 tasksContainer.tasks = tasksArray;
                                 $scope.tasks.push(tasksContainer);
                             }
+                            $scope.needToRecalculate = true;
                         });
                     }
+                    $scope.needToRecalculate = true;
                     populated = true;
                 });
             } else {
@@ -82,12 +84,14 @@ angular.module('tenderworkApp')
             $scope.loadAll();
         };
         if($scope.estimate.$resolved === false) {
-            console.log("estimate not resolved yet!")
+            console.log("estimate not resolved yet!");
             $scope.estimate.$promise.then($scope.loadAll);
+            $scope.needToRecalculate = true;
 
         } else {
-            console.log("estimate resolved!")
+            console.log("estimate resolved!");
             $scope.loadAll();
+            $scope.needToRecalculate = true;
         }
 
         $scope.isCreator = function(ent) {
@@ -110,7 +114,6 @@ angular.module('tenderworkApp')
 
         $scope.copyRequirement = function(reqId) {
             Requirement.copy({id:reqId}, function(result) {
-                console.log($scope.estimate, result);
                 Estimate.update($scope.estimate, function() {
                     console.log('succes');
                         $state.go($state.current, {id:$scope.estimate.id }, {reload:true});
