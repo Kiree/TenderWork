@@ -59,24 +59,27 @@ public class DatabaseConfiguration {
         //config.setDataSourceClassName(dataSourceProperties.getDriverClassName());
         config.setDataSourceClassName("net.sourceforge.jtds.jdbcx.JtdsDataSource");
         //config.addDataSourceProperty("datasource-class-name", dataSourceProperties.getName());
-        config.setJdbcUrl(dataSourceProperties.getUrl());
+        config.addDataSourceProperty("serverName", "servername");
+        config.addDataSourceProperty("port", "port");
+        config.addDataSourceProperty("databaseName", "dbname");
+        //config.setJdbcUrl(dataSourceProperties.getUrl());
 
         //config.addDataSourceProperty("url", dataSourceProperties.getUrl());
         if (dataSourceProperties.getUsername() != null) {
-            config.setUsername(dataSourceProperties.getUsername());
-            //config.addDataSourceProperty("user", dataSourceProperties.getUsername());
+            //config.setUsername(dataSourceProperties.getUsername());
+            config.addDataSourceProperty("user", dataSourceProperties.getUsername());
         } else {
-            config.setUsername(""); // HikariCP doesn't allow null user
-            //config.addDataSourceProperty("user", ""); // HikariCP doesn't allow null user
+            //config.setUsername(""); // HikariCP doesn't allow null user
+            config.addDataSourceProperty("user", ""); // HikariCP doesn't allow null user
         }
         if (dataSourceProperties.getPassword() != null) {
-            config.setPassword(dataSourceProperties.getPassword());
-            //config.addDataSourceProperty("password", dataSourceProperties.getPassword());
+            //config.setPassword(dataSourceProperties.getPassword());
+            config.addDataSourceProperty("password", dataSourceProperties.getPassword());
         } else {
-            config.setPassword(""); // HikariCP doesn't allow null password
-            //config.addDataSourceProperty("password", ""); // HikariCP doesn't allow null password
+            //config.setPassword(""); // HikariCP doesn't allow null password
+            config.addDataSourceProperty("password", ""); // HikariCP doesn't allow null password
         }
-        
+
         if (metricRegistry != null) {
             config.setMetricRegistry(metricRegistry);
         }
