@@ -199,16 +199,15 @@
 
         <div class="panel-group" id="accordionReq" ng-controller="RequirementController" aria-multiselectable="true">
             <div class="panel panel-default desktop-border" ng-repeat="requirement in requirements | orderBy:'requirement.id':reverse track by requirement.id ">
-                <div class="panel-heading panel-heading-req" id="head{{requirement.id}}">
+                <div class="panel-heading panel-heading-req bg-always-gray" id="head{{requirement.id}}">
                     <div class="row">
-
-                        <div class="col-xs-1 pull-left"><button class="btn btn-xs accordion-toggle" data-toggle="collapse" data-target="#body{{requirement.id}}"><span class="glyphicon glyphicon-triangle-bottom"></span></button></div>
+                        <div class="col-xs-1 pull-left">
+                            <button class="btn btn-xs accordion-toggle" data-toggle="collapse" data-target="#body{{requirement.id}}"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+                        </div>
 
                         <div class="col-xs-6 col-sm-3 pull-right">
                             <div class="btn-group pull-right no-padding-right">
-                                <button type="submit"
-                                        class="btn btn-info btn-xs"
-                                        ng-click="copyRequirement(requirement.id)">
+                                <button type="submit" class="btn btn-info btn-xs" ng-click="copyRequirement(requirement.id)">
                                     <span class="glyphicon glyphicon-plus-sign"></span>
                                     <span class="hidden-xs hidden-sm">Kopioi vaatimus</span>
                                 </button>
@@ -217,12 +216,11 @@
                             </div>
                         </div>
                         <div class="col-sm-8 col-xs-12 pull-left">
-
-                                <div class="col-xs-12 pull-left" style="word-wrap: break-word"><h4 class="panel-title">{{requirement.name}}</h4></div>
-
+                            <div class="col-xs-12 pull-left" style="word-wrap: break-word"><h4 class="panel-title">{{requirement.name}}</h4></div>
                         </div>
                     </div>
                 </div>
+
                 <div class="panel-body">
                     <div id="body{{requirement.id}}" class="panel-collapse collapse in" aria-labelledby="head{{requirement.id}}">
                         <div class="table-responsive"  style="overflow-x: hidden;">
@@ -298,7 +296,7 @@
                                                 </div>
                                                 <!--taaags-->
                                             <div class="row">
-                                                <div class="col-xs-12 bg-always-gray box-padding-margin">
+                                                <div class="col-xs-12 box-padding-margin">
                                                     <tags-input placeholder="{{empty}}" disabled="true" ng-model="requirement.tags" display-property="name" key-property="id"></tags-input>
                                                 </div>
                                             </div>
@@ -325,20 +323,20 @@
                                         <div class="panel panel-default desktop-border" ng-repeat="task in taskObject.tasks | orderBy:'task.id':reverse track by task.id"><!--track by task.id-->
                                             <div class="panel-heading panel-heading-task" id="head2{{task.id}}">
 
-                                                <div class="row">
-                                                    <div class="col-sm-2 col-xs-12 pull-right">
-                                                        <div class="btn-group pull-right no-padding-right">
-                                                            <button class="btn btn-default btn-xs accordion-toggle" data-toggle="collapse" data-target="#body2{{task.id}}"><span class="glyphicon glyphicon-eye-open"></span></button>
-                                                            <button ng-show="isCreator(task)" class="btn btn-primary btn-xs" ui-sref="task.edit({tid:task.id, eid:estimate.id, rid:requirement.id})"><span class="glyphicon glyphicon-pencil"></span></button>
-                                                            <button ng-show="isCreator(task)" class="btn btn-danger btn-xs" ng-click="deleteTask(task)"><span class="glyphicon glyphicon-remove-circle"></span></button>
-                                                        </div>
-                                                    </div>
 
-                                                    <div class="col-sm-10 col-xs-12 pull-left">
-                                                        <div class="col-xs-12" style="word-wrap: break-word"><h4 class="panel-title">{{task.name}}</h4></div>
+                                                <div class="col-sm-2 col-xs-12 pull-right">
+                                                    <div class="btn-group pull-right no-padding-right">
+                                                        <button class="btn btn-default btn-xs accordion-toggle" data-toggle="collapse" data-target="#body2{{task.id}}"><span class="glyphicon glyphicon-eye-open"></span></button>
+                                                        <button ng-show="isCreator(task)" class="btn btn-primary btn-xs" ui-sref="task.edit({tid:task.id, eid:estimate.id, rid:requirement.id})"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                        <button ng-show="isCreator(task)" class="btn btn-danger btn-xs" ng-click="deleteTask(task)"><span class="glyphicon glyphicon-remove-circle"></span></button>
                                                     </div>
-
                                                 </div>
+
+                                                <div class="col-sm-10 col-xs-12 pull-left">
+                                                    <div class="col-xs-12" style="word-wrap: break-word"><h4 class="panel-title">{{task.name}}</h4></div>
+                                                </div>
+
+
                                             </div>
 
 
