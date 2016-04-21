@@ -4,7 +4,6 @@
 
 angular.module('tenderworkApp').factory('EntityHelperFactory', function() {
     var __createTag = function(tagJSObject) {
-        console.log("create tag called");
         if(tagJSObject.id === "undefined") {
             return {
                 id:null,
@@ -17,6 +16,9 @@ angular.module('tenderworkApp').factory('EntityHelperFactory', function() {
        console.log("update called");
     };
     var __roundResourcing = function (resourcing) {
+        if(resourcing === null) {
+            return 'n/a';
+        }
         return resourcing - Math.floor(resourcing) > .5 ? Math.ceil(resourcing) : Math.floor(resourcing) + .5;
     };
 
