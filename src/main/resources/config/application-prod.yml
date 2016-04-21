@@ -20,8 +20,7 @@ spring:
             enabled: false
     datasource:
         driver-class-name: net.sourceforge.jtds.jdbc.Driver
-        datasource-class-name: net.sourceforge.jtds.jdbcx.JtdsDataSource
-        url: jdbc:jtds:sqlserver://${jdbc.url}
+        url: ${jdbc.url}
         username: ${jdbc.username}
         password: ${jdbc.password}
     jpa:

@@ -2,8 +2,7 @@
 <div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-4 no-padding-left"><h2><span translate="tenderworkApp.estimate.detail.title">Estimate</span> {{estimate.id}}</h2></div>
-            <div class="col-xs-8 no-padding-right">
+            <div class="col-xs-12 no-padding-right pull-right">
                 <div class="btn-group pull-right">
                     <button type="submit"
                             ui-sref="project.detail({pid:estimate.ownerProject.id})"
@@ -29,6 +28,8 @@
                     </button>
                 </div>
             </div>
+            <div class="col-xs-12 no-padding-left pull-left"><h2><span translate="tenderworkApp.estimate.detail.title">Estimate</span> {{estimate.id}}</h2></div>
+
         </div>
     </div>
 
@@ -200,13 +201,10 @@
             <div class="panel panel-default desktop-border" ng-repeat="requirement in requirements | orderBy:'requirement.id':reverse track by requirement.id ">
                 <div class="panel-heading panel-heading-req" id="head{{requirement.id}}">
                     <div class="row">
-                        <div class="col-xs-6">
-                            <div class="row">
-                                <div class="col-xs-1"><button class="btn btn-xs accordion-toggle" data-toggle="collapse" data-target="#body{{requirement.id}}"><span class="glyphicon glyphicon-triangle-bottom"></span></button></div>
-                                <div class="col-xs-11"><h4 class="panel-title">{{requirement.name}}</h4></div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
+
+                        <div class="col-xs-1 pull-left"><button class="btn btn-xs accordion-toggle" data-toggle="collapse" data-target="#body{{requirement.id}}"><span class="glyphicon glyphicon-triangle-bottom"></span></button></div>
+
+                        <div class="col-xs-6 col-sm-3 pull-right">
                             <div class="btn-group pull-right no-padding-right">
                                 <button type="submit"
                                         class="btn btn-info btn-xs"
@@ -217,6 +215,11 @@
                                 <button ng-show="isCreator(requirement)" class="btn btn-primary btn-xs" ui-sref="requirement.edit({rid:requirement.id, eid:estimate.id})"><span class="glyphicon glyphicon-pencil"></span></button>
                                 <button ng-show="isCreator(requirement)" class="btn btn-danger btn-xs" ui-sref="requirement.delete({rid:requirement.id, eid:estimate.id})" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove-circle"></span></button>
                             </div>
+                        </div>
+                        <div class="col-sm-8 col-xs-12 pull-left">
+
+                                <div class="col-xs-12 pull-left" style="word-wrap: break-word"><h4 class="panel-title">{{requirement.name}}</h4></div>
+
                         </div>
                     </div>
                 </div>
@@ -285,7 +288,7 @@
                                                                  <div class="col-xs-12 padding-detail-header-field">
                                                                     <span translate="tenderworkApp.requirement.description" class="projectdetail">description</span>
                                                                 </div>
-                                                                <div class="col-xs-12 padding-detail-text-field">
+                                                                <div class="col-xs-12 padding-detail-text-field" style="word-wrap: break-word">
                                                                     <span class="form-control-static">{{requirement.description}}</span>
                                                                 </div>
                                                             </div>
@@ -321,17 +324,22 @@
                                     <div class="panel-group" id="accordionTask" ng-controller="TaskController" aria-multiselectable="true" ng-repeat="taskObject in tasks | filter: { requirementId:requirement.id } ">
                                         <div class="panel panel-default desktop-border" ng-repeat="task in taskObject.tasks | orderBy:'task.id':reverse track by task.id"><!--track by task.id-->
                                             <div class="panel-heading panel-heading-task" id="head2{{task.id}}">
+
                                                 <div class="row">
-                                                    <div class="col-xs-6">
-                                                        <h4 class="panel-title">{{task.name}}</h4>
-                                                    </div>
-                                                    <div class="col-xs-6">
+                                                    <div class="col-xs-6 col-sm-3 pull-right">
                                                         <div class="btn-group pull-right no-padding-right">
                                                             <button class="btn btn-default btn-xs accordion-toggle" data-toggle="collapse" data-target="#body2{{task.id}}"><span class="glyphicon glyphicon-eye-open"></span></button>
                                                             <button ng-show="isCreator(task)" class="btn btn-primary btn-xs" ui-sref="task.edit({tid:task.id, eid:estimate.id, rid:requirement.id})"><span class="glyphicon glyphicon-pencil"></span></button>
                                                             <button ng-show="isCreator(task)" class="btn btn-danger btn-xs" ng-click="deleteTask(task)"><span class="glyphicon glyphicon-remove-circle"></span></button>
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-sm-9 col-xs-12 pull-left">
+
+                                                        <div class="col-xs-12" style="word-wrap: break-word"><h4 class="panel-title">{{task.name}}</h4></div>
+
+                                                    </div>
+
                                                 </div>
                                             </div>
 
@@ -440,12 +448,12 @@
                                                             <div class="col-xs-12 col-sm-4 right-padder left-padder description-text-field">
                                                                 <div class="row desktop-border bg-always-darkgray" data-tndr-height-max-target="task-{{task.id}}">
                                                                     <div class="row">
-                                                                        <div class="col-xs-12 col-sm-6">
+                                                                        <div class="col-xs-12">
                                                                             <div class="col-xs-12 padding-detail-header-field">
                                                                                 <span translate="tenderworkApp.task.description" class="projectdetail">description</span>
                                                                             </div>
-                                                                            <div class="col-xs-12 padding-detail-text-field">
-                                                                                <span class="form-control-static">{{task.description}}</span>
+                                                                            <div class="col-xs-12 padding-detail-text-field" style="word-wrap: break-word">
+                                                                                <span class="form-control-static" >{{task.description}}</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>

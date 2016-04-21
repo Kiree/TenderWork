@@ -97,7 +97,7 @@ div.bottom-border-1 {
 }
 
 .btn-newrequirement{
-    bottom: 7px;
+    bottom: 10px;
     position: relative;
     top: 20px;
 }
@@ -124,6 +124,11 @@ div.box-padding-margin {
     margin-bottom:14px;
 }
 
+div.box-padding-margin2 {
+    padding-top:8px;
+    margin-bottom:14px;
+}
+
 div.bottom-margin-1 {
     margin-bottom:14px;
 }
@@ -137,11 +142,4 @@ div.padding-detail-text-field {
 }
 
 
-/*MOI*/
-.row-eq-height-xs {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display:         flex;
-    flex-direction: row;
-}
+
