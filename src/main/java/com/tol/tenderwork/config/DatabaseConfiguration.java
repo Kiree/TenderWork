@@ -56,7 +56,7 @@ public class DatabaseConfiguration {
             throw new ApplicationContextException("Database connection pool is not configured correctly");
         }
         HikariConfig config = new HikariConfig();
-        config.setDataSourceClassName(dataSourceProperties.getDriverClassName());
+        //config.setDataSourceClassName(dataSourceProperties.getDriverClassName());
         config.setDataSourceClassName("net.sourceforge.jtds.jdbcx.JtdsDataSource");
         //config.addDataSourceProperty("datasource-class-name", dataSourceProperties.getName());
         config.setJdbcUrl(dataSourceProperties.getUrl());
@@ -66,7 +66,8 @@ public class DatabaseConfiguration {
             config.setUsername(dataSourceProperties.getUsername());
             //config.addDataSourceProperty("user", dataSourceProperties.getUsername());
         } else {
-            config.addDataSourceProperty("user", ""); // HikariCP doesn't allow null user
+            config.setUsername(""); // HikariCP doesn't allow null user
+            //config.addDataSourceProperty("user", ""); // HikariCP doesn't allow null user
         }
         if (dataSourceProperties.getPassword() != null) {
             config.setPassword(dataSourceProperties.getPassword());
@@ -75,14 +76,7 @@ public class DatabaseConfiguration {
             config.setPassword(""); // HikariCP doesn't allow null password
             //config.addDataSourceProperty("password", ""); // HikariCP doesn't allow null password
         }
-
-
-        //MySQL optimizations, see https://github.com/brettwooldridge/HikariCP/wiki/MySQL-Configuration
-        if ("com.mysql.jdbc.jdbc2.optional.MysqlDataSource".equals(dataSourceProperties.getDriverClassName())) {
-            config.addDataSourceProperty("cachePrepStmts", jHipsterProperties.getDatasource().isCachePrepStmts());
-            config.addDataSourceProperty("prepStmtCacheSize", jHipsterProperties.getDatasource().getPrepStmtCacheSize());
-            config.addDataSourceProperty("prepStmtCacheSqlLimit", jHipsterProperties.getDatasource().getPrepStmtCacheSqlLimit());
-        }
+        
         if (metricRegistry != null) {
             config.setMetricRegistry(metricRegistry);
         }
