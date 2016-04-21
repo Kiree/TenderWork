@@ -7,6 +7,7 @@ angular.module('tenderworkApp')
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
+        $scope.empty = "\u00A0";
         $scope.loadAll = function() {
             Task.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));

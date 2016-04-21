@@ -7,6 +7,7 @@ angular.module('tenderworkApp')
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
+        $scope.empty = "\u00A0";
         var populated = false;
         /*
         // searches for requirements and their tasks and builds an array out of the results
