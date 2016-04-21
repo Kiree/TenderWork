@@ -167,7 +167,7 @@ public class ProjectResource {
         log.debug("REST request to search Projects for query {}", query);
 
         return StreamSupport
-            .stream(projectSearchRepository.findByNameOrClientOrTags(query, query, query).spliterator(), false)
+            .stream(projectSearchRepository.findByNameOrClientOrTags_Name(query, query, query).spliterator(), false)
             .collect(Collectors.toList());
     }
 }
