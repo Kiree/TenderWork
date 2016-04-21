@@ -197,7 +197,7 @@
     <div class="container-fluid">
 
         <div class="panel-group" id="accordionReq" ng-controller="RequirementController" aria-multiselectable="true">
-            <div class="panel panel-default desktop-border" ng-repeat="requirement in requirements track by requirement.id">
+            <div class="panel panel-default desktop-border" ng-repeat="requirement in requirements | orderBy:'requirement.id':reverse track by requirement.id ">
                 <div class="panel-heading panel-heading-req" id="head{{requirement.id}}">
                     <div class="row">
                         <div class="col-xs-6">
@@ -319,7 +319,7 @@
 
                                     <!--TASK-->
                                     <div class="panel-group" id="accordionTask" ng-controller="TaskController" aria-multiselectable="true" ng-repeat="taskObject in tasks | filter: { requirementId:requirement.id } ">
-                                        <div class="panel panel-default desktop-border" ng-repeat="task in taskObject.tasks track by task.id"><!--track by task.id-->
+                                        <div class="panel panel-default desktop-border" ng-repeat="task in taskObject.tasks | orderBy:'task.id':reverse track by task.id"><!--track by task.id-->
                                             <div class="panel-heading panel-heading-task" id="head2{{task.id}}">
                                                 <div class="row">
                                                     <div class="col-xs-6">
