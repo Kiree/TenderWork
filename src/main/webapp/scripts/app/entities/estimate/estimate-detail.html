@@ -13,7 +13,9 @@
                             class="btn btn-info btn-sm"
                             ng-click="copyEstimate(estimate.id)">
                         <span class="glyphicon glyphicon-plus-sign"></span>
-                        <span class="hidden-xs hidden-sm">YLEINEN KOPIONAPPI JOLLA EI OLE TRANSLATEA JA JOKA EI TEE MITÄÄN</span>
+                        <span class="hidden-xs hidden-sm">
+                            <span translate="entity.action.copy">Copy</span>
+                        </span>
                     </button>
                     <button type="submit" class="btn btn-primary btn-sm"  ng-show="isCreator(estimate)"
                             ui-sref="estimate.edit({eid:estimate.id})" class="btn btn-primary btn-sm">
@@ -209,7 +211,7 @@
                             <div class="btn-group pull-right no-padding-right">
                                 <button type="submit" class="btn btn-info btn-xs" ng-click="copyRequirement(requirement.id)">
                                     <span class="glyphicon glyphicon-plus-sign"></span>
-                                    <span class="hidden-xs hidden-sm">Kopioi vaatimus</span>
+                                    <span class="hidden-xs hidden-sm"><span translate="entity.action.copy">Kopioi vaatimus</span></span>
                                 </button>
                                 <button ng-show="isCreator(requirement)" class="btn btn-primary btn-xs" ui-sref="requirement.edit({rid:requirement.id, eid:estimate.id})"><span class="glyphicon glyphicon-pencil"></span></button>
                                 <button ng-show="isCreator(requirement)" class="btn btn-danger btn-xs" ui-sref="requirement.delete({rid:requirement.id, eid:estimate.id})" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove-circle"></span></button>

@@ -107,7 +107,8 @@
             "delete": "Poista",
             "edit": "Muokkaa",
             "save": "Tallenna",
-            "view": "Näytä"
+            "view": "Näytä",
+            "copy": "Kopioi"
         },
         "detail": {
             "field": "Kenttä",

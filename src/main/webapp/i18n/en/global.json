@@ -110,7 +110,8 @@
             "delete": "Delete",
             "edit": "Edit",
             "save": "Save",
-            "view": "View"
+            "view": "View",
+            "copy": "Copy"
         },
         "detail": {
             "field": "Field",
