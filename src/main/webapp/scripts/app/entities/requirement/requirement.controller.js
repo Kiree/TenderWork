@@ -2,9 +2,6 @@
 
 angular.module('tenderworkApp')
     .controller('RequirementController', function ($rootScope, $scope, $state, Requirement, RequirementSearch, ParseLinks, Task, TaskSearch, Principal, Estimate) {
-        $state.get().map(function(item) {
-            console.log(item.name);
-        });
         $scope.requirements = [];
         $scope.tasks = [];
         $scope.predicate = 'id';

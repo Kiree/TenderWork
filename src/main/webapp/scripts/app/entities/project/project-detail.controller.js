@@ -32,6 +32,7 @@ angular.module('tenderworkApp')
                     }
                 }
                 $scope.project = $scope.helperFunctions.fillEmptyEntityDetails($scope.project);
+                $scope.needToRecalculate = true;
             });
         };
         $scope.reset = function() {

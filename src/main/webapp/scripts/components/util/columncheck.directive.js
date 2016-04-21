@@ -42,7 +42,6 @@ angular.module('tenderworkApp')
                        if(scope.calculated_max_height[attrs.tndrHeightMaxCheck] < newHeight) {
                            scope.calculated_max_height[attrs.tndrHeightMaxCheck] = newHeight;
                        }
-                       console.log(scope.calculated_max_height, ": ", scope.currentMaxHeight, current_height);
                    };
                    console.log("i need you: ", scope.needToRecalculate);
                    scope.$watch('needToRecalculate', recalculate);
@@ -54,7 +53,6 @@ angular.module('tenderworkApp')
         link:
             function(scope, element, attrs) {
                 scope.$watchCollection('calculated_max_height', function(newVal, oldVal) {
-                    console.log("i was changed: ", oldVal, "->", newVal);
                     if(!newVal) {
                         return;
                     }
