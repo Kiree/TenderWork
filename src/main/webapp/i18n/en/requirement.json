@@ -24,7 +24,7 @@
             "durationTesting": "Testing duration",
             "synergyBenefit": "Synergy benefit",
             "owner": "Owner",
-            "ownerEstimate": "OwnerEstimate",
+            "ownerEstimate": "Owner Estimate",
             "hasTasks": "HasTasks"
         }
     }
