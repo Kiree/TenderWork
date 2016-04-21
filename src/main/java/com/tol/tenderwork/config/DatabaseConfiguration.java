@@ -59,17 +59,23 @@ public class DatabaseConfiguration {
         config.setDataSourceClassName(dataSourceProperties.getDriverClassName());
         config.setDataSourceClassName("net.sourceforge.jtds.jdbcx.JtdsDataSource");
         config.addDataSourceProperty("datasource-class-name", dataSourceProperties.getName());
-        config.addDataSourceProperty("url", dataSourceProperties.getUrl());
+        config.setJdbcUrl(dataSourceProperties.getUrl());
+        
+        //config.addDataSourceProperty("url", dataSourceProperties.getUrl());
         if (dataSourceProperties.getUsername() != null) {
-            config.addDataSourceProperty("user", dataSourceProperties.getUsername());
+            config.setUsername(dataSourceProperties.getUsername());
+            //config.addDataSourceProperty("user", dataSourceProperties.getUsername());
         } else {
             config.addDataSourceProperty("user", ""); // HikariCP doesn't allow null user
         }
         if (dataSourceProperties.getPassword() != null) {
-            config.addDataSourceProperty("password", dataSourceProperties.getPassword());
+            config.setPassword(dataSourceProperties.getPassword());
+            //config.addDataSourceProperty("password", dataSourceProperties.getPassword());
         } else {
-            config.addDataSourceProperty("password", ""); // HikariCP doesn't allow null password
+            config.setPassword(""); // HikariCP doesn't allow null password
+            //config.addDataSourceProperty("password", ""); // HikariCP doesn't allow null password
         }
+
 
         //MySQL optimizations, see https://github.com/brettwooldridge/HikariCP/wiki/MySQL-Configuration
         if ("com.mysql.jdbc.jdbc2.optional.MysqlDataSource".equals(dataSourceProperties.getDriverClassName())) {
