@@ -57,7 +57,7 @@ public class DatabaseConfiguration {
         }
         HikariConfig config = new HikariConfig();
         config.setDataSourceClassName(dataSourceProperties.getDriverClassName());
-        //config.setDataSourceClassName("net.sourceforge.jtds.jdbcx.JtdsDataSource");
+        config.setDataSourceClassName("net.sourceforge.jtds.jdbcx.JtdsDataSource");
         config.addDataSourceProperty("datasource-class-name", dataSourceProperties.getName());
         config.addDataSourceProperty("url", dataSourceProperties.getUrl());
         if (dataSourceProperties.getUsername() != null) {
