@@ -56,8 +56,11 @@ angular.module('tenderworkApp')
                     if(!newVal) {
                         return;
                     }
-                    element.height(newVal[attrs.tndrHeightMaxTarget]);
-                    scope.needToRecalculate = false;
+                    if($(window).innerWidth() >= 768) {
+                        console.log("i need to change: ", oldVal, "->", newVal);
+                        element.height(newVal[attrs.tndrHeightMaxTarget]);
+                        scope.needToRecalculate = false;
+                    }
                 });
             }
     }
