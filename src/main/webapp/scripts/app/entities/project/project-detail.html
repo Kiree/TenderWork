@@ -12,12 +12,12 @@
                         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
                     </button>
                     <button ng-show="isCreator(project)" type="submit" class="btn btn-primary btn-sm"
-                            ui-sref="project.edit({id:project.id})" class="btn btn-primary btn-sm">
+                            ui-sref="project.edit({pid:project.id})" class="btn btn-primary btn-sm">
                         <span class="glyphicon glyphicon-pencil"></span>
                         <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
                     </button>
                     <button ng-show="isCreator(project)" type="submit"
-                            ui-sref="project.delete({id:project.id})"
+                            ui-sref="project.delete({pid:project.id})"
                             class="btn btn-danger btn-sm">
                         <span class="glyphicon glyphicon-remove-circle"></span>
                         <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
@@ -141,25 +141,13 @@
             <div class="col-xs-4 no-padding-left"><h3 translate="tenderworkApp.estimate.home.title">Estimates</h3></div>
             <div class="col-xs-8 no-padding-right btn-newestimate">
 
-                <button class="btn btn-primary pull-right" ui-sref="estimate.new({id:project.id})" >
+                <button class="btn btn-primary pull-right" ui-sref="estimate.new({pid:project.id})" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs" translate="tenderworkApp.estimate.home.createLabel">Create new Estimate
                     </span>
                 </button>
             </div>
-            <!--
-            <div class="col-xs-8 no-padding-right">
-                <form name="searchForm" class="form-inline">
-                    <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="searchQuery" id="searchQuery" placeholder="{{ 'tenderworkApp.estimate.home.search' | translate }}">
-                        <span  class="input-group-btn width-min" >
-                            <button class="btn btn-info" ng-click="search()">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-            </div>-->
+
         </div>
     </div>
 
@@ -175,36 +163,11 @@
             </thead>
             <tbody data-link="row" class="rowlink" infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
             <tr class="rowLink" ng-repeat="estimate in estimates track by estimate.id">
-                <td><a href="#" ui-sref="estimate.detail({id:estimate.id})"></a>{{estimate.totalPrice}}</td>
+                <td><a href="#" ui-sref="estimate.detail({eid:estimate.id})">&nbsp;</a>{{estimate.totalPrice}}</td>
                 <td>{{estimate.totalDuration}}</td>
                 <td>{{estimate.rounded}}</td>
                 <td>{{estimate.createdBy.login}}</td>
 
-                <!--
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                ui-sref="estimate.detail({id:estimate.id})"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>
-                            <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="estimate.edit({id:estimate.id})"
-                                class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="estimate.delete({id:estimate.id})"
-                                class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-remove-circle"></span>
-                            <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
-                        </button>
-                    </div>
-                </td>
-
-                -->
             </tr>
             </tbody>
         </table>

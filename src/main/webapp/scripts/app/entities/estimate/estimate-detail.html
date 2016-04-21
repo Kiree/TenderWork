@@ -3,11 +3,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left"><h2><span translate="tenderworkApp.estimate.detail.title">Estimate</span> {{estimate.id}}</h2></div>
-
             <div class="col-xs-8 no-padding-right">
                 <div class="btn-group pull-right">
                     <button type="submit"
-                            ui-sref="project.detail({id:estimate.ownerProject.id})"
+                            ui-sref="project.detail({pid:estimate.ownerProject.id})"
                             class="btn btn-info btn-sm">
                         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
                     </button>
@@ -18,12 +17,12 @@
                         <span class="hidden-xs hidden-sm">YLEINEN KOPIONAPPI JOLLA EI OLE TRANSLATEA JA JOKA EI TEE MITÄÄN</span>
                     </button>
                     <button type="submit" class="btn btn-primary btn-sm"  ng-show="isCreator(estimate)"
-                            ui-sref="estimate.edit({id:estimate.id})" class="btn btn-primary btn-sm">
+                            ui-sref="estimate.edit({eid:estimate.id})" class="btn btn-primary btn-sm">
                         <span class="glyphicon glyphicon-pencil"></span>
                         <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
                     </button>
                     <button type="submit" ng-show="isCreator(estimate)"
-                            ui-sref="estimate.delete({id:estimate.id, projectId:estimate.ownerProject.id})"
+                            ui-sref="estimate.delete({pid:estimate.ownerProject.id, eid:estimate.id})"
                             class="btn btn-danger btn-sm">
                         <span class="glyphicon glyphicon-remove-circle"></span>
                         <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
@@ -90,7 +89,7 @@
                                         <div class="col-sm-12 col-xs-6 padding-detail-header-field">
                                             <span translate="tenderworkApp.estimate.workdaysInMonth" class="projectdetail">WorkdaysInMonth</span>
                                         </div>
-                                        <div class="col-sm-12 col-xs-6 padding-detail-header-field">
+                                        <div class="col-sm-12 col-xs-6 padding-detail-text-field">
                                             <span class="form-control-static">{{estimate.workdaysInMonth}}</span>
                                         </div>
                                     </div>
@@ -173,23 +172,14 @@
                 </div>
             </div>
 
-            <!--
-            <tr>
-                <td>
-                    <span translate="tenderworkApp.estimate.ownerProject">ownerProject</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="project.detail({id:estimate.ownerProject.id})">{{estimate.ownerProject.name}}</a>
-                </td>
-            </tr>
-            -->
+
         </div>
     </div>
     <div class="container-fluid">
         <div class="row btn-bottom">
             <div class="col-xs-4 reqtitle-text-field"><h4 class="reqtitle" translate="tenderworkApp.requirement.home.title">Requirements</h4></div>
             <div class="col-xs-8 btn-newrequirement">
-                <button class="btn btn-primary pull-right" ui-sref="requirement.new({estimateId:estimate.id})" >
+                <button class="btn btn-primary pull-right" ui-sref="requirement.new({eid:estimate.id})" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs" translate="tenderworkApp.requirement.home.createLabel">Create new Requirement</span>
                 </button>
@@ -253,8 +243,8 @@
                                     <span class="glyphicon glyphicon-plus-sign"></span>
                                     <span class="hidden-xs hidden-sm">Kopioi vaatimus</span>
                                 </button>
-                                <button ng-show="isCreator(requirement)" class="btn btn-primary btn-xs" ui-sref="requirement.edit({id:requirement.id, estimateId:estimate.id})"><span class="glyphicon glyphicon-pencil"></span></button>
-                                <button ng-show="isCreator(requirement)" class="btn btn-danger btn-xs" ui-sref="requirement.delete({id:requirement.id, estimateId:estimate.id})" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                                <button ng-show="isCreator(requirement)" class="btn btn-primary btn-xs" ui-sref="requirement.edit({rid:requirement.id, eid:estimate.id})"><span class="glyphicon glyphicon-pencil"></span></button>
+                                <button ng-show="isCreator(requirement)" class="btn btn-danger btn-xs" ui-sref="requirement.delete({rid:requirement.id, eid:estimate.id})" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove-circle"></span></button>
                             </div>
                         </div>
                     </div>
@@ -353,7 +343,7 @@
                                         <div class="row btn-bottom">
                                             <div class="col-xs-4 requirementlisting reqtitle-text-field"><h4 class="reqtitle" translate="tenderworkApp.task.home.title">Tasks</h4></div>
                                             <div class="col-xs-8 btn-newtask">
-                                                <button class="btn btn-primary pull-right" ui-sref="task.new({requirementId:requirement.id, estimateId:estimate.id})" >
+                                                <button class="btn btn-primary pull-right" ui-sref="task.new({rid:requirement.id, eid:estimate.id})" >
                                                     <span class="glyphicon glyphicon-plus"></span>
                                                     <span class="hidden-xs" translate="tenderworkApp.task.home.createLabel">Create new Task</span>
                                                 </button>
@@ -372,7 +362,7 @@
                                                     <div class="col-xs-6">
                                                         <div class="btn-group pull-right no-padding-right">
                                                             <button class="btn btn-default btn-xs accordion-toggle" data-toggle="collapse" data-target="#body2{{task.id}}"><span class="glyphicon glyphicon-eye-open"></span></button>
-                                                            <button ng-show="isCreator(task)" class="btn btn-primary btn-xs" ui-sref="task.edit({id:task.id, estimateId:estimate.id, requirementId:requirement.id})"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                            <button ng-show="isCreator(task)" class="btn btn-primary btn-xs" ui-sref="task.edit({tid:task.id, eid:estimate.id, rid:requirement.id})"><span class="glyphicon glyphicon-pencil"></span></button>
                                                             <button ng-show="isCreator(task)" class="btn btn-danger btn-xs" ng-click="deleteTask(task)"><span class="glyphicon glyphicon-remove-circle"></span></button>
                                                         </div>
                                                     </div>
@@ -525,7 +515,7 @@
     </div>
 </div>
 </div>
-        <button type="submit" ui-sref="project.detail({id:estimate.ownerProject.id})" class="btn btn-info">
+        <button type="submit" ui-sref="project.detail({pid:estimate.ownerProject.id})" class="btn btn-info">
             <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
         </button>
 </div>

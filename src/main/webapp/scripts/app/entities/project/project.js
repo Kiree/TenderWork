@@ -27,12 +27,12 @@ angular.module('tenderworkApp')
             })
             .state('project.detail', {
                 parent: 'project',
-                url: '/project/{id}',
+                url: '/project/{pid}',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'tenderworkApp.project.detail.title'
                 },
-                params:{projectId:null},
+                params:{pid:null},
                 views: {
                     'content@': {
                         templateUrl: 'scripts/app/entities/project/project-detail.html',
@@ -47,7 +47,7 @@ angular.module('tenderworkApp')
                         return $translate.refresh();
                     }],
                     entity: ['$stateParams', 'Project', function($stateParams, Project) {
-                        return Project.get({id : $stateParams.id});
+                        return Project.get({id : $stateParams.pid});
                     }]
                 }
             })
@@ -79,15 +79,15 @@ angular.module('tenderworkApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('project.detail', { id:result.id }, { reload: true });
+                        $state.go('project.detail', { pid:result.id }, { reload: true });
                     }, function() {
-                        $state.go('project',  { id:$stateParams.id } );
+                        $state.go('project');
                     })
                 }]
             })
             .state('project.edit', {
                 parent: 'project.detail',
-                url: '/{id}/edit',
+                url: '/{pid}/edit',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -98,7 +98,7 @@ angular.module('tenderworkApp')
                         size: 'lg',
                         resolve: {
                             entity: ['$translate', 'Project', function($translate, Project) {
-                                return Project.get({id : $stateParams.id}).$promise.then(function(result) {
+                                return Project.get({id : $stateParams.pid}).$promise.then(function(result) {
                                     result.state = $translate.instant(result.state);
                                     return result;
                                 }, function(result) { return result; },
@@ -107,7 +107,7 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('project.detail', null, { reload: true });
+                        $state.go('project.detail', {pid:result.id} , { reload: true });
                     }, function() {
                         $state.go('^');
                     })
@@ -115,9 +115,12 @@ angular.module('tenderworkApp')
             })
             .state('project.delete', {
                 parent: 'project.detail',
-                url: '/{id}/delete',
+                url: '/{pid}/delete',
                 data: {
                     authorities: ['ROLE_USER'],
+                },
+                params: {
+                    pid:null
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -127,13 +130,13 @@ angular.module('tenderworkApp')
                         size: 'md',
                         resolve: {
                             entity: ['Project', function(Project) {
-                                return Project.get({id : $stateParams.id});
+                                return Project.get({id : $stateParams.pid});
                             }]
                         }
                     }).result.then(function(result) {
                         $state.go('project', null, { reload: true });
                     }, function() {
-                        $state.go('project.detail', { id:$stateParams.id } );
+                        $state.go('project.detail', { pid:$stateParams.pid } );
                     })
                 }]
             });

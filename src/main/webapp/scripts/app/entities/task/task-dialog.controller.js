@@ -33,7 +33,7 @@ angular.module('tenderworkApp').controller('TaskDialogController',
             $scope.task.ownerRequirement = $scope.requirementLinkedToTask;
         };
         // this does nothing as of yet, need to finish html views
-        Requirement.get({id:$stateParams.requirementId}, function(responseRequirement) {
+        Requirement.get({id:$stateParams.rid}, function(responseRequirement) {
             if(responseRequirement === null) {
                 $scope.requirementLinkedToTask = null;
                 $scope.estimateLinkedToTask = null;

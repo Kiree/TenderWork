@@ -2,6 +2,27 @@
     "global": {
         "title": "TenderWork",
         "browsehappy": "Käytät <strong>vanhentunutta</strong> selainta. Ole hyvä ja <a href=\"http://browsehappy.com/?locale=en\">päivitä selaimesi</a> parantaaksesi käyttökokemustasi.",
+        "trail": {
+            "project":"Projektilistaus",
+            "project.detail":"Projektin tiedot",
+            "estimate.detail":"Arvion tiedot",
+            "user-management": "Käyttäjähallinta",
+            "tracker": "Käyttäjäseuranta",
+            "metrics": "Metriikka",
+            "health": "Terveys",
+            "configuration": "Asetukset",
+            "logs": "Logit",
+            "audits": "Tapahtumat",
+            "apidocs": "API",
+            "database": "Tietokanta",
+            "settings": "Asetukset",
+            "password": "Salasana",
+            "sessions": "Istunnot",
+            "login": "Sisäänkirjautuminen",
+            "logout": "Uloskirjautuminen",
+            "register": "Rekisteröinti",
+            "docs":"API"
+        },
         "menu": {
             "home": "Koti",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",

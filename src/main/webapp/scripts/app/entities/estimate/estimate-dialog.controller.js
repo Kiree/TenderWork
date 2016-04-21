@@ -22,19 +22,13 @@ angular.module('tenderworkApp').controller('EstimateDialogController',
             }
             return entity;
         };
-        $scope.estimateId = $stateParams.id;
+        $scope.page = 0;
         $scope.estimate = defaultValues(entity);
         $scope.users = User.query();
-        $scope.projects = Project.query().$promise.then(function(results) {
-            results.some(function(item) {
-                if (item.id == $stateParams.id) {
-                    $scope.attachToProject = $scope.helperFunctions.copyProject(item);
-                    return true;
-                }
-            });
-            $rootScope.$broadcast('rzSliderForceRender');
+        $scope.attachToProject = Project.get({id:$stateParams.pid}, function() {
+            $rootScope.$broadcast('rzSliderForceRender');  // get project and refresh sliders
         });
-        $scope.requirements = Requirement.query();
+
         $scope.currentUserAccount = null;
 
         $scope.load = function(id) {

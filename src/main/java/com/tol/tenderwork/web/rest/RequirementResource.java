@@ -282,7 +282,7 @@ public class RequirementResource {
             clone.setHasTaskss(newTaskSet);
         }
 
-        clone = saveService.saveRequirementToRepo(clone);
+        clone = updateService.updateRequirement(clone);
 
         return clone;
     }
