@@ -60,7 +60,7 @@ public class DatabaseConfiguration {
         config.setDataSourceClassName("net.sourceforge.jtds.jdbcx.JtdsDataSource");
         //config.addDataSourceProperty("datasource-class-name", dataSourceProperties.getName());
         config.addDataSourceProperty("serverName", "servername");
-        config.addDataSourceProperty("port", "port");
+        //config.addDataSourceProperty("port", "port");
         config.addDataSourceProperty("databaseName", "dbname");
         //config.setJdbcUrl(dataSourceProperties.getUrl());
 
