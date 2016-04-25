@@ -2,7 +2,9 @@
 
 angular.module('tenderworkApp')
     .controller('ProjectDetailController', function ($window, $scope, $rootScope, $stateParams, entity, Project, User, Estimate, ParseLinks, EstimateSearch, $translate, Tag, TagSearch, Principal) {
-
+        if($stateParams.generateDefaultEstimate) {
+            Estimate.save($stateParams.generateDefaultEstimate, function(r) { }, function(r) {});
+        }
         $scope.project = entity;
         $scope.estimates = [];
         $scope.tags = [];

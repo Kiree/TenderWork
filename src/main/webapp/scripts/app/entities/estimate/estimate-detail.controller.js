@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tenderworkApp')
-    .controller('EstimateDetailController', function ($scope, $rootScope, $stateParams, entity, Estimate, User, Project, Requirement, Principal ) {
+    .controller('EstimateDetailController', function ($scope, $rootScope, $stateParams, entity, Estimate, User, Project, Requirement, Principal, $timeout ) {
         $scope.estimate = $scope.helperFunctions.fillEmptyEntityDetails(entity);
         $scope.needToRecalculate = true;
         $scope.load = function (id) {
@@ -14,15 +14,19 @@ angular.module('tenderworkApp')
 
         $scope.accordionRecalculate = function(toggledBy) {
             if(typeof $scope.accordionVisible[toggledBy] == 'undefined') {
-                console.log("created", toggledBy);
                 $scope.accordionVisible[toggledBy] = true;
             } else {
                 $scope.accordionVisible[toggledBy] = !$scope.accordionVisible[toggledBy];
             }
             if($scope.accordionVisible[toggledBy]) {
-                $scope.needToRecalculate = true;
+                $timeout(function() {
+                    $scope.needToRecalculate = true;
+                }, 500);
             }
-            console.log("klik", toggledBy);
+        };
+
+        $scope.expandRequirements = function() {
+
         };
 
         $scope.isCreator = function(ent) {

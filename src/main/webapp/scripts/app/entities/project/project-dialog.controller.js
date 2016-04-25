@@ -68,6 +68,8 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
             $scope.isSaving = false;
         };
 
+
+
         $scope.save = function () {
             var today = new Date();
             $scope.project.tags = $scope.tags.map($scope.helperFunctions.createTag);
