@@ -20,10 +20,9 @@ spring:
             enabled: false
     datasource:
         driver-class-name: net.sourceforge.jtds.jdbc.Driver
-        url: ${jdbc.url}
-        serverName: ${jdbc.serverName}
-        username: ${jdbc.username}
-        password: ${jdbc.password}
+        url:
+        username:
+        password:
     jpa:
         database-platform: org.hibernate.dialect.SQLServerDialect
         database: SQL_SERVER
