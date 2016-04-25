@@ -21,6 +21,7 @@ spring:
     datasource:
         driver-class-name: net.sourceforge.jtds.jdbc.Driver
         url: ${jdbc.url}
+        serverName: ${jdbc.serverName}
         username: ${jdbc.username}
         password: ${jdbc.password}
     jpa:
