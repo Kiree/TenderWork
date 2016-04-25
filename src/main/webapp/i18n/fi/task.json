@@ -1,5 +1,6 @@
 {
     "tenderworkApp": {
+        "tagsinput": "Tagit",
         "task" : {
             "home": {
                 "title": "Taskit",

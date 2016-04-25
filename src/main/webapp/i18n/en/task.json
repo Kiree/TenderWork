@@ -1,5 +1,6 @@
 {
     "tenderworkApp": {
+        "tagsinput": "Tags",
         "task" : {
             "home": {
                 "title": "Tasks",

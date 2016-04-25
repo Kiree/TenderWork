@@ -100,19 +100,20 @@ public class UserResource {
             return ResponseEntity.badRequest()
                 .headers(HeaderUtil.createFailureAlert("user-management", "userexists", "Login already in use"))
                 .body(null);
-        } else if (userRepository.findOneByEmail(managedUserDTO.getEmail()).isPresent()) {
+        } else if(!managedUserDTO.getPassword().equals(managedUserDTO.getConfirmPassword())) {
             return ResponseEntity.badRequest()
-                .headers(HeaderUtil.createFailureAlert("user-management", "emailexists", "Email already in use"))
+                .headers(HeaderUtil.createFailureAlert("user-management", "passwordsdontmatch", "Passwords don't match"))
                 .body(null);
         } else {
             User newUser = userService.createUser(managedUserDTO);
+            log.debug("Saved: {}", newUser);
             String baseUrl = request.getScheme() + // "http"
             "://" +                                // "://"
             request.getServerName() +              // "myhost"
             ":" +                                  // ":"
             request.getServerPort() +              // "80"
             request.getContextPath();              // "/myContextPath" or "" if deployed in root context
-            mailService.sendCreationEmail(newUser, baseUrl);
+            //mailService.sendCreationEmail(newUser, baseUrl);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
                 .headers(HeaderUtil.createAlert( "user-management.created", newUser.getLogin()))
                 .body(newUser);

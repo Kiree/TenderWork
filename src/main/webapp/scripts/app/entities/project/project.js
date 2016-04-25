@@ -32,7 +32,7 @@ angular.module('tenderworkApp')
                     authorities: ['ROLE_USER'],
                     pageTitle: 'tenderworkApp.project.detail.title'
                 },
-                params:{pid:null},
+                params:{pid:null,generateDefaultEstimate:null},
                 views: {
                     'content@': {
                         templateUrl: 'scripts/app/entities/project/project-detail.html',
@@ -57,7 +57,7 @@ angular.module('tenderworkApp')
                 data: {
                     authorities: ['ROLE_USER'],
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal, Estimate) {
                     $uibModal.open({
                         templateUrl: 'scripts/app/entities/project/project-dialog.html',
                         controller: 'ProjectDialogController',
@@ -79,7 +79,25 @@ angular.module('tenderworkApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('project.detail', { pid:result.id }, { reload: true });
+                        var createDefaultEstimate = function(project) {
+                            return {
+                                createdBy:project.createdBy,
+                                dailyPrice:500,
+                                desiredProjectDuration:3,
+                                id:null,
+                                implementationFactor:1,
+                                ownerProject:project,
+                                resourcing:null,
+                                specificationFactor:1,
+                                synergyBenefit:0,
+                                testingFactor:1,
+                                totalDuration:null,
+                                totalPrice:null,
+                                totalSynergyBenefit:null,
+                                workdaysInMonth:20
+                            };
+                        };
+                        $state.go('project.detail', { pid:result.id, generateDefaultEstimate:createDefaultEstimate(result) }, { reload: true });
                     }, function() {
                         $state.go('project');
                     })

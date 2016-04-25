@@ -32,18 +32,21 @@ angular.module('tenderworkApp')
                        if(scope.calculated_max_height === null || typeof scope.calculated_max_height == 'undefined') {
                            scope.calculated_max_height = {};
                        }
-                       scope.calculated_max_height[attrs.tndrHeightMaxCheck] = initial_value;
+                       if(typeof scope.calculated_max_height[attrs.tndrHeightMaxCheck] == 'undefined') {
+                           scope.calculated_max_height[attrs.tndrHeightMaxCheck] = initial_value;
+                       }
 
                        var current_height = parseInt(element.height());
+
                        if (scope.currentMaxHeight[attrs.tndrHeightMaxCheck] < current_height) {
                            scope.currentMaxHeight[attrs.tndrHeightMaxCheck] = current_height;
                        }
-                       var newHeight = initial_value + scope.currentMaxHeight[attrs.tndrHeightMaxCheck];
+                       var newHeight = scope.currentMaxHeight[attrs.tndrHeightMaxCheck];
                        if(scope.calculated_max_height[attrs.tndrHeightMaxCheck] < newHeight) {
-                           scope.calculated_max_height[attrs.tndrHeightMaxCheck] = newHeight;
+                           scope.calculated_max_height[attrs.tndrHeightMaxCheck] = attrs.tndrHeightMaxCheck === 'project' ? newHeight : newHeight - 33;
                        }
+                       scope.needToRecalculate = false;
                    };
-                   console.log("i need you: ", scope.needToRecalculate);
                    scope.$watch('needToRecalculate', recalculate);
                }
            }
@@ -57,9 +60,7 @@ angular.module('tenderworkApp')
                         return;
                     }
                     if($(window).innerWidth() >= 768) {
-                        console.log("i need to change: ", oldVal, "->", newVal);
                         element.height(newVal[attrs.tndrHeightMaxTarget]);
-                        scope.needToRecalculate = false;
                     }
                 });
             }

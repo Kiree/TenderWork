@@ -16,7 +16,6 @@
             <tr>
                 <th translate="global.field.id">ID</th>
                 <th translate="user-management.login">Login</th>
-                <th translate="user-management.email">Email</th>
                 <th></th>
                 <th translate="user-management.langKey">LangKey</th>
                 <th translate="user-management.profiles">Profiles</th>
@@ -30,7 +29,6 @@
             <tr ng-repeat="user in users track by user.id">
                 <td><a ui-sref="user-management-detail({login:user.login})">{{user.id}}</a></td>
                 <td>{{user.login}}</td>
-                <td>{{user.email}}</td>
                 <td>
                     <span class="label label-danger" ng-click="setActive(user, true)" ng-show="!user.activated"
                           translate="user-management.deactivated" style="cursor: pointer;">Desactivated</span>

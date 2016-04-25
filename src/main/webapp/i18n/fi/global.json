@@ -136,7 +136,8 @@
         "Size": "Kenttä {{ fieldName }} ei täytä min/max kokovaatimuksia!",
         "userexists": "Käyttäjänimi on jo käytössä!",
         "emailexists": "Sähköposti on jo käytössä!",
-        "idexists": "Uudella {{ entityName }} ei voi olla ID:tä."
+        "idexists": "Uudella {{ entityName }} ei voi olla ID:tä.",
+        "passwordsdontmatch": "Salasanat eivät vastaa toisiaan"
     },
     "footer": "TenderWork 2016"
 }

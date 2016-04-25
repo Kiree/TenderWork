@@ -2,7 +2,7 @@
 
 angular.module('tenderworkApp').controller('UserManagementDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'User', 'Language',
-        function($scope, $stateParams, $uibModalInstance, entity, User, Language) {
+        function($scope, $stateParams, $uibModalInstance, entity, User, Language, Auth) {
 
         $scope.user = entity;
         $scope.authorities = ["ROLE_USER", "ROLE_ADMIN"];
@@ -16,6 +16,26 @@ angular.module('tenderworkApp').controller('UserManagementDialogController',
 
         var onSaveError = function (result) {
             $scope.isSaving = false;
+        };
+
+        $scope.success = null;
+        $scope.error = null;
+        $scope.doNotMatch = null;
+        $scope.changePassword = function () {
+            if ($scope.password !== $scope.confirmPassword) {
+                $scope.error = null;
+                $scope.success = null;
+                $scope.doNotMatch = 'ERROR';
+            } else {
+                $scope.doNotMatch = null;
+                Auth.changePassword($scope.password).then(function () {
+                    $scope.error = null;
+                    $scope.success = 'OK';
+                }).catch(function () {
+                    $scope.success = null;
+                    $scope.error = 'ERROR';
+                });
+            }
         };
 
         $scope.save = function () {
