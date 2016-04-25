@@ -10,10 +10,25 @@ angular.module('tenderworkApp')
                 $scope.needToRecalculate = true;
             });
         };
+        $scope.accordionVisible = {};
+
+        $scope.accordionRecalculate = function(toggledBy) {
+            if(typeof $scope.accordionVisible[toggledBy] == 'undefined') {
+                console.log("created", toggledBy);
+                $scope.accordionVisible[toggledBy] = true;
+            } else {
+                $scope.accordionVisible[toggledBy] = !$scope.accordionVisible[toggledBy];
+            }
+            if($scope.accordionVisible[toggledBy]) {
+                $scope.needToRecalculate = true;
+            }
+            console.log("klik", toggledBy);
+        };
 
         $scope.isCreator = function(ent) {
             return Principal.isCreator(ent.createdBy);
         };
+
         // takes float and rounds it to nearest whole or half
 
         if(entity.resourcing !== null && typeof entity.resourcing != 'undefined') {

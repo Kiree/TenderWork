@@ -44,6 +44,7 @@ angular.module('tenderworkApp')
                     for (var i = 0; i < result.length; i++) {
                         $scope.requirements.push($scope.helperFunctions.fillEmptyEntityDetails(result[i]));
                         TaskSearch.query({query: "ownerRequirement.id:" + result[i].id}, function(results_tasks) {
+                            $scope.needToRecalculate = true;
                             if(results_tasks.length > 0) {
                                 var tasksContainer = {requirementId: results_tasks[0].ownerRequirement.id, tasks: []};
                                 var tasksArray = [];
@@ -53,10 +54,8 @@ angular.module('tenderworkApp')
                                 tasksContainer.tasks = tasksArray;
                                 $scope.tasks.push(tasksContainer);
                             }
-                            $scope.needToRecalculate = true;
                         });
                     }
-                    $scope.needToRecalculate = true;
                     populated = true;
                 });
             } else {

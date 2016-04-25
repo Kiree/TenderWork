@@ -105,33 +105,37 @@
                 </p>
             </div>
         </div>
-        <div ng-show="estimateLinkedToTask.synergyBenefit" class="form-group">
-            <label class="control-label" translate="tenderworkApp.task.estimateSynergy" for="field_estimateSynergy">EstimateSynergy</label>
-            <input type="number" class="form-control" name="estimateSynergy" id="field_estimateSynergy"
+        <div class="form-group" ng-show="estimateLinkedToTask.synergyBenefit">
+            <div class="form-group">
+                <label class="control-label" translate="tenderworkApp.task.estimateSynergy" for="field_estimateSynergy">EstimateSynergy</label>
+                <input type="number" class="form-control" name="estimateSynergy" id="field_estimateSynergy"
                     ng-model="task.estimateSynergy"
                     min="0" />
-            <div ng-show="editForm.estimateSynergy.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.estimateSynergy.$error.min" translate="entity.validation.min" translate-value-min="0">
-                    This field should be more than 0.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.estimateSynergy.$error.number" translate="entity.validation.number">
-                    This field should be a number.
-                </p>
+                <div ng-show="editForm.estimateSynergy.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.estimateSynergy.$error.min" translate="entity.validation.min" translate-value-min="0">
+                        This field should be more than 0.
+                    </p>
+                    <p class="help-block"
+                       ng-show="editForm.estimateSynergy.$error.number" translate="entity.validation.number">
+                        This field should be a number.
+                    </p>
+                </div>
             </div>
-        </div>
-        <div ng-show="estimateLinkedToTask.synergyBenefit" class="form-group">
-            <label class="control-label" translate="tenderworkApp.task.synergyCheck" for="field_synergyCheck">SynergyCheck</label>
-            <input type="checkbox" class="form-control" name="synergyCheck" id="field_synergyCheck"
-                    ng-model="task.synergyCheck"
-                     />
-            <div ng-show="editForm.synergyCheck.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.synergyCheck.$error.required" translate="entity.validation.required">
-                    This field is required.
-                </p>
+            <div class="checkbox">
+                <label class="control-label" >&nbsp;</label>
+                <input type="checkbox" name="synergyCheck" id="field_synergyCheck"
+                       ng-model="task.synergyCheck"
+                />
+                <div ng-show="editForm.synergyCheck.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.synergyCheck.$error.required" translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
             </div>
+
+
         </div>
         <div class="form-group">
             <tags-input class="tags-input" max-length="30" ng-model="tags" display-property="name">

@@ -27,7 +27,7 @@ angular.module('tenderworkApp')
                            scope.currentMaxHeight = {};
                        }
                        scope.currentMaxHeight[attrs.tndrHeightMaxCheck] = 0;
-
+                       console.log('CMH', scope.currentMaxHeight);
                        var initial_value = 0;
                        if(scope.calculated_max_height === null || typeof scope.calculated_max_height == 'undefined') {
                            scope.calculated_max_height = {};
@@ -36,6 +36,7 @@ angular.module('tenderworkApp')
                            scope.calculated_max_height[attrs.tndrHeightMaxCheck] = initial_value;
                        }
                        var current_height = parseInt(element.height());
+                       console.log(current_height);
 
                        if (scope.currentMaxHeight[attrs.tndrHeightMaxCheck] < current_height) {
                            scope.currentMaxHeight[attrs.tndrHeightMaxCheck] = current_height;
@@ -59,7 +60,7 @@ angular.module('tenderworkApp')
                         return;
                     }
                     if($(window).innerWidth() >= 768) {
-                        //console.log("i need to change: ", oldVal, "->", newVal);
+                        console.log("i need to change: ", oldVal, "->", newVal);
                         element.height(newVal[attrs.tndrHeightMaxTarget]);
                     }
                 });
