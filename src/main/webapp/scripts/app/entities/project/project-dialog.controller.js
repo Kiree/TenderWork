@@ -17,13 +17,6 @@ angular.module('tenderworkApp').controller('ProjectDialogController',
             'Suljettu':'states.closed'
         };
 
-
-        var updateTag = function(tag) {
-            return {
-                id:tag.id,
-                name:tag.name
-            }
-        };
         if(entity.$resolved) {
             $scope.tags = entity.id === null ? [] : entity.tags;
         } else {

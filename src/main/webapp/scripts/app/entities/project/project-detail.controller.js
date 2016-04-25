@@ -9,12 +9,23 @@ angular.module('tenderworkApp')
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
+        $scope.currentMaxHeight = {};
+        $scope.calclulated_max_height = {};
+        $scope.needToRecalculate = false;
         $scope.load = function (id) {
             Project.get({id: id}, function(result) {
                 $scope.project = result;
             });
         };
         $scope.empty = "\u00A0";
+
+        if($scope.project.$resolved === false) {
+            $scope.project.$promise.then(function(result) {
+                $scope.needToRecalculate = !$scope.needToRecalculate;
+            });
+        } else {
+            $scope.needToRecalculate = !$scope.needToRecalculate;
+        }
 
         $scope.loadAll = function() {
             var found;
@@ -32,7 +43,6 @@ angular.module('tenderworkApp')
                     }
                 }
                 $scope.project = $scope.helperFunctions.fillEmptyEntityDetails($scope.project);
-                $scope.needToRecalculate = true;
             });
         };
         $scope.reset = function() {
@@ -49,7 +59,7 @@ angular.module('tenderworkApp')
             return Principal.isCreator(ent.createdBy);
         };
         $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-        //    calculateHeight();
+            //$scope.needToRecalculate = true;
         });
 
         var unsubscribe = $rootScope.$on('tenderworkApp:projectUpdate', function(event, result) {
