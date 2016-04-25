@@ -202,8 +202,8 @@ public class EstimateResource {
 
         Estimate result = copyEstimateSettings(cloneId, id);
 
-        return ResponseEntity.created(new URI("/api/requirements/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("requirement", result.getId().toString()))
+        return ResponseEntity.created(new URI("/api/estimates/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert("estimate", result.getId().toString()))
             .body(result);
     }
 
