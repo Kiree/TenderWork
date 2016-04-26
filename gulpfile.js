@@ -266,7 +266,7 @@ gulp.task('ngconstant:prod', function() {
             VERSION: parseVersionFromPomXml()
         }
     })
-    .pipe(gulp.dest(yeoman.tmp + 'scripts/app/'));
+    .pipe(gulp.dest(yeoman.app + 'scripts/app/'));
 });
 
 gulp.task('jshint', function() {
