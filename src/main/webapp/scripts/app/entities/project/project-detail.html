@@ -123,8 +123,17 @@
             </div>
         </div>
             <!-- tagit -->
-            <div class="col-xs-12 desktop-border bg-always-gray box-padding-margin">
-                <tags-input placeholder="{{empty}}" disabled="true" ng-model="project.tags" display-property="name" key-property="id"></tags-input>
+
+
+
+            <div class="col-xs-12 desktop-border bg-always-white box-padding-margin">
+                <div class="col-xs-12 padding-detail-header-field">
+                    <span translate="tenderworkApp.project.tags" class="projectdetail">Tags</span>
+                </div>
+                <div class="col-xs-12 padding-detail-header-field">
+                    <tags-input placeholder="{{empty}}" disabled="true" ng-model="project.tags" display-property="name" key-property="id"></tags-input>
+                </div>
+
             </div>
         </div>
     </div>

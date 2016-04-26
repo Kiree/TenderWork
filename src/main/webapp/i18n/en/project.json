@@ -27,7 +27,8 @@
             "stateDescription": "State description",
             "createdBy": "Created by",
             "editedBy": "Edited by",
-            "hasEstimates": "HasEstimates"
+            "hasEstimates": "HasEstimates",
+            "tags": "Tags"
         }
     }
 }
