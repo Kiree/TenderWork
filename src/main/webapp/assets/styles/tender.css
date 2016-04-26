@@ -107,7 +107,9 @@ div.bottom-border-1 {
     position: relative;
     top: 20px;
 }
-
+input.margin-hack {
+    margin-top:0px;
+}
 div.btn-bottom{
     padding-bottom:5px;
 }
