@@ -19,7 +19,7 @@ angular.module('tenderworkApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pas
                 $window.document.title = title;
             });
         };
-
+        $rootScope.needToRecalculate = 0;
         $rootScope.ENV = ENV;
         $rootScope.VERSION = VERSION;
         $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {

@@ -36,6 +36,7 @@ angular.module('tenderworkApp')
          */
         $scope.loadAll = function() {
             if($scope.estimate) {
+                $rootScope.needToRecalculate += 1;
                 $rootScope.roundedResourcing = $scope.helperFunctions.roundResourcing($scope.estimate.resourcing);
                 RequirementSearch.query({query: "ownerEstimate.id:" + $scope.estimate.id}, function (result) {
                     if (populated) {
@@ -44,7 +45,7 @@ angular.module('tenderworkApp')
                     for (var i = 0; i < result.length; i++) {
                         $scope.requirements.push($scope.helperFunctions.fillEmptyEntityDetails(result[i]));
                         TaskSearch.query({query: "ownerRequirement.id:" + result[i].id}, function(results_tasks) {
-                            $scope.needToRecalculate = true;
+
                             if(results_tasks.length > 0) {
                                 var tasksContainer = {requirementId: results_tasks[0].ownerRequirement.id, tasks: []};
                                 var tasksArray = [];
@@ -81,14 +82,12 @@ angular.module('tenderworkApp')
             $scope.loadAll();
         };
         if($scope.estimate.$resolved === false) {
-            console.log("estimate not resolved yet!");
+            console.log("estimate not resolved yet!", $rootScope.needToRecalculate);
             $scope.estimate.$promise.then($scope.loadAll);
-            $scope.needToRecalculate = true;
 
         } else {
-            console.log("estimate resolved!");
+            console.log("estimate resolved!", $rootScope.needToRecalculate);
             $scope.loadAll();
-            $scope.needToRecalculate = true;
         }
 
         $scope.isCreator = function(ent) {

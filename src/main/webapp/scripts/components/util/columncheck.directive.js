@@ -45,7 +45,6 @@ angular.module('tenderworkApp')
                        if(scope.calculated_max_height[attrs.tndrHeightMaxCheck] < newHeight) {
                            scope.calculated_max_height[attrs.tndrHeightMaxCheck] = attrs.tndrHeightMaxCheck === 'project' ? newHeight : newHeight - 33;
                        }
-                       scope.needToRecalculate = false;
                    };
                    scope.$watch('needToRecalculate', recalculate);
                }

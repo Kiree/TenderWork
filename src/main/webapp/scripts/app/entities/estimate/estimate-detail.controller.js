@@ -3,11 +3,11 @@
 angular.module('tenderworkApp')
     .controller('EstimateDetailController', function ($scope, $rootScope, $stateParams, entity, Estimate, User, Project, Requirement, Principal, $timeout ) {
         $scope.estimate = $scope.helperFunctions.fillEmptyEntityDetails(entity);
-        $scope.needToRecalculate = true;
+        $rootScope.needToRecalculate += 1;
         $scope.load = function (id) {
             Estimate.get({id: id}, function(result) {
                 $scope.estimate = result;
-                $scope.needToRecalculate = true;
+                $rootScope.needToRecalculate += 1;
             });
         };
         $scope.accordionVisible = {};
@@ -20,7 +20,7 @@ angular.module('tenderworkApp')
             }
             if($scope.accordionVisible[toggledBy]) {
                 $timeout(function() {
-                    $scope.needToRecalculate = true;
+                    $rootScope.needToRecalculate += 1;
                 }, 500);
             }
         };
