@@ -44,7 +44,7 @@ spring:
     data:
         elasticsearch:
             cluster-name:
-            cluster-nodes: localhost:9300
+            cluster-nodes: localhost:9200
     mail:
         host: localhost
         port: 25
