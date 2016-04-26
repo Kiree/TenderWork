@@ -25,6 +25,8 @@ angular.module('tenderworkApp')
             }
         };
 
+        $scope.openAll = false;
+
         $scope.expandRequirements = function() {
 
         };

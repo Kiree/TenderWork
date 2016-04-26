@@ -1,6 +1,7 @@
 {
     "global": {
         "title": "TenderWork",
+        "toggleall":"Avaa/Sulje Kaikki",
         "browsehappy": "Käytät <strong>vanhentunutta</strong> selainta. Ole hyvä ja <a href=\"http://browsehappy.com/?locale=en\">päivitä selaimesi</a> parantaaksesi käyttökokemustasi.",
         "trail": {
             "project":"Projektilistaus",
