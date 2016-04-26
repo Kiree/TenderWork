@@ -233,7 +233,7 @@ gulp.task('usemin', function() {
                     rev()
                 ]
             })).
-            pipe(gulp.dest(yeoman.dist));
+            pipe(gulp.dest(yeoman.app));
     });
 });
 
