@@ -29,7 +29,7 @@ var karmaServer = require('karma').Server;
 
 var yeoman = {
     app: 'src/main/webapp/',
-    dist: 'src/main/webapp/dist/',
+    dist: 'src/main/webapp/',
     test: 'src/test/javascript/spec/',
     tmp: '.tmp/',
     port: 9000,
