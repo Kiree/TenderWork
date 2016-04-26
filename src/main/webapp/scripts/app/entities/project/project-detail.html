@@ -30,10 +30,10 @@
         <div class="row">
             <div class="col-xs-12 bottom-margin-1">
                 <div class="row" data-tndr-height-max-check="project">
-                    <div class="col-xs-12 col-sm-7 right-padder xs-stacked-margin">
+                    <div class="col-xs-12 right-padder xs-stacked-margin">
                         <div class="row desktop-border bg-always-white" data-tndr-height-max-target="project"> <!--ng-style="{'min-height':calculated_height,'max-height':calculated_height}">-->
                             <div class="row">
-                                <div class="col-xs-7">
+                                <div class="col-sm-4 col-xs-6">
                                     <div class="col-xs-12 padding-detail-header-field">
                                         <span translate="tenderworkApp.project.client" class="projectdetail">Client</span>
                                     </div>
@@ -41,7 +41,7 @@
                                         <span class="">{{project.client}}</span>
                                     </div>
                                 </div>
-                                <div class="col-xs-5">
+                                <div class="col-sm-4 col-xs-6">
                                     <div class="col-xs-12 padding-detail-header-field">
                                         <span translate="tenderworkApp.project.deadline" class="projectdetail">Deadline</span>
                                     </div>
@@ -49,50 +49,12 @@
                                         <span class="">{{project.deadline | date:'mediumDate'}}</span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-12 padding-detail-header-field">
-                                <span translate="tenderworkApp.project.docLocation" class="projectdetail">DocLocation</span>
-                            </div>
-                            <div class="col-xs-12 padding-detail-text-field wrap-field">
-                                <span ng-bind-html="project.docLocation | linky" class=""></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-5 left-padder">
-                        <div class="row desktop-border bg-always-white" data-tndr-height-max-target="project"><!--ng-style="{'min-height':calculated_height,'max-height':calculated_height}">-->
-                            <div class="row">
-                                <div class="col-xs-6">
+                                <div class="col-sm-4 col-xs-12">
                                     <div class="col-xs-12 padding-detail-header-field">
-                                        <span translate="tenderworkApp.project.createdDate" class="projectdetail">CreatedDate</span>
+                                        <span translate="tenderworkApp.project.docLocation" class="projectdetail">DocLocation</span>
                                     </div>
-                                    <div class="col-xs-12 padding-detail-text-field">
-                                        <span class="">{{project.createdDate | date:'medium'}}</span>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="col-xs-12 padding-detail-header-field">
-                                        <span translate="tenderworkApp.project.createdBy" class="projectdetail">createdBy</span>
-                                    </div>
-                                    <div class="col-xs-12 padding-detail-text-field">
-                                        {{project.createdBy.login}}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <div class="col-xs-12 padding-detail-header-field">
-                                        <span translate="tenderworkApp.project.editedDate" class="projectdetail">EditedDate</span>
-                                    </div>
-                                    <div class="col-xs-12 padding-detail-text-field" >
-                                        <span class="">{{project.editedDate | date:'medium'}}</span>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="col-xs-12 padding-detail-header-field">
-                                        <span translate="tenderworkApp.project.editedBy" class="projectdetail">editedBy</span>
-                                    </div>
-                                    <div class="col-xs-12 padding-detail-text-field">
-                                        {{project.editedBy.login}}
+                                    <div class="col-xs-12 padding-detail-text-field wrap-field">
+                                        <span ng-bind-html="project.docLocation | linky" class=""></span>
                                     </div>
                                 </div>
                             </div>
@@ -100,34 +62,71 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="col-xs-12 right-padder xs-stacked-margin bottom-margin-1">
+                <div class="row desktop-border bg-always-white"> <!--ng-style="{'min-height':calculated_height,'max-height':calculated_height}">-->
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-6">
+                            <div class="col-xs-12 padding-detail-header-field">
+                                <span translate="tenderworkApp.project.state" class="projectdetail">State</span>
+                            </div>
+                            <div class="col-xs-12 padding-detail-text-field">
+                                <span ng-show="project.state=='states.new'" class="" translate="states.new">NW: {{ translated.state.new }}</span>
+                                <span ng-show="project.state=='states.closed'" class="" translate="states.closed">NW: {{ project.state }}</span>
+                                <span ng-show="project.state=='states.pending'" class="" translate="states.pending">NW: {{ project.state }}</span>
+                                <span ng-show="project.state=='states.won'" class="" translate="states.won">NW: {{ project.state }}</span>
+                                <span ng-show="project.state=='states.lost'" class="" translate="states.lost">NW: {{ project.state }}</span>
+                            </div>
+                            <div class="col-xs-12 padding-detail-header-field">
+                                <span translate="tenderworkApp.project.stateDescription" class="projectdetail">StateDescription</span>
+                            </div>
+                            <div class="col-xs-12 padding-detail-text-field wrap-field">
+                                <span class="">{{project.stateDescription}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-6">
+                            <div class="col-xs-12 padding-detail-header-field">
+                                <span translate="tenderworkApp.project.createdBy" class="projectdetail">createdBy</span>
+                            </div>
+                            <div class="col-xs-12 padding-detail-text-field">
+                                {{project.createdBy.login}}
+                            </div>
+                            <div class="col-xs-12 padding-detail-header-field">
+                                <span translate="tenderworkApp.project.createdDate" class="projectdetail">CreatedDate</span>
+                            </div>
+                            <div class="col-xs-12 padding-detail-text-field">
+                                <span class="">{{project.createdDate | date:'medium'}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12 xs-stacked-margin">
+                            <div class="col-xs-6 col-sm-12 xs-stacked-margin">
+                                <div class="col-xs-12 padding-detail-header-field">
+                                    <span translate="tenderworkApp.project.editedBy" class="projectdetail">editedBy</span>
+                                </div>
+                                <div class="col-xs-12 padding-detail-text-field">
+                                    {{project.editedBy.login}}
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-12">
+                                <div class="col-xs-12 padding-detail-header-field">
+                                    <span translate="tenderworkApp.project.editedDate" class="projectdetail">EditedDate</span>
+                                </div>
+                                <div class="col-xs-12 padding-detail-text-field" >
+                                    <span class="">{{project.editedDate | date:'medium'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-xs-12 desktop-border bg-always-white box-padding-margin">
                 <div class="row">
                     <div class="col-xs-12 padding-detail-header-field">
                         <span translate="tenderworkApp.project.description" class="projectdetail">Description</span>
                     </div>
                     <div class="col-xs-12 padding-detail-text-field preformatted" style="word-wrap: break-word"><span class="">{{project.description}}</span></div>
-
-
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 desktop-border bg-always-white box-padding-margin">
-                <div class="row">
-                    <div class="col-xs-12 padding-detail-header-field">
-                        <span translate="tenderworkApp.project.state" class="projectdetail">State</span>
-                    </div>
-                    <div class="col-xs-12 padding-detail-text-field">
-                        <span ng-show="project.state=='states.new'" class="" translate="states.new">NW: {{ translated.state.new }}</span>
-                        <span ng-show="project.state=='states.closed'" class="" translate="states.closed">NW: {{ project.state }}</span>
-                        <span ng-show="project.state=='states.pending'" class="" translate="states.pending">NW: {{ project.state }}</span>
-                        <span ng-show="project.state=='states.won'" class="" translate="states.won">NW: {{ project.state }}</span>
-                        <span ng-show="project.state=='states.lost'" class="" translate="states.lost">NW: {{ project.state }}</span>
-                    </div>
-                    <div class="col-xs-12 padding-detail-header-field">
-                        <span translate="tenderworkApp.project.stateDescription" class="projectdetail">StateDescription</span>
-                    </div>
-                    <div class="col-xs-12 padding-detail-text-field wrap-field">
-                        <span class="">{{project.stateDescription}}</span>
-                    </div>
                 </div>
             </div>
             <!-- tagit -->
