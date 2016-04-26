@@ -58,7 +58,7 @@ var parseVersionFromPomXml = function() {
 };
 
 gulp.task('clean', function (cb) {
-    del([yeoman.dist], cb);
+    del([yeoman.app], cb);
 });
 
 gulp.task('clean:tmp', function (cb) {
@@ -84,16 +84,16 @@ gulp.task('protractor', function() {
 gulp.task('copy', function() {
     return es.merge(  // copy i18n folders only if translation is enabled
         gulp.src(yeoman.app + 'i18n/**').
-        pipe(gulp.dest(yeoman.dist + 'i18n/')),
+        pipe(gulp.dest(yeoman.app + 'i18n/')),
         gulp.src(yeoman.app + 'assets/**/*.{woff,svg,ttf,eot}').
         pipe(flatten()).
-        pipe(gulp.dest(yeoman.dist + 'assets/fonts/')));
+        pipe(gulp.dest(yeoman.app + 'assets/fonts/')));
 });
 
 gulp.task('images', function() {
     return gulp.src(yeoman.app + 'assets/images/**').
         pipe(imagemin({optimizationLevel: 5})).
-        pipe(gulp.dest(yeoman.dist + 'assets/images')).
+        pipe(gulp.dest(yeoman.app + 'assets/images')).
         pipe(browserSync.reload({stream: true}));
 });
 
@@ -215,7 +215,7 @@ gulp.task('build', function () {
 
 gulp.task('usemin', function() {
     runSequence('images', 'styles', function () {
-        return gulp.src([yeoman.app + '**/*.html', '!' + yeoman.app + 'bower_components/**/*.html']).
+        return gulp.src([yeoman.app + '*.html', '!' + yeoman.app + 'bower_components/**/*.html']).
             pipe(usemin({
                 css: [
                     prefix.apply(),
