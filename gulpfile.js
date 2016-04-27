@@ -29,7 +29,7 @@ var karmaServer = require('karma').Server;
 
 var yeoman = {
     app: 'src/main/webapp/',
-    dist: 'src/main/webapp/',
+    dist: 'src/main/webapp/dist/',
     test: 'src/test/javascript/spec/',
     tmp: '.tmp/',
     port: 9000,
@@ -58,7 +58,7 @@ var parseVersionFromPomXml = function() {
 };
 
 gulp.task('clean', function (cb) {
-    del([yeoman.app], cb);
+    del([yeoman.dist], cb);
 });
 
 gulp.task('clean:tmp', function (cb) {
@@ -66,12 +66,10 @@ gulp.task('clean:tmp', function (cb) {
 });
 
 gulp.task('test', ['wiredep:test', 'ngconstant:dev'], function(done) {
-    /*
     new karmaServer({
         configFile: __dirname + '/src/test/javascript/karma.conf.js',
         singleRun: true
     }, done).start();
-    */
 });
 
 gulp.task('protractor', function() {
@@ -84,16 +82,16 @@ gulp.task('protractor', function() {
 gulp.task('copy', function() {
     return es.merge(  // copy i18n folders only if translation is enabled
         gulp.src(yeoman.app + 'i18n/**').
-        pipe(gulp.dest(yeoman.app + 'i18n/')),
+        pipe(gulp.dest(yeoman.dist + 'i18n/')), 
         gulp.src(yeoman.app + 'assets/**/*.{woff,svg,ttf,eot}').
         pipe(flatten()).
-        pipe(gulp.dest(yeoman.app + 'assets/fonts/')));
+        pipe(gulp.dest(yeoman.dist + 'assets/fonts/')));
 });
 
 gulp.task('images', function() {
     return gulp.src(yeoman.app + 'assets/images/**').
         pipe(imagemin({optimizationLevel: 5})).
-        pipe(gulp.dest(yeoman.app + 'assets/images')).
+        pipe(gulp.dest(yeoman.dist + 'assets/images')).
         pipe(browserSync.reload({stream: true}));
 });
 
@@ -215,7 +213,7 @@ gulp.task('build', function () {
 
 gulp.task('usemin', function() {
     runSequence('images', 'styles', function () {
-        return gulp.src([yeoman.app + '*.html', '!' + yeoman.app + 'bower_components/**/*.html']).
+        return gulp.src([yeoman.app + '**/*.html', '!' + yeoman.app + 'bower_components/**/*.html']).
             pipe(usemin({
                 css: [
                     prefix.apply(),
@@ -233,7 +231,7 @@ gulp.task('usemin', function() {
                     rev()
                 ]
             })).
-            pipe(gulp.dest(yeoman.app));
+            pipe(gulp.dest(yeoman.dist));
     });
 });
 
@@ -266,7 +264,7 @@ gulp.task('ngconstant:prod', function() {
             VERSION: parseVersionFromPomXml()
         }
     })
-    .pipe(gulp.dest(yeoman.app + 'scripts/app/'));
+    .pipe(gulp.dest(yeoman.tmp + 'scripts/app/'));
 });
 
 gulp.task('jshint', function() {
