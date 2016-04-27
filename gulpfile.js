@@ -82,7 +82,7 @@ gulp.task('protractor', function() {
 gulp.task('copy', function() {
     return es.merge(  // copy i18n folders only if translation is enabled
         gulp.src(yeoman.app + 'i18n/**').
-        pipe(gulp.dest(yeoman.dist + 'i18n/')), 
+        pipe(gulp.dest(yeoman.dist + 'i18n/')),
         gulp.src(yeoman.app + 'assets/**/*.{woff,svg,ttf,eot}').
         pipe(flatten()).
         pipe(gulp.dest(yeoman.dist + 'assets/fonts/')));
@@ -231,7 +231,7 @@ gulp.task('usemin', function() {
                     rev()
                 ]
             })).
-            pipe(gulp.dest(yeoman.dist));
+            pipe(gulp.dest(yeoman.app));
     });
 });
 
