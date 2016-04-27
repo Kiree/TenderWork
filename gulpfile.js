@@ -208,57 +208,7 @@ gulp.task('wiredep:test', function () {
 });
 
 gulp.task('build', function () {
-    runSequence('clean', 'copy', 'wiredep:app', 'ngconstant:prod', 'usemin', function(){
-        var baseUri = 'http://localhost:' + yeoman.apiPort;
-        // Routes to proxy to the backend. Routes ending with a / will setup
-        // a redirect so that if accessed without a trailing slash, will
-        // redirect. This is required for some endpoints for proxy-middleware
-        // to correctly handle them.
-        var proxyRoutes = [
-            '/api',
-            '/health',
-            '/configprops',
-            '/v2/api-docs',
-            '/swagger-ui',
-            '/configuration/security',
-            '/configuration/ui',
-            '/swagger-resources',
-            '/metrics',
-            '/websocket/tracker',
-            '/dump',
-            '/console/'
-        ];
-
-        var requireTrailingSlash = proxyRoutes.filter(function (r) {
-            return endsWith(r, '/');
-        }).map(function (r) {
-            // Strip trailing slash so we can use the route to match requests
-            // with non trailing slash
-            return r.substr(0, r.length - 1);
-        });
-
-        var proxies = [
-            // Ensure trailing slash in routes that require it
-            function (req, res, next) {
-                requireTrailingSlash.forEach(function(route){
-                    if (url.parse(req.url).path === route) {
-                        res.statusCode = 301;
-                        res.setHeader('Location', route + '/');
-                        res.end();
-                    }
-                });
-
-                next();
-            }
-        ].concat(
-            // Build a list of proxies for routes: [route1_proxy, route2_proxy, ...]
-            proxyRoutes.map(function (r) {
-                var options = url.parse(baseUri + r);
-                options.route = r;
-                options.preserveHost = true;
-                return proxy(options);
-            }));
-    })
+    runSequence('clean', 'copy', 'wiredep:app', 'ngconstant:prod', 'usemin');
 });
 
 gulp.task('usemin', function() {
@@ -314,7 +264,7 @@ gulp.task('ngconstant:prod', function() {
             VERSION: parseVersionFromPomXml()
         }
     })
-    .pipe(gulp.dest(yeoman.tmp + 'scripts/app/'));
+    .pipe(gulp.dest(yeoman.app + 'scripts/app/'));
 });
 
 gulp.task('jshint', function() {
