@@ -22,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,6 +68,9 @@ public class UserResource {
 
     @Inject
     private UserRepository userRepository;
+
+    @Inject
+    private PasswordEncoder passwordEncoder;
 
     @Inject
     private MailService mailService;
@@ -135,6 +139,11 @@ public class UserResource {
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(managedUserDTO.getId()))) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("user-management", "userexists", "Login already in use")).body(null);
         }
+        if(!managedUserDTO.getPassword().equals(managedUserDTO.getConfirmPassword())) {
+            return ResponseEntity.badRequest()
+                .headers(HeaderUtil.createFailureAlert("user-management", "passwordsdontmatch", "Passwords don't match"))
+                .body(null);
+        }
         return userRepository
             .findOneById(managedUserDTO.getId())
             .map(user -> {
@@ -143,6 +152,8 @@ public class UserResource {
                 user.setLastName(managedUserDTO.getLastName());
                 user.setActivated(managedUserDTO.isActivated());
                 user.setLangKey(managedUserDTO.getLangKey());
+                String encryptedPassword = passwordEncoder.encode(managedUserDTO.getPassword());
+                user.setPassword(encryptedPassword);
                 Set<Authority> authorities = user.getAuthorities();
                 authorities.clear();
                 managedUserDTO.getAuthorities().stream().forEach(

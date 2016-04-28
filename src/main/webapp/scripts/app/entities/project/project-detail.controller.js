@@ -1,9 +1,12 @@
 'use strict';
 
 angular.module('tenderworkApp')
-    .controller('ProjectDetailController', function ($window, $scope, $rootScope, $stateParams, entity, Project, User, Estimate, ParseLinks, EstimateSearch, $translate, Tag, TagSearch, Principal) {
+    .controller('ProjectDetailController', function ($window, $state, $scope, $rootScope, $stateParams, entity, Project, User, Estimate, ParseLinks, EstimateSearch, $translate, Tag, TagSearch, Principal) {
+        console.log($stateParams.generateDefaultEstimate);
         if($stateParams.generateDefaultEstimate) {
-            Estimate.save($stateParams.generateDefaultEstimate, function(r) { }, function(r) {});
+            Estimate.save($stateParams.generateDefaultEstimate, function(r) {
+                $state.go('project.detail', {pid:entity.id, generateDefaultEstimate:false }, { reload:true });
+            }, function(r) {});
         }
         $scope.project = entity;
         $scope.estimates = [];

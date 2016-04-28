@@ -125,7 +125,7 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('project.detail', {pid:result.id} , { reload: true });
+                        $state.go('project.detail', {pid:result.id, generateDefaultEstimate:false} , { reload: true });
                     }, function() {
                         $state.go('^');
                     })
@@ -154,7 +154,7 @@ angular.module('tenderworkApp')
                     }).result.then(function(result) {
                         $state.go('project', null, { reload: true });
                     }, function() {
-                        $state.go('project.detail', { pid:$stateParams.pid } );
+                        $state.go('project.detail', { pid:$stateParams.pid, generateDefaultEstimate:false } );
                     })
                 }]
             });

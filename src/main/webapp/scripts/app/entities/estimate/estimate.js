@@ -91,9 +91,9 @@ angular.module('tenderworkApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('project.detail', { id:result.ownerProject.id }, { reload: true });
+                        $state.go('project.detail', { id:result.ownerProject.id , generateDefaultEstimate:false}, { reload: true });
                     }, function() {
-                        $state.go('project.detail', { id:$stateParams.pid});
+                        $state.go('project.detail', { id:$stateParams.pid, generateDefaultEstimate:false});
                     })
                 }]
             })
@@ -147,7 +147,7 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('project.detail', { id:$stateParams.pid }, { reload: true });
+                        $state.go('project.detail', { id:$stateParams.pid, generateDefaultEstimate:false }, { reload: true });
                     }, function() {
                         $state.go('estimate.detail', { id:$stateParams.eid }, { reload: true });
                     })

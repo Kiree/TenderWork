@@ -39,7 +39,7 @@
             </thead>
             <tbody data-link="row" class="rowlink" infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
                 <tr class="rowLink" ng-repeat="project in projects track by project.id">
-                    <td style="max-width: 300px; overflow: hidden; "><a ui-sref="project.detail({id:project.id, pid:project.id})">{{project.name}}</a></td>
+                    <td style="max-width: 300px; overflow: hidden; "><a ui-sref="project.detail({pid:project.id, generateDefaultEstimate:false})">{{project.name}}</a></td>
                     <td style="max-width: 300px; overflow: hidden; ">{{project.client}}</td>
                     <td>{{project.deadline | date:'mediumDate'}}</td>
                     <td>{{project.editedDate | date:'medium'}}</td>
