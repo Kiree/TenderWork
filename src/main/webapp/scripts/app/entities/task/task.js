@@ -42,7 +42,7 @@ angular.module('tenderworkApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('estimate.detail', { id:$stateParams.eid }, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.eid, openreqwithid:$stateParams.rid }, { reload: true });
                     }, function() {
                         $state.go('estimate.detail', { id:$stateParams.eid });
                     })

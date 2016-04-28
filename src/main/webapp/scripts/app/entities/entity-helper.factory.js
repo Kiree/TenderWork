@@ -13,7 +13,7 @@ angular.module('tenderworkApp').factory('EntityHelperFactory', function() {
         return tagJSObject;
     };
     var __updateTag = function(tagJSObject) {
-       console.log("update called");
+       // not used
     };
     var __roundResourcing = function (resourcing) {
         if(resourcing === null) {

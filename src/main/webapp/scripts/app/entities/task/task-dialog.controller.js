@@ -46,7 +46,6 @@ angular.module('tenderworkApp').controller('TaskDialogController',
                     return;
                 }
                 $scope.estimateLinkedToTask = $scope.helperFunctions.copyEstimate(responseEstimate);
-                console.log($scope.estimateLinkedToTask);
                 $scope.estimates = [$scope.estimateLinkedToTask];
                 setDefaultsForTask();
             });
@@ -89,7 +88,6 @@ angular.module('tenderworkApp').controller('TaskDialogController',
                 return item;
             });
             $scope.task.tags = proper;
-            console.log($scope.task);
             if ($scope.task.id != null) {
                 Task.update($scope.task, onSaveSuccess, onSaveError);
             } else {

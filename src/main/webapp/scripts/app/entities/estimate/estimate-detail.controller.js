@@ -3,6 +3,14 @@
 angular.module('tenderworkApp')
     .controller('EstimateDetailController', function ($scope, $rootScope, $stateParams, entity, Estimate, User, Project, Requirement, Principal, $timeout ) {
         $scope.estimate = $scope.helperFunctions.fillEmptyEntityDetails(entity);
+        $scope.openReq = $stateParams.openreqwithid ? $stateParams.openreqwithid : null;
+        $scope.openThisReq = function(id) {
+            console.log('here', id, $scope.openReq);
+            if (id === $scope.openReq) {
+                return 'in';
+            }
+            return '';
+        }
         $rootScope.needToRecalculate += 1;
         $scope.load = function (id) {
             Estimate.get({id: id}, function(result) {
@@ -41,7 +49,7 @@ angular.module('tenderworkApp')
             $scope.roundedResourcing = $scope.helperFunctions.roundResourcing(entity.resourcing);
         }
 
-        
+
         $scope.copyEstimate = function(estId) {
             Estimate.copy({id:estId}, function(result) {
                 $state.go($state.current, {id:estId}, {reload:true});

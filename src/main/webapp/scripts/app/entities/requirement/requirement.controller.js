@@ -111,10 +111,8 @@ angular.module('tenderworkApp')
         $scope.copyRequirement = function(reqId) {
             Requirement.copy({id:reqId}, function(result) {
                 Estimate.update($scope.estimate, function() {
-                    console.log('succes');
                         $state.go($state.current, {id:$scope.estimate.id }, {reload:true});
                 }, function() {
-                    console.log('fail');
                         $state.go($state.current, {id:$scope.estimate.id }, {reload:true});
                 }
                 );
