@@ -68,7 +68,7 @@ public class Requirement implements Serializable {
         inverseJoinColumns = @JoinColumn(name="tags_id"))
     private Set<Tag> tags = new HashSet<>();
 
-    @OneToMany(mappedBy = "ownerRequirement", cascade = CascadeType.REFRESH)
+    @OneToMany(mappedBy = "ownerRequirement", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Task> hasTaskss = new HashSet<>();

@@ -24,7 +24,6 @@ angular.module('tenderworkApp')
                         size: 'lg',
                         resolve: {
                             entity: function () {
-                                console.log($stateParams);
                                 return {
                                     name: null,
                                     description: null,
@@ -43,7 +42,6 @@ angular.module('tenderworkApp')
                             }
                         }
                     }).result.then(function(result) {
-                        console.log($stateParams);
                         $state.go('estimate.detail', { id:$stateParams.eid, openreqwithid:$stateParams.rid }, { reload: true });
                     }, function() {
                         $state.go('estimate.detail', { id:$stateParams.eid, openreqwithid:null });

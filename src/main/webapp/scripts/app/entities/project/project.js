@@ -59,6 +59,7 @@ angular.module('tenderworkApp')
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal, Estimate) {
                     $uibModal.open({
+                        backdrop:'static',
                         templateUrl: 'scripts/app/entities/project/project-dialog.html',
                         controller: 'ProjectDialogController',
                         size: 'lg',
@@ -111,6 +112,7 @@ angular.module('tenderworkApp')
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
+                        backdrop:'static',
                         templateUrl: 'scripts/app/entities/project/project-edit-dialog.html',
                         controller: 'ProjectDialogController',
                         size: 'lg',

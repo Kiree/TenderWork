@@ -3,10 +3,8 @@
 angular.module('tenderworkApp')
     .controller('EstimateDetailController', function ($scope, $rootScope, $stateParams, entity, Estimate, User, Project, Requirement, Principal, $timeout ) {
         $scope.estimate = $scope.helperFunctions.fillEmptyEntityDetails(entity);
-        console.log($stateParams);
         $scope.openReq = $stateParams.openreqwithid ? $stateParams.openreqwithid : null;
         $scope.openThis = function(id) {
-            console.log('here', id, $scope.openReq);
             if (id === $scope.openReq) {
                 return 'in';
             }

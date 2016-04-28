@@ -2,7 +2,6 @@
 
 angular.module('tenderworkApp')
     .controller('ProjectDetailController', function ($window, $state, $scope, $rootScope, $stateParams, entity, Project, User, Estimate, ParseLinks, EstimateSearch, $translate, Tag, TagSearch, Principal) {
-        console.log($stateParams.generateDefaultEstimate);
         if($stateParams.generateDefaultEstimate) {
             Estimate.save($stateParams.generateDefaultEstimate, function(r) {
                 $state.go('project.detail', {pid:entity.id, generateDefaultEstimate:false }, { reload:true });
