@@ -209,7 +209,7 @@ public class UpdateService {
 
         //Find the owner estimate
         Estimate estimateHelper = estimateRepository.findOne(requirement.getOwnerEstimate().getId());
-        estimateHelper.addRequirement(requirement);
+        //estimateHelper.addRequirement(requirement);
         saveService.saveEstimateToRepo(estimateHelper);
 
         //Save the result of the update to the repository

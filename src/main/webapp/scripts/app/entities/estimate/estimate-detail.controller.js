@@ -41,14 +41,14 @@ angular.module('tenderworkApp')
             $scope.roundedResourcing = $scope.helperFunctions.roundResourcing(entity.resourcing);
         }
 
-        /*
+        
         $scope.copyEstimate = function(estId) {
             Estimate.copy({id:estId}, function(result) {
                 $state.go($state.current, {id:estId}, {reload:true});
             });
         };
-        */
-        
+
+
 
         var unsubscribe = $rootScope.$on('tenderworkApp:estimateUpdate', function(event, result) {
             $scope.estimate = result;

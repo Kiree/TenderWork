@@ -214,14 +214,11 @@ public class Estimate implements Serializable {
     }
 
     public void addRequirement(Requirement requirement) {
-        removeRequirement(requirement);
         this.hasRequirementss.add(requirement);
     }
 
     public void removeRequirement(Requirement requirement) {
-        if(this.hasRequirementss.contains(requirement)) {
-            this.hasRequirementss.remove(requirement);
-        }
+        this.hasRequirementss.remove(requirement);
     }
 
     @Override
