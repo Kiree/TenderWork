@@ -96,6 +96,10 @@ div.bottom-border-1 {
     top: 15px;
 }
 
+.titlepadding{
+    padding-left: 3px;
+}
+
 .btn-newrequirement{
     bottom: 10px;
     position: relative;

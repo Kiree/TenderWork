@@ -2,7 +2,7 @@
 <div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12 col-sm-6 pull-right">
+            <div class="col-xs-12 col-sm-6 pull-right no-padding-right">
                 <div class="btn-group pull-right">
                     <button type="submit"
                             ui-sref="project.detail({pid:estimate.ownerProject.id, generateDefaultEstimate:false})"
@@ -32,12 +32,10 @@
                     </button>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 wrap-field pull-left"><h2>{{estimate.id}}</h2></div>
+            <div class="col-xs-12 col-sm-6 wrap-field pull-left titlepadding"><h2>{{estimate.id}}</h2></div>
 
         </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row desktop-border bg-always-gray box-padding-margin">
+        <div class="row desktop-border bg-always-gray left-padder right-padder box-padding-margin">
             <div class="col-xs-12 col-sm-4 right-padder">
                 <div class="col-sm-12 col-xs-6">
                     <span translate="tenderworkApp.estimate.totalPrice" class="projectdetail">TotalPrice</span>
@@ -289,8 +287,8 @@
                                     <!--TASKIN LUONTI-->
                             <div class="container-fluid">
                                 <div class="row btn-bottom">
-                                    <div class="col-xs-4 requirementlisting reqtitle-text-field"><h4 class="reqtitle" translate="tenderworkApp.task.home.title">Tasks</h4></div>
-                                    <div class="col-xs-8 btn-newtask">
+                                    <div class="col-xs-4 reqtitle-text-field titlepadding"><h4 class="reqtitle" translate="tenderworkApp.task.home.title">Tasks</h4></div>
+                                    <div class="col-xs-8 btn-newtask pull-right no-padding-right">
                                         <button ng-show="isCreator(requirement)" class="btn btn-primary pull-right" ui-sref="task.new({rid:requirement.id, eid:estimate.id})" >
                                             <span class="glyphicon glyphicon-plus"></span>
                                             <span class="hidden-xs" translate="tenderworkApp.task.home.createLabel">Create new Task</span>
