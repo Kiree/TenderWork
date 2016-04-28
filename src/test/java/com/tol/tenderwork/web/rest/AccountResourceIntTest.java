@@ -69,7 +69,6 @@ public class AccountResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        doNothing().when(mockMailService).sendActivationEmail((User) anyObject(), anyString());
 
         AccountResource accountResource = new AccountResource();
         ReflectionTestUtils.setField(accountResource, "userRepository", userRepository);
@@ -116,7 +115,6 @@ public class AccountResourceIntTest {
         user.setLogin("test");
         user.setFirstName("john");
         user.setLastName("doe");
-        user.setEmail("john.doe@jhipter.com");
         user.setAuthorities(authorities);
         when(mockUserService.getUserWithAuthorities()).thenReturn(user);
 
@@ -127,7 +125,6 @@ public class AccountResourceIntTest {
                 .andExpect(jsonPath("$.login").value("test"))
                 .andExpect(jsonPath("$.firstName").value("john"))
                 .andExpect(jsonPath("$.lastName").value("doe"))
-                .andExpect(jsonPath("$.email").value("john.doe@jhipter.com"))
                 .andExpect(jsonPath("$.authorities").value(AuthoritiesConstants.ADMIN));
     }
 
@@ -149,7 +146,6 @@ public class AccountResourceIntTest {
             "password",
             "Joe",                  // firstName
             "Shmoe",                // lastName
-            "joe@example.com",      // e-mail
             true,                   // activated
             "en",                   // langKey
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
@@ -174,7 +170,6 @@ public class AccountResourceIntTest {
             "password",
             "Funky",                // firstName
             "One",                  // lastName
-            "funky@example.com",    // e-mail
             true,                   // activated
             "en",                   // langKey
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
@@ -186,8 +181,6 @@ public class AccountResourceIntTest {
                 .content(TestUtil.convertObjectToJsonBytes(u)))
             .andExpect(status().isBadRequest());
 
-        Optional<User> user = userRepository.findOneByEmail("funky@example.com");
-        assertThat(user.isPresent()).isFalse();
     }
 
     @Test
@@ -199,7 +192,6 @@ public class AccountResourceIntTest {
             "password",
             "Bob",              // firstName
             "Green",            // lastName
-            "invalid",          // e-mail <-- invalid
             true,               // activated
             "en",               // langKey
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
@@ -225,7 +217,6 @@ public class AccountResourceIntTest {
             "password",
             "Alice",                // firstName
             "Something",            // lastName
-            "alice@example.com",    // e-mail
             true,                   // activated
             "en",                   // langKey
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
@@ -233,7 +224,7 @@ public class AccountResourceIntTest {
 
         // Duplicate login, different e-mail
         UserDTO dup = new UserDTO(u.getLogin(), u.getPassword(), u.getConfirmPassword(), u.getLogin(), u.getLastName(),
-            "alicejr@example.com", true, u.getLangKey(), u.getAuthorities());
+            true, u.getLangKey(), u.getAuthorities());
 
         // Good user
         restMvc.perform(
@@ -249,8 +240,6 @@ public class AccountResourceIntTest {
                 .content(TestUtil.convertObjectToJsonBytes(dup)))
             .andExpect(status().is4xxClientError());
 
-        Optional<User> userDup = userRepository.findOneByEmail("alicejr@example.com");
-        assertThat(userDup.isPresent()).isFalse();
     }
 
     @Test
@@ -263,7 +252,6 @@ public class AccountResourceIntTest {
             "password",
             "John",                 // firstName
             "Doe",                  // lastName
-            "john@example.com",     // e-mail
             true,                   // activated
             "en",                   // langKey
             new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
@@ -271,7 +259,7 @@ public class AccountResourceIntTest {
 
         // Duplicate e-mail, different login
         UserDTO dup = new UserDTO("johnjr", u.getPassword(), u.getConfirmPassword(),u.getLogin(), u.getLastName(),
-            u.getEmail(), true, u.getLangKey(), u.getAuthorities());
+            true, u.getLangKey(), u.getAuthorities());
 
         // Good user
         restMvc.perform(
@@ -300,7 +288,6 @@ public class AccountResourceIntTest {
             "password",
             "Bad",                  // firstName
             "Guy",                  // lastName
-            "badguy@example.com",   // e-mail
             true,                   // activated
             "en",                   // langKey
             new HashSet<>(Arrays.asList(AuthoritiesConstants.ADMIN)) // <-- only admin should be able to do that
