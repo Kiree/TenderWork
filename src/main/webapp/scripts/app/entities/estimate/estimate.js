@@ -39,7 +39,8 @@ angular.module('tenderworkApp')
                 },
                 params: {
                     eid:null,
-                    pid:null
+                    pid:null,
+                    openreqwithid:null
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
@@ -119,9 +120,9 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('estimate.detail', { id:result.id }, { reload: true });
+                        $state.go('estimate.detail', { id:result.id, openreqwithid:null }, { reload: true });
                     }, function() {
-                        $state.go('estimate.detail', { id:$stateParams.eid} );
+                        $state.go('estimate.detail', { id:$stateParams.eid, openreqwithid:null} );
                     })
                 }]
             })
@@ -149,7 +150,7 @@ angular.module('tenderworkApp')
                     }).result.then(function(result) {
                         $state.go('project.detail', { id:$stateParams.pid, generateDefaultEstimate:false }, { reload: true });
                     }, function() {
-                        $state.go('estimate.detail', { id:$stateParams.eid }, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.eid, openreqwithid:null }, { reload: true });
                     })
                 }]
             });

@@ -36,9 +36,9 @@ angular.module('tenderworkApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('estimate.detail', { id:$stateParams.eid }, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.eid, openreqwithid:null }, { reload: true });
                     }, function() {
-                        $state.go('estimate.detail', { id:$stateParams.eid }, { reload:true });
+                        $state.go('estimate.detail', { id:$stateParams.eid , openreqwithid:null}, { reload:true });
                     })
                 }]
             });
@@ -64,9 +64,9 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('estimate.detail', { id:$stateParams.eid }, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.eid, openreqwithid:null }, { reload: true });
                     }, function() {
-                        $state.go('estimate.detail', { id:$stateParams.eid }, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.eid, openreqwithid:null }, { reload: true });
                     })
                 }]
             });
@@ -92,9 +92,9 @@ angular.module('tenderworkApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('estimate.detail', { id:$stateParams.eid }, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.eid, openreqwithid:null }, { reload: true });
                     }, function() {
-                        $state.go('estimate.detail', { id:$stateParams.eid }, { reload: true });
+                        $state.go('estimate.detail', { id:$stateParams.eid, openreqwithid:null }, { reload: true });
                     })
                 }]
             });
