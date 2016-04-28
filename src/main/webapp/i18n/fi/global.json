@@ -2,6 +2,9 @@
     "global": {
         "title": "TenderWork",
         "toggleall":"Avaa/Sulje Kaikki",
+        "validation": {
+            "patternmismatch":"Only lowercase letters a-z and numbers accepted"
+        },
         "browsehappy": "Käytät <strong>vanhentunutta</strong> selainta. Ole hyvä ja <a href=\"http://browsehappy.com/?locale=en\">päivitä selaimesi</a> parantaaksesi käyttökokemustasi.",
         "trail": {
             "project":"Projektilistaus",

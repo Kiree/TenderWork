@@ -12,11 +12,16 @@
         <div class="form-group">
             <label class="control-label" translate="user-management.login">Login</label>
             <input type="text" class="form-control" name="login"
-                   ng-model="user.login" ng-required="user.id == null" ng-maxlength="50">
+                   ng-model="user.login" ng-required="user.id == null" ng-maxlength="50"
+                ng-pattern="/^[a-z0-9]*$/">
 
             <div ng-show="editForm.login.$invalid">
                 <p class="help-block"
                    ng-show="editForm.login.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.login.$error.pattern" translate="global.validation.patternmismatch">
                     This field is required.
                 </p>
 
