@@ -111,13 +111,16 @@ public class UpdateService {
                 Task resultTask = new Task();
 
                 // Go through all of Requirement's tasks
-                for (Task task : requirementHelper.getHasTaskss()) {
-                    Task taskHelper = taskRepository.findOne(task.getId());
-                    task = mathService.calculateTask(taskHelper, estimate);
-                    resultTask = saveService.saveTaskToRepo(task);
-                    log.error("Päivitettiin task {}", task);
+                if(!requirementHelper.getHasTaskss().isEmpty()) {
+                    for (Task task : requirementHelper.getHasTaskss()) {
+                        Task taskHelper = taskRepository.findOne(task.getId());
+                        task = mathService.calculateTask(taskHelper, estimate);
+                        resultTask = saveService.saveTaskToRepo(task);
+                        log.error("Päivitettiin task {}", task);
+                    }
+                    requirement = mathService.calculateRequirement(resultTask);
                 }
-                requirement = mathService.calculateRequirement(resultTask);
+
                 saveService.saveRequirementToRepo(requirement);
                 log.error("Päivitettiin requ {}", requirement);
 
