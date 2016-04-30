@@ -88,7 +88,7 @@ public class Estimate implements Serializable {
     @JoinColumn(name = "owner_project_id")
     private Project ownerProject;
 
-    @OneToMany(mappedBy = "ownerEstimate", cascade = CascadeType.REFRESH)
+    @OneToMany(mappedBy = "ownerEstimate", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Requirement> hasRequirementss = new HashSet<>();
