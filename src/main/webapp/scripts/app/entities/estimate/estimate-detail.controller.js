@@ -4,6 +4,12 @@ angular.module('tenderworkApp')
     .controller('EstimateDetailController', function ($scope, $rootScope, $stateParams, entity, Estimate, User, Project, Requirement, Principal, $timeout ) {
         $scope.estimate = $scope.helperFunctions.fillEmptyEntityDetails(entity);
         $scope.openReq = $stateParams.openreqwithid ? $stateParams.openreqwithid : null;
+        $scope.toggleAllCollapses = function() {
+            $scope.openAll = !$scope.openAll;
+            if(!$scope.openAll) {
+                $scope.openReq = null;
+            }
+        };
         $scope.openThis = function(id) {
             if (id === $scope.openReq) {
                 return 'in';
