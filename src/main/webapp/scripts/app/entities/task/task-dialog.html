@@ -100,117 +100,34 @@
                 </p>
             </div>
         </div>
-        <div class="form-group row" ng-show="estimateLinkedToTask.synergyBenefit">
-            <div class="form-group col-xs-11">
-                <label class="control-label" translate="tenderworkApp.task.estimateSynergy" for="field_estimateSynergy">EstimateSynergy</label>
+        <div class="form-group" ng-show="estimateLinkedToTask.synergyBenefit">
+            <label class="control-label" for="field_estimateSynergy">
+
+                    <input type="checkbox" name="synergyCheck" id="field_synergyCheck"
+                        ng-model="task.synergyCheck"
+                    />
+                    <span class="span-bottom-padding-hack" translate="tenderworkApp.task.estimateSynergy" >EstimateSynergy</span>
+                </label>
+
                 <input type="number" class="form-control" name="estimateSynergy" id="field_estimateSynergy"
                     ng-model="task.estimateSynergy"
                     min="0" />
-                <div ng-show="editForm.estimateSynergy.$invalid">
-                    <p class="help-block"
-                       ng-show="editForm.estimateSynergy.$error.min" translate="entity.validation.min" translate-value-min="0">
-                        This field should be more than 0.
-                    </p>
-                    <p class="help-block"
-                       ng-show="editForm.estimateSynergy.$error.number" translate="entity.validation.number">
-                        This field should be a number.
-                    </p>
-                </div>
+            <div ng-show="editForm.estimateSynergy.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.estimateSynergy.$error.min" translate="entity.validation.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.estimateSynergy.$error.number" translate="entity.validation.number">
+                    This field should be a number.
+                </p>
             </div>
-            <div class="form-group col-xs-1">
-                <label class="control-label" >&nbsp;</label>
-                <input type="checkbox" class="form-control margin-hack" name="synergyCheck" id="field_synergyCheck"
-                       ng-model="task.synergyCheck"
-                />
-                <div ng-show="editForm.synergyCheck.$invalid">
-                    <p class="help-block"
-                       ng-show="editForm.synergyCheck.$error.required" translate="entity.validation.required">
-                        This field is required.
-                    </p>
-                </div>
-            </div>
-
-
         </div>
         <div class="form-group">
             <tags-input class="tags-input" max-length="30" ng-model="tags" display-property="name">
                 <auto-complete source="tagFilter($query)"></auto-complete>
             </tags-input>
         </div>
-        <!--
-        <div class="form-group">
-            <label class="control-label" translate="tenderworkApp.task.synergyTotal" for="field_synergyTotal">SynergyTotal</label>
-            <input type="number" class="form-control" name="synergyTotal" id="field_synergyTotal"
-                    ng-model="task.synergyTotal"
-                    min="0" />
-            <div ng-show="editForm.synergyTotal.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.synergyTotal.$error.min" translate="entity.validation.min" translate-value-min="0">
-                    This field should be more than 0.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.synergyTotal.$error.number" translate="entity.validation.number">
-                    This field should be a number.
-                </p>
-            </div>
-        </div>
-        -->
-        <!--
-        <div class="form-group">
-            <label class="control-label" translate="tenderworkApp.task.estimateTotal" for="field_estimateTotal">EstimateTotal</label>
-            <input type="number" class="form-control" name="estimateTotal" id="field_estimateTotal"
-                    ng-model="task.estimateTotal"
-                    min="0" />
-            <div ng-show="editForm.estimateTotal.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.estimateTotal.$error.min" translate="entity.validation.min" translate-value-min="0">
-                    This field should be more than 0.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.estimateTotal.$error.number" translate="entity.validation.number">
-                    This field should be a number.
-                </p>
-            </div>
-        </div>
-        -->
-        <!--
-        <div class="form-group">
-            <label translate="tenderworkApp.task.ownedBy" for="field_ownedBy">ownedBy</label>
-            <select class="form-control" id="field_ownedBy" name="ownedBy" ng-model="task.ownedBy" ng-options="user as user.login for user in users track by user.id">
-                <option value=""></option>
-            </select>
-        </div>
-        --><!--
-        <div class="form-group">
-            <label translate="tenderworkApp.task.specificationFactor" for="field_specificationFactor">specificationFactor</label>
-            <select class="form-control" id="field_specificationFactor" name="specificationFactor" ng-model="task.ownerEstimate" ng-options="estimate as estimate.specificationFactor for estimate in estimates track by estimate.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label translate="tenderworkApp.task.implementationFactor" for="field_implementationFactor">implementationFactor</label>
-            <select class="form-control" id="field_implementationFactor" name="implementationFactor" ng-model="task.ownerEstimate" ng-options="estimate as estimate.implementationFactor for estimate in estimates track by estimate.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label translate="tenderworkApp.task.testingFactor" for="field_testingFactor">testingFactor</label>
-            <select class="form-control" id="field_testingFactor" name="testingFactor" ng-model="task.ownerEstimate" ng-options="estimate as estimate.testingFactor for estimate in estimates track by estimate.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label translate="tenderworkApp.task.synergyBenefit" for="field_synergyBenefit">synergyBenefit</label>
-            <select class="form-control" id="field_synergyBenefit" name="synergyBenefit" ng-model="task.ownerEstimate" ng-options="estimate as estimate.synergyBenefit for estimate in estimates track by estimate.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label translate="tenderworkApp.task.ownerRequirement" for="field_ownerRequirement">ownerRequirement</label>
-            <select class="form-control" id="field_ownerRequirement" name="ownerRequirement" ng-model="task.ownerRequirement" ng-options="requirement as requirement.name for requirement in requirements track by requirement.id">
-                <option value=""></option>
-            </select>
-        </div>-->
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">

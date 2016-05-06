@@ -118,6 +118,20 @@ div.btn-bottom{
     padding-bottom:5px;
 }
 
+div.padder-remover {
+    padding:0;
+    overflow:hidden;
+}
+
+.button-margin-hack {
+    margin:-1px;
+}
+
+span.span-bottom-padding-hack {
+
+    margin-bottom:15px;
+}
+
 span.requirementlisting{
     padding-left:5px;
     padding-top:10px;

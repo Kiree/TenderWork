@@ -63,17 +63,15 @@
                 </p>
             </div>
         </div>
-        <div class="form-group row">
-            <div class="col-xs-11">
-                <label class="control-label" translate="tenderworkApp.project.deadline" for="field_deadline">Deadline</label>
+        <div class="form-group">
+
+            <label class="control-label" translate="tenderworkApp.project.deadline" for="field_deadline">Deadline</label>
+            <div class="input-group">
                 <input id="field_deadline" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="project.deadline" is-open="datePickerForDeadline.status.opened"
+                       placeholder="YYYY-MM-DD"
                 />
-            </div>
-            <div class="col-xs-1">
-                <label class="control-label">&nbsp;</label>
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="datePickerForDeadlineOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                </span>
+                <div class="input-group-addon padder-remover"><button type="button" class="btn btn-default button-margin-hack" ng-click="datePickerForDeadlineOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button></div>
+
             </div>
         </div>
         <div class="form-group">
